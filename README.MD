@@ -1,1 +1,1 @@
-# GeekyGify
+# Geeky Gify

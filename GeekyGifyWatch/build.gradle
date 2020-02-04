@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 7:42 AM
- * Last modified 2/4/20 7:25 AM
+ * Created by Elias Fazel on 2/4/20 9:02 AM
+ * Last modified 2/4/20 8:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "net.geeksempire.geeky.geekygify"
+        applicationId "net.geeksempire.geeky.gify"
 
         minSdkVersion 25
         targetSdkVersion 29
@@ -95,6 +95,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.preference:preference-ktx:1.1.0'
 
+    implementation 'androidx.work:work-runtime-ktx:2.3.0'
+
 
     implementation 'com.google.android.material:material:1.2.0-alpha04'
 
@@ -105,5 +107,19 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 
-    implementation 'com.giphy.sdk:ui:1.0.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+
+    implementation 'androidx.room:room-runtime:2.2.3'
+    implementation 'androidx.room:room-ktx:2.2.3'
+    kapt 'androidx.room:room-compiler:2.2.3'
+
+
+    implementation 'com.android.volley:volley:1.1.1'
+
+
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    implementation 'com.giphy.sdk:ui:1.1.2'
 }

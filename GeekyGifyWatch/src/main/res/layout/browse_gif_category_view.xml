@@ -2,22 +2,23 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/4/20 9:02 AM
-  ~ Last modified 2/4/20 9:02 AM
+  ~ Created by Elias Fazel on 2/4/20 2:10 PM
+  ~ Last modified 2/4/20 1:40 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".BrowseGifCategory.BrowseGifCategoryView">
 
-    <ImageView
-        android:id="@+id/gifViewer"
+    <androidx.wear.widget.WearableRecyclerView
+        android:id="@+id/categoryList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

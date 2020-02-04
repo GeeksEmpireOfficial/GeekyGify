@@ -1,0 +1,2 @@
+include ':GeekyGifyWatch'
+rootProject.name='Geeky Gify'

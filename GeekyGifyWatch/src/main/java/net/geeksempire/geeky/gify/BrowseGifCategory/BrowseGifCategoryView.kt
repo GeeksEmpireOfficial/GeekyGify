@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 2:10 PM
- * Last modified 2/4/20 2:10 PM
+ * Created by Elias Fazel on 2/4/20 2:53 PM
+ * Last modified 2/4/20 2:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -59,13 +59,21 @@ class BrowseGifCategoryView : AppCompatActivity() {
         }*/
 
 
+        val categoriesNamesLeft = arrayOf("Fun", "Sport", "Boom", "Fuck", "Test", "Now", "Trend", "Extra", "Something")
+        val categoriesNamesRight = arrayOf("FunX", "SportX", "BoomX", "FuckX", "TestX", "NowX", "TrendX")
+
         val lists = ArrayList<CategoryItemData>()
 
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            for (it in 0..20) {
-                lists.add(CategoryItemData(it.toString(), it.toString()))
+            for (it in categoriesNamesLeft.indices) {
+                try {
+
+                } catch (e: ArrayIndexOutOfBoundsException) {
+
+                }
+                lists.add(CategoryItemData(try { categoriesNamesLeft[it] } catch (e: ArrayIndexOutOfBoundsException) { null } , try { categoriesNamesRight[it] } catch (e: ArrayIndexOutOfBoundsException) { null }))
 
             }
         }

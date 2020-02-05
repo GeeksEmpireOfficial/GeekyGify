@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:06 PM
- * Last modified 2/4/20 3:06 PM
+ * Created by Elias Fazel on 2/4/20 3:21 PM
+ * Last modified 2/4/20 3:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.CategoryAdapter
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
+import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDataLeft
+import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDataRight
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.WearLayoutManager
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.numberEven
@@ -63,8 +65,8 @@ class BrowseGifCategoryView : AppCompatActivity() {
 
         val categoriesNames = arrayOf("Fun", "Sport", "Boom", "Fuck", "Test", "Now", "Trend", "Extra", "FunX", "SportX", "BoomX", "FuckX", "TestX", "NowX", "TrendX")
 
-        val categoriesNamesLeft = ArrayList<String>()
-        val categoriesNamesRight = ArrayList<String>()
+        val categoriesNamesLeft = ArrayList<CategoryItemDataLeft>()
+        val categoriesNamesRight = ArrayList<CategoryItemDataRight>()
 
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -72,11 +74,11 @@ class BrowseGifCategoryView : AppCompatActivity() {
             categoriesNames.forEachIndexed { index, aString ->
                 if (numberEven(index)) {
 
-                    categoriesNamesLeft.add(aString)
+                    categoriesNamesLeft.add(CategoryItemDataLeft(aString))
 
                 } else {
 
-                    categoriesNamesRight.add(aString)
+                    categoriesNamesRight.add(CategoryItemDataRight(aString))
 
                 }
             }

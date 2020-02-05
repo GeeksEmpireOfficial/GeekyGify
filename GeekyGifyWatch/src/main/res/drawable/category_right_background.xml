@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/4/20 2:10 PM
-  ~ Last modified 2/4/20 2:08 PM
+  ~ Created by Elias Fazel on 2/4/20 3:21 PM
+  ~ Last modified 2/4/20 3:20 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,23 +14,25 @@
     android:color="@color/default_color_game_light">
 
     <item
+        android:start="3dp"
         android:id="@+id/drawableBackground">
         <shape
             android:shape="rectangle" >
             <corners
-                android:topLeftRadius="1dp"
-                android:bottomLeftRadius="1dp"
+                android:topLeftRadius="7dp"
+                android:bottomLeftRadius="7dp"
                 android:bottomRightRadius="77dp"
                 android:topRightRadius="77dp"/>
         </shape>
     </item>
     <item
+        android:start="3dp"
         android:id="@android:id/mask">
         <shape
             android:shape="rectangle">
             <corners
-                android:topLeftRadius="1dp"
-                android:bottomLeftRadius="1dp"
+                android:topLeftRadius="7dp"
+                android:bottomLeftRadius="7dp"
                 android:bottomRightRadius="77dp"
                 android:topRightRadius="77dp"/>
             <solid

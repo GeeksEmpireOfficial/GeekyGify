@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:06 PM
- * Last modified 2/4/20 2:59 PM
+ * Created by Elias Fazel on 2/4/20 3:21 PM
+ * Last modified 2/4/20 3:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,10 +46,10 @@ class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<Cat
 
     override fun onBindViewHolder(viewHolderCategoryList: CategoryListViewHolder, position: Int) {
 
-        if (categoryItemsData[position].categoryTitleLeft != null) {
+        if (categoryItemsData[position].categoryLeft != null) {
             viewHolderCategoryList.categoryIconLeft.visibility = View.VISIBLE
 
-            viewHolderCategoryList.categoryIconLeft.text = (categoryItemsData[position].categoryTitleLeft)
+            viewHolderCategoryList.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
 
             val backgroundDrawableLeftLayer = context.getDrawable(R.drawable.category_left_background) as LayerDrawable
             val backgroundDrawableLeft = backgroundDrawableLeftLayer.findDrawableByLayerId(R.id.drawableBackground)
@@ -58,17 +58,17 @@ class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<Cat
                 viewHolderCategoryList.categoryIconLeft.background = backgroundDrawableLeftLayer
             }
             viewHolderCategoryList.categoryIconLeft.setOnClickListener {
-                Log.d("CategoryAdapter", categoryItemsData[position].categoryTitleLeft)
+                Log.d("CategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle)
 
             }
         } else {
             viewHolderCategoryList.categoryIconLeft.visibility = View.GONE
         }
 
-        if (categoryItemsData[position].categoryTitleRight != null) {
+        if (categoryItemsData[position].categoryRight != null) {
             viewHolderCategoryList.categoryIconRight.visibility = View.VISIBLE
 
-            viewHolderCategoryList.categoryIconRight.text = (categoryItemsData[position].categoryTitleRight)
+            viewHolderCategoryList.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
 
             val backgroundDrawableRightLayer = context.getDrawable(R.drawable.category_right_background) as LayerDrawable
             val backgroundDrawableRight = backgroundDrawableRightLayer.findDrawableByLayerId(R.id.drawableBackground)
@@ -78,7 +78,7 @@ class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<Cat
             }
 
             viewHolderCategoryList.categoryIconRight.setOnClickListener {
-                Log.d("CategoryAdapter", categoryItemsData[position].categoryTitleRight)
+                Log.d("CategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle)
 
             }
         } else {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 2:53 PM
- * Last modified 2/4/20 2:51 PM
+ * Created by Elias Fazel on 2/4/20 3:06 PM
+ * Last modified 2/4/20 2:59 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import net.geeksempire.geeky.gify.BrowseGifCategory.Data.CategoryItemData
+import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.R
 
 class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<CategoryItemData>) : RecyclerView.Adapter<CategoryListViewHolder>() {

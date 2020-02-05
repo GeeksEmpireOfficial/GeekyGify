@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 2:53 PM
- * Last modified 2/4/20 2:50 PM
+ * Created by Elias Fazel on 2/4/20 3:06 PM
+ * Last modified 2/4/20 3:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.CategoryAdapter
+import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.WearLayoutManager
-import net.geeksempire.geeky.gify.BrowseGifCategory.Data.CategoryItemData
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.numberEven
 
 class BrowseGifCategoryView : AppCompatActivity() {
 
@@ -58,22 +59,33 @@ class BrowseGifCategoryView : AppCompatActivity() {
             }
         }*/
 
-
-        val categoriesNamesLeft = arrayOf("Fun", "Sport", "Boom", "Fuck", "Test", "Now", "Trend", "Extra", "Something")
-        val categoriesNamesRight = arrayOf("FunX", "SportX", "BoomX", "FuckX", "TestX", "NowX", "TrendX")
-
         val lists = ArrayList<CategoryItemData>()
+
+        val categoriesNames = arrayOf("Fun", "Sport", "Boom", "Fuck", "Test", "Now", "Trend", "Extra", "FunX", "SportX", "BoomX", "FuckX", "TestX", "NowX", "TrendX")
+
+        val categoriesNamesLeft = ArrayList<String>()
+        val categoriesNamesRight = ArrayList<String>()
 
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            for (it in categoriesNamesLeft.indices) {
-                try {
+            categoriesNames.forEachIndexed { index, aString ->
+                if (numberEven(index)) {
 
-                } catch (e: ArrayIndexOutOfBoundsException) {
+                    categoriesNamesLeft.add(aString)
+
+                } else {
+
+                    categoriesNamesRight.add(aString)
 
                 }
-                lists.add(CategoryItemData(try { categoriesNamesLeft[it] } catch (e: ArrayIndexOutOfBoundsException) { null } , try { categoriesNamesRight[it] } catch (e: ArrayIndexOutOfBoundsException) { null }))
+            }
+
+            for (it in categoriesNamesLeft.indices) {
+                lists.add(
+                    CategoryItemData(try { categoriesNamesLeft[it] } catch (e: IndexOutOfBoundsException) { null } ,
+                        try { categoriesNamesRight[it] } catch (e: IndexOutOfBoundsException) { null })
+                )
 
             }
         }

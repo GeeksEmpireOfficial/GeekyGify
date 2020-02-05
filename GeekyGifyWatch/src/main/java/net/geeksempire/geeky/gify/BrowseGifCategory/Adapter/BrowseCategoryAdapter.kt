@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:21 PM
- * Last modified 2/4/20 3:14 PM
+ * Created by Elias Fazel on 2/4/20 3:48 PM
+ * Last modified 2/4/20 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.R
 
-class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<CategoryItemData>) : RecyclerView.Adapter<CategoryListViewHolder>() {
+class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayList<CategoryItemData>) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
 
     val colorsList =
         arrayOf(
@@ -34,9 +34,9 @@ class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<Cat
             Color.YELLOW,
             Color.MAGENTA)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrowseCategoryListViewHolder {
 
-        return CategoryListViewHolder(LayoutInflater.from(context).inflate(R.layout.item_category_view, parent, false))
+        return BrowseCategoryListViewHolder(LayoutInflater.from(context).inflate(R.layout.browse_gif_category_item_view, parent, false))
     }
 
     override fun getItemCount(): Int {
@@ -44,45 +44,45 @@ class CategoryAdapter(var context: Context, var categoryItemsData: ArrayList<Cat
         return categoryItemsData.size
     }
 
-    override fun onBindViewHolder(viewHolderCategoryList: CategoryListViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolderBrowseCategoryList: BrowseCategoryListViewHolder, position: Int) {
 
         if (categoryItemsData[position].categoryLeft != null) {
-            viewHolderCategoryList.categoryIconLeft.visibility = View.VISIBLE
+            viewHolderBrowseCategoryList.categoryIconLeft.visibility = View.VISIBLE
 
-            viewHolderCategoryList.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
+            viewHolderBrowseCategoryList.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
 
             val backgroundDrawableLeftLayer = context.getDrawable(R.drawable.category_left_background) as LayerDrawable
             val backgroundDrawableLeft = backgroundDrawableLeftLayer.findDrawableByLayerId(R.id.drawableBackground)
             backgroundDrawableLeft?.let {
                 it.setTint(colorsList.random())
-                viewHolderCategoryList.categoryIconLeft.background = backgroundDrawableLeftLayer
+                viewHolderBrowseCategoryList.categoryIconLeft.background = backgroundDrawableLeftLayer
             }
-            viewHolderCategoryList.categoryIconLeft.setOnClickListener {
+            viewHolderBrowseCategoryList.categoryIconLeft.setOnClickListener {
                 Log.d("CategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle)
 
             }
         } else {
-            viewHolderCategoryList.categoryIconLeft.visibility = View.GONE
+            viewHolderBrowseCategoryList.categoryIconLeft.visibility = View.GONE
         }
 
         if (categoryItemsData[position].categoryRight != null) {
-            viewHolderCategoryList.categoryIconRight.visibility = View.VISIBLE
+            viewHolderBrowseCategoryList.categoryIconRight.visibility = View.VISIBLE
 
-            viewHolderCategoryList.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
+            viewHolderBrowseCategoryList.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
 
             val backgroundDrawableRightLayer = context.getDrawable(R.drawable.category_right_background) as LayerDrawable
             val backgroundDrawableRight = backgroundDrawableRightLayer.findDrawableByLayerId(R.id.drawableBackground)
             backgroundDrawableRight?.let {
                 it.setTint(colorsList.random())
-                viewHolderCategoryList.categoryIconRight.background = backgroundDrawableRightLayer
+                viewHolderBrowseCategoryList.categoryIconRight.background = backgroundDrawableRightLayer
             }
 
-            viewHolderCategoryList.categoryIconRight.setOnClickListener {
+            viewHolderBrowseCategoryList.categoryIconRight.setOnClickListener {
                 Log.d("CategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle)
 
             }
         } else {
-            viewHolderCategoryList.categoryIconRight.visibility = View.GONE
+            viewHolderBrowseCategoryList.categoryIconRight.visibility = View.GONE
         }
     }
 }

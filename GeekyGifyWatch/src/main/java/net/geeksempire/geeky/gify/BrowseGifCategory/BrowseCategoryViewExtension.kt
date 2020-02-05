@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:44 PM
- * Last modified 2/4/20 3:39 PM
+ * Created by Elias Fazel on 2/4/20 3:48 PM
+ * Last modified 2/4/20 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,13 +14,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.wear.widget.WearableLinearLayoutManager
 import kotlinx.android.synthetic.main.browse_gif_category_view.*
-import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.CategoryAdapter
-import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.WearLayoutManager
-import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.CategoryBrowserViewModel
+import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.BrowseCategoryAdapter
+import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.BrowseCategoryWearLayoutManager
+import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 
-fun BrowseGifCategoryView.createViewModelObserver() : CategoryBrowserViewModel {
+fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
-    categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, WearLayoutManager())
+    categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
     categoryList.isEdgeItemsCenteringEnabled = true
     categoryList.apply {
         isCircularScrollingGestureEnabled = true
@@ -28,11 +28,11 @@ fun BrowseGifCategoryView.createViewModelObserver() : CategoryBrowserViewModel {
         scrollDegreesPerScreen = 90f
     }
 
-    val browseGifCategoryView = ViewModelProvider(this).get(CategoryBrowserViewModel::class.java)
+    val browseGifCategoryView = ViewModelProvider(this).get(BrowseCategoryViewModel::class.java)
 
     browseGifCategoryView.categoriesListData.observe(this,
         Observer {
-            val categoryAdapter = CategoryAdapter(applicationContext, it)
+            val categoryAdapter = BrowseCategoryAdapter(applicationContext, it)
 
             categoryList.adapter = categoryAdapter
             categoryAdapter.notifyDataSetChanged()

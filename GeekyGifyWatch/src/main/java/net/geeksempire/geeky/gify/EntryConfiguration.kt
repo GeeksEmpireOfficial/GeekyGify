@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 9:02 AM
- * Last modified 2/4/20 8:07 AM
+ * Created by Elias Fazel on 2/4/20 3:48 PM
+ * Last modified 2/4/20 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,7 @@ package net.geeksempire.geeky.gify
 import android.content.Intent
 import android.os.Bundle
 import android.support.wearable.activity.WearableActivity
-import net.geeksempire.geeky.gify.BrowseGifCategory.BrowseGifCategoryView
+import net.geeksempire.geeky.gify.BrowseGifCategory.BrowseCategoryView
 
 class EntryConfiguration : WearableActivity() {
 
@@ -22,7 +22,7 @@ class EntryConfiguration : WearableActivity() {
         setAmbientEnabled()
 
 
-        startActivity(Intent(applicationContext, BrowseGifCategoryView::class.java))
+        startActivity(Intent(applicationContext, BrowseCategoryView::class.java))
 
         this@EntryConfiguration.finish()
     }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:44 PM
- * Last modified 2/4/20 3:44 PM
+ * Created by Elias Fazel on 2/4/20 3:48 PM
+ * Last modified 2/4/20 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDat
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDataRight
 import net.geeksempire.geeky.gify.Utils.numberEven
 
-class CategoryBrowserViewModel : ViewModel() {
+class BrowseCategoryViewModel : ViewModel() {
 
     val categoriesListData: MutableLiveData<ArrayList<CategoryItemData>> by lazy {
         MutableLiveData<ArrayList<CategoryItemData>>()

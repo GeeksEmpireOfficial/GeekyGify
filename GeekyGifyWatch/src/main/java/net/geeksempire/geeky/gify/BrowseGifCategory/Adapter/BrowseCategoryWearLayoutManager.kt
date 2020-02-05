@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 2:10 PM
- * Last modified 2/4/20 1:31 PM
+ * Created by Elias Fazel on 2/4/20 3:48 PM
+ * Last modified 2/4/20 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.wear.widget.WearableLinearLayoutManager
 
-class WearLayoutManager(var maxIconProgress: Float = 0.65f) : WearableLinearLayoutManager.LayoutCallback() {
+class BrowseCategoryWearLayoutManager(var maxIconProgress: Float = 0.65f) : WearableLinearLayoutManager.LayoutCallback() {
 
     private var progressToCenter: Float = 0f
 

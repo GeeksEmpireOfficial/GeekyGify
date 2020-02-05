@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:44 PM
- * Last modified 2/4/20 3:44 PM
+ * Created by Elias Fazel on 2/4/20 3:48 PM
+ * Last modified 2/4/20 3:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,13 +14,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.geeky.gify.R
 
-class BrowseGifCategoryView : AppCompatActivity() {
+class BrowseCategoryView : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.browse_gif_category_view)
 
         val browseGifCategoryView = createViewModelObserver()
+
+
         /*GiphyCoreUI.configure(this, getString(R.string.GIPHY_SDK_API_KEY))
 
         val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = DarkTheme, dimBackground = true)
@@ -50,8 +52,5 @@ class BrowseGifCategoryView : AppCompatActivity() {
                 //Your user dismissed the dialog without selecting a GIF
             }
         }*/
-
-
-
     }
 }

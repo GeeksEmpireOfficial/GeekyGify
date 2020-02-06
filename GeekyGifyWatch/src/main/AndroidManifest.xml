@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/4/20 3:48 PM
-  ~ Last modified 2/4/20 3:47 PM
+  ~ Created by Elias Fazel on 2/6/20 9:51 AM
+  ~ Last modified 2/6/20 9:32 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -44,6 +44,11 @@
 
         <activity
             android:name=".BrowseGifCategory.BrowseCategoryView"
+            android:theme="@style/GeeksEmpire.Material">
+        </activity>
+
+        <activity
+            android:name=".BrowseGif.BrowseGifView"
             android:theme="@style/GeeksEmpire.Material">
             <intent-filter
                 android:autoVerify="true"

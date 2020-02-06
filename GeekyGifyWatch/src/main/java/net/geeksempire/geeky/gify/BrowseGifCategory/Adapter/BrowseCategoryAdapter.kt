@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:48 PM
- * Last modified 2/4/20 3:47 PM
+ * Created by Elias Fazel on 2/6/20 9:51 AM
+ * Last modified 2/6/20 9:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
                 viewHolderBrowseCategoryList.categoryIconLeft.background = backgroundDrawableLeftLayer
             }
             viewHolderBrowseCategoryList.categoryIconLeft.setOnClickListener {
-                Log.d("CategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle)
+                Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
 
             }
         } else {
@@ -78,7 +78,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
             }
 
             viewHolderBrowseCategoryList.categoryIconRight.setOnClickListener {
-                Log.d("CategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle)
+                Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle.toString())
 
             }
         } else {

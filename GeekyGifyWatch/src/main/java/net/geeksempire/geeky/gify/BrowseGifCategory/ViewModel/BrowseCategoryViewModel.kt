@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:48 PM
- * Last modified 2/4/20 3:47 PM
+ * Created by Elias Fazel on 2/6/20 9:51 AM
+ * Last modified 2/6/20 9:08 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDataLeft
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDataRight
-import net.geeksempire.geeky.gify.Utils.numberEven
+import net.geeksempire.geeky.gify.Utils.Calculations.numberEven
 
 class BrowseCategoryViewModel : ViewModel() {
 
@@ -48,7 +48,6 @@ class BrowseCategoryViewModel : ViewModel() {
                     try { categoriesNamesRight[it] } catch (e: IndexOutOfBoundsException) { null })
             )
         }
-
 
         categoriesListData.postValue(categoriesListDataFinal)
     }

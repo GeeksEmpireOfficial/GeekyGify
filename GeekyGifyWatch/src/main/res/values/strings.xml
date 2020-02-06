@@ -1,13 +1,48 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/4/20 7:42 AM
-  ~ Last modified 2/4/20 7:19 AM
+  ~ Created by Elias Fazel on 2/6/20 9:51 AM
+  ~ Last modified 2/6/20 9:14 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <resources>
+
     <string name="app_name">Geeky Gify</string>
+
+    <string-array name="gifCategoryList">
+        <item>Actions</item>
+        <item>Adjectives</item>
+        <item>Animals</item>
+        <item>Anime</item>
+        <item>Art</item>
+        <item>Design</item>
+        <item>Comics</item>
+        <item>Celebrities</item>
+        <item>Decades</item>
+        <item>Emotions</item>
+        <item>Fashion</item>
+        <item>Beauty</item>
+        <item>Food</item>
+        <item>Drink</item>
+        <item>Gaming</item>
+        <item>Greetings</item>
+        <item>Holidays</item>
+        <item>Identity</item>
+        <item>Interests</item>
+        <item>Memes</item>
+        <item>Movies</item>
+        <item>Music</item>
+        <item>Nature</item>
+        <item>News</item>
+        <item>Reactions</item>
+        <item>Science</item>
+        <item>Sports</item>
+        <item>Stickers</item>
+        <item>Transportation</item>
+        <item>TV</item>
+        <item>Weird</item>
+    </string-array>
 </resources>

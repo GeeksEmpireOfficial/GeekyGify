@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 11:14 AM
- * Last modified 2/6/20 11:14 AM
+ * Created by Elias Fazel on 2/6/20 11:25 AM
+ * Last modified 2/6/20 11:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,13 +10,16 @@
 
 package net.geeksempire.geeky.gify.BrowseGifCategory.Adapter
 
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import net.geeksempire.geeky.gify.BrowseGif.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.R
 
@@ -48,7 +51,12 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
             viewHolderBrowseCategoryList.categoryIconLeft.setOnClickListener {
                 Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
 
-
+                Intent(context, BrowseGifView::class.java).apply {
+                    this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
+                    this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(this,
+                        ActivityOptions.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+                }
             }
         } else {
             viewHolderBrowseCategoryList.categoryIconLeft.visibility = View.GONE
@@ -69,6 +77,12 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
             viewHolderBrowseCategoryList.categoryIconRight.setOnClickListener {
                 Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle.toString())
 
+                Intent(context, BrowseGifView::class.java).apply {
+                    this.putExtra("CategoryName", categoryItemsData[position].categoryRight?.categoryTitle.toString())
+                    this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(this,
+                        ActivityOptions.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+                }
             }
         } else {
             viewHolderBrowseCategoryList.categoryIconRight.visibility = View.GONE

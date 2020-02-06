@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 9:51 AM
- * Last modified 2/6/20 9:05 AM
+ * Created by Elias Fazel on 2/6/20 11:14 AM
+ * Last modified 2/6/20 11:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val categoriesNames = resources.getStringArray(R.array.gifCategoryList).toList() as ArrayList<String>
 
-    browseGifCategoryView.setupCategoryBrowserData(categoriesNames)
+    browseGifCategoryView.setupCategoryBrowserData(applicationContext, categoriesNames)
 
     return browseGifCategoryView
 }

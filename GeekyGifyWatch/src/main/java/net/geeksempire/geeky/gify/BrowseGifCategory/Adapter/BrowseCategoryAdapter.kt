@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 9:51 AM
- * Last modified 2/6/20 9:06 AM
+ * Created by Elias Fazel on 2/6/20 11:14 AM
+ * Last modified 2/6/20 11:14 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,6 @@
 package net.geeksempire.geeky.gify.BrowseGifCategory.Adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,17 +21,6 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemDat
 import net.geeksempire.geeky.gify.R
 
 class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayList<CategoryItemData>) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
-
-    val colorsList =
-        arrayOf(
-            Color.BLACK,
-            Color.RED,
-            Color.GRAY,
-            Color.GREEN,
-            Color.BLUE,
-            Color.CYAN,
-            Color.YELLOW,
-            Color.MAGENTA)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrowseCategoryListViewHolder {
 
@@ -54,11 +42,12 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
             val backgroundDrawableLeftLayer = context.getDrawable(R.drawable.category_left_background) as LayerDrawable
             val backgroundDrawableLeft = backgroundDrawableLeftLayer.findDrawableByLayerId(R.id.drawableBackground)
             backgroundDrawableLeft?.let {
-                it.setTint(colorsList.random())
+                it.setTint(categoryItemsData[position].categoryLeft!!.backgroundColor)
                 viewHolderBrowseCategoryList.categoryIconLeft.background = backgroundDrawableLeftLayer
             }
             viewHolderBrowseCategoryList.categoryIconLeft.setOnClickListener {
                 Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
+
 
             }
         } else {
@@ -73,7 +62,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
             val backgroundDrawableRightLayer = context.getDrawable(R.drawable.category_right_background) as LayerDrawable
             val backgroundDrawableRight = backgroundDrawableRightLayer.findDrawableByLayerId(R.id.drawableBackground)
             backgroundDrawableRight?.let {
-                it.setTint(colorsList.random())
+                it.setTint(categoryItemsData[position].categoryRight!!.backgroundColor)
                 viewHolderBrowseCategoryList.categoryIconRight.background = backgroundDrawableRightLayer
             }
 

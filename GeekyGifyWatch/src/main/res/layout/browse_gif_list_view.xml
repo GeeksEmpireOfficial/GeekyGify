@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/6/20 11:25 AM
-  ~ Last modified 2/6/20 11:21 AM
+  ~ Created by Elias Fazel on 2/6/20 4:27 PM
+  ~ Last modified 2/6/20 2:27 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BrowseGif.BrowseGifView"
+    tools:context=".BrowseGif.UI.BrowseGifView"
     tools:deviceIds="wear">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
         apps:boxedEdges="all"
         tools:ignore="MissingPrefix">
 
-        <androidx.wear.widget.WearableRecyclerView
+        <com.giphy.sdk.ui.views.GifsRecyclerView
             android:id="@+id/gifList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

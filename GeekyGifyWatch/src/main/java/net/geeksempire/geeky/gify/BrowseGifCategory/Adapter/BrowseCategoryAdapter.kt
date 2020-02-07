@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 11:25 AM
- * Last modified 2/6/20 11:20 AM
+ * Created by Elias Fazel on 2/6/20 4:27 PM
+ * Last modified 2/6/20 2:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import net.geeksempire.geeky.gify.BrowseGif.BrowseGifView
+import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.R
 

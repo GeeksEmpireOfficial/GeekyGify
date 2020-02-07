@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/6/20 9:51 AM
-  ~ Last modified 2/6/20 9:30 AM
+  ~ Created by Elias Fazel on 2/6/20 4:27 PM
+  ~ Last modified 2/6/20 2:27 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/browse_category_background_gradient"
-    tools:context=".BrowseGifCategory.BrowseCategoryView">
+    tools:context=".BrowseGifCategory.UI.BrowseCategoryView">
 
     <androidx.wear.widget.WearableRecyclerView
         android:id="@+id/categoryList"

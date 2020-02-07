@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/6/20 4:27 PM
+  ~ Last modified 2/6/20 3:53 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainViewItem"
+    android:layout_width="71dp"
+    android:layout_height="71dp">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/gifItemView"
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        apps:srcCompat="@drawable/icon_geeky_gify"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 4:27 PM
- * Last modified 2/6/20 4:27 PM
+ * Created by Elias Fazel on 2/6/20 4:29 PM
+ * Last modified 2/6/20 4:29 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -45,14 +45,14 @@ class EnqueueSearch {
 
                         for (i in 0 until gifJsonArray.length()) {
                             val jsonObject : JSONObject = gifJsonArray[i] as JSONObject
-                            val jsonObjectImage = jsonObject.getJSONObject("images")
+                            val jsonObjectImage = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES)
 
-                            val jsonObjectImageOriginal= jsonObjectImage.getJSONObject("original")
-                            val jsonObjectImageOriginalLink = jsonObjectImageOriginal.getString("url")
+                            val jsonObjectImageOriginal= jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_ORIGINAL)
+                            val jsonObjectImageOriginalLink = jsonObjectImageOriginal.getString(GiphyJsonDataStructure.DATA_URL)
 
 
-                            val jsonObjectImagePreview = jsonObjectImage.getJSONObject("preview_gif")
-                            val jsonObjectImagePreviewLink = jsonObjectImagePreview.getString("url")
+                            val jsonObjectImagePreview = jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_PREVIEW_GIF)
+                            val jsonObjectImagePreviewLink = jsonObjectImagePreview.getString(GiphyJsonDataStructure.DATA_URL)
 
                             dataToAdapter.add(BrowseGifItemData(jsonObjectImagePreviewLink, jsonObjectImageOriginalLink))
 

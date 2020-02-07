@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 4:27 PM
- * Last modified 2/6/20 4:27 PM
+ * Created by Elias Fazel on 2/7/20 10:53 AM
+ * Last modified 2/7/20 10:23 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,8 +30,7 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
 
         val categoryName = intent.getStringExtra("CategoryName")
 
-        val browseGifViewModel: BrowseGifViewModel = createViewModelObserver()
-
+        val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(categoryName)
     }
 
     override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback {

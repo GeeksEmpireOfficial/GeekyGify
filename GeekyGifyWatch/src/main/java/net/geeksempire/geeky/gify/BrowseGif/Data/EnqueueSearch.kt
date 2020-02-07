@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 4:29 PM
- * Last modified 2/6/20 4:29 PM
+ * Created by Elias Fazel on 2/7/20 10:53 AM
+ * Last modified 2/7/20 10:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,52 +16,28 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import net.geeksempire.geeky.gify.BrowseGif.Adapter.Data.BrowseGifItemData
 import net.geeksempire.geeky.gify.BrowseGif.Extension.GiphySearchParameter
 import net.geeksempire.geeky.gify.BrowseGif.Extension.SearchAddress
-import org.json.JSONArray
-import org.json.JSONException
+import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
+import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import org.json.JSONObject
 import javax.net.ssl.HttpsURLConnection
 
 class EnqueueSearch {
 
-    private fun giphyJsonObjectRequest(context: Context, giphySearchParameter: GiphySearchParameter) {
+    fun giphyJsonObjectRequest(context: Context, giphySearchParameter: GiphySearchParameter, browseGifViewModel: BrowseGifViewModel) {
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
-            SearchAddress().generateSearchLink(context, giphySearchParameter),
+            SearchAddress().generateSearchLink(giphySearchParameter),
             null,
             Response.Listener<JSONObject?> { response ->
-                println(">>> ${response}")
+                Log.d("JsonObjectRequest", response?.getJSONObject(GiphyJsonDataStructure.META)?.getInt(GiphyJsonDataStructure.META_STATUS).toString())
 
                 if (response != null
-                    && (response.getJSONObject(GiphyJsonDataStructure.META).getString(GiphyJsonDataStructure.META_STATUS).toInt() == HttpsURLConnection.HTTP_OK)) {
+                    && (response.getJSONObject(GiphyJsonDataStructure.META).getInt(GiphyJsonDataStructure.META_STATUS) == HttpsURLConnection.HTTP_OK)) {
 
-                    try {
-                        val gifJsonArray: JSONArray = response.getJSONArray(GiphyJsonDataStructure.DATA)
-
-                        val dataToAdapter = ArrayList<BrowseGifItemData>()
-
-                        for (i in 0 until gifJsonArray.length()) {
-                            val jsonObject : JSONObject = gifJsonArray[i] as JSONObject
-                            val jsonObjectImage = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES)
-
-                            val jsonObjectImageOriginal= jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_ORIGINAL)
-                            val jsonObjectImageOriginalLink = jsonObjectImageOriginal.getString(GiphyJsonDataStructure.DATA_URL)
-
-
-                            val jsonObjectImagePreview = jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_PREVIEW_GIF)
-                            val jsonObjectImagePreviewLink = jsonObjectImagePreview.getString(GiphyJsonDataStructure.DATA_URL)
-
-                            dataToAdapter.add(BrowseGifItemData(jsonObjectImagePreviewLink, jsonObjectImageOriginalLink))
-
-                        }
-
-
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
+                    browseGifViewModel.setupGifsBrowserData(response, GetResources(context).getNeonColors())
                 }
 
             }, Response.ErrorListener {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 4:27 PM
- * Last modified 2/6/20 3:57 PM
+ * Created by Elias Fazel on 2/7/20 10:53 AM
+ * Last modified 2/7/20 10:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package net.geeksempire.geeky.gify.BrowseGif.Adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,14 +34,15 @@ class BrowseGifAdapter(var context: Context, var browseGifItemData: ArrayList<Br
 
     override fun onBindViewHolder(viewHoldBrowseGifList: BrowseGifListViewHolder, position: Int) {
 
-          Glide.with(context)
+        viewHoldBrowseGifList.mainView.setBackgroundColor(Color.parseColor(browseGifItemData[position].backgroundColor))
+        Glide.with(context)
               .asGif()
               .diskCacheStrategy(DiskCacheStrategy.DATA)
               .load(browseGifItemData[position].gifPreviewUrl)
               .into(viewHoldBrowseGifList.gifPreview)
 
         viewHoldBrowseGifList.gifPreview.setOnClickListener {
-
+            //browseGifItemData[position].gifOriginalUri
         }
     }
 }

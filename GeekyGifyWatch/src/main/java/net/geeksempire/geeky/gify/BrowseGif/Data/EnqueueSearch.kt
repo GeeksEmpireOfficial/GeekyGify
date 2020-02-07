@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 10:53 AM
- * Last modified 2/7/20 10:53 AM
+ * Created by Elias Fazel on 2/7/20 11:27 AM
+ * Last modified 2/7/20 11:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,9 +16,9 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import net.geeksempire.geeky.gify.BrowseGif.Extension.GiphySearchParameter
-import net.geeksempire.geeky.gify.BrowseGif.Extension.SearchAddress
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
+import net.geeksempire.geeky.gify.Utils.Giphy.GiphySearchParameter
+import net.geeksempire.geeky.gify.Utils.Giphy.SearchAddress
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import org.json.JSONObject
 import javax.net.ssl.HttpsURLConnection
@@ -29,7 +29,7 @@ class EnqueueSearch {
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
-            SearchAddress().generateSearchLink(giphySearchParameter),
+            SearchAddress().generateGiphySearchLink(giphySearchParameter),
             null,
             Response.Listener<JSONObject?> { response ->
                 Log.d("JsonObjectRequest", response?.getJSONObject(GiphyJsonDataStructure.META)?.getInt(GiphyJsonDataStructure.META_STATUS).toString())

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 10:53 AM
- * Last modified 2/7/20 10:53 AM
+ * Created by Elias Fazel on 2/7/20 11:27 AM
+ * Last modified 2/7/20 11:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,8 @@ import net.geeksempire.geeky.gify.BrowseGif.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
+import net.geeksempire.geeky.gify.Utils.Giphy.GiphyExplore
+import net.geeksempire.geeky.gify.Utils.Giphy.GiphySearchParameter
 
 fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
 
@@ -32,7 +34,7 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
         Observer {
             if (it.size > 0) {
                 gifList.visibility = View.VISIBLE
-                progressBarGifs.visibility = View.GONE
+                progressBarGifs.hide()
 
                 val browseGifAdapter = BrowseGifAdapter(applicationContext, it)
 
@@ -48,4 +50,12 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
     }
 
     return browseGifViewModel
+}
+
+fun BrowseGifView.createClickListeners() {
+    exploreGifs.setOnClickListener {
+
+        GiphyExplore()
+            .invokeGiphyExplore(applicationContext, supportFragmentManager)
+    }
 }

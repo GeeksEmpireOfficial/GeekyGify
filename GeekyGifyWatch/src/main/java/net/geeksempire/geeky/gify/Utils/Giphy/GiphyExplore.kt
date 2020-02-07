@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 9:51 AM
- * Last modified 2/6/20 8:50 AM
+ * Created by Elias Fazel on 2/7/20 11:27 AM
+ * Last modified 2/7/20 11:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,12 +21,15 @@ import com.giphy.sdk.ui.GiphyCoreUI
 import com.giphy.sdk.ui.themes.DarkTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
-import net.geeksempire.geeky.gify.R
 
-class GiphySearch {
+class GiphyExplore {
 
-    fun invokeGiphySearch(context: Context, fragmentManager: FragmentManager) {
-        GiphyCoreUI.configure(context, context.getString(R.string.GIPHY_SDK_API_KEY))
+    companion object {
+        private const val GIPHY_SDK_API_KEY = "vaQ2LAuOJoWDVdtTYqdPHPI38PUzdnG1"
+    }
+
+    fun invokeGiphyExplore(context: Context, fragmentManager: FragmentManager) {
+        GiphyCoreUI.configure(context, GiphyExplore.GIPHY_SDK_API_KEY)
 
         val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = DarkTheme, dimBackground = true)
         giphySettings.mediaTypeConfig = arrayOf(
@@ -56,4 +59,6 @@ class GiphySearch {
             }
         }
     }
+
+    private fun generateGiphyExploreLink(gifMediaId: String) = "https://media.giphy.com/media/${gifMediaId}/giphy.gif"
 }

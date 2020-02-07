@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/6/20 4:27 PM
- * Last modified 2/6/20 2:27 PM
+ * Created by Elias Fazel on 2/7/20 11:27 AM
+ * Last modified 2/7/20 11:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,7 +55,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
                     this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(this,
-                        ActivityOptions.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+                        ActivityOptions.makeCustomAnimation(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right).toBundle())
                 }
             }
         } else {
@@ -81,7 +81,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
                     this.putExtra("CategoryName", categoryItemsData[position].categoryRight?.categoryTitle.toString())
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(this,
-                        ActivityOptions.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
+                        ActivityOptions.makeCustomAnimation(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right).toBundle())
                 }
             }
         } else {

@@ -2,43 +2,66 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/7/20 10:53 AM
-  ~ Last modified 2/7/20 10:38 AM
+  ~ Created by Elias Fazel on 2/7/20 11:27 AM
+  ~ Last modified 2/7/20 11:14 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutGifList"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BrowseGif.UI.BrowseGifView"
-    tools:deviceIds="wear">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.ContentLoadingProgressBar
+        style="?android:attr/progressBarStyleSmallInverse"
+        android:id="@+id/progressBarGifs"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:visibility="visible"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gifList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        apps:boxedEdges="all"
-        tools:ignore="MissingPrefix">
+        android:layout_margin="33dp"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
 
-        <androidx.wear.widget.CircularProgressLayout
-            android:id="@+id/progressBarGifs"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:visibility="visible"
-            apps:layout_constraintTop_toTopOf="parent"
-            apps:layout_constraintBottom_toBottomOf="parent"
-            apps:layout_constraintLeft_toLeftOf="parent"
-            apps:layout_constraintRight_toRightOf="parent"/>
+    <ImageView
+        android:id="@+id/exploreGifs"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
 
-        <com.giphy.sdk.ui.views.GifsRecyclerView
-            android:id="@+id/gifList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:visibility="gone" />
+    <ImageView
+        android:id="@+id/nextGifPage"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.wear.widget.BoxInsetLayout>
+    <ImageView
+        android:id="@+id/previousGifPage"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

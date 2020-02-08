@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/7/20 3:48 PM
+  ~ Last modified 2/7/20 3:31 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainViewItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darker">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        style="?android:attr/progressBarStyleSmallInverse"
+        android:id="@+id/progressBarGifs"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:visibility="visible"
+        android:progressTint="@color/pink"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/gifView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/closeFragment"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/close_button"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

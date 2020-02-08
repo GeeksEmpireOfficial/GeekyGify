@@ -1,26 +1,31 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 10:53 AM
- * Last modified 2/7/20 10:47 AM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 2:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.BrowseGif.Adapter
+package net.geeksempire.geeky.gify.BrowseGif.UI.Adapter
 
-import android.content.Context
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import net.geeksempire.geeky.gify.BrowseGif.Adapter.Data.BrowseGifItemData
+import kotlinx.android.synthetic.main.browse_gif_list_view.*
+import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.BrowseGifItemData
+import net.geeksempire.geeky.gify.BrowseGif.UI.GifViewer
 import net.geeksempire.geeky.gify.R
 
-class BrowseGifAdapter(var context: Context, var browseGifItemData: ArrayList<BrowseGifItemData>) : RecyclerView.Adapter<BrowseGifListViewHolder>() {
+class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: ArrayList<BrowseGifItemData>) : RecyclerView.Adapter<BrowseGifListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrowseGifListViewHolder {
 
@@ -42,7 +47,18 @@ class BrowseGifAdapter(var context: Context, var browseGifItemData: ArrayList<Br
               .into(viewHoldBrowseGifList.gifPreview)
 
         viewHoldBrowseGifList.gifPreview.setOnClickListener {
-            //browseGifItemData[position].gifOriginalUri
+            context.fragmentGifViewer.visibility = View.VISIBLE
+
+            val gifViewer: Fragment = GifViewer()
+            gifViewer.arguments = Bundle().apply {
+                putString("GIF_LINK", browseGifItemData[position].gifOriginalUri)
+            }
+
+            context.supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.slide_from_right, 0)
+                .replace(R.id.fragmentGifViewer, gifViewer, "GIF VIEWER")
+                .commit()
         }
     }
 }

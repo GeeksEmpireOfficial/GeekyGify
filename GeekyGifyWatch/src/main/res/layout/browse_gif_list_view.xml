@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/7/20 11:27 AM
-  ~ Last modified 2/7/20 11:14 AM
+  ~ Created by Elias Fazel on 2/7/20 3:48 PM
+  ~ Last modified 2/7/20 3:02 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,7 +14,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayoutGifList"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/browse_gif_background_gradient">
 
     <androidx.core.widget.ContentLoadingProgressBar
         style="?android:attr/progressBarStyleSmallInverse"
@@ -40,10 +41,38 @@
         apps:layout_constraintLeft_toLeftOf="parent"
         apps:layout_constraintRight_toRightOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/categoryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="37dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_outline"
+        android:background="@drawable/category_left_background"
+
+        apps:autoSizeTextType="uniform"
+        apps:autoSizeMaxTextSize="14sp"
+        apps:autoSizeMinTextSize="10sp"
+        apps:autoSizeStepGranularity="1sp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+
     <ImageView
         android:id="@+id/exploreGifs"
         android:layout_width="33dp"
         android:layout_height="33dp"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gph_ic_search_pink"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintLeft_toLeftOf="parent"
         apps:layout_constraintRight_toRightOf="parent"/>
@@ -63,5 +92,15 @@
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintLeft_toLeftOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentGifViewer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

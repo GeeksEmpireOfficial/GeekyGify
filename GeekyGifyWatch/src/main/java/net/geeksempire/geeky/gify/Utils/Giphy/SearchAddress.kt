@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 11:27 AM
- * Last modified 2/7/20 11:23 AM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 3:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,7 @@
 
 package net.geeksempire.geeky.gify.Utils.Giphy
 
-data class GiphySearchParameter(var categoryName: String, var requestLimit: Int = 10, var requestOffset: Int = 0, var searchRating: String = "G", var searchLanguage: String = "en")
+data class GiphySearchParameter(var categoryName: String, var requestLimit: Int = 12, var requestOffset: Int = 0, var searchRating: String = "G", var searchLanguage: String = "en")
 
 class SearchAddress {
 

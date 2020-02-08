@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 11:27 AM
- * Last modified 2/7/20 11:23 AM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 2:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package net.geeksempire.geeky.gify.BrowseGif.UI
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.ambient.AmbientModeSupport
+import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createClickListeners
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createViewModelObserver
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
@@ -30,6 +31,8 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
         ambientController.setAmbientOffloadEnabled(true)
 
         val categoryName = intent.getStringExtra("CategoryName")
+
+        categoryTitle.text = categoryName
 
         val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(categoryName)
 

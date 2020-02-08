@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 10:53 AM
- * Last modified 2/7/20 10:37 AM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 3:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,8 +16,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import net.geeksempire.geeky.gify.BrowseGif.Adapter.Data.BrowseGifItemData
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
+import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.BrowseGifItemData
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject

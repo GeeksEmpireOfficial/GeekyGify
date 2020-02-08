@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/4/20 3:48 PM
- * Last modified 2/4/20 3:47 PM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 2:33 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.BrowseGifCategory.Adapter
+package net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

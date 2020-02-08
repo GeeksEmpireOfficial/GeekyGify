@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 11:27 AM
- * Last modified 2/7/20 11:21 AM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 3:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
-import net.geeksempire.geeky.gify.BrowseGif.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
+import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.Utils.Giphy.GiphyExplore
@@ -26,7 +26,7 @@ import net.geeksempire.geeky.gify.Utils.Giphy.GiphySearchParameter
 
 fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
 
-    gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
+    gifList.layoutManager = GridLayoutManager(applicationContext, 3, RecyclerView.VERTICAL, false)
 
     val browseGifViewModel = ViewModelProvider(this@createViewModelObserver).get(BrowseGifViewModel::class.java)
 
@@ -36,7 +36,7 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
                 gifList.visibility = View.VISIBLE
                 progressBarGifs.hide()
 
-                val browseGifAdapter = BrowseGifAdapter(applicationContext, it)
+                val browseGifAdapter = BrowseGifAdapter(this@createViewModelObserver, it)
 
                 gifList.adapter = browseGifAdapter
                 browseGifAdapter.notifyDataSetChanged()
@@ -53,9 +53,10 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
 }
 
 fun BrowseGifView.createClickListeners() {
+
     exploreGifs.setOnClickListener {
 
         GiphyExplore()
-            .invokeGiphyExplore(applicationContext, supportFragmentManager)
+            .invokeGiphyExplore(this@createClickListeners)
     }
 }

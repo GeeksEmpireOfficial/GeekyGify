@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 11:27 AM
- * Last modified 2/7/20 11:26 AM
+ * Created by Elias Fazel on 2/7/20 3:48 PM
+ * Last modified 2/7/20 2:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.BrowseGifCategory.Adapter
+package net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter
 
 import android.app.ActivityOptions
 import android.content.Context
@@ -20,7 +20,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
-import net.geeksempire.geeky.gify.BrowseGifCategory.Adapter.Data.CategoryItemData
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.R
 
 class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayList<CategoryItemData>) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
@@ -55,7 +55,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
                     this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(this,
-                        ActivityOptions.makeCustomAnimation(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right).toBundle())
+                        ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
                 }
             }
         } else {
@@ -81,7 +81,7 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
                     this.putExtra("CategoryName", categoryItemsData[position].categoryRight?.categoryTitle.toString())
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(this,
-                        ActivityOptions.makeCustomAnimation(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right).toBundle())
+                        ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
                 }
             }
         } else {

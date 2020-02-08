@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 4:35 PM
- * Last modified 2/7/20 4:21 PM
+ * Created by Elias Fazel on 2/8/20 10:06 AM
+ * Last modified 2/8/20 9:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package net.geeksempire.geeky.gify.BrowseGif.Extension
 
+import android.content.Context
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
@@ -23,10 +24,13 @@ import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.Utils.Giphy.GiphyExplore
 import net.geeksempire.geeky.gify.Utils.Giphy.GiphySearchParameter
+import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
+import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInterface
+import org.json.JSONObject
 
 fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
 
-    gifList.layoutManager = GridLayoutManager(applicationContext, 3, RecyclerView.VERTICAL, false)
+    gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
 
     val browseGifViewModel = ViewModelProvider(this@createViewModelObserver).get(BrowseGifViewModel::class.java)
 
@@ -48,7 +52,11 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
         })
 
     GiphySearchParameter(categoryName).also {
-        EnqueueSearch().giphyJsonObjectRequest(applicationContext, it, browseGifViewModel)
+
+        EnqueueSearch()
+            .giphyJsonObjectRequest(applicationContext,
+                it,
+                jsonRequestResponse(applicationContext, browseGifViewModel))
     }
 
     createClickListeners(categoryName, browseGifViewModel)
@@ -70,8 +78,12 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
 
         BrowseGifViewModel.gifRequestOffset = BrowseGifViewModel.gifRequestOffset.plus(BrowseGifViewModel.gifRequestLimit)
 
-        GiphySearchParameter(categoryName, requestOffset = BrowseGifViewModel.gifRequestOffset).also {
-            EnqueueSearch().giphyJsonObjectRequest(applicationContext, it, browseGifViewModel)
+        GiphySearchParameter(categoryName).also {
+
+            EnqueueSearch()
+                .giphyJsonObjectRequest(applicationContext,
+                    it,
+                    jsonRequestResponse(applicationContext, browseGifViewModel))
         }
     }
 
@@ -85,8 +97,23 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
             previousGifPage.visibility = View.GONE
         }
 
-        GiphySearchParameter(categoryName, requestOffset = BrowseGifViewModel.gifRequestOffset).also {
-            EnqueueSearch().giphyJsonObjectRequest(applicationContext, it, browseGifViewModel)
+        GiphySearchParameter(categoryName).also {
+
+            EnqueueSearch()
+                .giphyJsonObjectRequest(applicationContext,
+                    it,
+                    jsonRequestResponse(applicationContext, browseGifViewModel))
+        }
+    }
+}
+
+fun jsonRequestResponse(context: Context, browseGifViewModel: BrowseGifViewModel): JsonRequestResponseInterface {
+    return object : JsonRequestResponseInterface {
+
+        override fun jsonRequestResponseHandler(rawDataJsonObject: JSONObject, colorsList: ArrayList<String>) {
+
+            browseGifViewModel.setupGifsBrowserData(rawDataJsonObject,
+                GetResources(context).getNeonColors())
         }
     }
 }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 2:34 PM
+ * Created by Elias Fazel on 2/8/20 10:44 AM
+ * Last modified 2/8/20 10:43 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,7 @@ import com.giphy.sdk.ui.themes.DarkTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
+import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.GifViewer
 import net.geeksempire.geeky.gify.R
 
@@ -56,7 +57,14 @@ class GiphyExplore {
 
                 val gifViewer: Fragment = GifViewer()
                 gifViewer.arguments = Bundle().apply {
-                    putString("GIF_LINK", generateGiphyExploreLink(media.id))
+                    putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, generateGiphyExploreLink(media.id))
+
+                    media.user?.let { gifUserProfile ->
+
+                        putString(GiphyJsonDataStructure.DATA_USER_DISPLAY_NAME, gifUserProfile.displayName)
+                        putString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL, gifUserProfile.avatarUrl)
+                        putBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED, gifUserProfile.verified)
+                    }
                 }
 
                 context.supportFragmentManager

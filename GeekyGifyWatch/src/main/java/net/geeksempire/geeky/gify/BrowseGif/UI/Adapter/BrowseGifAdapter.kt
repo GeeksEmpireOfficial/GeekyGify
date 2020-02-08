@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 2:34 PM
+ * Created by Elias Fazel on 2/8/20 10:44 AM
+ * Last modified 2/8/20 10:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
+import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.BrowseGifItemData
 import net.geeksempire.geeky.gify.BrowseGif.UI.GifViewer
 import net.geeksempire.geeky.gify.R
@@ -51,7 +52,14 @@ class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: Ar
 
             val gifViewer: Fragment = GifViewer()
             gifViewer.arguments = Bundle().apply {
-                putString("GIF_LINK", browseGifItemData[position].gifOriginalUri)
+                putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, browseGifItemData[position].gifOriginalUri)
+
+                browseGifItemData[position].gifUserProfile?.let { gifUserProfile ->
+
+                    putString(GiphyJsonDataStructure.DATA_USER_DISPLAY_NAME, gifUserProfile.userDisplayName)
+                    putString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL, gifUserProfile.userAvatarUrl)
+                    putBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED, gifUserProfile.isUserVerified)
+                }
             }
 
             context.supportFragmentManager

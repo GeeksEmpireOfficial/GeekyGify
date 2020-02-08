@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 4:35 PM
- * Last modified 2/7/20 4:12 PM
+ * Created by Elias Fazel on 2/8/20 10:44 AM
+ * Last modified 2/8/20 10:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.BrowseGifItemData
+import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -47,16 +48,24 @@ class BrowseGifViewModel : ViewModel() {
                 val jsonObject : JSONObject = gifJsonArray[i] as JSONObject
                 val jsonObjectImage = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES)
 
-                val jsonObjectImageOriginal= jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_ORIGINAL)
-                val jsonObjectImageOriginalLink = jsonObjectImageOriginal.getString(GiphyJsonDataStructure.DATA_URL)
+                val jsonObjectImageOriginal= jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL)
+                val jsonObjectImageOriginalLink = jsonObjectImageOriginal.getString(GiphyJsonDataStructure.DATA_IMAGES_URL)
 
-                val jsonObjectImagePreview = jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_PREVIEW_GIF)
-                val jsonObjectImagePreviewLink = jsonObjectImagePreview.getString(GiphyJsonDataStructure.DATA_URL)
+                val jsonObjectImagePreview = jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF)
+                val jsonObjectImagePreviewLink = jsonObjectImagePreview.getString(GiphyJsonDataStructure.DATA_IMAGES_URL)
 
                 val aBackgroundColor = colorsList.random()
                 browseGifItemData.add(
                     BrowseGifItemData(jsonObjectImagePreviewLink,
                         jsonObjectImageOriginalLink,
+                        if (!jsonObject.isNull(GiphyJsonDataStructure.DATA_USER)) {
+                            val useJsonObject = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_USER)
+                            GifUserProfile(userDisplayName = useJsonObject.getString(GiphyJsonDataStructure.DATA_USER_DISPLAY_NAME),
+                                userAvatarUrl = useJsonObject.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL),
+                                isUserVerified = useJsonObject.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED))
+                        } else {
+                            null
+                        },
                         aBackgroundColor)
                 )
                 colorsList.remove(aBackgroundColor)

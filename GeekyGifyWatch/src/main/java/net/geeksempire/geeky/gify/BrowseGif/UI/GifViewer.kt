@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 4:35 PM
- * Last modified 2/7/20 4:26 PM
+ * Created by Elias Fazel on 2/8/20 10:44 AM
+ * Last modified 2/8/20 10:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import kotlinx.android.synthetic.main.gif_view.*
+import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Extension.setupGifViewClickListener
 import net.geeksempire.geeky.gify.R
 
@@ -30,7 +31,7 @@ class GifViewer : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        gifLinkToDownload = arguments?.getString("GIF_LINK") ?: "https://media3.giphy.com/media/QBStRoYK6d5VQD1pYX/giphy.gif"
+        gifLinkToDownload = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL) ?: "https://media3.giphy.com/media/QBStRoYK6d5VQD1pYX/giphy.gif"
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

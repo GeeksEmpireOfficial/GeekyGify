@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:44 AM
- * Last modified 2/8/20 10:36 AM
+ * Created by Elias Fazel on 2/8/20 11:54 AM
+ * Last modified 2/8/20 11:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,7 +60,7 @@ class BrowseGifViewModel : ViewModel() {
                         jsonObjectImageOriginalLink,
                         if (!jsonObject.isNull(GiphyJsonDataStructure.DATA_USER)) {
                             val useJsonObject = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_USER)
-                            GifUserProfile(userDisplayName = useJsonObject.getString(GiphyJsonDataStructure.DATA_USER_DISPLAY_NAME),
+                            GifUserProfile(userName = useJsonObject.getString(GiphyJsonDataStructure.DATA_USER_NAME),
                                 userAvatarUrl = useJsonObject.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL),
                                 isUserVerified = useJsonObject.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED))
                         } else {

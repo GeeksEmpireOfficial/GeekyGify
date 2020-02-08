@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:44 AM
- * Last modified 2/8/20 10:42 AM
+ * Created by Elias Fazel on 2/8/20 11:54 AM
+ * Last modified 2/8/20 11:44 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,7 +56,7 @@ class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: Ar
 
                 browseGifItemData[position].gifUserProfile?.let { gifUserProfile ->
 
-                    putString(GiphyJsonDataStructure.DATA_USER_DISPLAY_NAME, gifUserProfile.userDisplayName)
+                    putString(GiphyJsonDataStructure.DATA_USER_NAME, gifUserProfile.userName)
                     putString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL, gifUserProfile.userAvatarUrl)
                     putBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED, gifUserProfile.isUserVerified)
                 }
@@ -67,6 +67,11 @@ class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: Ar
                 .setCustomAnimations(R.anim.slide_from_right, 0)
                 .replace(R.id.fragmentGifViewer, gifViewer, "GIF VIEWER")
                 .commit()
+        }
+
+        viewHoldBrowseGifList.gifPreview.setOnLongClickListener {
+
+            false
         }
     }
 }

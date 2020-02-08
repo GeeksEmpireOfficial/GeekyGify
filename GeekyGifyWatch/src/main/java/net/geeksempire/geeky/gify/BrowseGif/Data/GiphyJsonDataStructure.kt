@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:44 AM
- * Last modified 2/8/20 10:22 AM
+ * Created by Elias Fazel on 2/8/20 11:54 AM
+ * Last modified 2/8/20 11:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ class GiphyJsonDataStructure {
         const val DATA_IMAGES_URL = "url"
 
         const val DATA_USER = "user"
-        const val DATA_USER_DISPLAY_NAME = "display_name"
+        const val DATA_USER_NAME = "username"
         const val DATA_USER_AVATAR_URL = "avatar_url"
         const val DATA_USER_IS_VERIFIED = "is_verified"
     }

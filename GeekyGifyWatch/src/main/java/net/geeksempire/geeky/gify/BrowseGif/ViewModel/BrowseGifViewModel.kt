@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 3:48 PM
+ * Created by Elias Fazel on 2/7/20 4:35 PM
+ * Last modified 2/7/20 4:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,14 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class BrowseGifViewModel : ViewModel() {
+
+    companion object {
+        const val gifRequestLimit: Int = 12
+        var gifRequestOffset: Int = 0
+        var gifRequestRating: String = "G"
+        var gifRequestLanguage: String = "en"
+
+    }
 
     val gifsListData: MutableLiveData<ArrayList<BrowseGifItemData>> by lazy {
         MutableLiveData<ArrayList<BrowseGifItemData>>()

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 3:06 PM
+ * Created by Elias Fazel on 2/7/20 4:35 PM
+ * Last modified 2/7/20 4:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,13 @@
 
 package net.geeksempire.geeky.gify.Utils.Giphy
 
-data class GiphySearchParameter(var categoryName: String, var requestLimit: Int = 12, var requestOffset: Int = 0, var searchRating: String = "G", var searchLanguage: String = "en")
+import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
+
+data class GiphySearchParameter(var categoryName: String,
+                                val requestLimit: Int = BrowseGifViewModel.gifRequestLimit,
+                                var requestOffset: Int = BrowseGifViewModel.gifRequestOffset,
+                                var searchRating: String = BrowseGifViewModel.gifRequestRating,
+                                var searchLanguage: String = BrowseGifViewModel.gifRequestLanguage)
 
 class SearchAddress {
 

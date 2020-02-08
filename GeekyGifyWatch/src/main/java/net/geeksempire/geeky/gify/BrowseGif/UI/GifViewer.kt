@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 3:48 PM
+ * Created by Elias Fazel on 2/7/20 4:35 PM
+ * Last modified 2/7/20 4:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -54,7 +54,11 @@ class GifViewer : Fragment() {
 
         closeFragment.setOnClickListener {
             activity?.let {
-                it.supportFragmentManager.beginTransaction().remove(this@GifViewer).commit()
+                it.supportFragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(0, R.anim.slide_to_right)
+                    .remove(this@GifViewer)
+                    .commit()
             }
         }
 

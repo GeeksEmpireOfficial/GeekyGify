@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 3:48 PM
+ * Created by Elias Fazel on 2/7/20 4:35 PM
+ * Last modified 2/7/20 4:21 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,6 +40,8 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
 
                 gifList.adapter = browseGifAdapter
                 browseGifAdapter.notifyDataSetChanged()
+
+                nextGifPage.visibility = View.VISIBLE
             }
 
             Log.d(this@createViewModelObserver.javaClass.simpleName, "GifsListData Observe")
@@ -49,14 +51,42 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
         EnqueueSearch().giphyJsonObjectRequest(applicationContext, it, browseGifViewModel)
     }
 
+    createClickListeners(categoryName, browseGifViewModel)
+
     return browseGifViewModel
 }
 
-fun BrowseGifView.createClickListeners() {
+fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel: BrowseGifViewModel) {
 
     exploreGifs.setOnClickListener {
 
         GiphyExplore()
             .invokeGiphyExplore(this@createClickListeners)
+    }
+
+    nextGifPage.setOnClickListener {
+        progressBarGifs.show()
+        previousGifPage.visibility = View.VISIBLE
+
+        BrowseGifViewModel.gifRequestOffset = BrowseGifViewModel.gifRequestOffset.plus(BrowseGifViewModel.gifRequestLimit)
+
+        GiphySearchParameter(categoryName, requestOffset = BrowseGifViewModel.gifRequestOffset).also {
+            EnqueueSearch().giphyJsonObjectRequest(applicationContext, it, browseGifViewModel)
+        }
+    }
+
+    previousGifPage.setOnClickListener {
+        progressBarGifs.show()
+
+        BrowseGifViewModel.gifRequestOffset = BrowseGifViewModel.gifRequestOffset.minus(BrowseGifViewModel.gifRequestLimit)
+        if (BrowseGifViewModel.gifRequestOffset < 0) {
+            BrowseGifViewModel.gifRequestOffset = 0
+
+            previousGifPage.visibility = View.GONE
+        }
+
+        GiphySearchParameter(categoryName, requestOffset = BrowseGifViewModel.gifRequestOffset).also {
+            EnqueueSearch().giphyJsonObjectRequest(applicationContext, it, browseGifViewModel)
+        }
     }
 }

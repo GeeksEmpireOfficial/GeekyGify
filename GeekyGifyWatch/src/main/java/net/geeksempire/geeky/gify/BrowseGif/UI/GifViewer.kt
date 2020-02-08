@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 11:54 AM
- * Last modified 2/8/20 11:45 AM
+ * Created by Elias Fazel on 2/8/20 12:41 PM
+ * Last modified 2/8/20 12:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import kotlinx.android.synthetic.main.gif_view.*
+import kotlinx.android.synthetic.main.gif_view.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Extension.setupGifViewClickListener
 import net.geeksempire.geeky.gify.BrowseGif.Extension.setupUserProfileInformation
@@ -48,19 +49,27 @@ class GifViewer : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.gif_view, container, false)
 
-        return inflater.inflate(R.layout.gif_view, container, false)
+        Glide.with(context!!)
+            .asGif()
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .load(R.drawable.gradient_loading)
+            .into(view.progressBarGifView)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         Glide.with(context!!)
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(gifLinkToDownload)
             .into(gifView)
-
 
         setupGifViewClickListener()
         setupUserProfileInformation()

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 11:54 AM
- * Last modified 2/8/20 11:44 AM
+ * Created by Elias Fazel on 2/8/20 12:41 PM
+ * Last modified 2/8/20 12:07 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,11 +41,12 @@ class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: Ar
     override fun onBindViewHolder(viewHoldBrowseGifList: BrowseGifListViewHolder, position: Int) {
 
         viewHoldBrowseGifList.mainView.setBackgroundColor(Color.parseColor(browseGifItemData[position].backgroundColor))
+
         Glide.with(context)
-              .asGif()
-              .diskCacheStrategy(DiskCacheStrategy.DATA)
-              .load(browseGifItemData[position].gifPreviewUrl)
-              .into(viewHoldBrowseGifList.gifPreview)
+            .asGif()
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .load(browseGifItemData[position].gifPreviewUrl)
+            .into(viewHoldBrowseGifList.gifPreview)
 
         viewHoldBrowseGifList.gifPreview.setOnClickListener {
             context.fragmentGifViewer.visibility = View.VISIBLE

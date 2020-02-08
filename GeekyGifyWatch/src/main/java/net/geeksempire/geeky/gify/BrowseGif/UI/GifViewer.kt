@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:44 AM
- * Last modified 2/8/20 10:38 AM
+ * Created by Elias Fazel on 2/8/20 10:51 AM
+ * Last modified 2/8/20 10:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,10 +28,18 @@ class GifViewer : Fragment() {
 
     lateinit var gifLinkToDownload: String
 
+    var gifUserDisplayName: String? = null
+    var gifUserAvatarUrl: String? = null
+    var gifUserIsVerified: Boolean? = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        gifLinkToDownload = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL) ?: "https://media3.giphy.com/media/QBStRoYK6d5VQD1pYX/giphy.gif"
+        gifLinkToDownload = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
+
+        gifUserDisplayName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_DISPLAY_NAME)
+        gifUserAvatarUrl = arguments?.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL)
+        gifUserIsVerified = arguments?.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

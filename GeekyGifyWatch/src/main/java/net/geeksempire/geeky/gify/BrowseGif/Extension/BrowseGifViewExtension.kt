@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:06 AM
- * Last modified 2/8/20 9:54 AM
+ * Created by Elias Fazel on 2/8/20 6:03 PM
+ * Last modified 2/8/20 2:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,8 +22,8 @@ import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
-import net.geeksempire.geeky.gify.Utils.Giphy.GiphyExplore
-import net.geeksempire.geeky.gify.Utils.Giphy.GiphySearchParameter
+import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
+import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInterface
 import org.json.JSONObject

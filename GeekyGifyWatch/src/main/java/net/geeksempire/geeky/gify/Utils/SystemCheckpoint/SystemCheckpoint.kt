@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:06 AM
- * Last modified 2/8/20 9:31 AM
+ * Created by Elias Fazel on 2/8/20 6:03 PM
+ * Last modified 2/8/20 6:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,11 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import javax.inject.Inject
 
-class SystemCheckpoint @Inject constructor(var context: Context) {
+interface InterfaceSystemCheckpoint {
+
+}
+
+class SystemCheckpoint @Inject constructor(var context: Context) : InterfaceSystemCheckpoint {
 
     fun networkConnection(): Boolean {
         var networkAvailable = false

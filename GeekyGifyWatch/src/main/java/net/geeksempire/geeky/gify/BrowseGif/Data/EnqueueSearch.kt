@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 10:06 AM
- * Last modified 2/8/20 9:39 AM
+ * Created by Elias Fazel on 2/8/20 6:03 PM
+ * Last modified 2/8/20 2:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,8 +16,8 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import net.geeksempire.geeky.gify.Utils.Giphy.GiphySearchParameter
-import net.geeksempire.geeky.gify.Utils.Giphy.SearchAddress
+import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
+import net.geeksempire.geeky.gify.GiphyExplore.SearchAddress
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInterface
 import org.json.JSONObject

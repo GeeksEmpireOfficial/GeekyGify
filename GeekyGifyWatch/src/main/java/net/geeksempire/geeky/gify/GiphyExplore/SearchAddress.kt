@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 4:35 PM
- * Last modified 2/7/20 4:12 PM
+ * Created by Elias Fazel on 2/8/20 6:03 PM
+ * Last modified 2/8/20 2:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.Utils.Giphy
+package net.geeksempire.geeky.gify.GiphyExplore
 
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 

@@ -11,21 +11,21 @@
 <resources>
 
     <style name="GeeksEmpire" parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:colorPrimary">@color/default_color</item>
-        <item name="android:colorPrimaryDark">@color/default_color_darker</item>
-        <item name="android:colorAccent">@color/default_color_light</item>
+        <item name="android:colorPrimary">@color/default_color_game</item>
+        <item name="android:colorPrimaryDark">@color/default_color_game_dark</item>
+        <item name="android:colorAccent">@color/default_color_game_light</item>
 
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
     <style name="GeeksEmpire.Material" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:colorPrimary">@color/default_color</item>
-        <item name="android:colorPrimaryDark">@color/default_color_darker</item>
-        <item name="android:colorAccent">@color/default_color_light</item>
+        <item name="android:colorPrimary">@color/default_color_game</item>
+        <item name="android:colorPrimaryDark">@color/default_color_game_dark</item>
+        <item name="android:colorAccent">@color/default_color_game_light</item>
 
-        <item name="colorPrimary">@color/default_color</item>
-        <item name="colorPrimaryDark">@color/default_color_darker</item>
-        <item name="colorAccent">@color/default_color_light</item>
+        <item name="colorPrimary">@color/default_color_game</item>
+        <item name="colorPrimaryDark">@color/default_color_game_dark</item>
+        <item name="colorAccent">@color/default_color_game_light</item>
 
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
- * Last modified 2/8/20 5:44 PM
+ * Created by Elias Fazel on 2/8/20 6:28 PM
+ * Last modified 2/8/20 6:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,9 +11,11 @@
 package net.geeksempire.geeky.gify.Utils.SystemCheckpoint
 
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Handler
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +29,9 @@ import net.geeksempire.geeky.gify.Utils.DependencyInjection.Scopes.ActivityScope
 import javax.inject.Inject
 
 @ActivityScope
-class NetworkConnectionListener @Inject constructor (var appCompatActivity: AppCompatActivity, var mainView: ConstraintLayout, var systemCheckpoint: SystemCheckpoint) :  ConnectivityManager.NetworkCallback() {
+class NetworkConnectionListener @Inject constructor (private var appCompatActivity: AppCompatActivity,
+                                                     var mainView: ConstraintLayout,
+                                                     var systemCheckpoint: SystemCheckpoint) :  ConnectivityManager.NetworkCallback() {
 
     val connectivityManager = appCompatActivity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     var offlineIndicator: View
@@ -67,8 +71,14 @@ class NetworkConnectionListener @Inject constructor (var appCompatActivity: AppC
                     Glide.with(appCompatActivity)
                         .asGif()
                         .diskCacheStrategy(DiskCacheStrategy.DATA)
-                        .load(R.drawable.gradient_loading)
+                        .load(R.drawable.no_internet_connection)
                         .into(offlineIndicator.offlineWait)
+
+                    offlineIndicator.offlineWait.setOnClickListener {
+                        appCompatActivity.startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                        appCompatActivity.finish()
+                    }
                 }
             }, 555)
         }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
- * Last modified 2/8/20 6:03 PM
+ * Created by Elias Fazel on 2/8/20 6:28 PM
+ * Last modified 2/8/20 6:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package net.geeksempire.geeky.gify
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.ambient.AmbientModeSupport
@@ -51,8 +52,14 @@ class EntryConfiguration : AppCompatActivity(), AmbientModeSupport.AmbientCallba
             Glide.with(this@EntryConfiguration)
                 .asGif()
                 .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .load(R.drawable.gradient_loading)
+                .load(R.drawable.no_internet_connection)
                 .into(offlineIndicator.offlineWait)
+
+            offlineIndicator.offlineWait.setOnClickListener {
+                startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                this@EntryConfiguration.finish()
+            }
         }
     }
 

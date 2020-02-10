@@ -23,7 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.BrowseGifItemData
-import net.geeksempire.geeky.gify.BrowseGif.UI.GifViewer
+import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 
 class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: ArrayList<BrowseGifItemData>) : RecyclerView.Adapter<BrowseGifListViewHolder>() {
@@ -51,7 +51,8 @@ class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: Ar
         viewHoldBrowseGifList.gifPreview.setOnClickListener {
             context.fragmentGifViewer.visibility = View.VISIBLE
 
-            val gifViewer: Fragment = GifViewer()
+            val gifViewer: Fragment =
+                GifViewer()
             gifViewer.arguments = Bundle().apply {
                 putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, browseGifItemData[position].gifOriginalUri)
 

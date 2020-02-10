@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 11:54 AM
- * Last modified 2/8/20 11:49 AM
+ * Created by Elias Fazel on 2/9/20 4:09 PM
+ * Last modified 2/9/20 4:07 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.BrowseGif.Extension
+package net.geeksempire.geeky.gify.GifViewer.Extension
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -23,7 +23,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.gif_view.*
-import net.geeksempire.geeky.gify.BrowseGif.UI.GifViewer
+import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Calculations.calculateThirtyPercent
 
@@ -91,23 +91,5 @@ fun GifViewer.setupGifViewClickListener() {
         viewExpanded = !viewExpanded
 
         false
-    }
-}
-
-fun GifViewer.setupUserProfileInformation() {
-
-    if (gifUserName != null && gifUserAvatarUrl != null && gifUserIsVerified != null) {
-
-        Glide.with(context!!)
-            .asGif()
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .load(gifUserAvatarUrl)
-            .apply(RequestOptions.circleCropTransform())
-            .into(userAvatarView)
-
-        userNameView.text = "@${gifUserName}"
-        if (!gifUserIsVerified!!) {
-            userVerifiedBadgeView.imageTintList = ColorStateList.valueOf(Color.GRAY)
-        }
     }
 }

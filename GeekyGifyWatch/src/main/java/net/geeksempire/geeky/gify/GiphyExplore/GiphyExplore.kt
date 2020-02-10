@@ -25,7 +25,7 @@ import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
-import net.geeksempire.geeky.gify.BrowseGif.UI.GifViewer
+import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 
 class GiphyExplore {
@@ -55,7 +55,8 @@ class GiphyExplore {
             override fun onGifSelected(media: Media) {
                 context.fragmentGifViewer.visibility = View.VISIBLE
 
-                val gifViewer: Fragment = GifViewer()
+                val gifViewer: Fragment =
+                    GifViewer()
                 gifViewer.arguments = Bundle().apply {
                     putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, generateGiphyExploreLink(media.id))
 

@@ -25,44 +25,9 @@ import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
+import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponse
 import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInterface
 import org.json.JSONObject
-
-fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
-
-    gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
-
-    val browseGifViewModel = ViewModelProvider(this@createViewModelObserver).get(BrowseGifViewModel::class.java)
-
-    browseGifViewModel.gifsListData.observe(this@createViewModelObserver,
-        Observer {
-            if (it.size > 0) {
-                gifList.visibility = View.VISIBLE
-                progressBarGifs.hide()
-
-                val browseGifAdapter = BrowseGifAdapter(this@createViewModelObserver, it)
-
-                gifList.adapter = browseGifAdapter
-                browseGifAdapter.notifyDataSetChanged()
-
-                nextGifPage.visibility = View.VISIBLE
-            }
-
-            Log.d(this@createViewModelObserver.javaClass.simpleName, "GifsListData Observe")
-        })
-
-    GiphySearchParameter(categoryName).also {
-
-        EnqueueSearch()
-            .giphyJsonObjectRequest(applicationContext,
-                it,
-                jsonRequestResponse(applicationContext, browseGifViewModel))
-    }
-
-    createClickListeners(categoryName, browseGifViewModel)
-
-    return browseGifViewModel
-}
 
 fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel: BrowseGifViewModel) {
 
@@ -83,7 +48,7 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
             EnqueueSearch()
                 .giphyJsonObjectRequest(applicationContext,
                     it,
-                    jsonRequestResponse(applicationContext, browseGifViewModel))
+                    JsonRequestResponse().jsonRequestResponseHandler(applicationContext, browseGifViewModel))
         }
     }
 
@@ -102,18 +67,7 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
             EnqueueSearch()
                 .giphyJsonObjectRequest(applicationContext,
                     it,
-                    jsonRequestResponse(applicationContext, browseGifViewModel))
-        }
-    }
-}
-
-fun jsonRequestResponse(context: Context, browseGifViewModel: BrowseGifViewModel): JsonRequestResponseInterface {
-    return object : JsonRequestResponseInterface {
-
-        override fun jsonRequestResponseHandler(rawDataJsonObject: JSONObject, colorsList: ArrayList<String>) {
-
-            browseGifViewModel.setupGifsBrowserData(rawDataJsonObject,
-                GetResources(context).getNeonColors())
+                    JsonRequestResponse().jsonRequestResponseHandler(applicationContext, browseGifViewModel))
         }
     }
 }

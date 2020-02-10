@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
+ * Created by Elias Fazel on 2/9/20 4:07 PM
  * Last modified 2/8/20 6:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.BrowseGif.UI
+package net.geeksempire.geeky.gify.GifViewer
 
 import android.os.Bundle
 import android.os.Handler
@@ -26,8 +26,8 @@ import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.android.synthetic.main.gif_view.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
-import net.geeksempire.geeky.gify.BrowseGif.Extension.setupGifViewClickListener
-import net.geeksempire.geeky.gify.BrowseGif.Extension.setupUserProfileInformation
+import net.geeksempire.geeky.gify.GifViewer.Extension.setupGifViewClickListener
+import net.geeksempire.geeky.gify.GifViewer.Extension.setupUserProfileInformation
 import net.geeksempire.geeky.gify.R
 
 
@@ -90,10 +90,6 @@ class GifViewer : Fragment() {
 
         setupGifViewClickListener()
         setupUserProfileInformation()
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onDestroyView() {

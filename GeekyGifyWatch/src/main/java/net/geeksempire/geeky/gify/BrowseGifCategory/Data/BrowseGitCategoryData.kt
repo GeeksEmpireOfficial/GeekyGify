@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 6:28 PM
- * Last modified 2/9/20 6:26 PM
+ * Created by Elias Fazel on 2/9/20 7:17 PM
+ * Last modified 2/9/20 7:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@ class BrowseGitCategoryData {
 
     private fun getGifCategoryDatabase(context: Context) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        val widgetDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
+        val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(supportSQLiteDatabase: SupportSQLiteDatabase) {
@@ -56,12 +56,12 @@ class BrowseGitCategoryData {
             })
             .build()
 
-        widgetDataInterface.initDataAccessObject().getAllGifCategoryNames()
+        gifCategoryDataInterface.initDataAccessObject().getAllGifCategoryNames()
     }
 
     private suspend fun initializeGifCategoryDatabase(context: Context, initialGifCategoryNames: ArrayList<String>) {
 
-        val widgetDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
+        val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(supportSQLiteDatabase: SupportSQLiteDatabase) {
@@ -95,11 +95,11 @@ class BrowseGitCategoryData {
                 arrayOfGifCategoryDataModels.add(
                     GifCategoryDataModel(
                         it.value,
-                        System.currentTimeMillis()
+                        (initialGifCategoryNames.size -  it.index).toLong()
                     )
                 )
             }
 
-        widgetDataInterface.initDataAccessObject().insertAllNewGifCategoryData(arrayOfGifCategoryDataModels)
+        gifCategoryDataInterface.initDataAccessObject().insertAllNewGifCategoryData(arrayOfGifCategoryDataModels)
     }
 }

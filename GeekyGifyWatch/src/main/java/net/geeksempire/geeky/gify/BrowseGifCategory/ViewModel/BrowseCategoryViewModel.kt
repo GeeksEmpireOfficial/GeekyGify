@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 6:28 PM
- * Last modified 2/9/20 6:20 PM
+ * Created by Elias Fazel on 2/9/20 7:17 PM
+ * Last modified 2/9/20 6:36 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,8 +29,6 @@ class BrowseCategoryViewModel : ViewModel() {
     }
 
     fun setupCategoryBrowserData(rawData: ArrayList<String>, colorsList: ArrayList<String>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-
-        println(">>> raw " + rawData.size)
 
         val categoriesListDataFinal = ArrayList<CategoryItemData>()
 

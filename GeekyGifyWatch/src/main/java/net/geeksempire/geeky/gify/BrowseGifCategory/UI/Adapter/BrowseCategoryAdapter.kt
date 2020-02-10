@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/7/20 3:48 PM
- * Last modified 2/7/20 2:35 PM
+ * Created by Elias Fazel on 2/9/20 7:17 PM
+ * Last modified 2/9/20 7:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,9 +21,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemLongPress
 
-class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayList<CategoryItemData>) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
+
+class BrowseCategoryAdapter(var context: Context,
+                            var categoryItemsData: ArrayList<CategoryItemData>, var  recyclerViewGifCategoryItemLongPress: RecyclerViewGifCategoryItemLongPress) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrowseCategoryListViewHolder {
 
@@ -86,6 +90,26 @@ class BrowseCategoryAdapter(var context: Context, var categoryItemsData: ArrayLi
             }
         } else {
             viewHolderBrowseCategoryList.categoryIconRight.visibility = View.GONE
+        }
+
+        viewHolderBrowseCategoryList.categoryIconRight.setOnLongClickListener { view ->
+            categoryItemsData[position].categoryRight?.categoryTitle?.let {
+                recyclerViewGifCategoryItemLongPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                    it
+                )
+            }
+
+            false
+        }
+
+        viewHolderBrowseCategoryList.categoryIconLeft.setOnLongClickListener { view ->
+            categoryItemsData[position].categoryLeft?.categoryTitle?.let {
+                recyclerViewGifCategoryItemLongPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                    it
+                )
+            }
+
+            false
         }
     }
 }

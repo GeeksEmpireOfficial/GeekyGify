@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/7/20 3:48 PM
-  ~ Last modified 2/7/20 2:54 PM
+  ~ Created by Elias Fazel on 2/9/20 4:52 PM
+  ~ Last modified 2/9/20 4:43 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@
         android:focusableInTouchMode="true"
         android:textColor="@color/light"
         android:fontFamily="@font/pixelate_normal"
-        android:background="@drawable/category_right_background"
+        android:background="@drawable/category_left_background"
         android:visibility="gone"
 
         apps:autoSizeTextType="uniform"

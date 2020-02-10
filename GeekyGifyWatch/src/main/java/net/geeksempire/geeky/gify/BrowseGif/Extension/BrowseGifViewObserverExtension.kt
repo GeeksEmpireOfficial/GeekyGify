@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 4:10 PM
- * Last modified 2/8/20 6:03 PM
+ * Created by Elias Fazel on 2/10/20 2:04 PM
+ * Last modified 2/10/20 2:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,7 +10,6 @@
 
 package net.geeksempire.geeky.gify.BrowseGif.Extension
 
-import android.content.Context
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
@@ -22,12 +21,8 @@ import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
-import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
-import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponse
-import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInterface
-import org.json.JSONObject
 
 fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
 
@@ -59,8 +54,6 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
                 it,
                 JsonRequestResponse().jsonRequestResponseHandler(applicationContext, browseGifViewModel))
     }
-
-    createClickListeners(categoryName, browseGifViewModel)
 
     return browseGifViewModel
 }

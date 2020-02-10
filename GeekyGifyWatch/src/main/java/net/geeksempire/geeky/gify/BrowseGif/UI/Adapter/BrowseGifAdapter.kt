@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 12:41 PM
- * Last modified 2/8/20 12:07 PM
+ * Created by Elias Fazel on 2/10/20 2:04 PM
+ * Last modified 2/10/20 1:57 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,8 +51,7 @@ class BrowseGifAdapter(var context: AppCompatActivity, var browseGifItemData: Ar
         viewHoldBrowseGifList.gifPreview.setOnClickListener {
             context.fragmentGifViewer.visibility = View.VISIBLE
 
-            val gifViewer: Fragment =
-                GifViewer()
+            val gifViewer: Fragment = GifViewer()
             gifViewer.arguments = Bundle().apply {
                 putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, browseGifItemData[position].gifOriginalUri)
 

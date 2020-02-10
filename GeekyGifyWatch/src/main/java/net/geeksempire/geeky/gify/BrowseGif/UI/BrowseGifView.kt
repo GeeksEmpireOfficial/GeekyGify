@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
- * Last modified 2/8/20 5:25 PM
+ * Created by Elias Fazel on 2/10/20 2:04 PM
+ * Last modified 2/10/20 1:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,6 +14,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.ambient.AmbientModeSupport
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
+import net.geeksempire.geeky.gify.BrowseGif.Extension.createClickListeners
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createViewModelObserver
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.GeekyGifyApplication
@@ -43,9 +44,15 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
 
         val categoryName = intent.getStringExtra("CategoryName")
 
-        categoryTitle.text = categoryName
+        categoryName?.let {
 
-        val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(categoryName)
+            categoryTitle.text = it
+
+            val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(it)
+
+            createClickListeners(it, browseGifViewModel)
+
+        }
     }
 
     override fun onDestroy() {

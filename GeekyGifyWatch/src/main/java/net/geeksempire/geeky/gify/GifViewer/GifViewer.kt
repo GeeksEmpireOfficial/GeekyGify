@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 4:07 PM
- * Last modified 2/8/20 6:03 PM
+ * Created by Elias Fazel on 2/10/20 2:04 PM
+ * Last modified 2/10/20 1:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -88,8 +88,8 @@ class GifViewer : Fragment() {
             })
             .into(gifView)
 
-        setupGifViewClickListener()
         setupUserProfileInformation()
+        setupGifViewClickListener()
     }
 
     override fun onDestroyView() {

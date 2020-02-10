@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 4:31 PM
- * Last modified 2/9/20 4:31 PM
+ * Created by Elias Fazel on 2/10/20 2:04 PM
+ * Last modified 2/10/20 1:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,40 +33,8 @@ fun GifViewer.setupGifViewClickListener() {
         }
     }
 
-    var userProfileView: Boolean = false
     gifView.setOnClickListener {
 
-        if (gifUserName != null && gifUserAvatarUrl != null) {
-
-            if (userProfileView) {
-
-                val animationSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_to_right)
-
-                userAvatarView.startAnimation(animationSlideOut)
-                userAvatarView.visibility = View.GONE
-
-                userNameView.startAnimation(animationSlideOut)
-                userNameView.visibility = View.GONE
-
-                userVerifiedBadgeView.startAnimation(animationSlideOut)
-                userVerifiedBadgeView.visibility = View.GONE
-
-            } else {
-
-                val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_from_right)
-
-                userAvatarView.startAnimation(animationSlideIn)
-                userAvatarView.visibility = View.VISIBLE
-
-                userNameView.startAnimation(animationSlideIn)
-                userNameView.visibility = View.VISIBLE
-
-                userVerifiedBadgeView.startAnimation(animationSlideIn)
-                userVerifiedBadgeView.visibility = View.VISIBLE
-            }
-
-            userProfileView = !userProfileView
-        }
     }
 
     var viewExpanded: Boolean = false
@@ -79,8 +47,44 @@ fun GifViewer.setupGifViewClickListener() {
         )
 
         val gifViewLayoutParameter: ViewGroup.LayoutParams = gifView.layoutParams
-        gifViewLayoutParameter.width = if (viewExpanded) ViewGroup.LayoutParams.MATCH_PARENT else calculateThirtyPercent(gifView.width)
-        gifViewLayoutParameter.height = if (viewExpanded) ViewGroup.LayoutParams.MATCH_PARENT else calculateThirtyPercent(gifView.height)
+
+        if (viewExpanded)  {
+
+            val animationSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_to_right)
+
+            userAvatarView.startAnimation(animationSlideOut)
+            userAvatarView.visibility = View.GONE
+
+            userNameView.startAnimation(animationSlideOut)
+            userNameView.visibility = View.GONE
+
+            if (gifUserIsVerified!!) {
+                userVerifiedBadgeView.startAnimation(animationSlideOut)
+                userVerifiedBadgeView.visibility = View.GONE
+            }
+
+            gifViewLayoutParameter.width = ViewGroup.LayoutParams.MATCH_PARENT
+            gifViewLayoutParameter.height = ViewGroup.LayoutParams.MATCH_PARENT
+
+        } else {
+
+            val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_from_right)
+
+            userAvatarView.startAnimation(animationSlideIn)
+            userAvatarView.visibility = View.VISIBLE
+
+            userNameView.startAnimation(animationSlideIn)
+            userNameView.visibility = View.VISIBLE
+
+            if (gifUserIsVerified!!) {
+                userVerifiedBadgeView.startAnimation(animationSlideIn)
+                userVerifiedBadgeView.visibility = View.VISIBLE
+            }
+
+            gifViewLayoutParameter.width = calculateThirtyPercent(gifView.width)
+            gifViewLayoutParameter.height = calculateThirtyPercent(gifView.height)
+
+        }
         gifView.layoutParams = gifViewLayoutParameter
 
         viewExpanded = !viewExpanded

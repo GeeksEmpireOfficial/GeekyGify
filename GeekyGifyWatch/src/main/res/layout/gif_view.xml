@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/10/20 5:18 PM
-  ~ Last modified 2/10/20 4:04 PM
+  ~ Created by Elias Fazel on 2/11/20 11:17 AM
+  ~ Last modified 2/11/20 10:18 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -116,7 +116,7 @@
         app:circle_start_color="@color/purple"
         app:circle_end_color="@color/yellow"
         app:dots_primary_color="@color/pink"
-        app:dots_secondary_color="@color/cyan"
+        app:dots_secondary_color="@color/default_color_light"
 
         app:anim_scale_factor="1"
         app:is_enabled="true"

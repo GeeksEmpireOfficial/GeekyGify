@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 7:52 PM
- * Last modified 2/10/20 7:49 PM
+ * Created by Elias Fazel on 2/11/20 11:17 AM
+ * Last modified 2/11/20 11:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,7 +14,6 @@ import android.content.Context
 import android.os.Handler
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
 import androidx.wear.widget.WearableLinearLayoutManager
 import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import kotlinx.coroutines.CoroutineScope
@@ -26,14 +25,15 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWea
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
-import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
+import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDatabase
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemLongPress
 
 
 fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
+
 
     categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
     categoryList.isEdgeItemsCenteringEnabled = true
@@ -51,8 +51,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
         override fun itemLongPressed(rightLeft: Boolean, categoryName: String) {
 
             CoroutineScope(Dispatchers.IO).launch {
-                val gifCategoryDataInterface = Room.databaseBuilder(applicationContext, GifCategoryDataInterface::class.java, DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
-                    .build()
+                val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
 
                 when (rightLeft) {
                     RecyclerViewRightLeftItem.RIGHT_ITEM -> {

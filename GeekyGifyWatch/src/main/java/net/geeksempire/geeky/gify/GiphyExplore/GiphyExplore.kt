@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
- * Last modified 2/8/20 2:42 PM
+ * Created by Elias Fazel on 2/11/20 11:17 AM
+ * Last modified 2/11/20 10:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -58,6 +58,7 @@ class GiphyExplore {
                 val gifViewer: Fragment =
                     GifViewer()
                 gifViewer.arguments = Bundle().apply {
+                    putString(GiphyJsonDataStructure.DATA_URL, media.url)
                     putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, generateGiphyExploreLink(media.id))
 
                     media.user?.let { gifUserProfile ->

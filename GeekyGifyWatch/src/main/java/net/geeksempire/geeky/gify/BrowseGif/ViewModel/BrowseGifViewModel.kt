@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 11:54 AM
- * Last modified 2/8/20 11:44 AM
+ * Created by Elias Fazel on 2/11/20 11:17 AM
+ * Last modified 2/11/20 10:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,6 +46,9 @@ class BrowseGifViewModel : ViewModel() {
 
             for (i in 0 until gifJsonArray.length()) {
                 val jsonObject : JSONObject = gifJsonArray[i] as JSONObject
+
+                val linkToGif = jsonObject.getString(GiphyJsonDataStructure.DATA_URL)
+
                 val jsonObjectImage = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES)
 
                 val jsonObjectImageOriginal= jsonObjectImage.getJSONObject(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL)
@@ -56,7 +59,8 @@ class BrowseGifViewModel : ViewModel() {
 
                 val aBackgroundColor = colorsList.random()
                 browseGifItemData.add(
-                    BrowseGifItemData(jsonObjectImagePreviewLink,
+                    BrowseGifItemData(linkToGif,
+                        jsonObjectImagePreviewLink,
                         jsonObjectImageOriginalLink,
                         if (!jsonObject.isNull(GiphyJsonDataStructure.DATA_USER)) {
                             val useJsonObject = jsonObject.getJSONObject(GiphyJsonDataStructure.DATA_USER)

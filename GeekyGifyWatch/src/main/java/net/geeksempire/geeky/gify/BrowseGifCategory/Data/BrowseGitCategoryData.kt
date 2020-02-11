@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 7:52 PM
- * Last modified 2/10/20 7:49 PM
+ * Created by Elias Fazel on 2/11/20 11:17 AM
+ * Last modified 2/11/20 11:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,15 +11,17 @@
 package net.geeksempire.geeky.gify.BrowseGifCategory.Data
 
 import android.content.Context
-import androidx.room.Room
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
+import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDatabase
 
 class BrowseGitCategoryData(var context: Context) {
+
+    private val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(context).initialGifCategoryDatabase()
 
     fun categoryListNames() : Deferred<ArrayList<String>> = CoroutineScope(Dispatchers.IO).async {
         var gifCategoryList = ArrayList<String>()
@@ -41,16 +43,10 @@ class BrowseGitCategoryData(var context: Context) {
 
     private fun getGifCategoryDatabase() : Deferred<List<String>> = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
-            .build()
-
         gifCategoryDataInterface.initDataAccessObject().getAllGifCategoryNames()
     }
 
     private suspend fun initializeGifCategoryDatabase(initialGifCategoryNames: ArrayList<String>) {
-
-        val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
-            .build()
 
         val arrayOfGifCategoryDataModels = ArrayList<GifCategoryDataModel>()
 

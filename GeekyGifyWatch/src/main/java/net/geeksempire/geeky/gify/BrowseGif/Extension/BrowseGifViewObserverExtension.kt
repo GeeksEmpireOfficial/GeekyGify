@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 2:34 PM
- * Last modified 2/10/20 2:34 PM
+ * Created by Elias Fazel on 2/11/20 11:17 AM
+ * Last modified 2/11/20 10:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,10 +36,15 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
     val browseGifViewModel = ViewModelProvider(this@createViewModelObserver).get(BrowseGifViewModel::class.java)
 
     val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress = object : RecyclerViewGifBrowseItemPress {
-        override fun itemPressed(gifUserProfile: GifUserProfile?, gifOriginalUri: String) {
+        override fun itemPressed(
+            gifUserProfile: GifUserProfile?,
+            gifOriginalUri: String,
+            linkToGif: String
+        ) {
             fragmentGifViewer.visibility = View.VISIBLE
 
             gifViewer.arguments = Bundle().apply {
+                putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
                 putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, gifOriginalUri)
 
                 gifUserProfile?.let { gifUserProfile ->

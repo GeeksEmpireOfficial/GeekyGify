@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 5:25 PM
- * Last modified 2/10/20 5:25 PM
+ * Created by Elias Fazel on 2/10/20 6:19 PM
+ * Last modified 2/10/20 6:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,9 +23,9 @@ import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.geeksempire.geeky.gify.GifFavorite.FavoriteCheckpoint
-import net.geeksempire.geeky.gify.GifFavorite.FavoriteIt
-import net.geeksempire.geeky.gify.GifFavorite.UnfavoriteIt
+import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
+import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteIt
+import net.geeksempire.geeky.gify.GifFavorite.Util.UnfavoriteIt
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Calculations.calculateThirtyPercent
@@ -112,7 +112,8 @@ fun GifViewer.setupGifViewClickListener() {
         false
     }
 
-    FavoriteCheckpoint().checkIfFavorite(context!!, makeFavorite, gifLinkToDownload)
+    FavoriteCheckpoint()
+        .checkIfFavorite(context!!, makeFavorite, gifLinkToDownload)
     makeFavorite.setOnLikeListener(object : OnLikeListener {
         override fun liked(likeButton: LikeButton?) {
             CoroutineScope(Dispatchers.IO).launch {

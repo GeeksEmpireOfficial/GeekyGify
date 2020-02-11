@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 11:15 AM
+ * Created by Elias Fazel on 2/11/20 12:26 PM
+ * Last modified 2/11/20 12:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -178,11 +178,9 @@ fun GifViewer.setupGifViewClickListener() {
         val remoteIntent = Intent(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            .setData(Uri.parse(linkToGif))
-        remoteIntent.apply {
-            putExtra(Intent.EXTRA_STREAM, Uri.parse(linkToGif))
-            putExtra(Intent.EXTRA_TEXT, context?.getString(R.string.app_name))
-        }
+            .setData(Uri.parse(/*linkToGif*/"https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${linkToGif}" +
+                    "&" +
+                    "${Intent.EXTRA_TEXT}=${context?.getString(R.string.app_name)}"))
 
         RemoteIntent.startRemoteActivity(
             context,

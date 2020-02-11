@@ -1,0 +1,36 @@
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/11/20 12:26 PM
+  ~ Last modified 2/9/20 1:22 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <style name="GeeksEmpire" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:colorPrimary">@color/default_color_game</item>
+        <item name="android:colorPrimaryDark">@color/default_color_game_dark</item>
+        <item name="android:colorAccent">@color/default_color_game_light</item>
+
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="GeeksEmpire.Material" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/default_color_game</item>
+        <item name="android:colorPrimaryDark">@color/default_color_game_dark</item>
+        <item name="android:colorAccent">@color/default_color_game_light</item>
+
+        <item name="colorPrimary">@color/default_color_game</item>
+        <item name="colorPrimaryDark">@color/default_color_game_dark</item>
+        <item name="colorAccent">@color/default_color_game_light</item>
+
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+    <style name="ContentLoadingProgress">
+        <item name="colorAccent">@color/pink</item>
+    </style>
+</resources>

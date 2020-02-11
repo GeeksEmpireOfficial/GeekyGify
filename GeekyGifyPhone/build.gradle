@@ -1,0 +1,102 @@
+/*
+ * Copyright © 2020 By Geeks Empire. 
+ *
+ * Created by Elias Fazel on 2/11/20 12:26 PM
+ * Last modified 2/11/20 11:35 AM
+ *
+ * Licensed Under MIT License.
+ * https://opensource.org/licenses/MIT
+ */
+
+apply plugin: 'com.android.application'
+
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+
+    defaultConfig {
+        applicationId "net.geeksempire.geeky.gify"
+
+        minSdkVersion 25
+        targetSdkVersion 29
+
+        versionCode 1
+        versionName "${majorVersion}." + getDateMonth() + "." + getDateDay() + "." + getDateYear() + ".${versionCode}"
+
+        wearAppUnbundled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    flavorDimensions "GeekyGify"
+    productFlavors {
+        releaseConfig {
+            dimension "GeekyGify"
+
+            versionNameSuffix '[Android][Phone]'
+        }
+        betaConfig {
+            dimension "GeekyGify"
+
+            versionNameSuffix '[Android][Phone][BETA]'
+        }
+    }
+}
+
+static def getDateYear() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy')
+    return formattedDate
+}
+
+static def getDateMonth() {
+    def date = new Date()
+    def formattedDate = date.format('MM')
+    return formattedDate
+}
+
+static def getDateDay() {
+    def date = new Date()
+    def formattedDate = date.format('dd')
+    return formattedDate
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    implementation 'com.google.android.gms:play-services-wearable:17.0.0'
+
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+
+    implementation 'com.google.android.material:material:1.2.0-alpha04'
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

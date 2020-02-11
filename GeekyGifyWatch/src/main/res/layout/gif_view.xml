@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/10/20 2:04 PM
-  ~ Last modified 2/10/20 2:03 PM
+  ~ Created by Elias Fazel on 2/10/20 3:04 PM
+  ~ Last modified 2/10/20 3:03 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -39,7 +39,7 @@
         android:id="@+id/closeFragment"
         android:layout_width="33dp"
         android:layout_height="33dp"
-        android:padding="1dp"
+        android:layout_margin="1dp"
         android:scaleType="fitCenter"
         android:src="@drawable/close_button"
         apps:layout_constraintTop_toTopOf="parent"
@@ -51,7 +51,7 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginBottom="3dp"
-        android:padding="1dp"
+        android:layout_margin="1dp"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_verified_badge"
         android:visibility="gone"
@@ -66,7 +66,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="50dp"
         android:layout_marginBottom="3dp"
-        android:padding="1dp"
+        android:layout_margin="1dp"
         android:scaleType="fitCenter"
         android:visibility="gone"
 
@@ -80,7 +80,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="3dp"
         android:paddingStart="5dp"
-        android:paddingEnd="3dp"
+        android:paddingEnd="5dp"
         android:gravity="center_vertical"
         android:singleLine="true"
         android:ellipsize="marquee"
@@ -101,12 +101,23 @@
         apps:layout_constraintStart_toEndOf="@id/userAvatarView"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.like.LikeButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/makeFavorite"
-        android:layout_width="29dp"
-        android:layout_height="29dp"
-        android:padding="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
 
+        app:icon_type="heart"
+        app:icon_size="19dp"
+        app:like_drawable="@drawable/heart_on"
+        app:unlike_drawable="@drawable/heart_off"
+        app:circle_start_color="@color/light_transparent"
+        app:circle_end_color="@color/default_color_game"
+        app:dots_primary_color="@color/pink"
+        app:dots_secondary_color="@color/orange"
+        app:anim_scale_factor="3"
+        app:is_enabled="true"
+        app:liked="false"
 
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintTop_toTopOf="parent"

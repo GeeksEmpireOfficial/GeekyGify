@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 2:04 PM
- * Last modified 2/10/20 1:49 PM
+ * Created by Elias Fazel on 2/10/20 3:04 PM
+ * Last modified 2/10/20 2:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,8 @@ import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.gif_view.*
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
@@ -91,4 +93,15 @@ fun GifViewer.setupGifViewClickListener() {
 
         false
     }
+
+    makeFavorite.setOnLikeListener(object : OnLikeListener {
+        override fun liked(likeButton: LikeButton?) {
+
+        }
+
+        override fun unLiked(likeButton: LikeButton?) {
+
+        }
+    })
 }
+

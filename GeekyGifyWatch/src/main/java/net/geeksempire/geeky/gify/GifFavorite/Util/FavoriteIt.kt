@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 7:43 PM
- * Last modified 2/10/20 7:32 PM
+ * Created by Elias Fazel on 2/10/20 7:52 PM
+ * Last modified 2/10/20 7:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,10 +20,9 @@ import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
 
-class FavoriteIt {
+class FavoriteIt (var context: Context) {
 
-    fun addFavoriteGifDatabase(context: Context,
-                               gifUrl: String,
+    fun addFavoriteGifDatabase(gifUrl: String,
                                gifUsername: String?, gifUserAvatar: String?, gifUserVerified: Boolean?)
             = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 

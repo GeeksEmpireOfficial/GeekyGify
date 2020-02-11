@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 7:43 PM
- * Last modified 2/10/20 7:32 PM
+ * Created by Elias Fazel on 2/10/20 7:52 PM
+ * Last modified 2/10/20 7:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -105,7 +105,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
 private fun triggerGifCategoryDataLoading(context: Context, browseGifCategoryView: BrowseCategoryViewModel) {
     CoroutineScope(Dispatchers.IO).launch {
-        BrowseGitCategoryData().categoryListNames(context).await().let {
+        BrowseGitCategoryData(context).categoryListNames().await().let {
             browseGifCategoryView.setupCategoryBrowserData(
                 it,
                 GetResources(context).getNeonColors()

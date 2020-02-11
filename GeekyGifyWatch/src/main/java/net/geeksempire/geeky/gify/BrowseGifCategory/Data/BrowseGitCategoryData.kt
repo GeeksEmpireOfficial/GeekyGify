@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 7:43 PM
- * Last modified 2/10/20 7:43 PM
+ * Created by Elias Fazel on 2/10/20 7:52 PM
+ * Last modified 2/10/20 7:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,27 +19,27 @@ import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
 
-class BrowseGitCategoryData {
+class BrowseGitCategoryData(var context: Context) {
 
-    fun categoryListNames(context: Context) : Deferred<ArrayList<String>> = CoroutineScope(Dispatchers.IO).async {
+    fun categoryListNames() : Deferred<ArrayList<String>> = CoroutineScope(Dispatchers.IO).async {
         var gifCategoryList = ArrayList<String>()
 
         if (context.getDatabasePath(DatabaseInformation.GIF_CATEGORY_DATABASE_NAME).exists()) {
 
-            gifCategoryList = getGifCategoryDatabase(context).await() as ArrayList<String>
+            gifCategoryList = getGifCategoryDatabase().await() as ArrayList<String>
 
         } else {
 
             gifCategoryList = context.resources.getStringArray(R.array.gifCategoryList).toList() as ArrayList<String>
 
-            initializeGifCategoryDatabase(context, gifCategoryList)
+            initializeGifCategoryDatabase(gifCategoryList)
 
         }
 
         gifCategoryList
     }
 
-    private fun getGifCategoryDatabase(context: Context) : Deferred<List<String>> = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    private fun getGifCategoryDatabase() : Deferred<List<String>> = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
             .build()
@@ -47,7 +47,7 @@ class BrowseGitCategoryData {
         gifCategoryDataInterface.initDataAccessObject().getAllGifCategoryNames()
     }
 
-    private suspend fun initializeGifCategoryDatabase(context: Context, initialGifCategoryNames: ArrayList<String>) {
+    private suspend fun initializeGifCategoryDatabase(initialGifCategoryNames: ArrayList<String>) {
 
         val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
             .build()

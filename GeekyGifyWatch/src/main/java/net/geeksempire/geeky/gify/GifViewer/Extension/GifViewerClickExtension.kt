@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 6:19 PM
- * Last modified 2/10/20 6:10 PM
+ * Created by Elias Fazel on 2/10/20 7:52 PM
+ * Last modified 2/10/20 7:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -112,13 +112,13 @@ fun GifViewer.setupGifViewClickListener() {
         false
     }
 
-    FavoriteCheckpoint()
-        .checkIfFavorite(context!!, makeFavorite, gifLinkToDownload)
+    FavoriteCheckpoint(context!!)
+        .checkIfFavorite(makeFavorite, gifLinkToDownload)
     makeFavorite.setOnLikeListener(object : OnLikeListener {
         override fun liked(likeButton: LikeButton?) {
             CoroutineScope(Dispatchers.IO).launch {
 
-                FavoriteIt().addFavoriteGifDatabase(context!!,
+                FavoriteIt(context!!).addFavoriteGifDatabase(
                     gifLinkToDownload,
                     gifUserName, gifUserAvatarUrl, gifUserIsVerified).await()
             }
@@ -127,8 +127,7 @@ fun GifViewer.setupGifViewClickListener() {
         override fun unLiked(likeButton: LikeButton?) {
             CoroutineScope(Dispatchers.IO).launch {
 
-                UnfavoriteIt().removeFavoriteGifDatabase(context!!,
-                    gifLinkToDownload).await()
+                UnfavoriteIt(context!!).removeFavoriteGifDatabase(gifLinkToDownload).await()
             }
         }
     })

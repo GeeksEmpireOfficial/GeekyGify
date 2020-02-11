@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 6:19 PM
- * Last modified 2/10/20 6:10 PM
+ * Created by Elias Fazel on 2/10/20 7:43 PM
+ * Last modified 2/10/20 7:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.geeksempire.geeky.gify.RoomDatabase.DatabaseNames
+import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataInterface
 
 class FavoriteCheckpoint {
@@ -25,9 +25,9 @@ class FavoriteCheckpoint {
     fun checkIfFavorite(context: Context, likeButton: LikeButton, gifUrl: String) = CoroutineScope(
         Dispatchers.IO).launch {
 
-        if (context.getDatabasePath(DatabaseNames.GIF_FAVORITE_DATABASE_NAME).exists()) {
+        if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {
 
-            val gifFavoriteDataInterface = Room.databaseBuilder(context, FavoriteDataInterface::class.java, DatabaseNames.GIF_FAVORITE_DATABASE_NAME)
+            val gifFavoriteDataInterface = Room.databaseBuilder(context, FavoriteDataInterface::class.java, DatabaseInformation.GIF_FAVORITE_DATABASE_NAME)
                 .build()
 
             val gifFavorited = gifFavoriteDataInterface

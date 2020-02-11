@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 6:28 PM
- * Last modified 2/9/20 6:08 PM
+ * Created by Elias Fazel on 2/10/20 7:43 PM
+ * Last modified 2/10/20 7:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,9 +14,9 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import net.geeksempire.geeky.gify.RoomDatabase.DatabaseNames
+import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 
-@Entity(tableName = DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
+@Entity(tableName = DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
 data class GifCategoryDataModel (
     @NonNull @PrimaryKey var CategoryName: String,
 

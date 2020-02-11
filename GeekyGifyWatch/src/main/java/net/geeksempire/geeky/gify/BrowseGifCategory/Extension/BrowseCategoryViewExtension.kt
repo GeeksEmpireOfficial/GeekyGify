@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 5:43 PM
- * Last modified 2/10/20 5:42 PM
+ * Created by Elias Fazel on 2/10/20 7:43 PM
+ * Last modified 2/10/20 7:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,7 +26,7 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWea
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
-import net.geeksempire.geeky.gify.RoomDatabase.DatabaseNames
+import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
@@ -51,7 +51,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
         override fun itemLongPressed(rightLeft: Boolean, categoryName: String) {
 
             CoroutineScope(Dispatchers.IO).launch {
-                val gifCategoryDataInterface = Room.databaseBuilder(applicationContext, GifCategoryDataInterface::class.java, DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
+                val gifCategoryDataInterface = Room.databaseBuilder(applicationContext, GifCategoryDataInterface::class.java, DatabaseInformation.GIF_CATEGORY_DATABASE_NAME)
                     .build()
 
                 when (rightLeft) {

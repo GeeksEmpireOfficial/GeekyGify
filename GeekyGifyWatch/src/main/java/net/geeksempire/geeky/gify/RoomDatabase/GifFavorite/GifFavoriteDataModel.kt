@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 5:18 PM
- * Last modified 2/10/20 4:34 PM
+ * Created by Elias Fazel on 2/10/20 7:43 PM
+ * Last modified 2/10/20 7:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,9 +14,9 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import net.geeksempire.geeky.gify.RoomDatabase.DatabaseNames
+import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 
-@Entity(tableName = DatabaseNames.GIF_FAVORITE_DATABASE_NAME)
+@Entity(tableName = DatabaseInformation.GIF_FAVORITE_DATABASE_NAME)
 data class FavoriteDataModel (
     @NonNull @PrimaryKey var TimeOrder: Long,
 

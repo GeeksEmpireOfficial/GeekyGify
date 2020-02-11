@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 7:17 PM
- * Last modified 2/9/20 7:17 PM
+ * Created by Elias Fazel on 2/10/20 5:18 PM
+ * Last modified 2/10/20 4:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -65,6 +65,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 }
 
                 triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
+
+                gifCategoryDataInterface.close()
             }
         }
     }

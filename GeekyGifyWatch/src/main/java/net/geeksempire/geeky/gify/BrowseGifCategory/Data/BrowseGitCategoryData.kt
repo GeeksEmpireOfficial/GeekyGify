@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 7:17 PM
- * Last modified 2/9/20 7:14 PM
+ * Created by Elias Fazel on 2/10/20 5:18 PM
+ * Last modified 2/10/20 5:03 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ class BrowseGitCategoryData {
         gifCategoryList
     }
 
-    private fun getGifCategoryDatabase(context: Context) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
+    private fun getGifCategoryDatabase(context: Context) : Deferred<List<String>> = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val gifCategoryDataInterface = Room.databaseBuilder(context, GifCategoryDataInterface::class.java, DatabaseNames.GIF_CATEGORY_DATABASE_NAME)
             .fallbackToDestructiveMigration()
@@ -90,6 +90,7 @@ class BrowseGitCategoryData {
             }
             .onCompletion {
 
+                gifCategoryDataInterface.close()
             }
             .withIndex().collect {
                 arrayOfGifCategoryDataModels.add(

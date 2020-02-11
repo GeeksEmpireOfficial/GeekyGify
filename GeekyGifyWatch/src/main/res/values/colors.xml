@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/6/20 11:14 AM
-  ~ Last modified 2/6/20 11:06 AM
+  ~ Created by Elias Fazel on 2/10/20 5:18 PM
+  ~ Last modified 2/10/20 3:41 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -25,9 +25,10 @@
     <color name="red">#9b000e</color>
     <color name="red_transparent">#4d9b000e</color>
     <color name="green">#007b08</color>
-    <color name="yellow">#FFEA00</color>
+    <color name="yellow">#ffb506</color>
     <color name="pink">#FE5475</color>
     <color name="cyan">#1FD4AF</color>
+    <color name="purple">#be0193</color>
 
 
     <color name="light">#f2f7ff</color>

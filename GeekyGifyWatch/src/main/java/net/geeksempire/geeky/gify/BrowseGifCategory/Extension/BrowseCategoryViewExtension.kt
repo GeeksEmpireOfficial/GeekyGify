@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 5:18 PM
- * Last modified 2/10/20 4:58 PM
+ * Created by Elias Fazel on 2/10/20 5:43 PM
+ * Last modified 2/10/20 5:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package net.geeksempire.geeky.gify.BrowseGifCategory.Extension
 
 import android.content.Context
+import android.os.Handler
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
@@ -41,6 +42,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
         bezelFraction = 0.5f
         scrollDegreesPerScreen = 90f
     }
+
+    var categoryAdapter: BrowseCategoryAdapter? = null
 
     val browseGifCategoryView = ViewModelProvider(this@createViewModelObserver).get(BrowseCategoryViewModel::class.java)
 
@@ -73,10 +76,26 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     browseGifCategoryView.categoriesListData.observe(this@createViewModelObserver,
         Observer {
-            val categoryAdapter = BrowseCategoryAdapter(applicationContext, it, recyclerViewItemLongPress)
+            if (categoryAdapter == null) {
 
-            categoryList.adapter = categoryAdapter
-            categoryAdapter?.notifyDataSetChanged()
+                categoryAdapter = BrowseCategoryAdapter(applicationContext, recyclerViewItemLongPress)
+                categoryAdapter!!.categoryItemsData = it
+
+                categoryList.adapter = categoryAdapter
+                categoryAdapter?.notifyDataSetChanged()
+            } else {
+                categoryAdapter?.let { categoryAdapter ->
+                    categoryAdapter.categoryItemsData = it
+
+                    categoryAdapter.notifyItemRangeChanged(0, categoryAdapter.itemCount)
+
+                    Handler().postDelayed({
+
+                        categoryList
+                            .smoothScrollToPosition(0)
+                    }, 99)
+                }
+            }
         })
 
     triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)

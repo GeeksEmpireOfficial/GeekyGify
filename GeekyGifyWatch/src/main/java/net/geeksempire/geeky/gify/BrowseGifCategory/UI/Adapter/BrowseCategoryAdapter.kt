@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 7:17 PM
- * Last modified 2/9/20 7:17 PM
+ * Created by Elias Fazel on 2/10/20 5:43 PM
+ * Last modified 2/10/20 5:38 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,9 @@ import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemLongPress
 
 
 class BrowseCategoryAdapter(var context: Context,
-                            var categoryItemsData: ArrayList<CategoryItemData>, var  recyclerViewGifCategoryItemLongPress: RecyclerViewGifCategoryItemLongPress) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
+                            var  recyclerViewGifCategoryItemLongPress: RecyclerViewGifCategoryItemLongPress) : RecyclerView.Adapter<BrowseCategoryListViewHolder>() {
+
+    lateinit var categoryItemsData: ArrayList<CategoryItemData>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrowseCategoryListViewHolder {
 
@@ -37,6 +39,26 @@ class BrowseCategoryAdapter(var context: Context,
     override fun getItemCount(): Int {
 
         return categoryItemsData.size
+    }
+
+    override fun onBindViewHolder(viewHolderPayload: BrowseCategoryListViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(viewHolderPayload, position, payloads)
+
+        if (categoryItemsData[position].categoryLeft != null) {
+            viewHolderPayload.categoryIconLeft.visibility = View.VISIBLE
+
+            viewHolderPayload.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
+        } else {
+            viewHolderPayload.categoryIconLeft.visibility = View.GONE
+        }
+
+        if (categoryItemsData[position].categoryRight != null) {
+            viewHolderPayload.categoryIconRight.visibility = View.VISIBLE
+
+            viewHolderPayload.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
+        } else {
+            viewHolderPayload.categoryIconRight.visibility = View.GONE
+        }
     }
 
     override fun onBindViewHolder(viewHolderBrowseCategoryList: BrowseCategoryListViewHolder, position: Int) {

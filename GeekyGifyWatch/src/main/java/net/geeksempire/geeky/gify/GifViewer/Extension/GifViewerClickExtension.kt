@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 12:26 PM
- * Last modified 2/11/20 12:23 PM
+ * Created by Elias Fazel on 2/11/20 4:41 PM
+ * Last modified 2/11/20 3:02 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -178,7 +178,7 @@ fun GifViewer.setupGifViewClickListener() {
         val remoteIntent = Intent(Intent.ACTION_VIEW)
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            .setData(Uri.parse(/*linkToGif*/"https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${linkToGif}" +
+            .setData(Uri.parse(/*linkToGif*/"https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${gifLinkToDownload}" +
                     "&" +
                     "${Intent.EXTRA_TEXT}=${context?.getString(R.string.app_name)}"))
 

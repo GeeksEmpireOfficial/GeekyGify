@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 1:13 PM
- * Last modified 2/12/20 1:13 PM
+ * Created by Elias Fazel on 2/12/20 1:24 PM
+ * Last modified 2/12/20 1:22 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -68,6 +68,15 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                     confirmationOverlay.showOn(fragmentActivity)
                     confirmationOverlay.setFinishedAnimationListener {
 
+                        RemoteIntent.startRemoteActivity(
+                            fragmentActivity,
+                            Intent(Intent.ACTION_VIEW)
+                                .addCategory(Intent.CATEGORY_BROWSABLE)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .setData(
+                                    Uri.parse("https://play.google.com/store/apps/details?id=${fragmentActivity.packageName}")),
+                            null)
+
                         this@ControlGifShare
                             .sharingProcessCallback(gifLinkToShare, additionalText)
                     }
@@ -80,7 +89,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             .setData(
-                Uri.parse(/*linkToGif*/"https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${gifLinkToShare}" +
+                Uri.parse("https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${gifLinkToShare}" +
                         "&" +
                         "${Intent.EXTRA_TEXT}=${additionalText}"))
 

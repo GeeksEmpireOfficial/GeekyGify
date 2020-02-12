@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 4:41 PM
- * Last modified 2/11/20 4:38 PM
+ * Created by Elias Fazel on 2/12/20 1:13 PM
+ * Last modified 2/12/20 11:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.Network
+package net.geeksempire.geeky.gify.Networking
 
 import android.content.Context
 import kotlinx.coroutines.*

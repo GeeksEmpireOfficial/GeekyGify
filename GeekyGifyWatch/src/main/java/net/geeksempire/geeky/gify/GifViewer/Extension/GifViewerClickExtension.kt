@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 4:41 PM
- * Last modified 2/11/20 3:02 PM
+ * Created by Elias Fazel on 2/12/20 1:13 PM
+ * Last modified 2/12/20 1:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,11 +10,6 @@
 
 package net.geeksempire.geeky.gify.GifViewer.Extension
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.ResultReceiver
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -22,8 +17,6 @@ import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
-import androidx.wear.widget.ConfirmationOverlay
-import com.google.android.wearable.intent.RemoteIntent
 import com.like.LikeButton
 import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.gif_view.*
@@ -36,6 +29,7 @@ import net.geeksempire.geeky.gify.GifFavorite.Util.UnfavoriteIt
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Calculations.calculateThirtyPercent
+import net.geeksempire.geeky.gify.Utils.SharingProcess.ControlGifShare
 
 fun GifViewer.setupGifViewClickListener() {
 
@@ -142,49 +136,10 @@ fun GifViewer.setupGifViewClickListener() {
 
     shareGif.setOnClickListener {
 
-        Intent(Intent.ACTION_SEND).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        ControlGifShare(activity!!)
+            .initializeGifShare(gifLinkToDownload,
+                context?.getString(R.string.app_name)
+            )
 
-            putExtra(Intent.EXTRA_STREAM, Uri.parse(linkToGif))
-            putExtra(Intent.EXTRA_TEXT, context?.getString(R.string.app_name))
-
-            this.type = "image/*"
-
-            startActivity(this)
-        }
-
-        val resultReceiver = object : ResultReceiver(Handler()) {
-            override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
-                if (resultCode == RemoteIntent.RESULT_OK) {
-
-                    val confirmationOverlay = ConfirmationOverlay()
-                        .setMessage(context?.getString(R.string.gifReadyOnPhone))
-                        .setDuration(1500 * 1)
-                        .setType(ConfirmationOverlay.SUCCESS_ANIMATION)
-                    confirmationOverlay.showOn(activity)
-
-                } else if (resultCode == RemoteIntent.RESULT_FAILED) {
-
-                    val confirmationOverlay = ConfirmationOverlay()
-                        .setMessage(context?.getString(R.string.errorOccurred))
-                        .setDuration(1500 * 1)
-                        .setType(ConfirmationOverlay.FAILURE_ANIMATION)
-                    confirmationOverlay.showOn(activity)
-
-                }
-            }
-        }
-
-        val remoteIntent = Intent(Intent.ACTION_VIEW)
-            .addCategory(Intent.CATEGORY_BROWSABLE)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            .setData(Uri.parse(/*linkToGif*/"https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${gifLinkToDownload}" +
-                    "&" +
-                    "${Intent.EXTRA_TEXT}=${context?.getString(R.string.app_name)}"))
-
-        RemoteIntent.startRemoteActivity(
-            context,
-            remoteIntent,
-            resultReceiver)
     }
 }

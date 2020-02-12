@@ -1,8 +1,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/11/20 12:26 PM
-  ~ Last modified 2/11/20 11:17 AM
+  ~ Created by Elias Fazel on 2/12/20 1:13 PM
+  ~ Last modified 2/12/20 12:05 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -12,8 +12,9 @@
 
     <string name="app_name">Geeky Gify</string>
 
-    <string name="gifReadyOnPhone"> ➡ 📲 </string>
+    <string name="gifReadyOnPhone"> 🖼 ➡ 📲 </string>
     <string name="errorOccurred"> ⚠ ⚠ ⚠ </string>
+    <string name="downloadErrorOccurred"> ⬇ 🖼 ⚠ </string>
 
     <string-array name="gifCategoryList">
         <item>Actions</item>

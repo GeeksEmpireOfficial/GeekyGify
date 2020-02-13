@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 1:13 PM
- * Last modified 2/12/20 12:34 PM
+ * Created by Elias Fazel on 2/13/20 12:51 PM
+ * Last modified 2/13/20 12:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,6 +49,9 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Available")
 
                     mainView.removeView(offlineIndicator)
+
+                    appCompatActivity.window.statusBarColor = appCompatActivity.getColor(R.color.default_color_game_light)
+                    appCompatActivity.window.navigationBarColor = appCompatActivity.getColor(R.color.default_color_game_light)
                 }
             }, 555)
         }
@@ -64,6 +67,9 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Lost")
 
                     mainView.addView(offlineIndicator)
+
+                    appCompatActivity.window.statusBarColor = appCompatActivity.getColor(R.color.cyberGreen)
+                    appCompatActivity.window.navigationBarColor = appCompatActivity.getColor(R.color.cyberGreen)
 
                     Glide.with(appCompatActivity)
                         .asGif()

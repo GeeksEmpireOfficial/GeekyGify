@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 2:45 PM
- * Last modified 2/13/20 2:14 PM
+ * Created by Elias Fazel on 2/13/20 2:51 PM
+ * Last modified 2/13/20 2:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,12 +17,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import net.geeksempire.geeky.gify.GifFavorite.UI.Adapter.Data.FavoritesGifItemData
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 
 class FavoritesGifAdapter (var context: Context,
-                           var browseGifItemData: ArrayList<FavoritesGifItemData>) : RecyclerView.Adapter<FavoritesGifListViewHolder>() {
+                           var browseGifItemData: List<FavoriteDataModel>) : RecyclerView.Adapter<FavoritesGifListViewHolder>() {
 
     val listOfColors = GetResources(context).getNeonColors()
 
@@ -44,7 +44,7 @@ class FavoritesGifAdapter (var context: Context,
         Glide.with(context)
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .load(browseGifItemData[position].gifPreviewUrl)
+            .load(browseGifItemData[position].GifPreviewUrl)
             .into(favoritesGifListViewHolder.gifPreview)
 
         favoritesGifListViewHolder.gifPreview.setOnClickListener {

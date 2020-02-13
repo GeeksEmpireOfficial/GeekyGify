@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 11:17 AM
+ * Created by Elias Fazel on 2/12/20 5:55 PM
+ * Last modified 2/12/20 3:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,18 @@ import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.GifFavoriteDatabase
 
 class FavoriteCheckpoint (var context: Context) {
+
+    suspend fun favoriteDatabaseExists () : Boolean {
+
+        return if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {
+            val gifFavoriteDataInterface = GifFavoriteDatabase(context)
+                .initialGifFavoriteDatabase().initDataAccessObject()
+
+            (gifFavoriteDataInterface.getRowCount() > 0)
+        } else {
+            false
+        }
+    }
 
     fun checkIfFavorite(likeButton: LikeButton, gifUrl: String) = CoroutineScope(
         Dispatchers.IO).launch {

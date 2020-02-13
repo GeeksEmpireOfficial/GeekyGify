@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 5:18 PM
- * Last modified 2/10/20 4:48 PM
+ * Created by Elias Fazel on 2/12/20 5:55 PM
+ * Last modified 2/12/20 3:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,4 +32,7 @@ interface FavoriteDataDAO {
 
     @Query("SELECT * FROM GifFavoriteDatabase WHERE GifUrl = (:GifUrl)")
     suspend fun getFavoriteGif(GifUrl: String): FavoriteDataModel?
+
+    @Query("SELECT COUNT(TimeOrder) FROM GifFavoriteDatabase")
+    suspend fun getRowCount(): Int
 }

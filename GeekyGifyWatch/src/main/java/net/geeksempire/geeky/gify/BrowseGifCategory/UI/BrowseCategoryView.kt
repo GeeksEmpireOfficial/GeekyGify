@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
- * Last modified 2/8/20 6:03 PM
+ * Created by Elias Fazel on 2/12/20 5:55 PM
+ * Last modified 2/12/20 5:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,8 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
 
     private lateinit var ambientController: AmbientModeSupport.AmbientController
 
+    private lateinit var browseGifCategoryView: BrowseCategoryViewModel
+
     @Inject
     lateinit var networkConnectionListener: NetworkConnectionListener
 
@@ -41,7 +43,7 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
         ambientController = AmbientModeSupport.attach(this)
         ambientController.setAmbientOffloadEnabled(true)
 
-        val browseGifCategoryView: BrowseCategoryViewModel = createViewModelObserver()
+        browseGifCategoryView = createViewModelObserver()
     }
 
     override fun onDestroy() {

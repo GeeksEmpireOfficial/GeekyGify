@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 11:17 AM
+ * Created by Elias Fazel on 2/12/20 5:55 PM
+ * Last modified 2/12/20 5:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import androidx.wear.widget.WearableLinearLayoutManager
 import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.Data.BrowseGitCategoryData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryAdapter
@@ -102,13 +103,11 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
     return browseGifCategoryView
 }
 
-private fun triggerGifCategoryDataLoading(context: Context, browseGifCategoryView: BrowseCategoryViewModel) {
-    CoroutineScope(Dispatchers.IO).launch {
-        BrowseGitCategoryData(context).categoryListNames().await().let {
-            browseGifCategoryView.setupCategoryBrowserData(
-                it,
-                GetResources(context).getNeonColors()
-            )
-        }
+private fun triggerGifCategoryDataLoading(context: Context, browseGifCategoryView: BrowseCategoryViewModel) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+    BrowseGitCategoryData(context).categoryListNames().await().let {
+        browseGifCategoryView.setupCategoryBrowserData(
+            it,
+            GetResources(context).getNeonColors()
+        )
     }
 }

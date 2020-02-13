@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 7:17 PM
- * Last modified 2/9/20 6:36 PM
+ * Created by Elias Fazel on 2/12/20 5:55 PM
+ * Last modified 2/12/20 5:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,7 +28,7 @@ class BrowseCategoryViewModel : ViewModel() {
         MutableLiveData<ArrayList<CategoryItemData>>()
     }
 
-    fun setupCategoryBrowserData(rawData: ArrayList<String>, colorsList: ArrayList<String>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+    fun setupCategoryBrowserData(rawData: ArrayList<String?>, colorsList: ArrayList<String>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
         val categoriesListDataFinal = ArrayList<CategoryItemData>()
 
@@ -36,18 +36,31 @@ class BrowseCategoryViewModel : ViewModel() {
         val categoriesNamesRight = ArrayList<CategoryItemDataRight>()
 
         rawData.forEachIndexed { index, aString ->
-            if (numberEven(index)) {
+            if (aString == "Favorites") {
+
+                categoriesNamesLeft.add(CategoryItemDataLeft(aString, 0))
+
+            }
+            else if (aString.isNullOrBlank()) {
+
+                categoriesNamesRight.add(CategoryItemDataRight(null, 0))
+
+            } else if (numberEven(index)) {
+
                 val colorData = colorsList.random()
                 val aBackgroundColor = Color.parseColor(colorData)
                 categoriesNamesLeft.add(CategoryItemDataLeft(aString, aBackgroundColor))
 
                 colorsList.remove(colorData)
+
             } else {
+
                 val colorData = colorsList.random()
                 val aBackgroundColor = Color.parseColor(colorData)
                 categoriesNamesRight.add(CategoryItemDataRight(aString, aBackgroundColor))
 
                 colorsList.remove(colorData)
+
             }
         }
 

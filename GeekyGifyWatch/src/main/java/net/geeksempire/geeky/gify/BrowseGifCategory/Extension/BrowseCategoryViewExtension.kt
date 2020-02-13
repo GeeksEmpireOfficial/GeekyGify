@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:41 PM
- * Last modified 2/13/20 1:41 PM
+ * Created by Elias Fazel on 2/13/20 2:45 PM
+ * Last modified 2/13/20 2:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,16 +56,16 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
         override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
 
             when (viewType) {
-                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
 
                     GiphyExplore()
                         .invokeGiphyExplore(this@createViewModelObserver)
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
 
                 }
             }
@@ -74,13 +74,13 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
         override fun itemLongPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
 
             when (viewType) {
-                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
 
                     CoroutineScope(Dispatchers.IO).launch {
                         val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
@@ -121,7 +121,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 Handler().postDelayed({
 
                     categoryList
-                        .smoothScrollToPosition(2)
+                        .smoothScrollToPosition(if(it[0].categoryLeft?.categoryTitle == "Search"){ 2 } else { 0 })
                 }, 99)
             } else {
                 categoryAdapter?.let { categoryAdapter ->
@@ -132,7 +132,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     Handler().postDelayed({
 
                         categoryList
-                            .smoothScrollToPosition(2)
+                            .smoothScrollToPosition(if(it[0].categoryLeft?.categoryTitle == "Search"){ 2 } else { 0 })
                     }, 99)
                 }
             }

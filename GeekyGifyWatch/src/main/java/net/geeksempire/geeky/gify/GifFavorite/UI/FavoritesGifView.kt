@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 6:10 PM
- * Last modified 2/12/20 6:07 PM
+ * Created by Elias Fazel on 2/13/20 2:45 PM
+ * Last modified 2/13/20 1:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.ambient.AmbientModeSupport
 import kotlinx.android.synthetic.main.favorites_gif_list_view.*
 import net.geeksempire.geeky.gify.GeekyGifyApplication
+import net.geeksempire.geeky.gify.GifFavorite.Extension.favoritesGifViewObserverExtension
 import net.geeksempire.geeky.gify.R
 
 class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
@@ -33,6 +34,8 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
 
         ambientController = AmbientModeSupport.attach(this)
         ambientController.setAmbientOffloadEnabled(true)
+
+        favoritesGifViewObserverExtension()
     }
 
     override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback {

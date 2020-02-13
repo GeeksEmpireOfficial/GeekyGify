@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:41 PM
- * Last modified 2/13/20 1:41 PM
+ * Created by Elias Fazel on 2/13/20 2:45 PM
+ * Last modified 2/13/20 2:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,6 @@ import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryTypeView
 import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
@@ -38,12 +37,14 @@ class BrowseCategoryAdapter(var context: Context,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return browseGifCategoryTypeView(parent, viewType)
+        return categoryItemsData[viewType].categoryLeft?.categoryTitle?.let {
+            browseGifCategoryTypeView(parent, it)
+        }!!
     }
 
     override fun getItemViewType(position: Int): Int {
 
-        return browseGifCategoryType(position)
+        return position
     }
 
     override fun getItemCount(): Int {
@@ -121,7 +122,7 @@ class BrowseCategoryAdapter(var context: Context,
                 categoryItemsData[position].categoryLeft?.categoryTitle?.let { itemTitle ->
                     recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
                         itemTitle,
-                        BrowseGifCategoryType.GIF_ITEM_SEARCH)
+                        BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE)
                 }
             }
 
@@ -190,7 +191,7 @@ class BrowseCategoryAdapter(var context: Context,
                 categoryItemsData[position].categoryRight?.categoryTitle?.let {
                     recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
                         it,
-                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES
+                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
                     )
                 }
 
@@ -201,7 +202,7 @@ class BrowseCategoryAdapter(var context: Context,
                 categoryItemsData[position].categoryLeft?.categoryTitle?.let {
                     recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
                         it,
-                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES
+                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
                     )
                 }
 

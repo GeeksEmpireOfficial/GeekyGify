@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 10:33 AM
- * Last modified 2/13/20 9:58 AM
+ * Created by Elias Fazel on 2/13/20 2:45 PM
+ * Last modified 2/13/20 2:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package net.geeksempire.geeky.gify.BrowseGifCategory.Data
 
 import android.content.Context
+import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
@@ -31,6 +32,7 @@ class BrowseGitCategoryData(var context: Context) {
         gifCategoryList.add(null)
 
         if (context.getDatabasePath(DatabaseInformation.GIF_CATEGORY_DATABASE_NAME).exists()) {
+            Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Get Database Category List")
 
             if (FavoriteCheckpoint(context).favoriteDatabaseExists()) {
                 gifCategoryList.add(context.getString(R.string.favoriteGif))
@@ -39,11 +41,11 @@ class BrowseGitCategoryData(var context: Context) {
             gifCategoryList.addAll(getGifCategoryDatabase().await() as ArrayList<String>)
 
         } else {
+            Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Get Default Category List")
 
             gifCategoryList = context.resources.getStringArray(R.array.gifCategoryList).toList() as ArrayList<String?>
 
             initializeGifCategoryDatabase(gifCategoryList)
-
         }
 
         gifCategoryList
@@ -60,6 +62,7 @@ class BrowseGitCategoryData(var context: Context) {
 
         initialGifCategoryNames.asFlow()
             .onEach {
+                Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Database No Filter: ${it}")
 
             }
             .filter { it ->
@@ -75,6 +78,7 @@ class BrowseGitCategoryData(var context: Context) {
                 gifCategoryDataInterface.close()
             }
             .withIndex().collect {
+                Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Database Filtered: ${it.value}")
 
                 it.value?.let {  categoryName ->
                     arrayOfGifCategoryDataModels.add(

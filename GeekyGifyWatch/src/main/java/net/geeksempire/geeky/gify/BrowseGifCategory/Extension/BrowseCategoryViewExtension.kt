@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 10:39 AM
- * Last modified 2/13/20 10:38 AM
+ * Created by Elias Fazel on 2/13/20 1:39 PM
+ * Last modified 2/13/20 1:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,12 +39,12 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
 
     categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
-    categoryList.isEdgeItemsCenteringEnabled = false
-    categoryList.isVerticalFadingEdgeEnabled = true
+    categoryList.isEdgeItemsCenteringEnabled = true
+    //categoryList.isVerticalFadingEdgeEnabled = true
     categoryList.apply {
-        isCircularScrollingGestureEnabled = true
-        bezelFraction = 0.5f
-        scrollDegreesPerScreen = 90f
+        this.isCircularScrollingGestureEnabled = true
+        this.bezelFraction = 0.10f
+        this.scrollDegreesPerScreen = 90f
     }
 
     var categoryAdapter: BrowseCategoryAdapter? = null
@@ -116,6 +116,12 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                 categoryList.adapter = categoryAdapter
                 categoryAdapter?.notifyDataSetChanged()
+
+                Handler().postDelayed({
+
+                    categoryList
+                        .smoothScrollToPosition(2)
+                }, 99)
             } else {
                 categoryAdapter?.let { categoryAdapter ->
                     categoryAdapter.categoryItemsData = it
@@ -125,7 +131,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     Handler().postDelayed({
 
                         categoryList
-                            .smoothScrollToPosition(0)
+                            .smoothScrollToPosition(2)
                     }, 99)
                 }
             }

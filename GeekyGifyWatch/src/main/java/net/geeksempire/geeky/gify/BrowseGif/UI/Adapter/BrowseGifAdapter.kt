@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 10:53 AM
+ * Created by Elias Fazel on 2/13/20 1:39 PM
+ * Last modified 2/13/20 1:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,7 +50,8 @@ class BrowseGifAdapter(var browseGifView: BrowseGifView,
             recyclerViewGifBrowseItemPress.itemPressed(
                 browseGifItemData[position].gifUserProfile,
                 browseGifItemData[position].gifOriginalUri,
-                browseGifItemData[position].linkToGif
+                browseGifItemData[position].linkToGif,
+                browseGifItemData[position].gifPreviewUrl
             )
 
         }

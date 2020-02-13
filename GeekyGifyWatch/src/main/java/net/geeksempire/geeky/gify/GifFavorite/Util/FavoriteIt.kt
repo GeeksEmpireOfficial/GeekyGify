@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 11:17 AM
+ * Created by Elias Fazel on 2/13/20 1:39 PM
+ * Last modified 2/13/20 1:37 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,13 +20,13 @@ import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.GifFavoriteDatabase
 
 class FavoriteIt (var context: Context) {
 
-    fun addFavoriteGifDatabase(gifUrl: String,
+    fun addFavoriteGifDatabase(gifUrl: String, gifPreviewUrl: String,
                                gifUsername: String?, gifUserAvatar: String?, gifUserVerified: Boolean?)
             = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
         val gifFavoriteDataInterface = GifFavoriteDatabase(context).initialGifFavoriteDatabase()
 
-        val favoriteDataModel = FavoriteDataModel(System.currentTimeMillis(), gifUrl,
+        val favoriteDataModel = FavoriteDataModel(System.currentTimeMillis(), gifUrl, gifPreviewUrl,
             gifUsername.toString(), gifUserAvatar.toString(), gifUserVerified?:false,
             true)
 

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 7:43 PM
- * Last modified 2/10/20 7:32 PM
+ * Created by Elias Fazel on 2/13/20 1:39 PM
+ * Last modified 2/13/20 1:36 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ data class FavoriteDataModel (
     @NonNull @PrimaryKey var TimeOrder: Long,
 
     @NonNull @ColumnInfo(name = "GifUrl") var GifUrl: String,
+    @NonNull @ColumnInfo(name = "GifPreviewUrl") var GifPreviewUrl: String,
 
     @ColumnInfo(name = "GifUsername") var GifUsername: String,
     @ColumnInfo(name = "GifUserAvatar") var GifUserAvatar: String,

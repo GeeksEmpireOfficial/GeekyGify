@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 1:13 PM
- * Last modified 2/12/20 11:59 AM
+ * Created by Elias Fazel on 2/13/20 1:39 PM
+ * Last modified 2/13/20 1:34 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,7 +35,7 @@ import net.geeksempire.geeky.gify.R
 class GifViewer : Fragment() {
 
     lateinit var linkToGif: String
-
+    lateinit var gifPreviewLink: String
     lateinit var gifLinkToDownload: String
 
     var gifUserName: String? = null
@@ -46,7 +46,7 @@ class GifViewer : Fragment() {
         super.onCreate(savedInstanceState)
 
         linkToGif = arguments?.getString(GiphyJsonDataStructure.DATA_URL) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
-
+        gifPreviewLink = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
         gifLinkToDownload = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
 
         gifUserName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_NAME)

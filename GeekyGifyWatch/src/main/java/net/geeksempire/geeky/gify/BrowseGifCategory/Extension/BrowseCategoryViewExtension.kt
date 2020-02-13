@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 10:33 AM
- * Last modified 2/13/20 10:31 AM
+ * Created by Elias Fazel on 2/13/20 10:39 AM
+ * Last modified 2/13/20 10:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,7 +39,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
 
     categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
-    categoryList.isEdgeItemsCenteringEnabled = true
+    categoryList.isEdgeItemsCenteringEnabled = false
+    categoryList.isVerticalFadingEdgeEnabled = true
     categoryList.apply {
         isCircularScrollingGestureEnabled = true
         bezelFraction = 0.5f

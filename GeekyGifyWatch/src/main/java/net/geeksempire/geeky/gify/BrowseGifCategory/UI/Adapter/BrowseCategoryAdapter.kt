@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 10:33 AM
- * Last modified 2/13/20 10:30 AM
+ * Created by Elias Fazel on 2/13/20 10:39 AM
+ * Last modified 2/13/20 10:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -105,7 +105,7 @@ class BrowseCategoryAdapter(var context: Context,
                 }
             }
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.searchGif)) {
 
             val viewHolder = initialViewHolder as BrowseSearchListViewHolder
 

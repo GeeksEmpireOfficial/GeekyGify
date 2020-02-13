@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:32 PM
+ * Created by Elias Fazel on 2/13/20 1:41 PM
+ * Last modified 2/13/20 1:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,12 +18,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.BrowseGifItemData
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
+import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifBrowseItemPress
 
 class BrowseGifAdapter(var browseGifView: BrowseGifView,
                        var browseGifItemData: ArrayList<BrowseGifItemData>,
-                       var recyclerViewGifBrowseItemPress: RecyclerViewGifBrowseItemPress) : RecyclerView.Adapter<BrowseGifListViewHolder>() {
+                       var recyclerViewGifBrowseItemPress: RecyclerViewGifBrowseItemPress
+) : RecyclerView.Adapter<BrowseGifListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BrowseGifListViewHolder {
 

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:06 PM
+ * Created by Elias Fazel on 2/13/20 1:41 PM
+ * Last modified 2/13/20 1:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,13 +26,13 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWea
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
+import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDatabase
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
-import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemPress
 
 
 fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
@@ -51,7 +51,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val browseGifCategoryView = ViewModelProvider(this@createViewModelObserver).get(BrowseCategoryViewModel::class.java)
 
-    val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemPress {
+    val recyclerViewItemLongPress = object :
+        RecyclerViewGifCategoryItemPress {
         override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
 
             when (viewType) {

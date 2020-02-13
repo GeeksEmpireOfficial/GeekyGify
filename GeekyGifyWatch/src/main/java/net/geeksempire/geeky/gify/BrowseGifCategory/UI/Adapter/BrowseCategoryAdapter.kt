@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 10:39 AM
- * Last modified 2/13/20 10:36 AM
+ * Created by Elias Fazel on 2/13/20 1:41 PM
+ * Last modified 2/13/20 1:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,12 +26,13 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryTypeView
+import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemPress
 
 class BrowseCategoryAdapter(var context: Context,
-                            var  recyclerViewGifCategoryItemPress: RecyclerViewGifCategoryItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                            var  recyclerViewGifCategoryItemPress: RecyclerViewGifCategoryItemPress
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var categoryItemsData: ArrayList<CategoryItemData>
 

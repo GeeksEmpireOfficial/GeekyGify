@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:33 PM
+ * Created by Elias Fazel on 2/13/20 1:41 PM
+ * Last modified 2/13/20 1:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,11 +23,11 @@ import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
+import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponse
-import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifBrowseItemPress
 
 fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
 
@@ -35,7 +35,8 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
 
     val browseGifViewModel = ViewModelProvider(this@createViewModelObserver).get(BrowseGifViewModel::class.java)
 
-    val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress = object : RecyclerViewGifBrowseItemPress {
+    val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress = object :
+        RecyclerViewGifBrowseItemPress {
         override fun itemPressed(gifUserProfile: GifUserProfile?,
                                  gifOriginalUri: String, linkToGif: String, gifPreviewUri: String) {
 

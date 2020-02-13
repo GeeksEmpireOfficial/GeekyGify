@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 2:34 PM
- * Last modified 2/10/20 2:13 PM
+ * Created by Elias Fazel on 2/12/20 6:10 PM
+ * Last modified 2/12/20 6:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import javax.inject.Inject
 
-class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider  {
+class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
     private lateinit var ambientController: AmbientModeSupport.AmbientController
 

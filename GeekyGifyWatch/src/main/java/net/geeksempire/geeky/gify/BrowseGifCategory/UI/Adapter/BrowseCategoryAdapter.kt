@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 5:55 PM
- * Last modified 2/12/20 5:45 PM
+ * Created by Elias Fazel on 2/12/20 6:10 PM
+ * Last modified 2/12/20 6:09 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
+import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemLongPress
 
@@ -101,12 +102,11 @@ class BrowseCategoryAdapter(var context: Context,
 
             viewHolder.favoriteIcon.setOnClickListener {
 
-                /*Intent(context, BrowseGifView::class.java).apply {
-                    this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
+                Intent(context, FavoritesGifView::class.java).apply {
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(this,
                         ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
-                }*/
+                }
             }
 
         } else {

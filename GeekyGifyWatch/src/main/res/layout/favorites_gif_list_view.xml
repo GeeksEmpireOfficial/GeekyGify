@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/12/20 6:10 PM
+  ~ Last modified 2/9/20 4:43 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/browse_gif_background_gradient">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gifList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="33dp"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        tools:visibility="visible"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:theme="@style/ContentLoadingProgress"
+        style="?android:attr/progressBarStyleSmallInverse"
+        android:id="@+id/progressBarGifs"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:visibility="visible"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/categoryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="37dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_outline"
+        android:background="@drawable/category_left_background"
+
+        apps:autoSizeTextType="uniform"
+        apps:autoSizeMaxTextSize="14sp"
+        apps:autoSizeMinTextSize="10sp"
+        apps:autoSizeStepGranularity="1sp"
+
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/exploreGifs"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:padding="2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gph_ic_search_pink"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/nextGifPage"
+        android:layout_width="33dp"
+        android:layout_height="match_parent"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/next_icon"
+        android:visibility="gone"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
+
+    <ImageView
+        android:id="@+id/previousGifPage"
+        android:layout_width="33dp"
+        android:layout_height="match_parent"
+        android:padding="1dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/previous_icon"
+        android:visibility="gone"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentGifViewer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintLeft_toLeftOf="parent"
+        apps:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

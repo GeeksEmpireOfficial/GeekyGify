@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 6:10 PM
- * Last modified 2/12/20 6:09 PM
+ * Created by Elias Fazel on 2/13/20 10:33 AM
+ * Last modified 2/13/20 10:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,42 +13,36 @@ package net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryType
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryTypeView
 import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemLongPress
+import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemPress
 
 class BrowseCategoryAdapter(var context: Context,
-                            var  recyclerViewGifCategoryItemLongPress: RecyclerViewGifCategoryItemLongPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                            var  recyclerViewGifCategoryItemPress: RecyclerViewGifCategoryItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var categoryItemsData: ArrayList<CategoryItemData>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return if (categoryItemsData[viewType].categoryLeft?.categoryTitle == context.getString(R.string.favoriteTitle)) {
-
-            BrowseFavoriteListViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.browse_gif_category_favorite_item_view,
-                    parent, false))
-        } else {
-
-            BrowseCategoryListViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.browse_gif_category_item_view,
-                    parent, false))
-        }
+        return browseGifCategoryTypeView(parent, viewType)
     }
 
     override fun getItemViewType(position: Int): Int {
 
-        return position
+        return browseGifCategoryType(position)
     }
 
     override fun getItemCount(): Int {
@@ -59,7 +53,9 @@ class BrowseCategoryAdapter(var context: Context,
     override fun onBindViewHolder(viewHolderPayload: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(viewHolderPayload, position, payloads)
 
-        if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteTitle)) {
+        if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
+
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.searchGif)) {
 
         } else {
 
@@ -85,7 +81,7 @@ class BrowseCategoryAdapter(var context: Context,
 
     override fun onBindViewHolder(initialViewHolder: RecyclerView.ViewHolder, position: Int) {
 
-        if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteTitle)) {
+        if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
 
             val viewHolder = initialViewHolder as BrowseFavoriteListViewHolder
 
@@ -106,6 +102,25 @@ class BrowseCategoryAdapter(var context: Context,
                     this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(this,
                         ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+                }
+            }
+
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
+
+            val viewHolder = initialViewHolder as BrowseSearchListViewHolder
+
+            viewHolder.searchIcon.visibility = View.VISIBLE
+            viewHolder.searchIcon.setBackgroundColor(Color.TRANSPARENT)
+            Glide.with(context)
+                .load(R.drawable.gph_ic_search_pink)
+                .into(viewHolder.searchIcon)
+
+            viewHolder.searchIcon.setOnClickListener {
+
+                categoryItemsData[position].categoryLeft?.categoryTitle?.let { itemTitle ->
+                    recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                        itemTitle,
+                        BrowseGifCategoryType.GIF_ITEM_SEARCH)
                 }
             }
 
@@ -172,8 +187,9 @@ class BrowseCategoryAdapter(var context: Context,
 
             viewHolder.categoryIconRight.setOnLongClickListener { view ->
                 categoryItemsData[position].categoryRight?.categoryTitle?.let {
-                    recyclerViewGifCategoryItemLongPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
-                        it
+                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                        it,
+                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES
                     )
                 }
 
@@ -182,8 +198,9 @@ class BrowseCategoryAdapter(var context: Context,
 
             viewHolder.categoryIconLeft.setOnLongClickListener { view ->
                 categoryItemsData[position].categoryLeft?.categoryTitle?.let {
-                    recyclerViewGifCategoryItemLongPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
-                        it
+                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                        it,
+                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES
                     )
                 }
 

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 5:55 PM
- * Last modified 2/12/20 5:43 PM
+ * Created by Elias Fazel on 2/13/20 10:33 AM
+ * Last modified 2/13/20 9:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,10 +27,13 @@ class BrowseGitCategoryData(var context: Context) {
     fun categoryListNames() : Deferred<ArrayList<String?>> = CoroutineScope(Dispatchers.IO).async {
         var gifCategoryList = ArrayList<String?>()
 
+        gifCategoryList.add(context.getString(R.string.searchGif))
+        gifCategoryList.add(null)
+
         if (context.getDatabasePath(DatabaseInformation.GIF_CATEGORY_DATABASE_NAME).exists()) {
 
             if (FavoriteCheckpoint(context).favoriteDatabaseExists()) {
-                gifCategoryList.add(context.getString(R.string.favoriteTitle))
+                gifCategoryList.add(context.getString(R.string.favoriteGif))
                 gifCategoryList.add(null)
             }
             gifCategoryList.addAll(getGifCategoryDatabase().await() as ArrayList<String>)
@@ -59,9 +62,9 @@ class BrowseGitCategoryData(var context: Context) {
             .onEach {
 
             }
-            .filter {
+            .filter { it ->
 
-                (it != null)
+                (it != null) || (it == "Favorites") || (it == "Search")
             }
             .map {
 

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 5:55 PM
- * Last modified 2/12/20 5:53 PM
+ * Created by Elias Fazel on 2/13/20 10:33 AM
+ * Last modified 2/13/20 10:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,13 +24,15 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.Data.BrowseGitCategoryData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryAdapter
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWearLayoutManager
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
+import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
 import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDatabase
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
-import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemLongPress
+import net.geeksempire.geeky.gify.Utils.UI.RecyclerViewGifCategoryItemPress
 
 
 fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
@@ -48,28 +50,58 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val browseGifCategoryView = ViewModelProvider(this@createViewModelObserver).get(BrowseCategoryViewModel::class.java)
 
-    val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemLongPress {
-        override fun itemLongPressed(rightLeft: Boolean, categoryName: String) {
+    val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemPress {
+        override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
 
-            CoroutineScope(Dispatchers.IO).launch {
-                val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+            when (viewType) {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
 
-                when (rightLeft) {
-                    RecyclerViewRightLeftItem.RIGHT_ITEM -> {
-                        gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
-                            GifCategoryDataModel(categoryName, System.currentTimeMillis())
-                        )
-                    }
-                    RecyclerViewRightLeftItem.LEFT_ITEM -> {
-                        gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
-                            GifCategoryDataModel(categoryName, System.currentTimeMillis())
-                        )
-                    }
+                    GiphyExplore()
+                        .invokeGiphyExplore(this@createViewModelObserver)
+
                 }
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
 
-                triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
+                }
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
 
-                gifCategoryDataInterface.close()
+                }
+            }
+        }
+
+        override fun itemLongPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
+
+            when (viewType) {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+
+                        when (rightLeft) {
+                            RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+                                gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
+                                    GifCategoryDataModel(categoryName, System.currentTimeMillis())
+                                )
+                            }
+                            RecyclerViewRightLeftItem.LEFT_ITEM -> {
+                                gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
+                                    GifCategoryDataModel(categoryName, System.currentTimeMillis())
+                                )
+                            }
+                        }
+
+                        triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
+
+                        gifCategoryDataInterface.close()
+                    }
+
+                }
             }
         }
     }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 10:54 AM
+ * Created by Elias Fazel on 2/13/20 10:33 AM
+ * Last modified 2/13/20 10:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,5 +82,5 @@ class GiphyExplore {
         }
     }
 
-    fun generateGiphyExploreLink(gifMediaId: String) = "https://media.giphy.com/media/${gifMediaId}/giphy.gif"
+    private fun generateGiphyExploreLink(gifMediaId: String) = "https://media.giphy.com/media/${gifMediaId}/giphy.gif"
 }

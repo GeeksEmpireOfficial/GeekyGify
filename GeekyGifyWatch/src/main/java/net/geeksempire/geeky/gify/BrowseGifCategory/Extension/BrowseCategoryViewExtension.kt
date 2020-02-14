@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 7:41 PM
- * Last modified 2/13/20 7:38 PM
+ * Created by Elias Fazel on 2/13/20 8:48 PM
+ * Last modified 2/13/20 8:48 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,8 +55,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val browseGifCategoryView = ViewModelProvider(this@createViewModelObserver).get(BrowseCategoryViewModel::class.java)
 
-    val recyclerViewItemLongPress = object :
-        RecyclerViewGifCategoryItemPress {
+    val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemPress {
+
         override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
 
             when (viewType) {
@@ -141,6 +141,32 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                 }
             }
+        }
+
+        override fun deleteCategory(rightLeft: Boolean, itemPosition: Int, categoryName: String) {
+
+            when (rightLeft) {
+                RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+
+                    CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+                        GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+                            .initDataAccessObject()
+                            .deleteByCategoryName(categoryName)
+                    }
+                }
+                RecyclerViewRightLeftItem.LEFT_ITEM -> {
+
+                    CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+                        GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+                            .initDataAccessObject()
+                            .deleteByCategoryName(categoryName)
+                    }
+                }
+            }
+
+            Handler().postDelayed({
+                triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
+            }, 200)
         }
     }
 

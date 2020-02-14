@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:19 PM
+ * Created by Elias Fazel on 2/13/20 8:48 PM
+ * Last modified 2/13/20 8:18 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,4 +32,10 @@ interface GifCategoryDataDAO {
 
     @Query("SELECT CategoryName FROM GifCategoryDatabase ORDER BY TimeOrder DESC")
     suspend fun getAllGifCategoryNames(): List<String>
+
+    @Query("SELECT * FROM GifCategoryDatabase WHERE CategoryName = (:categoryName)")
+    suspend fun getCategory(categoryName: String): GifCategoryDataModel?
+
+    @Query("DELETE FROM GifCategoryDatabase WHERE CategoryName = :categoryName")
+    suspend fun deleteByCategoryName(categoryName: String)
 }

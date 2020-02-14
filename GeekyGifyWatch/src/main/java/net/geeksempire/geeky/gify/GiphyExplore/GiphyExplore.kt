@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:28 PM
+ * Created by Elias Fazel on 2/13/20 3:50 PM
+ * Last modified 2/13/20 3:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -55,7 +55,7 @@ class GiphyExplore {
             override fun onGifSelected(media: Media) {
                 context.fragmentGifViewer.visibility = View.VISIBLE
 
-                val gifViewer: Fragment = GifViewer()
+                val gifViewer: Fragment = GifViewer(null)
                 gifViewer.arguments = Bundle().apply {
                     putString(GiphyJsonDataStructure.DATA_URL, media.url)
                     putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, generateGiphyExplorePreviewLink(media.id))

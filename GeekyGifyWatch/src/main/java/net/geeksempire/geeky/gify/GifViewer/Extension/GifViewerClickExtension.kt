@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:37 PM
+ * Created by Elias Fazel on 2/13/20 3:50 PM
+ * Last modified 2/13/20 3:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -74,10 +74,8 @@ fun GifViewer.setupGifViewClickListener() {
             userNameView.startAnimation(animationSlideOut)
             userNameView.visibility = View.GONE
 
-            if (gifUserIsVerified!!) {
-                userVerifiedBadgeView.startAnimation(animationSlideOut)
-                userVerifiedBadgeView.visibility = View.GONE
-            }
+            userVerifiedBadgeView.startAnimation(animationSlideOut)
+            userVerifiedBadgeView.visibility = View.GONE
 
             gifViewLayoutParameter.width = ViewGroup.LayoutParams.MATCH_PARENT
             gifViewLayoutParameter.height = ViewGroup.LayoutParams.MATCH_PARENT
@@ -98,10 +96,8 @@ fun GifViewer.setupGifViewClickListener() {
             userNameView.startAnimation(animationSlideIn)
             userNameView.visibility = View.VISIBLE
 
-            if (gifUserIsVerified!!) {
-                userVerifiedBadgeView.startAnimation(animationSlideIn)
-                userVerifiedBadgeView.visibility = View.VISIBLE
-            }
+            userVerifiedBadgeView.startAnimation(animationSlideIn)
+            userVerifiedBadgeView.visibility = View.VISIBLE
 
             gifViewLayoutParameter.width = calculateThirtyPercent(gifView.width)
             gifViewLayoutParameter.height = calculateThirtyPercent(gifView.height)

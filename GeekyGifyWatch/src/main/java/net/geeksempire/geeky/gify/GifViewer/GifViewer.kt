@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:34 PM
+ * Created by Elias Fazel on 2/13/20 3:50 PM
+ * Last modified 2/13/20 3:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,10 +29,11 @@ import kotlinx.android.synthetic.main.gif_view.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupGifViewClickListener
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupUserProfileInformation
+import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.R
 
 
-class GifViewer : Fragment() {
+class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentStateListener?) : Fragment() {
 
     lateinit var linkToGif: String
     lateinit var gifPreviewLink: String
@@ -40,7 +41,7 @@ class GifViewer : Fragment() {
 
     var gifUserName: String? = null
     var gifUserAvatarUrl: String? = null
-    var gifUserIsVerified: Boolean? = false
+    var gifUserIsVerified: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +104,8 @@ class GifViewer : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        gifViewerFragmentStateListener?.onFragmentDetach()
 
         activity!!.fragmentGifViewer!!.visibility = View.GONE
     }

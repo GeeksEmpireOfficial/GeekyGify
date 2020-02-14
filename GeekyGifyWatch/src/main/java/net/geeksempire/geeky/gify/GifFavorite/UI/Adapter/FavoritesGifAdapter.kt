@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 2:51 PM
- * Last modified 2/13/20 2:49 PM
+ * Created by Elias Fazel on 2/13/20 3:50 PM
+ * Last modified 2/13/20 3:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,14 +17,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
+import net.geeksempire.geeky.gify.GifFavorite.Util.RecyclerViewGifFavoriteItemPress
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 
-class FavoritesGifAdapter (var context: Context,
-                           var browseGifItemData: List<FavoriteDataModel>) : RecyclerView.Adapter<FavoritesGifListViewHolder>() {
+class FavoritesGifAdapter (private var context: Context,
+                           private var recyclerViewGifFavoriteItemPress: RecyclerViewGifFavoriteItemPress) : RecyclerView.Adapter<FavoritesGifListViewHolder>() {
 
-    val listOfColors = GetResources(context).getNeonColors()
+    var favoriteGifItemData = ArrayList<FavoriteDataModel>()
+
+    private val listOfColors = GetResources(context).getNeonColors()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesGifListViewHolder {
 
@@ -33,28 +37,27 @@ class FavoritesGifAdapter (var context: Context,
 
     override fun getItemCount(): Int {
 
-        return browseGifItemData.size
+        return favoriteGifItemData.size
     }
 
     override fun onBindViewHolder(favoritesGifListViewHolder: FavoritesGifListViewHolder, position: Int) {
-        val backgroundColor = listOfColors.random()
 
-        favoritesGifListViewHolder.mainView.setBackgroundColor(Color.parseColor(backgroundColor))
+        favoritesGifListViewHolder.mainView.setBackgroundColor(Color.parseColor(listOfColors.random()))
 
         Glide.with(context)
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .load(browseGifItemData[position].GifPreviewUrl)
+            .load(favoriteGifItemData[position].GifPreviewUrl)
             .into(favoritesGifListViewHolder.gifPreview)
 
         favoritesGifListViewHolder.gifPreview.setOnClickListener {
 
-//            recyclerViewGifBrowseItemPress.itemPressed(
-//                browseGifItemData[position].gifUserProfile,
-//                browseGifItemData[position].gifOriginalUri,
-//                browseGifItemData[position].linkToGif,
-//                browseGifItemData[position].gifPreviewUrl
-//            )
+            recyclerViewGifFavoriteItemPress.itemPressed(
+                if (favoriteGifItemData[position].GifUsername != "${null}") { GifUserProfile(favoriteGifItemData[position].GifUsername, favoriteGifItemData[position].GifUserAvatar, favoriteGifItemData[position].GifUserVerified) } else { null },
+                favoriteGifItemData[position].GifUrl,
+                favoriteGifItemData[position].GifUrl,
+                favoriteGifItemData[position].GifPreviewUrl
+            )
 
         }
 
@@ -62,7 +65,5 @@ class FavoritesGifAdapter (var context: Context,
 
             false
         }
-
-        listOfColors.remove(backgroundColor)
     }
 }

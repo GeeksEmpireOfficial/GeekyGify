@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 6:10 PM
- * Last modified 2/12/20 6:04 PM
+ * Created by Elias Fazel on 2/13/20 3:50 PM
+ * Last modified 2/13/20 3:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,7 +28,7 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
 
     private lateinit var ambientController: AmbientModeSupport.AmbientController
 
-    val gifViewer: Fragment = GifViewer()
+    val gifViewer: Fragment = GifViewer(null)
 
     @Inject
     lateinit var networkConnectionListener: NetworkConnectionListener

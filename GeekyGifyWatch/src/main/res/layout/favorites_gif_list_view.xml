@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/12/20 6:10 PM
-  ~ Last modified 2/12/20 6:10 PM
+  ~ Created by Elias Fazel on 2/13/20 3:50 PM
+  ~ Last modified 2/13/20 2:54 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -77,30 +77,6 @@
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintLeft_toLeftOf="parent"
         apps:layout_constraintRight_toRightOf="parent"/>
-
-    <ImageView
-        android:id="@+id/nextGifPage"
-        android:layout_width="33dp"
-        android:layout_height="match_parent"
-        android:padding="1dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/next_icon"
-        android:visibility="gone"
-        apps:layout_constraintTop_toTopOf="parent"
-        apps:layout_constraintBottom_toBottomOf="parent"
-        apps:layout_constraintRight_toRightOf="parent"/>
-
-    <ImageView
-        android:id="@+id/previousGifPage"
-        android:layout_width="33dp"
-        android:layout_height="match_parent"
-        android:padding="1dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/previous_icon"
-        android:visibility="gone"
-        apps:layout_constraintTop_toTopOf="parent"
-        apps:layout_constraintBottom_toBottomOf="parent"
-        apps:layout_constraintLeft_toLeftOf="parent"/>
 
     <FrameLayout
         android:id="@+id/fragmentGifViewer"

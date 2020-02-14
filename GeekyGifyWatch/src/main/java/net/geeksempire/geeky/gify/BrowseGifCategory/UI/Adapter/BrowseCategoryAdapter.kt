@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:48 PM
- * Last modified 2/13/20 5:44 PM
+ * Created by Elias Fazel on 2/13/20 7:13 PM
+ * Last modified 2/13/20 7:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -139,7 +139,7 @@ class BrowseCategoryAdapter(var context: Context,
             viewHolder.addIcon.visibility = View.VISIBLE
             viewHolder.addIcon.setBackgroundColor(Color.TRANSPARENT)
             Glide.with(context)
-                .load(android.R.drawable.ic_menu_add)
+                .load(R.drawable.icon_plus)
                 .into(viewHolder.addIcon)
 
             viewHolder.addIcon.setOnClickListener {
@@ -154,85 +154,90 @@ class BrowseCategoryAdapter(var context: Context,
 
         } else {
 
-            val viewHolder = initialViewHolder as BrowseCategoryListViewHolder
+            try {
+                val viewHolder = initialViewHolder as BrowseCategoryListViewHolder
 
-            //Setup Left Item
-            if (categoryItemsData[position].categoryLeft != null
-                || !categoryItemsData[position].categoryLeft?.categoryTitle.isNullOrBlank()) {
+                //Setup Left Item
+                if (categoryItemsData[position].categoryLeft != null
+                    || !categoryItemsData[position].categoryLeft?.categoryTitle.isNullOrBlank()) {
 
-                viewHolder.categoryIconLeft.visibility = View.VISIBLE
+                    viewHolder.categoryIconLeft.visibility = View.VISIBLE
 
-                viewHolder.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
+                    viewHolder.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
 
-                val backgroundDrawableLeftLayer = context.getDrawable(R.drawable.category_left_background) as LayerDrawable
-                val backgroundDrawableLeft = backgroundDrawableLeftLayer.findDrawableByLayerId(R.id.drawableBackground)
-                backgroundDrawableLeft?.let {
-                    it.setTint(categoryItemsData[position].categoryLeft!!.backgroundColor)
-                    viewHolder.categoryIconLeft.background = backgroundDrawableLeftLayer
-                }
-                viewHolder.categoryIconLeft.setOnClickListener {
-                    Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
-
-                    Intent(context, BrowseGifView::class.java).apply {
-                        this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
-                        this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        context.startActivity(this,
-                            ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+                    val backgroundDrawableLeftLayer = context.getDrawable(R.drawable.category_left_background) as LayerDrawable
+                    val backgroundDrawableLeft = backgroundDrawableLeftLayer.findDrawableByLayerId(R.id.drawableBackground)
+                    backgroundDrawableLeft?.let {
+                        it.setTint(categoryItemsData[position].categoryLeft!!.backgroundColor)
+                        viewHolder.categoryIconLeft.background = backgroundDrawableLeftLayer
                     }
-                }
-            } else {
-                viewHolder.categoryIconLeft.visibility = View.GONE
-            }
+                    viewHolder.categoryIconLeft.setOnClickListener {
+                        Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
 
-            //Setup Right Item
-            if (categoryItemsData[position].categoryRight != null
-                || !categoryItemsData[position].categoryRight?.categoryTitle.isNullOrBlank()) {
-
-                viewHolder.categoryIconRight.visibility = View.VISIBLE
-
-                viewHolder.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
-
-                val backgroundDrawableRightLayer = context.getDrawable(R.drawable.category_right_background) as LayerDrawable
-                val backgroundDrawableRight = backgroundDrawableRightLayer.findDrawableByLayerId(R.id.drawableBackground)
-                backgroundDrawableRight?.let {
-                    it.setTint(categoryItemsData[position].categoryRight!!.backgroundColor)
-                    viewHolder.categoryIconRight.background = backgroundDrawableRightLayer
-                }
-
-                viewHolder.categoryIconRight.setOnClickListener {
-                    Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle.toString())
-
-                    Intent(context, BrowseGifView::class.java).apply {
-                        this.putExtra("CategoryName", categoryItemsData[position].categoryRight?.categoryTitle.toString())
-                        this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        context.startActivity(this,
-                            ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+                        Intent(context, BrowseGifView::class.java).apply {
+                            this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
+                            this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(this,
+                                ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+                        }
                     }
-                }
-            } else {
-                viewHolder.categoryIconRight.visibility = View.GONE
-            }
-
-            viewHolder.categoryIconRight.setOnLongClickListener { view ->
-                categoryItemsData[position].categoryRight?.categoryTitle?.let {
-                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
-                        it,
-                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
-                    )
+                } else {
+                    viewHolder.categoryIconLeft.visibility = View.GONE
                 }
 
-                false
-            }
+                //Setup Right Item
+                if (categoryItemsData[position].categoryRight != null
+                    || !categoryItemsData[position].categoryRight?.categoryTitle.isNullOrBlank()) {
 
-            viewHolder.categoryIconLeft.setOnLongClickListener { view ->
-                categoryItemsData[position].categoryLeft?.categoryTitle?.let {
-                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
-                        it,
-                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
-                    )
+                    viewHolder.categoryIconRight.visibility = View.VISIBLE
+
+                    viewHolder.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
+
+                    val backgroundDrawableRightLayer = context.getDrawable(R.drawable.category_right_background) as LayerDrawable
+                    val backgroundDrawableRight = backgroundDrawableRightLayer.findDrawableByLayerId(R.id.drawableBackground)
+                    backgroundDrawableRight?.let {
+                        it.setTint(categoryItemsData[position].categoryRight!!.backgroundColor)
+                        viewHolder.categoryIconRight.background = backgroundDrawableRightLayer
+                    }
+
+                    viewHolder.categoryIconRight.setOnClickListener {
+                        Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle.toString())
+
+                        Intent(context, BrowseGifView::class.java).apply {
+                            this.putExtra("CategoryName", categoryItemsData[position].categoryRight?.categoryTitle.toString())
+                            this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(this,
+                                ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+                        }
+                    }
+                } else {
+                    viewHolder.categoryIconRight.visibility = View.GONE
                 }
 
-                false
+                viewHolder.categoryIconRight.setOnLongClickListener { view ->
+                    categoryItemsData[position].categoryRight?.categoryTitle?.let {
+                        recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                            it,
+                            BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
+                        )
+                    }
+
+                    false
+                }
+
+                viewHolder.categoryIconLeft.setOnLongClickListener { view ->
+                    categoryItemsData[position].categoryLeft?.categoryTitle?.let {
+                        recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                            it,
+                            BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
+                        )
+                    }
+
+                    false
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:48 PM
- * Last modified 2/13/20 5:35 PM
+ * Created by Elias Fazel on 2/13/20 7:13 PM
+ * Last modified 2/13/20 6:45 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,10 @@
 package net.geeksempire.geeky.gify.BrowseGifCategory.Extension
 
 import android.content.Context
+import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.wear.widget.WearableLinearLayoutManager
@@ -20,6 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import net.geeksempire.geeky.gify.BrowseGifCategory.AddCategory.AddNewCategory
 import net.geeksempire.geeky.gify.BrowseGifCategory.Data.BrowseGitCategoryData
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataModel
@@ -29,11 +33,12 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWea
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
+import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.GifCategoryFragmentStateListener
 import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
+import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
-
 
 fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
@@ -68,6 +73,24 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                 }
                 BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
+
+                    fragmentNewCategory.visibility = View.VISIBLE
+
+                    val addNewCategory: Fragment = AddNewCategory(object : GifCategoryFragmentStateListener {
+                        override fun onFragmentDetach() {
+                            triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
+                        }
+                    })
+
+                    addNewCategory.arguments = Bundle().apply {
+
+                    }
+
+                    supportFragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_from_right, 0)
+                        .replace(R.id.fragmentNewCategory, addNewCategory, "Add New Category")
+                        .commit()
 
                 }
             }

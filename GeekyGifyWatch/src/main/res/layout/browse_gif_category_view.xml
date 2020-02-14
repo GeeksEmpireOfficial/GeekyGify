@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/8/20 6:03 PM
-  ~ Last modified 2/8/20 3:29 PM
+  ~ Created by Elias Fazel on 2/13/20 7:13 PM
+  ~ Last modified 2/13/20 6:34 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -22,5 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentNewCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

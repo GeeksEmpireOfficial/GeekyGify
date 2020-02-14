@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:20 PM
+ * Created by Elias Fazel on 2/13/20 7:41 PM
+ * Last modified 2/13/20 7:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,9 +24,7 @@ class FavoriteCheckpoint (var context: Context) {
     suspend fun favoriteDatabaseExists () : Boolean {
 
         return if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {
-            val gifFavoriteDataInterface = GifFavoriteDatabase(
-                context
-            )
+            val gifFavoriteDataInterface = GifFavoriteDatabase(context)
                 .initialGifFavoriteDatabase().initDataAccessObject()
 
             (gifFavoriteDataInterface.getRowCount() > 0)
@@ -35,7 +33,14 @@ class FavoriteCheckpoint (var context: Context) {
         }
     }
 
-    fun checkIfFavorite(likeButton: LikeButton, gifUrl: String) = CoroutineScope(
+    suspend fun favoriteDatabaseCount() : Int {
+        val gifFavoriteDataInterface = GifFavoriteDatabase(context)
+            .initialGifFavoriteDatabase().initDataAccessObject()
+
+        return gifFavoriteDataInterface.getRowCount()
+    }
+
+    fun checkIfFavorite(likeButton: LikeButton, gifUrl: String) = CoroutineScope (
         Dispatchers.IO).launch {
 
         if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:42 PM
+ * Created by Elias Fazel on 2/13/20 7:41 PM
+ * Last modified 2/13/20 7:37 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteIt
 import net.geeksempire.geeky.gify.GifFavorite.Util.UnfavoriteIt
@@ -119,6 +120,11 @@ fun GifViewer.setupGifViewClickListener() {
                 FavoriteIt(context!!).addFavoriteGifDatabase(
                     gifLinkToDownload, gifPreviewLink,
                     gifUserName, gifUserAvatarUrl, gifUserIsVerified).await()
+
+                if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 1) {
+
+                    BrowseCategoryViewModel.firstFavoriteAdded.postValue(true)
+                }
             }
         }
 
@@ -126,6 +132,11 @@ fun GifViewer.setupGifViewClickListener() {
             CoroutineScope(Dispatchers.IO).launch {
 
                 UnfavoriteIt(context!!).removeFavoriteGifDatabase(gifLinkToDownload).await()
+
+                if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 0) {
+
+                    BrowseCategoryViewModel.firstFavoriteAdded.postValue(false)
+                }
             }
         }
     })

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:39 PM
- * Last modified 2/13/20 1:37 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,8 +15,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.GifFavoriteDatabase
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.FavoriteDataModel
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.GifFavoriteDatabase
 
 class FavoriteIt (var context: Context) {
 
@@ -24,11 +24,16 @@ class FavoriteIt (var context: Context) {
                                gifUsername: String?, gifUserAvatar: String?, gifUserVerified: Boolean?)
             = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        val gifFavoriteDataInterface = GifFavoriteDatabase(context).initialGifFavoriteDatabase()
+        val gifFavoriteDataInterface = GifFavoriteDatabase(
+            context
+        ).initialGifFavoriteDatabase()
 
-        val favoriteDataModel = FavoriteDataModel(System.currentTimeMillis(), gifUrl, gifPreviewUrl,
-            gifUsername.toString(), gifUserAvatar.toString(), gifUserVerified?:false,
-            true)
+        val favoriteDataModel =
+            FavoriteDataModel(
+                System.currentTimeMillis(), gifUrl, gifPreviewUrl,
+                gifUsername.toString(), gifUserAvatar.toString(), gifUserVerified ?: false,
+                true
+            )
 
         gifFavoriteDataInterface.initDataAccessObject().insertNewFavoriteData(favoriteDataModel)
 

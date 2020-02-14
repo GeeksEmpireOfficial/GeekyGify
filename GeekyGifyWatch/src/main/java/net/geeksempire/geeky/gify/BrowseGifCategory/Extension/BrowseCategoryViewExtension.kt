@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 2:45 PM
- * Last modified 2/13/20 2:42 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.Data.BrowseGitCategoryData
+import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataInterface
+import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataModel
+import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDatabase
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryAdapter
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWearLayoutManager
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
@@ -29,9 +32,6 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
 import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
-import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
-import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
-import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDatabase
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 
 
@@ -83,17 +83,25 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
 
                     CoroutineScope(Dispatchers.IO).launch {
-                        val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+                        val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(
+                            applicationContext
+                        ).initialGifCategoryDatabase()
 
                         when (rightLeft) {
                             RecyclerViewRightLeftItem.RIGHT_ITEM -> {
                                 gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
-                                    GifCategoryDataModel(categoryName, System.currentTimeMillis())
+                                    GifCategoryDataModel(
+                                        categoryName,
+                                        System.currentTimeMillis()
+                                    )
                                 )
                             }
                             RecyclerViewRightLeftItem.LEFT_ITEM -> {
                                 gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
-                                    GifCategoryDataModel(categoryName, System.currentTimeMillis())
+                                    GifCategoryDataModel(
+                                        categoryName,
+                                        System.currentTimeMillis()
+                                    )
                                 )
                             }
                         }

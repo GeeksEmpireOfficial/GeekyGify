@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:33 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,13 +20,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.favorites_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.FavoriteDataModel
 import net.geeksempire.geeky.gify.GifFavorite.UI.Adapter.FavoritesGifAdapter
 import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.GifFavorite.Util.RecyclerViewGifFavoriteItemPress
 import net.geeksempire.geeky.gify.GifFavorite.ViewModel.FavoritesGifViewModel
 import net.geeksempire.geeky.gify.GifFavorite.ViewModel.FavoritesGifViewModelFactory
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
 
 fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel {
 

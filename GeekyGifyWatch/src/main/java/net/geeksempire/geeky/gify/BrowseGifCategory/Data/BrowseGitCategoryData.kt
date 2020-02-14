@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 2:45 PM
- * Last modified 2/13/20 2:23 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,16 +14,19 @@ import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataInterface
+import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataModel
+import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDatabase
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
-import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataInterface
-import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDataModel
-import net.geeksempire.geeky.gify.RoomDatabase.GifCategory.GifCategoryDatabase
 
 class BrowseGitCategoryData(var context: Context) {
 
-    private val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(context).initialGifCategoryDatabase()
+    private val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(
+        context
+    ).initialGifCategoryDatabase()
 
     fun categoryListNames() : Deferred<ArrayList<String?>> = CoroutineScope(Dispatchers.IO).async {
         var gifCategoryList = ArrayList<String?>()
@@ -43,10 +46,13 @@ class BrowseGitCategoryData(var context: Context) {
         } else {
             Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Get Default Category List")
 
-            gifCategoryList = context.resources.getStringArray(R.array.gifCategoryList).toList() as ArrayList<String?>
+            gifCategoryList.addAll((context.resources.getStringArray(R.array.gifCategoryList).toList() as ArrayList<String?>))
 
             initializeGifCategoryDatabase(gifCategoryList)
         }
+
+        gifCategoryList.add(context.getString(R.string.addNewCategory))
+        gifCategoryList.add(null)
 
         gifCategoryList
     }
@@ -67,7 +73,7 @@ class BrowseGitCategoryData(var context: Context) {
             }
             .filter { it ->
 
-                (it != null) || (it == "Favorites") || (it == "Search")
+                (it != null) || (it == BrowseGifCategoryType.GIF_ITEM_FAVORITE) || (it == BrowseGifCategoryType.GIF_ITEM_SEARCH) || (it == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
             }
             .map {
 
@@ -84,7 +90,7 @@ class BrowseGitCategoryData(var context: Context) {
                     arrayOfGifCategoryDataModels.add(
                         GifCategoryDataModel(
                             categoryName,
-                            (initialGifCategoryNames.size -  it.index).toLong()
+                            (initialGifCategoryNames.size - it.index).toLong()
                         )
                     )
                 }

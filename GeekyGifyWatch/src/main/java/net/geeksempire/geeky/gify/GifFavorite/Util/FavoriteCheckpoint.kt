@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 5:55 PM
- * Last modified 2/12/20 3:52 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,15 +16,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.GifFavoriteDatabase
 import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.GifFavoriteDatabase
 
 class FavoriteCheckpoint (var context: Context) {
 
     suspend fun favoriteDatabaseExists () : Boolean {
 
         return if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {
-            val gifFavoriteDataInterface = GifFavoriteDatabase(context)
+            val gifFavoriteDataInterface = GifFavoriteDatabase(
+                context
+            )
                 .initialGifFavoriteDatabase().initDataAccessObject()
 
             (gifFavoriteDataInterface.getRowCount() > 0)
@@ -38,7 +40,9 @@ class FavoriteCheckpoint (var context: Context) {
 
         if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {
 
-            val gifFavoriteDataInterface = GifFavoriteDatabase(context).initialGifFavoriteDatabase()
+            val gifFavoriteDataInterface = GifFavoriteDatabase(
+                context
+            ).initialGifFavoriteDatabase()
 
             val gifFavorited = gifFavoriteDataInterface
                 .initDataAccessObject()

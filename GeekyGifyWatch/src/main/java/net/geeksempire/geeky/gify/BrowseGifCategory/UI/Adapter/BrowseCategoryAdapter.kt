@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 2:45 PM
- * Last modified 2/13/20 2:45 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,9 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryTypeView
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseCategoryListViewHolder
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseFavoriteListViewHolder
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseSearchListViewHolder
 import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.R
@@ -58,6 +61,8 @@ class BrowseCategoryAdapter(var context: Context,
         if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
 
         } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.searchGif)) {
+
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.addNewCategory)) {
 
         } else {
 
@@ -125,6 +130,12 @@ class BrowseCategoryAdapter(var context: Context,
                         BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE)
                 }
             }
+
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.addNewCategory)) {
+
+
+
+
 
         } else {
 

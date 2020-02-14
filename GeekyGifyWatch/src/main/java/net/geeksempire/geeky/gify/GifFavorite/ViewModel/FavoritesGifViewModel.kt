@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 2:51 PM
- * Last modified 2/13/20 2:49 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.GifFavoriteDatabase
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.FavoriteDataModel
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.GifFavoriteDatabase
 
 class FavoritesGifViewModel (val context: Context) : ViewModel() {
 
@@ -29,7 +29,9 @@ class FavoritesGifViewModel (val context: Context) : ViewModel() {
     fun setupGifsFavoritesData() = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
         try {
-            val gifFavoritesItemData = GifFavoriteDatabase(context)
+            val gifFavoritesItemData = GifFavoriteDatabase(
+                context
+            )
                 .initialGifFavoriteDatabase().initDataAccessObject().getAllFavoriteGif()
 
             favoritesGifItemData.postValue(gifFavoritesItemData)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:35 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
+import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.FavoriteDataModel
 import net.geeksempire.geeky.gify.GifFavorite.Util.RecyclerViewGifFavoriteItemPress
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.RoomDatabase.GifFavorite.FavoriteDataModel
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 
 class FavoritesGifAdapter (private var context: Context,

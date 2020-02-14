@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/9/20 7:17 PM
- * Last modified 2/9/20 7:12 PM
+ * Created by Elias Fazel on 2/13/20 5:20 PM
+ * Last modified 2/13/20 5:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.RoomDatabase.GifCategory
+package net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase
 
 import androidx.room.*
 

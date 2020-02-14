@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:19 PM
+ * Created by Elias Fazel on 2/13/20 7:20 PM
+ * Last modified 2/13/20 7:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,9 +29,7 @@ class FavoritesGifViewModel (val context: Context) : ViewModel() {
     fun setupGifsFavoritesData() = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
         try {
-            val gifFavoritesItemData = GifFavoriteDatabase(
-                context
-            )
+            val gifFavoritesItemData = GifFavoriteDatabase(context)
                 .initialGifFavoriteDatabase().initDataAccessObject().getAllFavoriteGif()
 
             favoritesGifItemData.postValue(gifFavoritesItemData)

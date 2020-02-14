@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:20 PM
+ * Created by Elias Fazel on 2/13/20 5:48 PM
+ * Last modified 2/13/20 5:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCa
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
+import net.geeksempire.geeky.gify.Utils.Calculations.numberEven
 
 class BrowseGitCategoryData(var context: Context) {
 
@@ -51,8 +52,14 @@ class BrowseGitCategoryData(var context: Context) {
             initializeGifCategoryDatabase(gifCategoryList)
         }
 
-        gifCategoryList.add(context.getString(R.string.addNewCategory))
-        gifCategoryList.add(null)
+        if (numberEven(gifCategoryList.size)) {
+            gifCategoryList.add(context.getString(R.string.addNewCategory))
+            gifCategoryList.add(null)
+        } else {
+            gifCategoryList.add(null)
+            gifCategoryList.add(context.getString(R.string.addNewCategory))
+        }
+
 
         gifCategoryList
     }
@@ -73,7 +80,7 @@ class BrowseGitCategoryData(var context: Context) {
             }
             .filter { it ->
 
-                (it != null) || (it == BrowseGifCategoryType.GIF_ITEM_FAVORITE) || (it == BrowseGifCategoryType.GIF_ITEM_SEARCH) || (it == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
+                (it != null) && (it != BrowseGifCategoryType.GIF_ITEM_FAVORITE) && (it != BrowseGifCategoryType.GIF_ITEM_SEARCH) && (it != BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
             }
             .map {
 

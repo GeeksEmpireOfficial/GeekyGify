@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:20 PM
+ * Created by Elias Fazel on 2/13/20 5:48 PM
+ * Last modified 2/13/20 5:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,7 +40,6 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
     categoryList.isEdgeItemsCenteringEnabled = true
-    //categoryList.isVerticalFadingEdgeEnabled = true
     categoryList.apply {
         this.isCircularScrollingGestureEnabled = true
         this.bezelFraction = 0.10f
@@ -66,6 +65,9 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                 }
                 BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
 
                 }
             }
@@ -110,6 +112,9 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                         gifCategoryDataInterface.close()
                     }
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
 
                 }
             }

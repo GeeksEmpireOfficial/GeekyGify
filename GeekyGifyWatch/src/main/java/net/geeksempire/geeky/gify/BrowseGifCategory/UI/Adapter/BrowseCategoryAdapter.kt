@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:19 PM
+ * Created by Elias Fazel on 2/13/20 5:48 PM
+ * Last modified 2/13/20 5:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,7 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryTypeView
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseAddListViewHolder
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseCategoryListViewHolder
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseFavoriteListViewHolder
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseSearchListViewHolder
@@ -58,11 +59,11 @@ class BrowseCategoryAdapter(var context: Context,
     override fun onBindViewHolder(viewHolderPayload: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(viewHolderPayload, position, payloads)
 
-        if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
+        if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_FAVORITE) {
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.searchGif)) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.addNewCategory)) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD) {
 
         } else {
 
@@ -88,7 +89,7 @@ class BrowseCategoryAdapter(var context: Context,
 
     override fun onBindViewHolder(initialViewHolder: RecyclerView.ViewHolder, position: Int) {
 
-        if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.favoriteGif)) {
+        if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_FAVORITE) {
 
             val viewHolder = initialViewHolder as BrowseFavoriteListViewHolder
 
@@ -112,7 +113,7 @@ class BrowseCategoryAdapter(var context: Context,
                 }
             }
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.searchGif)) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
 
             val viewHolder = initialViewHolder as BrowseSearchListViewHolder
 
@@ -131,10 +132,24 @@ class BrowseCategoryAdapter(var context: Context,
                 }
             }
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == context.getString(R.string.addNewCategory)) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD) {
 
+            val viewHolder = initialViewHolder as BrowseAddListViewHolder
 
+            viewHolder.addIcon.visibility = View.VISIBLE
+            viewHolder.addIcon.setBackgroundColor(Color.TRANSPARENT)
+            Glide.with(context)
+                .load(android.R.drawable.ic_menu_add)
+                .into(viewHolder.addIcon)
 
+            viewHolder.addIcon.setOnClickListener {
+
+                categoryItemsData[position].categoryLeft?.categoryTitle?.let { itemTitle ->
+                    recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                        itemTitle,
+                        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE)
+                }
+            }
 
 
         } else {

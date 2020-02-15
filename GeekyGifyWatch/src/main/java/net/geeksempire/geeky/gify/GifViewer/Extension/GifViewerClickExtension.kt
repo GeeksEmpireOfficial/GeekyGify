@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 7:41 PM
- * Last modified 2/13/20 7:37 PM
+ * Created by Elias Fazel on 2/14/20 4:43 PM
+ * Last modified 2/14/20 4:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,7 @@ import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
@@ -121,6 +122,7 @@ fun GifViewer.setupGifViewClickListener() {
                     gifLinkToDownload, gifPreviewLink,
                     gifUserName, gifUserAvatarUrl, gifUserIsVerified).await()
 
+                delay(321)
                 if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 1) {
 
                     BrowseCategoryViewModel.firstFavoriteAdded.postValue(true)
@@ -133,6 +135,7 @@ fun GifViewer.setupGifViewClickListener() {
 
                 UnfavoriteIt(context!!).removeFavoriteGifDatabase(gifLinkToDownload).await()
 
+                delay(321)
                 if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 0) {
 
                     BrowseCategoryViewModel.firstFavoriteAdded.postValue(false)

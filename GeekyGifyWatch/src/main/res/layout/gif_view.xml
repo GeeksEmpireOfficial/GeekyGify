@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/13/20 3:50 PM
-  ~ Last modified 2/13/20 3:47 PM
+  ~ Created by Elias Fazel on 2/14/20 4:26 PM
+  ~ Last modified 2/14/20 4:13 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -34,18 +34,6 @@
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintLeft_toLeftOf="parent"
         apps:layout_constraintRight_toRightOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/closeFragment"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_margin="3dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/close_button"
-
-        apps:layout_constraintTop_toTopOf="parent"
-        apps:layout_constraintBottom_toBottomOf="parent"
-        apps:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/userVerifiedBadgeView"
@@ -101,6 +89,48 @@
         apps:layout_constraintStart_toEndOf="@id/userAvatarView"
         apps:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/shareGif"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="3dp"
+        android:src="@drawable/icon_share"
+        android:visibility="gone"
+
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fullShareView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dark_transparent_50"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/shareToPhone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingStart="19dp"
+            android:background="@drawable/share_button_gif_background_gradient"
+            android:src="@drawable/share_to_phone"
+
+            apps:layout_constraintWidth_percent="0.5"
+            apps:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/shareToWatch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingStart="19dp"
+            android:background="@drawable/share_button_gif_background_gradient"
+            android:src="@drawable/share_to_watch"
+
+            apps:layout_constraintWidth_percent="0.5"
+            apps:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.like.LikeButton xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/makeFavorite"
         android:layout_width="wrap_content"
@@ -126,15 +156,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/shareGif"
+        android:id="@+id/closeFragment"
         android:layout_width="33dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="3dp"
-        android:src="@drawable/icon_share"
-        android:visibility="gone"
+        android:layout_margin="3dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/close_button"
 
-        apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintTop_toTopOf="parent"
-        apps:layout_constraintBottom_toBottomOf="parent"/>
+        apps:layout_constraintBottom_toBottomOf="parent"
+        apps:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

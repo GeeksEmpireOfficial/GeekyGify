@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 5:55 PM
- * Last modified 2/12/20 5:53 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 4:24 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,7 @@ import androidx.wear.ambient.AmbientModeSupport
 import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.Extension.createViewModelObserver
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
-import net.geeksempire.geeky.gify.GeekyGifyApplication
+import net.geeksempire.geeky.gify.GeekyGifyWatchApplication
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
         super.onCreate(savedInstanceState)
         setContentView(R.layout.browse_gif_category_view)
 
-        (application as GeekyGifyApplication)
+        (application as GeekyGifyWatchApplication)
             .dependencyGraph
             .subDependencyGraph()
             .create(this@BrowseCategoryView, mainView)

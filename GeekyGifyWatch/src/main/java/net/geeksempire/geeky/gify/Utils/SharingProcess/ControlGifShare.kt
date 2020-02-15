@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/12/20 1:24 PM
- * Last modified 2/12/20 1:22 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 3:29 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,9 +15,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.ResultReceiver
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.FragmentActivity
 import androidx.wear.widget.ConfirmationOverlay
 import com.google.android.wearable.intent.RemoteIntent
+import kotlinx.android.synthetic.main.gif_view.*
+import kotlinx.android.synthetic.main.gif_view.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,17 +30,32 @@ import net.geeksempire.geeky.gify.R
 
 class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterface {
 
+    fun initializeGifShare(gifLinkToShare: String, additionalText: String?) {
+
+        val shareView = fragmentActivity.fullShareView
+        shareView.startAnimation(AnimationUtils.loadAnimation(fragmentActivity, R.anim.slide_from_right))
+        shareView.visibility = View.VISIBLE
+
+        shareView.shareToPhone.setOnClickListener {
+
+            startShareToPhoneProcess(
+                gifLinkToShare,
+                additionalText
+            )
+        }
+
+        shareView.shareToWatch.setOnClickListener {
+
+            startShareToOtherApplications(
+                gifLinkToShare,
+                additionalText
+            )
+        }
+    }
+
     override fun sharingProcessCallback(gifLinkToShare: String, additionalText: String?) {
 
         startShareToOtherApplications(
-            gifLinkToShare,
-            additionalText
-        )
-    }
-
-    fun initializeGifShare(gifLinkToShare: String, additionalText: String?) {
-
-        startShareToPhoneProcess(
             gifLinkToShare,
             additionalText
         )
@@ -55,8 +74,6 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                     confirmationOverlay.showOn(fragmentActivity)
                     confirmationOverlay.setFinishedAnimationListener {
 
-                        this@ControlGifShare
-                            .sharingProcessCallback(gifLinkToShare, additionalText)
                     }
 
                 } else if (resultCode == RemoteIntent.RESULT_FAILED) {
@@ -100,11 +117,12 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
     }
 
     private fun startShareToOtherApplications (gifLinkToShare: String, additionalText: String?) {
+
         CoroutineScope(Dispatchers.Default).launch {
+
             Intent(Intent.ACTION_SEND).apply {
 
                 val gifFile = DownloadGif(fragmentActivity).downloadGifFile(gifLinkToShare).await()
-
                 if (gifFile.exists()) {
 
                     this.type = "image/*"

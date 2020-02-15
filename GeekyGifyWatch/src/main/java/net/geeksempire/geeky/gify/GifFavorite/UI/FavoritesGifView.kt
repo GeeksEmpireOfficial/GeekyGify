@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:25 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 4:24 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
 import kotlinx.android.synthetic.main.favorites_gif_list_view.*
-import net.geeksempire.geeky.gify.GeekyGifyApplication
+import net.geeksempire.geeky.gify.GeekyGifyWatchApplication
 import net.geeksempire.geeky.gify.GifFavorite.Extension.favoritesGifViewObserverExtension
 import net.geeksempire.geeky.gify.GifFavorite.ViewModel.FavoritesGifViewModel
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
@@ -35,7 +35,7 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
         super.onCreate(savedInstanceState)
         setContentView(R.layout.favorites_gif_list_view)
 
-        (application as GeekyGifyApplication)
+        (application as GeekyGifyWatchApplication)
             .dependencyGraph
             .subDependencyGraph()
             .create(this@FavoritesGifView, mainView)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:28 PM
- * Last modified 2/8/20 6:27 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 4:24 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,7 +32,7 @@ class EntryConfiguration : AppCompatActivity(), AmbientModeSupport.AmbientCallba
     lateinit var systemCheckpoint: SystemCheckpoint
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val dependencyGraph = (application as GeekyGifyApplication)
+        val dependencyGraph = (application as GeekyGifyWatchApplication)
             .dependencyGraph
         dependencyGraph.inject(this@EntryConfiguration)
         super.onCreate(savedInstanceState)

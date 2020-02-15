@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/13/20 12:51 PM
- * Last modified 2/13/20 12:51 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 4:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,7 +35,7 @@ import net.geeksempire.geeky.gify.Utils.uI.SnackbarView
 
 class ShareDataController : AppCompatActivity() {
 
-    lateinit var networkConnectionListener: NetworkConnectionListener
+    private lateinit var networkConnectionListener: NetworkConnectionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/11/20 11:17 AM
- * Last modified 2/11/20 10:52 AM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 3:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,6 +35,10 @@ class BrowseGifViewModel : ViewModel() {
 
     val gifsListData: MutableLiveData<ArrayList<BrowseGifItemData>> by lazy {
         MutableLiveData<ArrayList<BrowseGifItemData>>()
+    }
+
+    val gifsListError: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
 
     fun setupGifsBrowserData(rawDataJsonObject: JSONObject, colorsList: ArrayList<String>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {

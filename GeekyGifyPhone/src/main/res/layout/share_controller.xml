@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/12/20 1:13 PM
-  ~ Last modified 2/12/20 12:56 PM
+  ~ Created by Elias Fazel on 2/14/20 4:26 PM
+  ~ Last modified 2/14/20 4:21 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -28,15 +28,27 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appIcon"
+        android:id="@+id/appIconView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="13dp"
+        android:padding="15dp"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_geeky_gify"
 
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintBottom_toTopOf="@id/waitingView" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="13dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_text_geeky_gify"
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintBottom_toBottomOf="@id/appIconView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

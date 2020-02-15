@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/8/20 6:03 PM
- * Last modified 2/8/20 2:42 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 3:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,10 +12,14 @@ package net.geeksempire.geeky.gify.BrowseGif.Data
 
 import android.content.Context
 import android.util.Log
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.GiphyExplore.SearchAddress
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
@@ -23,11 +27,17 @@ import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInt
 import org.json.JSONObject
 import javax.net.ssl.HttpsURLConnection
 
+
 class EnqueueSearch {
+
+    companion object {
+        const val JSON_REQUEST_TIMEOUT = (1000 * 3)
+        const val JSON_REQUEST_RETRIES = (3)
+    }
 
     fun giphyJsonObjectRequest(context: Context,
                                giphySearchParameter: GiphySearchParameter,
-                               jsonRequestResponseInterface: JsonRequestResponseInterface) {
+                               jsonRequestResponseInterface: JsonRequestResponseInterface) = CoroutineScope(Dispatchers.IO).launch {
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET,
@@ -39,12 +49,20 @@ class EnqueueSearch {
                 if (response != null
                     && (response.getJSONObject(GiphyJsonDataStructure.META).getInt(GiphyJsonDataStructure.META_STATUS) == HttpsURLConnection.HTTP_OK)) {
 
-                    jsonRequestResponseInterface.jsonRequestResponseHandler(response, GetResources(context).getNeonColors())
+                    jsonRequestResponseInterface.jsonRequestResponseSuccessHandler(response, GetResources(context).getNeonColors())
                 }
 
             }, Response.ErrorListener {
-                Log.d("JsonObjectRequest Error", it.toString())
+                Log.d("JsonObjectRequestError", it.toString())
+
+                jsonRequestResponseInterface.jsonRequestResponseFailureHandler(it.toString())
             })
+
+        jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
+            EnqueueSearch.JSON_REQUEST_TIMEOUT,
+            EnqueueSearch.JSON_REQUEST_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        )
 
         val requestQueue = Volley.newRequestQueue(context)
         requestQueue.add(jsonObjectRequest)

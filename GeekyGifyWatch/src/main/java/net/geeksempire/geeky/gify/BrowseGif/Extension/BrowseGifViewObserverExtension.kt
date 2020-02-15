@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 1:41 PM
- * Last modified 2/13/20 1:41 PM
+ * Created by Elias Fazel on 2/14/20 4:26 PM
+ * Last modified 2/14/20 3:08 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,14 +10,20 @@
 
 package net.geeksempire.geeky.gify.BrowseGif.Extension
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
+import kotlinx.android.synthetic.main.offline_indicator.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.BrowseGifAdapter
@@ -78,6 +84,30 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
             }
 
             Log.d(this@createViewModelObserver.javaClass.simpleName, "GifsListData Observe")
+        })
+
+    browseGifViewModel.gifsListError.observe(this@createViewModelObserver,
+        Observer { errorMessage ->
+
+            if (errorMessage.isNotEmpty()) {
+                val offlineIndicator = LayoutInflater.from(this@createViewModelObserver).inflate(R.layout.offline_indicator, mainView, false)
+
+                mainView.addView(offlineIndicator)
+
+                Glide.with(applicationContext)
+                    .asGif()
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .load(R.drawable.no_internet_connection)
+                    .into(offlineIndicator.offlineWait)
+
+                offlineIndicator.offlineWait.setOnClickListener {
+                    startActivity(
+                        Intent(Settings.ACTION_SETTINGS).addFlags(
+                            Intent.FLAG_ACTIVITY_NEW_TASK))
+
+                    this@createViewModelObserver.finish()
+                }
+            }
         })
 
     GiphySearchParameter(categoryName).also {

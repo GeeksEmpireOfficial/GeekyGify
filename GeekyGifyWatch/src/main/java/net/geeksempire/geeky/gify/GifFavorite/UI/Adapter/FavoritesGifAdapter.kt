@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:20 PM
+ * Created by Elias Fazel on 2/14/20 4:35 PM
+ * Last modified 2/14/20 4:31 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
 import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.FavoriteDataModel
 import net.geeksempire.geeky.gify.GifFavorite.Util.RecyclerViewGifFavoriteItemPress
@@ -48,6 +49,7 @@ class FavoritesGifAdapter (private var context: Context,
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(favoriteGifItemData[position].GifPreviewUrl)
+            .apply(RequestOptions.circleCropTransform())
             .into(favoritesGifListViewHolder.gifPreview)
 
         favoritesGifListViewHolder.gifPreview.setOnClickListener {

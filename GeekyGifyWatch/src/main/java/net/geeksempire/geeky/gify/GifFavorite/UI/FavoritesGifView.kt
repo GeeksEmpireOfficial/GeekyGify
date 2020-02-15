@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 4:24 PM
+ * Created by Elias Fazel on 2/14/20 4:35 PM
+ * Last modified 2/14/20 4:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,6 +22,8 @@ import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
+import javax.inject.Inject
 
 class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
@@ -30,6 +32,9 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
     private lateinit var favoritesGifViewModel: FavoritesGifViewModel
 
     var gifViewer: Fragment = GifViewer(null)
+
+    @Inject
+    lateinit var networkConnectionListener: NetworkConnectionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +65,12 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
         }
 
         favoritesGifViewModel = favoritesGifViewObserverExtension()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        networkConnectionListener.unRegisterDefaultNetworkCallback()
     }
 
     override fun getAmbientCallback(): AmbientModeSupport.AmbientCallback {

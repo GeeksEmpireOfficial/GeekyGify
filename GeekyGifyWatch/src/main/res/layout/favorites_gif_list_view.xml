@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/13/20 3:50 PM
-  ~ Last modified 2/13/20 2:54 PM
+  ~ Created by Elias Fazel on 2/14/20 4:35 PM
+  ~ Last modified 2/14/20 4:29 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -43,7 +43,7 @@
         apps:layout_constraintRight_toRightOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/categoryTitle"
+        android:id="@+id/favoriteTitle"
         android:layout_width="match_parent"
         android:layout_height="33dp"
         android:layout_marginStart="37dp"
@@ -55,6 +55,7 @@
         android:scrollHorizontally="true"
         android:focusableInTouchMode="true"
         android:textColor="@color/light"
+        android:text="@string/favoriteGif"
         android:fontFamily="@font/pixelate_outline"
         android:background="@drawable/category_left_background"
 

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 8:48 PM
- * Last modified 2/13/20 8:46 PM
+ * Created by Elias Fazel on 2/16/20 10:45 AM
+ * Last modified 2/16/20 10:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,9 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
@@ -68,29 +71,43 @@ class BrowseCategoryAdapter(var context: Context,
 
         } else {
 
-            val viewHolder = viewHolderPayload as BrowseCategoryListViewHolder
+            if (viewHolderPayload is BrowseCategoryListViewHolder) {
 
-            if (categoryItemsData[position].categoryLeft != null) {
+                val viewHolder = viewHolderPayload as BrowseCategoryListViewHolder
 
-                viewHolder.categoryIconLeft.visibility = View.VISIBLE
-                viewHolder.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
-            } else {
-                viewHolder.categoryIconLeft.visibility = View.GONE
-            }
+                //Setup Left Item
+                if (categoryItemsData[position].categoryLeft != null
+                    || !categoryItemsData[position].categoryLeft?.categoryTitle.isNullOrBlank()) {
 
-            if (categoryItemsData[position].categoryRight != null) {
+                    viewHolder.categoryIconLeft.visibility = View.VISIBLE
+                    viewHolder.deleteLeftCategory.visibility = View.VISIBLE
 
-                viewHolder.categoryIconRight.visibility = View.VISIBLE
-                viewHolder.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
-            } else {
-                viewHolder.categoryIconRight.visibility = View.GONE
+                    viewHolder.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
+                } else {
+                    viewHolder.categoryIconLeft.visibility = View.GONE
+                    viewHolder.deleteLeftCategory.visibility = View.GONE
+                }
+
+                //Setup Right Item
+                if (categoryItemsData[position].categoryRight != null
+                    || !categoryItemsData[position].categoryRight?.categoryTitle.isNullOrBlank()) {
+
+                    viewHolder.categoryIconRight.visibility = View.VISIBLE
+                    viewHolder.deleteRightCategory.visibility = View.VISIBLE
+
+                    viewHolder.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
+                } else {
+                    viewHolder.categoryIconRight.visibility = View.GONE
+                    viewHolder.deleteRightCategory.visibility = View.GONE
+                }
             }
         }
     }
 
     override fun onBindViewHolder(initialViewHolder: RecyclerView.ViewHolder, position: Int) {
 
-        if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_FAVORITE) {
+        if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_FAVORITE
+            && initialViewHolder is BrowseFavoriteListViewHolder) {
 
             try {
                 val viewHolder = initialViewHolder as BrowseFavoriteListViewHolder
@@ -119,7 +136,8 @@ class BrowseCategoryAdapter(var context: Context,
                 e.printStackTrace()
             }
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SEARCH
+            && initialViewHolder is BrowseSearchListViewHolder) {
 
             try {
 
@@ -144,7 +162,8 @@ class BrowseCategoryAdapter(var context: Context,
                 e.printStackTrace()
             }
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD
+            && initialViewHolder is BrowseAddListViewHolder) {
 
             try {
 
@@ -169,7 +188,7 @@ class BrowseCategoryAdapter(var context: Context,
                 e.printStackTrace()
             }
 
-        } else {
+        } else if (initialViewHolder is BrowseCategoryListViewHolder) {
 
             try {
                 val viewHolder = initialViewHolder as BrowseCategoryListViewHolder
@@ -203,11 +222,14 @@ class BrowseCategoryAdapter(var context: Context,
                     viewHolder.deleteLeftCategory.setOnClickListener {
 
                         categoryItemsData[position].categoryLeft?.categoryTitle?.let { categoryName ->
-                            recyclerViewGifCategoryItemPress.deleteCategory(
-                                RecyclerViewRightLeftItem.RIGHT_ITEM,
-                                position,
-                                categoryName
-                            )
+                            CoroutineScope(Dispatchers.IO).launch {
+
+                                recyclerViewGifCategoryItemPress.deleteCategory(
+                                    RecyclerViewRightLeftItem.LEFT_ITEM,
+                                    position,
+                                    categoryName
+                                )
+                            }
 
                             val fadeOutAnimation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out)
 
@@ -254,11 +276,14 @@ class BrowseCategoryAdapter(var context: Context,
                     viewHolder.deleteRightCategory.setOnClickListener {
 
                         categoryItemsData[position].categoryRight?.categoryTitle?.let { categoryName ->
-                            recyclerViewGifCategoryItemPress.deleteCategory(
-                                RecyclerViewRightLeftItem.RIGHT_ITEM,
-                                position,
-                                categoryName
-                            )
+                            CoroutineScope(Dispatchers.IO).launch {
+
+                                recyclerViewGifCategoryItemPress.deleteCategory(
+                                    RecyclerViewRightLeftItem.RIGHT_ITEM,
+                                    position,
+                                    categoryName
+                                )
+                            }
 
                             val fadeOutAnimation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out)
 

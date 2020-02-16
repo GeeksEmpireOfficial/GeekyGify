@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/16/20 10:45 AM
+  ~ Last modified 2/16/20 10:26 AM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/orange">
+
+    <item
+        android:id="@android:id/mask">
+        <shape
+            android:shape="oval">
+
+            <solid
+                android:color="@color/orange"/>
+        </shape>
+    </item>
+</ripple>

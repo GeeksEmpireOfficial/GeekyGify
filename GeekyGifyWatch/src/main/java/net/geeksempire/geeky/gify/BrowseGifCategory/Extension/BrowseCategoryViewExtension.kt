@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 8:48 PM
- * Last modified 2/13/20 8:48 PM
+ * Created by Elias Fazel on 2/16/20 10:45 AM
+ * Last modified 2/16/20 10:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,10 +19,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.wear.widget.WearableLinearLayoutManager
 import kotlinx.android.synthetic.main.browse_gif_category_view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.AddCategory.AddNewCategory
 import net.geeksempire.geeky.gify.BrowseGifCategory.Data.BrowseGitCategoryData
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataInterface
@@ -30,6 +27,9 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryData
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDatabase
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryAdapter
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryWearLayoutManager
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemDataLeft
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemDataRight
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
@@ -143,30 +143,51 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         }
 
-        override fun deleteCategory(rightLeft: Boolean, itemPosition: Int, categoryName: String) {
+        override suspend fun deleteCategory(rightLeft: Boolean, itemPosition: Int, categoryName: String) {
+
+            var categoryItemDataLeft: CategoryItemDataLeft? = null
+            var categoryItemDataRight: CategoryItemDataRight? = null
+
+            categoryAdapter?.categoryItemsData?.get(itemPosition)?.let { pairCategory ->
+                categoryItemDataLeft = pairCategory.categoryLeft
+                categoryItemDataRight = pairCategory.categoryRight
+            }
 
             when (rightLeft) {
                 RecyclerViewRightLeftItem.RIGHT_ITEM -> {
 
                     CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+
                         GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
                             .initDataAccessObject()
                             .deleteByCategoryName(categoryName)
+
+                        categoryItemDataRight = null
                     }
                 }
                 RecyclerViewRightLeftItem.LEFT_ITEM -> {
 
                     CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+
                         GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
                             .initDataAccessObject()
                             .deleteByCategoryName(categoryName)
+
+                        categoryItemDataLeft = null
                     }
                 }
             }
 
-            Handler().postDelayed({
-                triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
-            }, 200)
+            delay(200)
+            categoryAdapter?.categoryItemsData
+                ?.set(itemPosition,
+                    CategoryItemData(categoryItemDataLeft, categoryItemDataRight))
+
+            withContext(Dispatchers.Main) {
+                categoryAdapter?.
+                        notifyItemChanged(itemPosition, CategoryItemData(categoryItemDataLeft, categoryItemDataRight))
+//                    notifyItemRangeChanged(0, categoryAdapter!!.itemCount, categoryAdapter?.categoryItemsData)
+            }
         }
     }
 
@@ -202,12 +223,11 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     BrowseCategoryViewModel.firstFavoriteAdded.observe(this@createViewModelObserver,
         Observer {
+
             triggerGifCategoryDataLoading(
                 applicationContext,
                 browseGifCategoryView
             )
-
-            BrowseCategoryViewModel.firstFavoriteAdded.removeObserver {/**/}
         })
 
     triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)

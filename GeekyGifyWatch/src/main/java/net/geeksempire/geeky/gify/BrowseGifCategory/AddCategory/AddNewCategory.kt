@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 7:13 PM
- * Last modified 2/13/20 7:13 PM
+ * Created by Elias Fazel on 2/16/20 10:45 AM
+ * Last modified 2/16/20 10:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,14 +49,16 @@ class AddNewCategory (private val gifCategoryFragmentStateListener: GifCategoryF
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        typeNewCategoryName.requestFocus()
+
         val inputMethodManager = getSystemService(context!!, InputMethodManager::class.java) as InputMethodManager
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 
-        typeNewCategoryName.requestFocus()
         typeNewCategoryName.setOnEditorActionListener { view, actionId, event ->
 
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
+                    typeNewCategoryName.clearFocus()
                     inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
 
                     if (!view.text.isBlank()) {

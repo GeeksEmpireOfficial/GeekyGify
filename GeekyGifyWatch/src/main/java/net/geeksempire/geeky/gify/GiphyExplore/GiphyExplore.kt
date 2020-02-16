@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 1:01 PM
+ * Created by Elias Fazel on 2/16/20 1:15 PM
+ * Last modified 2/16/20 1:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,10 +37,10 @@ class GiphyExplore {
 
         val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = DarkTheme, dimBackground = true)
         giphySettings.mediaTypeConfig = arrayOf(
-            GPHContentType.gif/*,
+            GPHContentType.gif,
             GPHContentType.sticker,
             GPHContentType.emoji,
-            GPHContentType.text*/)
+            GPHContentType.text)
         giphySettings.rating = RatingType.g
         giphySettings.renditionType = RenditionType.preview
         giphySettings.confirmationRenditionType = RenditionType.original

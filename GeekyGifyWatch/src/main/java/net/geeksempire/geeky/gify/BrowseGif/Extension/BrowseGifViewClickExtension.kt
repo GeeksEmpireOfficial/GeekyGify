@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/10/20 6:19 PM
- * Last modified 2/10/20 6:17 PM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,8 +23,9 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
 
     exploreGifs.setOnClickListener {
 
-        if (!gifViewer.isVisible || !fragmentGifViewer.isShown) {
+        if (!gifViewer.isVisible || !fragmentPlaceHolder.isShown) {
 
+            fragmentPlaceHolder.visibility = View.VISIBLE
             GiphyExplore()
                 .invokeGiphyExplore(this@createClickListeners)
         }

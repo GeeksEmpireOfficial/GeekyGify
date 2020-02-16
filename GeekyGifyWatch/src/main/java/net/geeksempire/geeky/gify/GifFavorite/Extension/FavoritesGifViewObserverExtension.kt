@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 7:20 PM
- * Last modified 2/13/20 7:15 PM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,7 +40,7 @@ fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel
         override fun itemPressed(gifUserProfile: GifUserProfile?,
                                  gifOriginalUri: String, linkToGif: String, gifPreviewUri: String) {
 
-            fragmentGifViewer.visibility = View.VISIBLE
+            fragmentPlaceHolder.visibility = View.VISIBLE
 
             gifViewer.arguments = Bundle().apply {
                 putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
@@ -57,7 +57,7 @@ fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel
             supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_from_right, 0)
-                .replace(R.id.fragmentGifViewer, gifViewer, "GIF VIEWER")
+                .replace(R.id.fragmentPlaceHolder, gifViewer, "GIF VIEWER")
                 .commit()
 
         }

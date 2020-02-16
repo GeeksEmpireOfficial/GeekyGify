@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:25 PM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 1:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,7 +11,6 @@
 package net.geeksempire.geeky.gify.GiphyExplore
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.giphy.sdk.core.models.Media
@@ -23,7 +22,6 @@ import com.giphy.sdk.ui.GiphyCoreUI
 import com.giphy.sdk.ui.themes.DarkTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
-import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
@@ -34,26 +32,25 @@ class GiphyExplore {
         private const val GIPHY_SDK_API_KEY = "vaQ2LAuOJoWDVdtTYqdPHPI38PUzdnG1"
     }
 
-    fun invokeGiphyExplore(context: AppCompatActivity) {
-        GiphyCoreUI.configure(context, GiphyExplore.GIPHY_SDK_API_KEY)
+    fun invokeGiphyExplore(appCompatActivity: AppCompatActivity) {
+        GiphyCoreUI.configure(appCompatActivity, GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = false)
 
         val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = DarkTheme, dimBackground = true)
         giphySettings.mediaTypeConfig = arrayOf(
-            GPHContentType.gif,
+            GPHContentType.gif/*,
             GPHContentType.sticker,
             GPHContentType.emoji,
-            GPHContentType.text)
-        giphySettings.rating = RatingType.unrated
+            GPHContentType.text*/)
+        giphySettings.rating = RatingType.g
         giphySettings.renditionType = RenditionType.preview
         giphySettings.confirmationRenditionType = RenditionType.original
         giphySettings.showAttribution = true
 
         val giphyDialog = GiphyDialogFragment.newInstance(giphySettings)
-        giphyDialog.showNow(context.supportFragmentManager, "GIF_DIALOGUE")
+        giphyDialog.showNow(appCompatActivity.supportFragmentManager, "GIF_DIALOGUE")
 
         giphyDialog.gifSelectionListener = object: GiphyDialogFragment.GifSelectionListener {
             override fun onGifSelected(media: Media) {
-                context.fragmentGifViewer.visibility = View.VISIBLE
 
                 val gifViewer: Fragment = GifViewer(null)
                 gifViewer.arguments = Bundle().apply {
@@ -69,10 +66,10 @@ class GiphyExplore {
                     }
                 }
 
-                context.supportFragmentManager
+                appCompatActivity.supportFragmentManager
                     .beginTransaction()
                     .setCustomAnimations(R.anim.slide_from_right, 0)
-                    .replace(R.id.fragmentGifViewer, gifViewer, "GIF VIEWER")
+                    .replace(R.id.fragmentPlaceHolder, gifViewer, "GIF VIEWER")
                     .commit()
             }
 

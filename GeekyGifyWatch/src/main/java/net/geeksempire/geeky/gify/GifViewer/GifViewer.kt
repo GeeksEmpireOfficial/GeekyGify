@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:45 PM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -107,6 +107,6 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
 
         gifViewerFragmentStateListener?.onFragmentDetach()
 
-        activity!!.fragmentGifViewer!!.visibility = View.GONE
+        activity!!.fragmentPlaceHolder!!.visibility = View.GONE
     }
 }

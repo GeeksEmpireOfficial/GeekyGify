@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 3:08 PM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,7 +46,7 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
         override fun itemPressed(gifUserProfile: GifUserProfile?,
                                  gifOriginalUri: String, linkToGif: String, gifPreviewUri: String) {
 
-            fragmentGifViewer.visibility = View.VISIBLE
+            fragmentPlaceHolder.visibility = View.VISIBLE
 
             gifViewer.arguments = Bundle().apply {
                 putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
@@ -63,7 +63,7 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
             supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.slide_from_right, 0)
-                .replace(R.id.fragmentGifViewer, gifViewer, "GIF VIEWER")
+                .replace(R.id.fragmentPlaceHolder, gifViewer, "GIF VIEWER")
                 .commit()
 
         }

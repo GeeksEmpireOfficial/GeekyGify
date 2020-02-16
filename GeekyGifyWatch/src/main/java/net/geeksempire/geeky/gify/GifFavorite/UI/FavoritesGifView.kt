@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:35 PM
- * Last modified 2/14/20 4:28 PM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package net.geeksempire.geeky.gify.GifFavorite.UI
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
@@ -57,8 +58,9 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
 
         exploreGifs.setOnClickListener {
 
-            if (!gifViewer.isVisible || !fragmentGifViewer.isShown) {
+            if (!gifViewer.isVisible || !fragmentPlaceHolder.isShown) {
 
+                fragmentPlaceHolder.visibility = View.VISIBLE
                 GiphyExplore()
                     .invokeGiphyExplore(this@FavoritesGifView)
             }

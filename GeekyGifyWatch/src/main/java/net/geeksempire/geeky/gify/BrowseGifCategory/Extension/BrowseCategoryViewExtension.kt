@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 10:45 AM
- * Last modified 2/16/20 10:39 AM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,6 +62,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             when (viewType) {
                 BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
 
+                    fragmentPlaceHolder.visibility = View.VISIBLE
                     GiphyExplore()
                         .invokeGiphyExplore(this@createViewModelObserver)
 
@@ -74,7 +75,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 }
                 BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
 
-                    fragmentNewCategory.visibility = View.VISIBLE
+                    fragmentPlaceHolder.visibility = View.VISIBLE
 
                     val addNewCategory: Fragment = AddNewCategory(object : GifCategoryFragmentStateListener {
                         override fun onFragmentDetach() {
@@ -89,7 +90,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     supportFragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_from_right, 0)
-                        .replace(R.id.fragmentNewCategory, addNewCategory, "Add New Category")
+                        .replace(R.id.fragmentPlaceHolder, addNewCategory, "Add New Category")
                         .commit()
 
                 }

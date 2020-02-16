@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 10:45 AM
- * Last modified 2/16/20 10:45 AM
+ * Created by Elias Fazel on 2/16/20 1:01 PM
+ * Last modified 2/16/20 12:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,6 +108,6 @@ class AddNewCategory (private val gifCategoryFragmentStateListener: GifCategoryF
         super.onDestroyView()
 
 
-        activity!!.fragmentNewCategory!!.visibility = View.GONE
+        activity!!.fragmentPlaceHolder!!.visibility = View.GONE
     }
 }

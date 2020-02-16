@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "148403295247",
+    "firebase_url": "https://geeky-gify.firebaseio.com",
+    "project_id": "geeky-gify",
+    "storage_bucket": "geeky-gify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148403295247:android:b69b533e9eeb2ac74ebf7a",
+        "android_client_info": {
+          "package_name": "net.geeksempire.geeky.gify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148403295247-4bgpl0ostnbuaem6q1ngkhh7obej46tb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.geeksempire.geeky.gify",
+            "certificate_hash": "7d66fbf7d613ea0251c582a4b2a6370bb33be228"
+          }
+        },
+        {
+          "client_id": "148403295247-feia3ffv7sg0ohlkpt3s2n1kfq8dcshc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.geeksempire.geeky.gify",
+            "certificate_hash": "c4f7ba6ff825ee77e200fa6c3edc4a749be7baac"
+          }
+        },
+        {
+          "client_id": "148403295247-5b4dit9v6ftkedhop1troko4h59seuik.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnL-8X9Q9chkKcVGB8n_1yyM_E87eHFNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148403295247-5b4dit9v6ftkedhop1troko4h59seuik.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

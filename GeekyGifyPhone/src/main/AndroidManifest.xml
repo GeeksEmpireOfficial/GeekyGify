@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/12/20 1:13 PM
-  ~ Last modified 2/12/20 12:57 PM
+  ~ Created by Elias Fazel on 2/16/20 2:08 PM
+  ~ Last modified 2/16/20 2:08 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -20,11 +20,28 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".GeekyGifyPhoneApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:theme="@style/GeeksEmpire.Material">
+
+        <activity
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:label="@string/app_name"
+            android:name=".EnteryConfiguration"
+            android:excludeFromRecents="true"
+            android:theme="@style/GeeksEmpire.Material">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
+
         <activity
             android:autoVerify="true"
             android:excludeFromRecents="true"
@@ -34,12 +51,10 @@
             android:name=".ShareDataController"
             android:theme="@style/ShareWaitingTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.LAUNCHER" />
 
                 <data
                     android:host="www.geekygify.xyz"

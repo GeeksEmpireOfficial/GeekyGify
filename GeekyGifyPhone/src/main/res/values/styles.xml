@@ -1,8 +1,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/12/20 1:13 PM
-  ~ Last modified 2/12/20 12:57 PM
+  ~ Created by Elias Fazel on 2/16/20 2:08 PM
+  ~ Last modified 2/16/20 2:04 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -10,32 +10,22 @@
 
 <resources>
 
-    <style name="GeeksEmpire" parent="@android:style/Theme.DeviceDefault.Light">
-        <item name="android:colorPrimary">@color/default_color_game</item>
-        <item name="android:colorPrimaryDark">@color/default_color_game_dark</item>
-        <item name="android:colorAccent">@color/default_color_game_light</item>
-
-        <item name="android:windowBackground">@drawable/splash_screen</item>
-    </style>
-
     <style name="GeeksEmpire.Material" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:colorPrimary">@color/default_color_game</item>
         <item name="android:colorPrimaryDark">@color/default_color_game_dark</item>
         <item name="android:colorAccent">@color/default_color_game_light</item>
 
-        <item name="colorPrimary">@color/default_color_game</item>
-        <item name="colorPrimaryDark">@color/default_color_game_dark</item>
-        <item name="colorAccent">@color/default_color_game_light</item>
+        <item name="android:statusBarColor">@color/default_color_game</item>
+        <item name="android:navigationBarColor">@color/default_color_game</item>
 
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
     <style name="ShareWaitingTheme" parent="@style/GeeksEmpire.Material">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/default_color_game_light</item>
-
         <item name="android:statusBarColor">@color/default_color_game_light</item>
         <item name="android:navigationBarColor">@color/default_color_game_light</item>
+
+        <item name="android:windowBackground">@color/default_color_game_light</item>
     </style>
 
     <style name="ContentLoadingProgress">

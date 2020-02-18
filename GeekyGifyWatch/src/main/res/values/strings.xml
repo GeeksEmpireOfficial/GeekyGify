@@ -1,8 +1,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/13/20 5:48 PM
-  ~ Last modified 2/13/20 5:40 PM
+  ~ Created by Elias Fazel on 2/18/20 12:57 PM
+  ~ Last modified 2/18/20 12:43 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -19,6 +19,9 @@
     <string name="gifReadyOnPhone"> 🖼 ➡ 📲 </string>
     <string name="errorOccurred"> ⚠ ⚠ ⚠ </string>
     <string name="downloadErrorOccurred"> ⬇ 🖼 ⚠ </string>
+
+    <string name="updateAvailable">New Update Available | Click Here to Install…!</string>
+    <string name="rateReview">Please Rate &amp; Write Review</string>
 
     <string-array name="gifCategoryList">
         <item>Actions</item>

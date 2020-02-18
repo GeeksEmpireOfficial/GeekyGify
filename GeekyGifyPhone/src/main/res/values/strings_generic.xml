@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/18/20 12:57 PM
+  ~ Last modified 2/18/20 12:47 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<resources>
+
+    <string name="playStoreLink">https://play.google.com/store/apps/details?id=</string>
+
+    <string name="integerVersionCodeNewUpdatePhone" translatable="false">integer_version_code_new_update_phone</string>
+    <string name="stringVersionNameNewUpdatePhone" translatable="false">string_version_name_new_update_phone</string>
+    <string name="stringUpcomingChangeLogPhone" translatable="false">string_upcoming_change_log_phone</string>
+    <string name="stringUpcomingChangeLogSummaryPhone" translatable="false">string_upcoming_change_log_summary_phone</string>
+
+    <string name="betaIntegerVersionCodeNewUpdatePhone" translatable="false">beta_integer_version_code_new_update_phone</string>
+    <string name="betaStringVersionNameNewUpdatePhone" translatable="false">beta_string_version_name_new_update_phone</string>
+    <string name="betaStringUpcomingChangeLogPhone" translatable="false">beta_string_upcoming_change_log_phone</string>
+    <string name="betaStringUpcomingChangeLogSummaryPhone" translatable="false">beta_string_upcoming_change_log_summary_phone</string>
+
+</resources>

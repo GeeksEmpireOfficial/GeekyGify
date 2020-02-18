@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/17/20 11:07 AM
- * Last modified 2/17/20 11:06 AM
+ * Created by Elias Fazel on 2/18/20 12:57 PM
+ * Last modified 2/18/20 12:23 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.Utils
+package net.geeksempire.geeky.gify.Utils.Notification
 
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService

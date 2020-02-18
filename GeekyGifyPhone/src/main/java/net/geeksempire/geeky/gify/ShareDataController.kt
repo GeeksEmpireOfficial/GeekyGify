@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 4:17 PM
+ * Created by Elias Fazel on 2/18/20 12:57 PM
+ * Last modified 2/18/20 12:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,8 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kotlinx.android.synthetic.main.offline_indicator.view.*
 import kotlinx.android.synthetic.main.share_controller.*
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +30,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.Networking.DownloadGif
 import net.geeksempire.geeky.gify.Utils.Extension.setupLoadingAnimation
+import net.geeksempire.geeky.gify.Utils.Notification.CreateNotification
+import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import net.geeksempire.geeky.gify.Utils.uI.SnackbarView
@@ -120,6 +124,34 @@ class ShareDataController : AppCompatActivity() {
                         this@ShareDataController.finish()
                     }
                 }
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val configSettings = FirebaseRemoteConfigSettings.Builder()
+            .setMinimumFetchIntervalInSeconds(13*60)
+            .build()
+
+        val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance().apply {
+            this.setConfigSettingsAsync(configSettings)
+        }
+
+        firebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_default)
+        firebaseRemoteConfig.fetchAndActivate().addOnSuccessListener {
+
+            val remoteConfigFunctions = RemoteConfigFunctions(applicationContext)
+
+            if (firebaseRemoteConfig.getLong(remoteConfigFunctions.versionCodeRemoteConfigKey()) > BuildConfig.VERSION_CODE) {
+
+                CreateNotification(applicationContext)
+                    .notifyManager(
+                        getString(R.string.updateAvailable),
+                        firebaseRemoteConfig.getString(remoteConfigFunctions.upcomingChangeLogSummaryConfigKey()),
+                        firebaseRemoteConfig.getLong(remoteConfigFunctions.versionCodeRemoteConfigKey()).toInt()
+                    )
             }
         }
     }

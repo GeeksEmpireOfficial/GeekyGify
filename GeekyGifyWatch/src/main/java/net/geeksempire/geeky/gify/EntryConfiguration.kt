@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 4:24 PM
+ * Created by Elias Fazel on 2/18/20 12:57 PM
+ * Last modified 2/18/20 12:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,6 +21,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.entry_configuration.*
 import kotlinx.android.synthetic.main.offline_indicator.view.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
+import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import javax.inject.Inject
 
@@ -60,6 +61,14 @@ class EntryConfiguration : AppCompatActivity(), AmbientModeSupport.AmbientCallba
 
                 this@EntryConfiguration.finish()
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if (BuildConfig.VERSION_NAME.contains("BETA")) {
+            RemoteConfigFunctions(applicationContext).joinedBetaProgram(true)
         }
     }
 

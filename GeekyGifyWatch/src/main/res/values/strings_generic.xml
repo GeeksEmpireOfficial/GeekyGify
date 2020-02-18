@@ -1,13 +1,25 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/4/20 7:42 AM
-  ~ Last modified 2/4/20 7:19 AM
+  ~ Created by Elias Fazel on 2/18/20 12:57 PM
+  ~ Last modified 2/18/20 12:27 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
   -->
 
 <resources>
+
+    <string name="playStoreLink">https://play.google.com/store/apps/details?id=</string>
+
+    <string name="integerVersionCodeNewUpdateWatch" translatable="false">integer_version_code_new_update_watch</string>
+    <string name="stringVersionNameNewUpdateWatch" translatable="false">string_version_name_new_update_watch</string>
+    <string name="stringUpcomingChangeLogWatch" translatable="false">string_upcoming_change_log_watch</string>
+    <string name="stringUpcomingChangeLogSummaryWatch" translatable="false">string_upcoming_change_log_summary_watch</string>
+
+    <string name="betaIntegerVersionCodeNewUpdateWatch" translatable="false">beta_integer_version_code_new_update_watch</string>
+    <string name="betaStringVersionNameNewUpdateWatch" translatable="false">beta_string_version_name_new_update_watch</string>
+    <string name="betaStringUpcomingChangeLogWatch" translatable="false">beta_string_upcoming_change_log_watch</string>
+    <string name="betaStringUpcomingChangeLogSummaryWatch" translatable="false">beta_string_upcoming_change_log_summary_watch</string>
 
 </resources>

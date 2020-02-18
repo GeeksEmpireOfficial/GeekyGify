@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/18/20 12:57 PM
+  ~ Last modified 2/18/20 12:32 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<defaultsMap>
+    <!-- Production -->
+    <entry>
+        <key>integer_version_code_new_update_watch</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>string_version_name_new_update_watch</key>
+        <value>ZERO</value>
+    </entry>
+    <entry>
+        <key>string_upcoming_change_log_watch</key>
+        <value>
+            New Features Available | Click Here to See…!
+        </value>
+    </entry>
+    <entry>
+        <key>string_upcoming_change_log_summary_watch</key>
+        <value>
+            New Features Available | Click Here to See…!
+        </value>
+    </entry>
+
+    <!-- Beta -->
+    <entry>
+        <key>beta_integer_version_code_new_update_watch</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>beta_string_version_name_new_update_watch</key>
+        <value>ZERO</value>
+    </entry>
+    <entry>
+        <key>beta_string_upcoming_change_log_watch</key>
+        <value>
+            New Features Available | Click Here to See…!
+        </value>
+    </entry>
+    <entry>
+        <key>beta_string_upcoming_change_log_summary_watch</key>
+        <value>
+            New Features Available | Click Here to See…!
+        </value>
+    </entry>
+</defaultsMap>

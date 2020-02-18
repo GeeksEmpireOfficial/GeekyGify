@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:15 PM
- * Last modified 2/16/20 1:10 PM
+ * Created by Elias Fazel on 2/18/20 1:24 PM
+ * Last modified 2/18/20 1:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,7 +33,7 @@ class GiphyExplore {
     }
 
     fun invokeGiphyExplore(appCompatActivity: AppCompatActivity) {
-        GiphyCoreUI.configure(appCompatActivity, GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = false)
+        GiphyCoreUI.configure(appCompatActivity, GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = true)
 
         val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = DarkTheme, dimBackground = true)
         giphySettings.mediaTypeConfig = arrayOf(

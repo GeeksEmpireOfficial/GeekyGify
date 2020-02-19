@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:20 PM
- * Last modified 2/13/20 5:20 PM
+ * Created by Elias Fazel on 2/18/20 6:56 PM
+ * Last modified 2/18/20 6:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,10 +14,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.BrowseCategoryAdapter
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseAddListViewHolder
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseCategoryListViewHolder
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseFavoriteListViewHolder
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseSearchListViewHolder
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.*
 import net.geeksempire.geeky.gify.R
 
 class BrowseGifCategoryType {
@@ -27,11 +24,13 @@ class BrowseGifCategoryType {
         const val GIF_ITEM_FAVORITE = "Favorites"
         const val GIF_ITEM_CATEGORIES = "Category"
         const val GIF_ITEM_CATEGORIES_ADD = "Add New Category"
+        const val GIF_ITEM_SOCIAL_MEDIA = "Social Media"
 
         const val GIF_ITEM_SEARCH_TYPE = 0
         const val GIF_ITEM_FAVORITE_TYPE = 1
         const val GIF_ITEM_CATEGORIES_TYPE = 2
         const val GIF_ITEM_CATEGORIES_ADD_TYPE = 3
+        const val GIF_ITEM_SOCIAL_MEDIA_TYPE = 4
     }
 }
 
@@ -49,6 +48,9 @@ fun browseGifCategoryType(positionTitle: String) : Int {
         }
         BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD -> {
             BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE
+        }
+        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
+            BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE
         }
         else -> {
             BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
@@ -103,6 +105,16 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
             )
 
         }
+        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE -> {
+
+            BrowseSocialMediaListViewHolder(
+                LayoutInflater.from(context)
+                    .inflate(
+                        R.layout.browse_gif_social_media_item_view,
+                        parentViewGroup, false
+                    )
+            )
+        }
         else -> {
 
             BrowseCategoryListViewHolder(
@@ -112,7 +124,6 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
                         parentViewGroup, false
                     )
             )
-
         }
     }
 }

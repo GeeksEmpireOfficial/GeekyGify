@@ -3,7 +3,7 @@
   ~ Copyright © 2020 By Geeks Empire.
   ~
   ~ Created by Elias Fazel on 2/18/20 6:56 PM
-  ~ Last modified 2/18/20 6:18 PM
+  ~ Last modified 2/18/20 6:36 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -13,13 +13,13 @@
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:id="@+id/mainViewItem"
     android:layout_width="match_parent"
-    android:layout_height="83dp"
+    android:layout_height="57dp"
     android:background="@android:color/transparent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/addIcon"
+        android:id="@+id/rateReviewIcon"
         android:layout_width="0dp"
-        android:layout_height="83dp"
+        android:layout_height="57dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:paddingEnd="13dp"
@@ -28,11 +28,28 @@
         android:paddingBottom="7dp"
         android:scaleType="fitCenter"
         android:background="@drawable/ripple_background"
-        android:visibility="gone"
+        android:src="@drawable/icon_rate_review"
 
-        android:contentDescription="@string/addNewCategory"
-
+        apps:layout_constraintWidth_percent="0.5"
         apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/facebookIcon"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingEnd="13dp"
+        android:paddingStart="13dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:scaleType="fitCenter"
+        android:background="@drawable/ripple_background"
+        android:src="@drawable/icon_facebook"
+
+        apps:layout_constraintWidth_percent="0.5"
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintTop_toTopOf="parent" />
 

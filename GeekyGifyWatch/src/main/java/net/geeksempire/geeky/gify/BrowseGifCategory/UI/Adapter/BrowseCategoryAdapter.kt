@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:11 PM
- * Last modified 2/18/20 6:11 PM
+ * Created by Elias Fazel on 2/18/20 6:56 PM
+ * Last modified 2/18/20 6:44 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,10 +28,7 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.browseGifCategoryTypeView
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseAddListViewHolder
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseCategoryListViewHolder
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseFavoriteListViewHolder
-import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.BrowseSearchListViewHolder
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.ViewHolders.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.RecyclerViewGifCategoryItemPress
 import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.R
@@ -70,8 +67,11 @@ class BrowseCategoryAdapter(var context: Context,
         } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD
             && viewHolderPayload is BrowseAddListViewHolder) {
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD
-            && viewHolderPayload is BrowseAddListViewHolder) {
+        }
+        else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA
+            && viewHolderPayload is BrowseSocialMediaListViewHolder) {
+
+        } else if (viewHolderPayload is BrowseCategoryListViewHolder) {
 
             val viewHolder = viewHolderPayload as BrowseCategoryListViewHolder
 
@@ -185,7 +185,26 @@ class BrowseCategoryAdapter(var context: Context,
                 e.printStackTrace()
             }
 
-        } else if (initialViewHolder is BrowseCategoryListViewHolder) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA
+            && initialViewHolder is BrowseSocialMediaListViewHolder) {
+
+            val viewHolder = initialViewHolder as BrowseSocialMediaListViewHolder
+
+            viewHolder.rateReview.setOnClickListener {
+
+                recyclerViewGifCategoryItemPress
+                    .itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE)
+            }
+
+            viewHolder.facebookIcon.setOnClickListener {
+
+                recyclerViewGifCategoryItemPress
+                    .itemPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE)
+            }
+        }
+        else if (initialViewHolder is BrowseCategoryListViewHolder) {
 
             try {
                 val viewHolder = initialViewHolder as BrowseCategoryListViewHolder

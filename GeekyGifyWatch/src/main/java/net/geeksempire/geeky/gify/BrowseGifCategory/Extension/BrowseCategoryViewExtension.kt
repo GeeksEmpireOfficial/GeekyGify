@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:11 PM
- * Last modified 2/18/20 5:58 PM
+ * Created by Elias Fazel on 2/18/20 6:56 PM
+ * Last modified 2/18/20 6:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,13 +11,17 @@
 package net.geeksempire.geeky.gify.BrowseGifCategory.Extension
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.ResultReceiver
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.wear.widget.WearableLinearLayoutManager
+import com.google.android.wearable.intent.RemoteIntent
 import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.AddCategory.AddNewCategory
@@ -93,6 +97,72 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                         .replace(R.id.fragmentPlaceHolder, addNewCategory, "Add New Category")
                         .commit()
 
+                }
+                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE -> {
+
+                    when (rightLeft) {
+                        RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+
+                        }
+                        RecyclerViewRightLeftItem.LEFT_ITEM -> {
+
+                        }
+                    }
+                }
+            }
+        }
+
+        override fun itemPressed(rightLeft: Boolean, viewType: Int) {
+            when (viewType) {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
+
+                    fragmentPlaceHolder.visibility = View.VISIBLE
+                    GiphyExplore()
+                        .invokeGiphyExplore(this@createViewModelObserver)
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
+
+                }
+                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE -> {
+
+                    when (rightLeft) {
+                        RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+
+                            val resultReceiver = object : ResultReceiver(Handler()) {
+                                override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
+                                    if (resultCode == RemoteIntent.RESULT_OK) {
+
+
+                                    } else if (resultCode == RemoteIntent.RESULT_FAILED) {
+
+                                    }
+                                }
+                            }
+
+                            val remoteIntent = Intent(Intent.ACTION_VIEW)
+                                .addCategory(Intent.CATEGORY_BROWSABLE)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                .setData(Uri.parse(getString(R.string.facebookPageLink)))
+
+                            RemoteIntent.startRemoteActivity(
+                                applicationContext,
+                                remoteIntent,
+                                resultReceiver)
+                        }
+                        RecyclerViewRightLeftItem.LEFT_ITEM -> {
+
+                            Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.playStoreLink) + packageName)).apply {
+                                startActivity(this)
+                            }
+                        }
+                    }
                 }
             }
         }

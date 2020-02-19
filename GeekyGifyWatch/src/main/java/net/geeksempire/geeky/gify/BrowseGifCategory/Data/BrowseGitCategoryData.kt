@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 5:48 PM
- * Last modified 2/13/20 5:42 PM
+ * Created by Elias Fazel on 2/18/20 6:56 PM
+ * Last modified 2/18/20 6:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -53,11 +53,17 @@ class BrowseGitCategoryData(var context: Context) {
         }
 
         if (numberEven(gifCategoryList.size)) {
-            gifCategoryList.add(context.getString(R.string.addNewCategory))
+            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
+            gifCategoryList.add(null)
+
+            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
             gifCategoryList.add(null)
         } else {
             gifCategoryList.add(null)
-            gifCategoryList.add(context.getString(R.string.addNewCategory))
+            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
+
+            gifCategoryList.add(null)
+            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
         }
 
 

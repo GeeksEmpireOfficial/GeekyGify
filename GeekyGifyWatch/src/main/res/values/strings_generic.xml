@@ -1,8 +1,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/18/20 12:57 PM
-  ~ Last modified 2/18/20 12:27 PM
+  ~ Created by Elias Fazel on 2/18/20 6:56 PM
+  ~ Last modified 2/18/20 6:47 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 <resources>
 
     <string name="playStoreLink">https://play.google.com/store/apps/details?id=</string>
+    <string name="facebookPageLink">https://www.facebook.com/GeekyGify/</string>
 
     <string name="integerVersionCodeNewUpdateWatch" translatable="false">integer_version_code_new_update_watch</string>
     <string name="stringVersionNameNewUpdateWatch" translatable="false">string_version_name_new_update_watch</string>

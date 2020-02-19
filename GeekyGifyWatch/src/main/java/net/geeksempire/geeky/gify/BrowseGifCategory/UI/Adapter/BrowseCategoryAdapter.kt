@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 10:45 AM
- * Last modified 2/16/20 10:36 AM
+ * Created by Elias Fazel on 2/18/20 5:23 PM
+ * Last modified 2/18/20 5:21 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -63,43 +63,44 @@ class BrowseCategoryAdapter(var context: Context,
     override fun onBindViewHolder(viewHolderPayload: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
         super.onBindViewHolder(viewHolderPayload, position, payloads)
 
-        if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_FAVORITE) {
+        if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_FAVORITE
+            && viewHolderPayload is BrowseFavoriteListViewHolder) {
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_SEARCH
+            && viewHolderPayload is BrowseSearchListViewHolder) {
 
-        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD) {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD
+            && viewHolderPayload is BrowseAddListViewHolder) {
 
-        } else {
+        } else if (categoryItemsData[position].categoryLeft?.categoryTitle == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD
+            && viewHolderPayload is BrowseAddListViewHolder) {
 
-            if (viewHolderPayload is BrowseCategoryListViewHolder) {
+            val viewHolder = viewHolderPayload as BrowseCategoryListViewHolder
 
-                val viewHolder = viewHolderPayload as BrowseCategoryListViewHolder
+            //Setup Left Item
+            if (categoryItemsData[position].categoryLeft != null
+                || !categoryItemsData[position].categoryLeft?.categoryTitle.isNullOrBlank()) {
 
-                //Setup Left Item
-                if (categoryItemsData[position].categoryLeft != null
-                    || !categoryItemsData[position].categoryLeft?.categoryTitle.isNullOrBlank()) {
+                viewHolder.categoryIconLeft.visibility = View.VISIBLE
+                viewHolder.deleteLeftCategory.visibility = View.VISIBLE
 
-                    viewHolder.categoryIconLeft.visibility = View.VISIBLE
-                    viewHolder.deleteLeftCategory.visibility = View.VISIBLE
+                viewHolder.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
+            } else {
+                viewHolder.categoryIconLeft.visibility = View.GONE
+                viewHolder.deleteLeftCategory.visibility = View.GONE
+            }
 
-                    viewHolder.categoryIconLeft.text = (categoryItemsData[position].categoryLeft?.categoryTitle)
-                } else {
-                    viewHolder.categoryIconLeft.visibility = View.GONE
-                    viewHolder.deleteLeftCategory.visibility = View.GONE
-                }
+            //Setup Right Item
+            if (categoryItemsData[position].categoryRight != null
+                || !categoryItemsData[position].categoryRight?.categoryTitle.isNullOrBlank()) {
 
-                //Setup Right Item
-                if (categoryItemsData[position].categoryRight != null
-                    || !categoryItemsData[position].categoryRight?.categoryTitle.isNullOrBlank()) {
+                viewHolder.categoryIconRight.visibility = View.VISIBLE
+                viewHolder.deleteRightCategory.visibility = View.VISIBLE
 
-                    viewHolder.categoryIconRight.visibility = View.VISIBLE
-                    viewHolder.deleteRightCategory.visibility = View.VISIBLE
-
-                    viewHolder.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
-                } else {
-                    viewHolder.categoryIconRight.visibility = View.GONE
-                    viewHolder.deleteRightCategory.visibility = View.GONE
-                }
+                viewHolder.categoryIconRight.text = (categoryItemsData[position].categoryRight?.categoryTitle)
+            } else {
+                viewHolder.categoryIconRight.visibility = View.GONE
+                viewHolder.deleteRightCategory.visibility = View.GONE
             }
         }
     }

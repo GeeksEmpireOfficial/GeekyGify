@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:56 PM
- * Last modified 2/18/20 6:39 PM
+ * Created by Elias Fazel on 2/19/20 12:15 PM
+ * Last modified 2/19/20 12:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,9 +25,7 @@ import net.geeksempire.geeky.gify.Utils.Calculations.numberEven
 
 class BrowseGitCategoryData(var context: Context) {
 
-    private val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(
-        context
-    ).initialGifCategoryDatabase()
+    private val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(context).initialGifCategoryDatabase()
 
     fun categoryListNames() : Deferred<ArrayList<String?>> = CoroutineScope(Dispatchers.IO).async {
         var gifCategoryList = ArrayList<String?>()

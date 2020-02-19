@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 12:46 PM
+ * Created by Elias Fazel on 2/18/20 6:11 PM
+ * Last modified 2/18/20 5:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -187,7 +187,6 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             withContext(Dispatchers.Main) {
                 categoryAdapter?.
                         notifyItemChanged(itemPosition, CategoryItemData(categoryItemDataLeft, categoryItemDataRight))
-//                    notifyItemRangeChanged(0, categoryAdapter!!.itemCount, categoryAdapter?.categoryItemsData)
             }
         }
     }

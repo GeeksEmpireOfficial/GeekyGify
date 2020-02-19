@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 5:23 PM
- * Last modified 2/18/20 5:21 PM
+ * Created by Elias Fazel on 2/18/20 6:11 PM
+ * Last modified 2/18/20 6:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,6 @@ package net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.View
@@ -38,8 +37,7 @@ import net.geeksempire.geeky.gify.GifFavorite.UI.FavoritesGifView
 import net.geeksempire.geeky.gify.R
 
 class BrowseCategoryAdapter(var context: Context,
-                            var  recyclerViewGifCategoryItemPress: RecyclerViewGifCategoryItemPress
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+                            var  recyclerViewGifCategoryItemPress: RecyclerViewGifCategoryItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     lateinit var categoryItemsData: ArrayList<CategoryItemData>
 
@@ -145,7 +143,6 @@ class BrowseCategoryAdapter(var context: Context,
                 val viewHolder = initialViewHolder as BrowseSearchListViewHolder
 
                 viewHolder.searchIcon.visibility = View.VISIBLE
-                viewHolder.searchIcon.setBackgroundColor(Color.TRANSPARENT)
                 Glide.with(context)
                     .load(R.drawable.gph_ic_search_pink)
                     .into(viewHolder.searchIcon)
@@ -171,7 +168,6 @@ class BrowseCategoryAdapter(var context: Context,
                 val viewHolder = initialViewHolder as BrowseAddListViewHolder
 
                 viewHolder.addIcon.visibility = View.VISIBLE
-                viewHolder.addIcon.setBackgroundColor(Color.TRANSPARENT)
                 Glide.with(context)
                     .load(R.drawable.icon_plus)
                     .into(viewHolder.addIcon)

@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 5:54 PM
- * Last modified 2/18/20 5:51 PM
+ * Created by Elias Fazel on 2/18/20 5:56 PM
+ * Last modified 2/18/20 5:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.Utils.uI
+package net.geeksempire.geeky.gify.Utils.UI
 
 import android.os.Handler
 import android.view.View

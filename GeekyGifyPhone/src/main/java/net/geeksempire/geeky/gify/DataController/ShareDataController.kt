@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 5:55 PM
- * Last modified 2/18/20 5:55 PM
+ * Created by Elias Fazel on 2/18/20 5:56 PM
+ * Last modified 2/18/20 5:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,7 +26,7 @@ import net.geeksempire.geeky.gify.Utils.Notification.CreateNotification
 import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
-import net.geeksempire.geeky.gify.Utils.uI.SnackbarView
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 
 class ShareDataController : AppCompatActivity() {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 5:54 PM
- * Last modified 2/18/20 5:54 PM
+ * Created by Elias Fazel on 2/18/20 5:56 PM
+ * Last modified 2/18/20 5:56 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -29,12 +29,12 @@ import kotlinx.android.synthetic.main.received_data_controller.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import net.geeksempire.geeky.gify.DataController.Extension.setupLoadingAnimation
 import net.geeksempire.geeky.gify.DataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.Networking.DownloadGif
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.Extension.setupLoadingAnimation
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
-import net.geeksempire.geeky.gify.Utils.uI.SnackbarView
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 class ReceivedDataController : Fragment() {
 

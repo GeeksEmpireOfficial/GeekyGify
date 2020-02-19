@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 5:56 PM
- * Last modified 2/18/20 5:56 PM
+ * Created by Elias Fazel on 2/18/20 7:14 PM
+ * Last modified 2/18/20 7:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,6 @@ import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +37,9 @@ import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 class ReceivedDataController : Fragment() {
 
+    lateinit var linkToDownloadGif: String
+    lateinit var additionalText: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,19 +58,16 @@ class ReceivedDataController : Fragment() {
 
         val systemCheckpoint = SystemCheckpoint(context!!)
 
-        arguments?.let { receivedData ->
+        arguments?.let {
+
+            linkToDownloadGif = it.getString(DataParameter.LINK_TO_GIF)!!
+            additionalText = it.getString(DataParameter.ADDITIONAL_TEXT).toString()
 
             if (systemCheckpoint.networkConnection()) {
                 setupLoadingAnimation()
 
-                val linkToGif = receivedData.getString(DataParameter.LINK_TO_GIF)!!
-                val additionalText = receivedData.getString(DataParameter.ADDITIONAL_TEXT)!!
-
-                Log.d(this.javaClass.simpleName, linkToGif)
-                Log.d(this.javaClass.simpleName, additionalText)
-
                 CoroutineScope(Dispatchers.Default).launch {
-                    val gifFile = DownloadGif(context!!).downloadGifFile(linkToGif).await()
+                    val gifFile = DownloadGif(context!!).downloadGifFile(linkToDownloadGif).await()
 
                     Intent(Intent.ACTION_SEND).apply {
 

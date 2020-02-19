@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 5:56 PM
- * Last modified 2/18/20 5:56 PM
+ * Created by Elias Fazel on 2/18/20 7:14 PM
+ * Last modified 2/18/20 7:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -80,6 +80,7 @@ class ShareDataController : AppCompatActivity() {
                 .setCustomAnimations(android.R.anim.fade_in, 0)
                 .replace(R.id.fragmentPlaceHolder, receivedDataController, "Received Data Controller")
                 .commit()
+
         }
     }
 

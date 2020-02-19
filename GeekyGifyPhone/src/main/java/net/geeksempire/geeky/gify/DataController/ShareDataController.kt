@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 5:54 PM
- * Last modified 2/18/20 5:48 PM
+ * Created by Elias Fazel on 2/18/20 5:55 PM
+ * Last modified 2/18/20 5:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,7 +38,7 @@ class ShareDataController : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.received_data_controller)
+        setContentView(R.layout.shared_data_controller)
 
         val vmBuilder = VmPolicy.Builder()
         StrictMode.setVmPolicy(vmBuilder.build())

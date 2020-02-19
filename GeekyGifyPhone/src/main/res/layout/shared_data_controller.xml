@@ -51,4 +51,9 @@
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintBottom_toBottomOf="@id/appIconView" />
 
+    <FrameLayout
+        android:id="@+id/fragmentPlaceHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

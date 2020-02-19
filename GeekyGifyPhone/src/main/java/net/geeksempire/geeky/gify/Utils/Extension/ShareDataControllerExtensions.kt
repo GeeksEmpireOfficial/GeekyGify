@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 12:51 PM
- * Last modified 2/13/20 12:44 PM
+ * Created by Elias Fazel on 2/18/20 5:54 PM
+ * Last modified 2/18/20 5:54 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,18 +12,18 @@ package net.geeksempire.geeky.gify.Utils.Extension
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.share_controller.*
+import kotlinx.android.synthetic.main.received_data_controller.*
+import net.geeksempire.geeky.gify.DataController.ReceivedDataController
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.ShareDataController
 
-fun ShareDataController.setupLoadingAnimation() {
+fun ReceivedDataController.setupLoadingAnimation() {
 
     val waitingGifs = arrayOf(
         R.drawable.waiting_cube,
         R.drawable.waiting_earth,
         R.drawable.waiting_robot)
 
-    Glide.with(applicationContext)
+    Glide.with(context!!)
         .asGif()
         .diskCacheStrategy(DiskCacheStrategy.DATA)
         .load(waitingGifs.random())

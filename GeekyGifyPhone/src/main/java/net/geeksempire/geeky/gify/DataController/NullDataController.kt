@@ -19,7 +19,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.google.android.material.imageview.ExperimentalImageView
 import kotlinx.android.synthetic.main.null_data_controller.*
 import net.geeksempire.geeky.gify.DataController.Extension.setupClickNullDataControllerAdsApp
 import net.geeksempire.geeky.gify.R
@@ -37,7 +36,6 @@ class NullDataController : Fragment() {
         return view
     }
 
-    @ExperimentalImageView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

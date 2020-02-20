@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/19/20 5:09 PM
- * Last modified 2/19/20 5:06 PM
+ * Created by Elias Fazel on 2/19/20 5:35 PM
+ * Last modified 2/19/20 5:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,8 +28,8 @@ import kotlinx.android.synthetic.main.received_data_controller.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.DataController.Extension.setupLoadingAnimation
 import net.geeksempire.geeky.gify.DataController.Parameter.DataParameter
-import net.geeksempire.geeky.gify.Networking.DownloadGif
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.Networking.DownloadGif
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 import java.io.File
@@ -61,8 +61,9 @@ class ReceivedDataController : Fragment() {
 
         arguments?.let {
 
-            linkToDownloadGif = it.getString(DataParameter.LINK_TO_GIF)!!
+            linkToDownloadGif = it.getString(DataParameter.LINK_TO_GIF) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
             additionalText = it.getString(DataParameter.ADDITIONAL_TEXT).toString()
+
 
             if (systemCheckpoint.networkConnection()) {
                 setupLoadingAnimation()

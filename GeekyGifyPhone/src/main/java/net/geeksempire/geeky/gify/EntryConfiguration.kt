@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 5:54 PM
- * Last modified 2/18/20 5:27 PM
+ * Created by Elias Fazel on 2/19/20 5:35 PM
+ * Last modified 2/19/20 5:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.geeky.gify.DataController.ShareDataController
 import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
 
-class EnteryConfiguration : AppCompatActivity() {
+class EntryConfiguration : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +30,6 @@ class EnteryConfiguration : AppCompatActivity() {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
 
-        this@EnteryConfiguration.finish()
+        this@EntryConfiguration.finish()
     }
 }

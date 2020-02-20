@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 3:29 PM
+ * Created by Elias Fazel on 2/19/20 5:35 PM
+ * Last modified 2/19/20 5:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,8 +25,8 @@ import kotlinx.android.synthetic.main.gif_view.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.geeksempire.geeky.gify.Networking.DownloadGif
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.Networking.DownloadGif
 
 class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterface {
 

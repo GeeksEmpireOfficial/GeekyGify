@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 4:24 PM
+ * Created by Elias Fazel on 2/19/20 3:13 PM
+ * Last modified 2/19/20 2:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,9 @@
 package net.geeksempire.geeky.gify.BrowseGif.UI
 
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
@@ -22,6 +25,8 @@ import net.geeksempire.geeky.gify.GeekyGifyWatchApplication
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
+import net.geeksempire.geeky.gify.Utils.UI.DisplayDetection
+import net.geeksempire.geeky.gify.Utils.UI.ShapeDetection
 import javax.inject.Inject
 
 class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
@@ -56,7 +61,40 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
 
             createClickListeners(it, browseGifViewModel)
 
+            categoryTitle.setOnClickListener {
+
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val displayDetection = DisplayDetection(this@BrowseGifView)
+        displayDetection.initializeShapeDetection(object : ShapeDetection {
+
+            override fun shapeType(typeOfShape: Int) {
+
+                when (typeOfShape) {
+                    DisplayDetection.DisplayType.ROUND_FULL -> {
+                        Log.d(DisplayDetection::class.java.simpleName, "ROUND")
+
+                    }
+                    DisplayDetection.DisplayType.ROUND_CHIN -> {
+                        Log.d(DisplayDetection::class.java.simpleName, "CHIN")
+
+                        exploreGifs.visibility = View.GONE
+                    }
+                    DisplayDetection.DisplayType.RECTANGLE -> {
+                        Log.d(DisplayDetection::class.java.simpleName, "RECTANGLE")
+
+                        val categoryTitleLayoutParameter: ViewGroup.LayoutParams = categoryTitle.layoutParams
+                        categoryTitleLayoutParameter.width = ViewGroup.LayoutParams.MATCH_PARENT
+                        categoryTitle.layoutParams = categoryTitleLayoutParameter
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroy() {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 12:46 PM
+ * Created by Elias Fazel on 2/19/20 3:13 PM
+ * Last modified 2/19/20 3:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,7 @@ package net.geeksempire.geeky.gify.GifViewer
 import android.os.Bundle
 import android.os.Handler
 import android.os.StrictMode
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,8 @@ import net.geeksempire.geeky.gify.GifViewer.Extension.setupGifViewClickListener
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupUserProfileInformation
 import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.UI.DisplayDetection
+import net.geeksempire.geeky.gify.Utils.UI.ShapeDetection
 
 
 class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentStateListener?) : Fragment() {
@@ -49,10 +52,6 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
         linkToGif = arguments?.getString(GiphyJsonDataStructure.DATA_URL) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
         gifPreviewLink = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
         gifLinkToDownload = arguments?.getString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
-
-        gifUserName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_NAME)
-        gifUserAvatarUrl = arguments?.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL)
-        gifUserIsVerified = arguments?.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -99,7 +98,38 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
             })
             .into(gifView)
 
-        setupUserProfileInformation()
+        val displayDetection = DisplayDetection(activity!!)
+        displayDetection.initializeShapeDetection(object : ShapeDetection {
+
+            override fun shapeType(typeOfShape: Int) {
+
+                when (typeOfShape) {
+                    DisplayDetection.DisplayType.ROUND_FULL -> {
+                        Log.d(DisplayDetection::class.java.simpleName, "ROUND")
+
+                        gifUserName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_NAME)
+                        gifUserAvatarUrl = arguments?.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL)
+                        gifUserIsVerified = arguments?.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED)
+
+                        setupUserProfileInformation()
+                    }
+                    DisplayDetection.DisplayType.ROUND_CHIN -> {
+                        Log.d(DisplayDetection::class.java.simpleName, "CHIN")
+
+
+                    }
+                    DisplayDetection.DisplayType.RECTANGLE -> {
+                        Log.d(DisplayDetection::class.java.simpleName, "RECTANGLE")
+
+                        gifUserName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_NAME)
+                        gifUserAvatarUrl = arguments?.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL)
+                        gifUserIsVerified = arguments?.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED)
+
+                        setupUserProfileInformation()
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroyView() {

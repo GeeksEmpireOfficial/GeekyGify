@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 3:50 PM
- * Last modified 2/13/20 3:50 PM
+ * Created by Elias Fazel on 2/19/20 3:13 PM
+ * Last modified 2/19/20 3:11 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,8 @@ import net.geeksempire.geeky.gify.R
 
 fun GifViewer.setupUserProfileInformation() {
 
-    if (!gifUserName.isNullOrBlank() && !gifUserAvatarUrl.isNullOrBlank()) {
+    if (!gifUserName.isNullOrBlank() && !gifUserAvatarUrl.isNullOrBlank()
+        && context != null) {
 
         Glide.with(context!!)
             .asGif()

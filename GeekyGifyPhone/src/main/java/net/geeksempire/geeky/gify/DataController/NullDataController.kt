@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 6:19 PM
- * Last modified 2/19/20 6:11 PM
+ * Created by Elias Fazel on 2/19/20 6:52 PM
+ * Last modified 2/19/20 6:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package net.geeksempire.geeky.gify.DataController
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ExperimentalImageView
 import kotlinx.android.synthetic.main.null_data_controller.*
 import net.geeksempire.geeky.gify.DataController.Extension.setupClickNullDataControllerAdsApp
 import net.geeksempire.geeky.gify.R
@@ -34,6 +37,7 @@ class NullDataController : Fragment() {
         return view
     }
 
+    @ExperimentalImageView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -44,6 +48,20 @@ class NullDataController : Fragment() {
             .asGif()
             .load("https://media0.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif")
             .into(waitingView)
+
+        facebookIcon.setOnClickListener {
+            Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookPageLink))).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(this)
+            }
+        }
+
+        rateReviewIcon.setOnClickListener {
+            Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.playStoreLink) + context!!.packageName)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(this)
+            }
+        }
 
         setupClickNullDataControllerAdsApp()
     }

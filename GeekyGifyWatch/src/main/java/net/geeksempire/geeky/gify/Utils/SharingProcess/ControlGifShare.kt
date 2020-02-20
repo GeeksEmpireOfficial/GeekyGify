@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 5:35 PM
- * Last modified 2/19/20 5:35 PM
+ * Created by Elias Fazel on 2/20/20 2:24 PM
+ * Last modified 2/20/20 12:57 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.gif_view.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Networking.DownloadGif
 
@@ -120,10 +121,10 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
 
         CoroutineScope(Dispatchers.Default).launch {
 
-            Intent(Intent.ACTION_SEND).apply {
+            val gifFile = DownloadGif(fragmentActivity).downloadGifFile(gifLinkToShare).await()
 
-                val gifFile = DownloadGif(fragmentActivity).downloadGifFile(gifLinkToShare).await()
-                if (gifFile.exists()) {
+            if (gifFile.exists()) {
+                Intent(Intent.ACTION_SEND).apply {
 
                     this.type = "image/*"
 
@@ -134,8 +135,10 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                     this.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
                     fragmentActivity.startActivity(Intent.createChooser(this, additionalText))
-                } else {
+                }
+            } else {
 
+                withContext(Dispatchers.Main) {
                     val confirmationOverlay = ConfirmationOverlay()
                         .setMessage(fragmentActivity.getString(R.string.downloadErrorOccurred))
                         .setDuration(1500 * 1)

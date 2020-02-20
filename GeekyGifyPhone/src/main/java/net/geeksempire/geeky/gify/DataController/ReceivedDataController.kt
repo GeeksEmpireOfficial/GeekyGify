@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/19/20 5:35 PM
- * Last modified 2/19/20 5:35 PM
+ * Created by Elias Fazel on 2/20/20 2:24 PM
+ * Last modified 2/20/20 12:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,6 @@ class ReceivedDataController : Fragment() {
             linkToDownloadGif = it.getString(DataParameter.LINK_TO_GIF) ?: "https://media.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif"
             additionalText = it.getString(DataParameter.ADDITIONAL_TEXT).toString()
 
-
             if (systemCheckpoint.networkConnection()) {
                 setupLoadingAnimation()
 
@@ -90,10 +89,11 @@ class ReceivedDataController : Fragment() {
                         }
                     } else {
 
-                        SnackbarView().snackBarViewFail((activity as AppCompatActivity),
-                            mainView,
-                            getString(R.string.downloadErrorOccurred))
-
+                        withContext(Dispatchers.Main) {
+                            SnackbarView().snackBarViewFail((activity as AppCompatActivity),
+                                mainView,
+                                getString(R.string.downloadErrorOccurred))
+                        }
                     }
                 }
 

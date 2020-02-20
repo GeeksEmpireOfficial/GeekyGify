@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:11 PM
- * Last modified 2/18/20 6:11 PM
+ * Created by Elias Fazel on 2/20/20 2:24 PM
+ * Last modified 2/20/20 1:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,6 +35,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders = [enableCrashReporting:"true"]
+        }
+        debug {
+            manifestPlaceholders = [enableCrashReporting:"false"]
         }
     }
 

@@ -1,8 +1,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/19/20 6:52 PM
-  ~ Last modified 2/19/20 6:39 PM
+  ~ Created by Elias Fazel on 2/20/20 2:24 PM
+  ~ Last modified 2/20/20 2:10 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -10,13 +10,26 @@
 
 <resources>
 
-    <string name="floatItName">Float It</string>
-    <string name="superShortcutsName">Super Shortcuts</string>
+    <string name="geeksEmpireName" translatable="false">Geeks Empire</string>
 
-    <string name="playStoreLink">https://play.google.com/store/apps/details?id=</string>
-    <string name="floatItLink">https://play.google.com/store/apps/details?id=net.geekstools.floatshort.PRO</string>
-    <string name="superShortcutsLink">https://play.google.com/store/apps/details?id=net.geekstools.supershortcuts.PRO</string>
-    <string name="facebookPageLink">https://www.facebook.com/GeekyGify/</string>
+    <string name="floatItName" translatable="false">Float It</string>
+    <string name="superShortcutsName" translatable="false">Super Shortcuts</string>
+    <string name="tRexRunnerName" translatable="false">T. Rex Runner</string>
+
+    <string name="playStoreLink" translatable="false">https://play.google.com/store/apps/details?id=</string>
+
+    <string name="floatItLink" translatable="false">https://play.google.com/store/apps/details?id=net.geekstools.floatshort.PRO</string>
+    <string name="superShortcutsLink" translatable="false">https://play.google.com/store/apps/details?id=net.geekstools.supershortcuts.PRO</string>
+    <string name="tRexRunnerLink" translatable="false">https://play.google.com/store/apps/details?id=net.geekstools.trexrunner</string>
+
+    <string name="facebookPageLink" translatable="false">https://www.facebook.com/GeekyGify/</string>
+
+    <string name="geeksEmpireLinkFacebook" translatable="false">https://www.facebook.com/GeeksEmpire</string>
+
+    <string name="shortcutId" translatable="false">shortcut_id</string>
+    <string name="shortcutLabel" translatable="false">shortcut_label</string>
+    <string name="shortcutIconLink" translatable="false">shortcut_icon_link</string>
+    <string name="shortcutActionLink" translatable="false">shortcut_action_link</string>
 
     <string name="integerVersionCodeNewUpdatePhone" translatable="false">integer_version_code_new_update_phone</string>
     <string name="stringVersionNameNewUpdatePhone" translatable="false">string_version_name_new_update_phone</string>

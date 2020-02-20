@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/14/20 4:26 PM
-  ~ Last modified 2/14/20 4:08 PM
+  ~ Created by Elias Fazel on 2/19/20 4:37 PM
+  ~ Last modified 2/19/20 4:32 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -16,9 +16,11 @@
     <item
         android:id="@+id/drawableBackground">
         <shape
-            android:shape="oval"
-            android:useLevel="false">
+            android:shape="rectangle">
 
+            <corners
+                android:topRightRadius="113dp"
+                android:bottomRightRadius="113dp"/>
             <gradient
                 android:startColor="@color/default_color_game_transparent"
                 android:centerColor="@color/dark_transparent"
@@ -29,9 +31,11 @@
     <item
         android:id="@android:id/mask">
         <shape
-            android:shape="oval"
-            android:useLevel="false">
+            android:shape="rectangle">
 
+            <corners
+                android:topRightRadius="113dp"
+                android:bottomRightRadius="113dp"/>
             <solid
                 android:color="@color/default_color_light"/>
         </shape>

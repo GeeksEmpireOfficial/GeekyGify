@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright © 2020 By Geeks Empire.
+  ~
+  ~ Created by Elias Fazel on 2/19/20 4:37 PM
+  ~ Last modified 2/19/20 4:33 PM
+  ~
+  ~ Licensed Under MIT License.
+  ~ https://opensource.org/licenses/MIT
+  -->
+
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/default_color_light">
+
+    <item
+        android:id="@+id/drawableBackground">
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="113dp"
+                android:bottomRightRadius="113dp"/>
+            <gradient
+                android:startColor="@color/default_color_game_transparent"
+                android:centerColor="@color/dark_transparent"
+                android:endColor="@color/default_color_game_transparent"
+                android:angle="90"/>
+        </shape>
+    </item>
+    <item
+        android:id="@android:id/mask">
+        <shape
+            android:shape="rectangle">
+
+            <corners
+                android:topRightRadius="113dp"
+                android:bottomRightRadius="113dp"/>
+            <solid
+                android:color="@color/default_color_light"/>
+        </shape>
+    </item>
+</ripple>

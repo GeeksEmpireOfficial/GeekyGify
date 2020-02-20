@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 7:14 PM
- * Last modified 2/18/20 7:14 PM
+ * Created by Elias Fazel on 2/19/20 4:37 PM
+ * Last modified 2/19/20 4:37 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -114,5 +114,11 @@ class ReceivedDataController : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+
     }
 }

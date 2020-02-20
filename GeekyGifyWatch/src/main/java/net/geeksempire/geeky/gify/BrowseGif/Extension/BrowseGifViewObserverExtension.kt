@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 12:46 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -33,7 +33,7 @@ import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponse
+import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequestResponse
 
 fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
 

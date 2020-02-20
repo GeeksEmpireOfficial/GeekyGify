@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 3:17 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,8 +22,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.GiphyExplore.SearchAddress
+import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequestResponseInterface
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
-import net.geeksempire.geeky.gify.Utils.ServerConnections.JsonRequestResponseInterface
 import org.json.JSONObject
 import javax.net.ssl.HttpsURLConnection
 

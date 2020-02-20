@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 12:57 PM
- * Last modified 2/18/20 12:42 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.entry_configuration.*
 import kotlinx.android.synthetic.main.offline_indicator.view.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.BrowseCategoryView
-import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
+import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import javax.inject.Inject
 

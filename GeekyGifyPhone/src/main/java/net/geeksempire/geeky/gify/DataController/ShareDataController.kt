@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/19/20 6:19 PM
- * Last modified 2/19/20 5:46 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,10 +22,10 @@ import kotlinx.android.synthetic.main.received_data_controller.*
 import net.geeksempire.geeky.gify.BuildConfig
 import net.geeksempire.geeky.gify.DataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.Notification.CreateNotification
-import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
+import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
+import net.geeksempire.geeky.gify.Utils.UI.CreateNotification
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 
@@ -101,7 +101,9 @@ class ShareDataController : AppCompatActivity() {
 
             if (firebaseRemoteConfig.getLong(remoteConfigFunctions.versionCodeRemoteConfigKey()) > BuildConfig.VERSION_CODE) {
 
-                CreateNotification(applicationContext)
+                CreateNotification(
+                    applicationContext
+                )
                     .notifyManager(
                         getString(R.string.updateAvailable),
                         firebaseRemoteConfig.getString(remoteConfigFunctions.upcomingChangeLogSummaryConfigKey()),

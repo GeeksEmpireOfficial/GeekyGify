@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 5:35 PM
- * Last modified 2/19/20 5:27 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.geeky.gify.DataController.ShareDataController
-import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
+import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.RemoteConfigFunctions
 
 class EntryConfiguration : AppCompatActivity() {
 

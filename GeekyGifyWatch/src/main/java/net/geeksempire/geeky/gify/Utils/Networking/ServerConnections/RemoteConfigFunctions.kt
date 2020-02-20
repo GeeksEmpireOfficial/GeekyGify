@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 12:57 PM
- * Last modified 2/18/20 12:40 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:32 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.Utils.ServerConnections
+package net.geeksempire.geeky.gify.Utils.Networking.ServerConnections
 
 import android.content.Context
 import androidx.preference.PreferenceManager

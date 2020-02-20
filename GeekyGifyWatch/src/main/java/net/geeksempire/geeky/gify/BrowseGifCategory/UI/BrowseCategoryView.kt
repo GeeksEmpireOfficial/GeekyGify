@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 12:57 PM
- * Last modified 2/18/20 12:45 PM
+ * Created by Elias Fazel on 2/20/20 12:35 PM
+ * Last modified 2/20/20 12:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,9 +21,9 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryView
 import net.geeksempire.geeky.gify.BuildConfig
 import net.geeksempire.geeky.gify.GeekyGifyWatchApplication
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.Utils.Notification.CreateNotification
-import net.geeksempire.geeky.gify.Utils.ServerConnections.RemoteConfigFunctions
+import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
+import net.geeksempire.geeky.gify.Utils.UI.CreateNotification
 import javax.inject.Inject
 
 class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider  {
@@ -69,7 +69,9 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
 
             if (firebaseRemoteConfig.getLong(remoteConfigFunctions.versionCodeRemoteConfigKey()) > BuildConfig.VERSION_CODE) {
 
-                CreateNotification(applicationContext)
+                CreateNotification(
+                    applicationContext
+                )
                     .notifyManager(
                         getString(R.string.updateAvailable),
                         firebaseRemoteConfig.getString(remoteConfigFunctions.upcomingChangeLogSummaryConfigKey()),

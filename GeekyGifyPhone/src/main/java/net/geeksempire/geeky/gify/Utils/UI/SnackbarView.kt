@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 5:56 PM
- * Last modified 2/18/20 5:56 PM
+ * Created by Elias Fazel on 2/19/20 6:19 PM
+ * Last modified 2/19/20 6:12 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,7 +34,7 @@ class SnackbarView {
     }
 
     fun snackBarViewSuccess(appCompatActivity: AppCompatActivity, viewGroup: ViewGroup, successMessage: String) {
-        val snackbarSuccess = Snackbar.make(viewGroup, successMessage, Snackbar.LENGTH_LONG)
+        val snackbarSuccess = Snackbar.make(viewGroup, successMessage, Snackbar.LENGTH_INDEFINITE)
         snackbarSuccess.show()
         snackbarSuccess.setAction(appCompatActivity.getString(android.R.string.ok), object : View.OnClickListener{
             override fun onClick(view: View?) {

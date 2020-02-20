@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/18/20 7:14 PM
- * Last modified 2/18/20 7:11 PM
+ * Created by Elias Fazel on 2/19/20 6:19 PM
+ * Last modified 2/19/20 5:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,7 +51,6 @@ class ShareDataController : AppCompatActivity() {
             this@ShareDataController,
             mainView,
             systemCheckpoint)
-
 
         if (intent.data == null) {
 

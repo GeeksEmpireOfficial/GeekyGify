@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/19/20 4:37 PM
- * Last modified 2/19/20 4:37 PM
+ * Created by Elias Fazel on 2/19/20 5:09 PM
+ * Last modified 2/19/20 5:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,17 +25,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.offline_indicator.view.*
 import kotlinx.android.synthetic.main.received_data_controller.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.DataController.Extension.setupLoadingAnimation
 import net.geeksempire.geeky.gify.DataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.Networking.DownloadGif
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
+import java.io.File
 
 class ReceivedDataController : Fragment() {
+
+    lateinit var gifFile: File
 
     lateinit var linkToDownloadGif: String
     lateinit var additionalText: String
@@ -67,11 +68,14 @@ class ReceivedDataController : Fragment() {
                 setupLoadingAnimation()
 
                 CoroutineScope(Dispatchers.Default).launch {
-                    val gifFile = DownloadGif(context!!).downloadGifFile(linkToDownloadGif).await()
+                    gifFile = DownloadGif(context!!).downloadGifFile(linkToDownloadGif).await()
 
-                    Intent(Intent.ACTION_SEND).apply {
+                    if (gifFile.exists()) {
+                        withContext(SupervisorJob() + Dispatchers.Main) {
+                            shareButton.visibility = View.VISIBLE
+                        }
 
-                        if (gifFile.exists()) {
+                        Intent(Intent.ACTION_SEND).apply {
 
                             this.type = "image/*"
 
@@ -82,13 +86,13 @@ class ReceivedDataController : Fragment() {
                             this.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
 
                             startActivity(Intent.createChooser(this, additionalText))
-                        } else {
-
-                            SnackbarView().snackBarViewFail((activity as AppCompatActivity),
-                                mainView,
-                                getString(R.string.downloadErrorOccurred))
-
                         }
+                    } else {
+
+                        SnackbarView().snackBarViewFail((activity as AppCompatActivity),
+                            mainView,
+                            getString(R.string.downloadErrorOccurred))
+
                     }
                 }
 
@@ -119,6 +123,34 @@ class ReceivedDataController : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        shareButton.setOnClickListener {
 
+            gifFile?.let {
+
+                if (it.exists()) {
+
+                    Intent(Intent.ACTION_SEND).apply {
+
+                        this.type = "image/*"
+
+                        this.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(it))
+                        this.putExtra(Intent.EXTRA_TEXT, additionalText)
+
+                        this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        this.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+                        startActivity(Intent.createChooser(this, additionalText))
+
+                    }
+
+                } else {
+
+                    SnackbarView().snackBarViewFail((activity as AppCompatActivity),
+                        mainView,
+                        getString(R.string.downloadErrorOccurred))
+
+                }
+            }
+        }
     }
 }

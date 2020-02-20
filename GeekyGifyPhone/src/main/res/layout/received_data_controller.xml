@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/19/20 4:37 PM
-  ~ Last modified 2/19/20 4:23 PM
+  ~ Created by Elias Fazel on 2/19/20 5:09 PM
+  ~ Last modified 2/19/20 5:04 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -52,4 +52,16 @@
         apps:layout_constraintEnd_toEndOf="parent"
         apps:layout_constraintBottom_toBottomOf="@id/appIconView" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/shareButton"
+        android:layout_width="match_parent"
+        android:layout_height="113dp"
+        android:padding="19dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/share_ripple_icon"
+        android:visibility="gone"
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/waitingView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

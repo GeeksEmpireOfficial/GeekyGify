@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 7:14 PM
- * Last modified 2/18/20 6:57 PM
+ * Created by Elias Fazel on 2/19/20 5:09 PM
+ * Last modified 2/19/20 4:47 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,7 +25,13 @@ class DownloadGif (var context: Context) {
 
         val downloadGifByte = URL(linkToGif).readBytes()
 
-        val filePath = context.externalMediaDirs[0].path + "/GeekyGify" + ".GIF"
+        File(context.externalMediaDirs[0].path + File.separator + "SharedGifCollection").let {
+            if (!it.exists()) {
+                it.mkdirs()
+            }
+        }
+
+        val filePath = context.externalMediaDirs[0].path + File.separator + "SharedGifCollection" + File.separator + "GeekyGify${System.currentTimeMillis()}" + ".GIF"
         val gifFile = File(filePath)
         val fileOutputStream = FileOutputStream(gifFile)
 

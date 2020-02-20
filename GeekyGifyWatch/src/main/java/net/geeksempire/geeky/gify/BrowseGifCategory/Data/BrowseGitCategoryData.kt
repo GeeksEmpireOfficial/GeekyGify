@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 12:15 PM
- * Last modified 2/19/20 12:14 PM
+ * Created by Elias Fazel on 2/19/20 4:10 PM
+ * Last modified 2/19/20 3:42 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,16 +30,17 @@ class BrowseGitCategoryData(var context: Context) {
     fun categoryListNames() : Deferred<ArrayList<String?>> = CoroutineScope(Dispatchers.IO).async {
         var gifCategoryList = ArrayList<String?>()
 
-        gifCategoryList.add(context.getString(R.string.searchGif))
+        gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_SEARCH)
         gifCategoryList.add(null)
 
         if (context.getDatabasePath(DatabaseInformation.GIF_CATEGORY_DATABASE_NAME).exists()) {
             Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Get Database Category List")
 
             if (FavoriteCheckpoint(context).favoriteDatabaseExists()) {
-                gifCategoryList.add(context.getString(R.string.favoriteGif))
+                gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_FAVORITE)
                 gifCategoryList.add(null)
             }
+
             gifCategoryList.addAll(getGifCategoryDatabase().await() as ArrayList<String>)
 
         } else {

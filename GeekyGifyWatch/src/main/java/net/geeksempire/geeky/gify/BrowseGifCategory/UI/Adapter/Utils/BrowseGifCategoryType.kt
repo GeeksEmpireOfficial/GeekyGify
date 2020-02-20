@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:56 PM
- * Last modified 2/18/20 6:16 PM
+ * Created by Elias Fazel on 2/19/20 4:10 PM
+ * Last modified 2/19/20 3:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,10 +20,25 @@ import net.geeksempire.geeky.gify.R
 class BrowseGifCategoryType {
 
     companion object {
+        /**
+         * Search
+         */
         const val GIF_ITEM_SEARCH = "Search"
+        /**
+         * Favorites
+         */
         const val GIF_ITEM_FAVORITE = "Favorites"
+        /**
+         * Category
+         */
         const val GIF_ITEM_CATEGORIES = "Category"
+        /**
+         * Add New Category
+         */
         const val GIF_ITEM_CATEGORIES_ADD = "Add New Category"
+        /**
+         * Social Media
+         */
         const val GIF_ITEM_SOCIAL_MEDIA = "Social Media"
 
         const val GIF_ITEM_SEARCH_TYPE = 0

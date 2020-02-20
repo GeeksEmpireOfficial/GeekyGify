@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:56 PM
- * Last modified 2/18/20 6:44 PM
+ * Created by Elias Fazel on 2/19/20 4:10 PM
+ * Last modified 2/19/20 4:04 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -211,7 +211,7 @@ class BrowseCategoryAdapter(var context: Context,
 
                 //Setup Left Item
                 if (categoryItemsData[position].categoryLeft != null
-                    || !categoryItemsData[position].categoryLeft?.categoryTitle.isNullOrBlank()) {
+                    && !categoryItemsData[position].categoryLeft!!.categoryTitle.isNullOrBlank()) {
 
                     viewHolder.categoryIconLeft.visibility = View.VISIBLE
                     viewHolder.deleteLeftCategory.visibility = View.VISIBLE
@@ -264,7 +264,7 @@ class BrowseCategoryAdapter(var context: Context,
 
                 //Setup Right Item
                 if (categoryItemsData[position].categoryRight != null
-                    || !categoryItemsData[position].categoryRight?.categoryTitle.isNullOrBlank()) {
+                    && !categoryItemsData[position].categoryRight!!.categoryTitle.isNullOrBlank()) {
 
                     viewHolder.categoryIconRight.visibility = View.VISIBLE
                     viewHolder.deleteRightCategory.visibility = View.VISIBLE

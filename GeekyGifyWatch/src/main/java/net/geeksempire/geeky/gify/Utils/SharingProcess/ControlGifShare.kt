@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 2:24 PM
- * Last modified 2/20/20 12:57 PM
+ * Created by Elias Fazel on 2/21/20 1:25 PM
+ * Last modified 2/21/20 1:21 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -107,7 +107,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
             .addCategory(Intent.CATEGORY_BROWSABLE)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             .setData(
-                Uri.parse("https://www.geekygify.xyz/controlgeekygifshare.html?${Intent.EXTRA_STREAM}=${gifLinkToShare}" +
+                Uri.parse("https://www.geeksempire.xyz/Projects/Android/GeekyGify/ControlGeekyGifyShare.html?${Intent.EXTRA_STREAM}=${gifLinkToShare}" +
                         "&" +
                         "${Intent.EXTRA_TEXT}=${additionalText}"))
 

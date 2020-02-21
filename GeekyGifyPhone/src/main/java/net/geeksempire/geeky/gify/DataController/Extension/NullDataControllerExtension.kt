@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 2:24 PM
- * Last modified 2/20/20 2:00 PM
+ * Created by Elias Fazel on 2/21/20 1:53 PM
+ * Last modified 2/21/20 1:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -108,12 +108,16 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
                         Icon.createWithBitmap(ConvertFile().drawableToBitmap(resource)),
                         context!!.getString(R.string.floatItLink)
                     )
+
+                    activity?.runOnUiThread {
+                        floatItIcon.setImageDrawable(resource)
+                    }
                 }
 
                 return true
             }
         })
-        .into(floatItIcon)
+        .submit()
 
     //Super Shortcuts
     Glide.with(context!!)
@@ -128,6 +132,7 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
             }
 
             override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
                 resource?.let {
                     popupAppShortcuts.create(
                         context!!.getString(R.string.superShortcutsName),
@@ -135,12 +140,16 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
                         Icon.createWithBitmap(ConvertFile().drawableToBitmap(resource)),
                         context!!.getString(R.string.superShortcutsLink)
                     )
+
+                    activity?.runOnUiThread {
+                        superShortcutsIcon.setImageDrawable(resource)
+                    }
                 }
 
                 return true
             }
         })
-        .into(superShortcutsIcon)
+        .submit()
 
     floatItIcon.setOnClickListener {
         Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.floatItLink))).apply {

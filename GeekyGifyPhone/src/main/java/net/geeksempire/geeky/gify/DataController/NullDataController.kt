@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 6:52 PM
- * Last modified 2/19/20 6:52 PM
+ * Created by Elias Fazel on 2/21/20 6:46 PM
+ * Last modified 2/21/20 6:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,17 +11,21 @@
 package net.geeksempire.geeky.gify.DataController
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.null_data_controller.*
 import net.geeksempire.geeky.gify.DataController.Extension.setupClickNullDataControllerAdsApp
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.Utils.UI.GlowAnimation
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 class NullDataController : Fragment() {
@@ -39,13 +43,18 @@ class NullDataController : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val glowAnimation = GlowAnimation(context!!)
+
         SnackbarView()
             .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.nullData))
 
-        Glide.with(context!!)
-            .asGif()
-            .load("https://media0.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif")
-            .into(waitingView)
+        Handler().postDelayed({
+            Glide.with(context!!)
+                .asGif()
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .load("https://media0.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif")
+                .into(waitingView)
+        }, 357)
 
         facebookIcon.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookPageLink))).apply {
@@ -62,5 +71,43 @@ class NullDataController : Fragment() {
         }
 
         setupClickNullDataControllerAdsApp()
+
+        with(facebookIcon) {
+            glowAnimation.valueAnimatorLoopTint(
+                this,
+                startValueColor = context!!.getColor(R.color.light), endValueColor = Color.TRANSPARENT,
+                startDuration = 1777, endDuration = 777
+            )
+        }
+
+        with(rateReviewIcon) {
+            glowAnimation.valueAnimatorLoopTint(
+                this,
+                startValueColor = context!!.getColor(R.color.light), endValueColor = Color.TRANSPARENT,
+                startDuration = 1777, endDuration = 777
+            )
+        }
+
+        with(floatItName) {
+            glowAnimation.shadowValueAnimatorLoop(
+                view = this,
+                startValueShadow = 0, endValueShadow = 29,
+                startDuration = 1333, endDuration = 777,
+                shadowColor = context!!.getColor(R.color.lighter),
+                shadowX = 0f,
+                shadowY = 0f
+            )
+        }
+
+        with(superShortcutsName) {
+            glowAnimation.shadowValueAnimatorLoop(
+                view = this,
+                startValueShadow = 0, endValueShadow = 29,
+                startDuration = 1333, endDuration = 777,
+                shadowColor = context!!.getColor(R.color.lighter),
+                shadowX = 0f,
+                shadowY = 0f
+            )
+        }
     }
 }

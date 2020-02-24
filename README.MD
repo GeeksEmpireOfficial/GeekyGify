@@ -13,10 +13,13 @@ Press & Hold on GIF to See More Options:<br />
 ◾ A Star 🌟 Icon to Save the GIF as <b>Favorite</b><br />
 ◾ Name Of Nerdy Girl 👧 Or Boy 👦 Who Published the GIF<br />
 ◾ A Share Icon to Send the GIF to Your Friends On Smartwatch ⌚ Or Smartphone 📱 <br />
-
+<b>⌚ Smartwatch Sharing Process</b> is Simple with Menu of Apps that Support Receiving GIF Files (There can be Several Or No Apps).
+<b>📱 Smartphone Sharing Process</b> is Different, Cause You Need to Install <b>Geeky Gify</b> App on Your Smartphone First. Then It will Get Data from Smartwatch & Open Sharing Menu to Send It to Other Applications.
+<br/>
+<br/>
 Please, <font color="#ff0000">NOTE</font> that This App Is Only for Smartwatches. You Should Install It On Your Smartphone To Handle Shared GIF & etc From Smartwatch.<br />
 <br />
-
+<br/>
 * Geeky Gify | Facebook 👍 
 * https://www.facebook.com/GeekyGify/ 
 <br />

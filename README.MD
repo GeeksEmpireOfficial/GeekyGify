@@ -20,6 +20,8 @@ Press & Hold on GIF to See More Options:<br />
 Please, <font color="#ff0000">NOTE</font> that This App Is Only for Smartwatches. You Should Install It On Your Smartphone To Handle Shared GIF & etc From Smartwatch.<br />
 <br />
 <br/>
+
 * Geeky Gify | Facebook 👍 
 * https://www.facebook.com/GeekyGify/ 
+
 <br />

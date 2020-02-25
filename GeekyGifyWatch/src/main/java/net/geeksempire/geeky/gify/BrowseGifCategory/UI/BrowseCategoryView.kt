@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 12:35 PM
- * Last modified 2/20/20 12:35 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -79,6 +79,10 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
                     )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onDestroy() {

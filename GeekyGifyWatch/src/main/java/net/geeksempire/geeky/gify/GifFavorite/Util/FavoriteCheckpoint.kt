@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 7:41 PM
- * Last modified 2/13/20 7:32 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,15 +22,10 @@ import net.geeksempire.geeky.gify.RoomDatabase.DatabaseInformation
 class FavoriteCheckpoint (var context: Context) {
 
     suspend fun favoriteDatabaseExists () : Boolean {
+        val gifFavoriteDataInterface = GifFavoriteDatabase(context)
+            .initialGifFavoriteDatabase().initDataAccessObject()
 
-        return if (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists()) {
-            val gifFavoriteDataInterface = GifFavoriteDatabase(context)
-                .initialGifFavoriteDatabase().initDataAccessObject()
-
-            (gifFavoriteDataInterface.getRowCount() > 0)
-        } else {
-            false
-        }
+        return (context.getDatabasePath(DatabaseInformation.GIF_FAVORITE_DATABASE_NAME).exists() && (gifFavoriteDataInterface.getRowCount() > 0))
     }
 
     suspend fun favoriteDatabaseCount() : Int {

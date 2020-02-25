@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 3:13 PM
- * Last modified 2/19/20 2:56 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:01 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,7 @@
 
 package net.geeksempire.geeky.gify.GifViewer.Extension
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -127,10 +128,11 @@ fun GifViewer.setupGifViewClickListener() {
                         gifLinkToDownload, gifPreviewLink,
                         gifUserName, gifUserAvatarUrl, gifUserIsVerified).await()
 
-                delay(321)
+                delay(555)
                 if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 1) {
+                    Log.d("FavoriteDatabaseModified", "First Item Added")
 
-                    BrowseCategoryViewModel.firstFavoriteAdded.postValue(true)
+                    BrowseCategoryViewModel.favoriteFirstLastModified.postValue(true)
                 }
             }
         }
@@ -142,10 +144,11 @@ fun GifViewer.setupGifViewClickListener() {
                     .removeFavoriteGifDatabase(
                         gifLinkToDownload).await()
 
-                delay(321)
+                delay(555)
                 if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 0) {
+                    Log.d("FavoriteDatabaseModified", "Last Item Removed")
 
-                    BrowseCategoryViewModel.firstFavoriteAdded.postValue(false)
+                    BrowseCategoryViewModel.favoriteFirstLastModified.postValue(true)
                 }
             }
         }

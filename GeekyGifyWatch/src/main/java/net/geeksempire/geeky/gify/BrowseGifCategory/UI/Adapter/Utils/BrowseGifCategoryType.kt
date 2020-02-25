@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 4:10 PM
- * Last modified 2/19/20 3:20 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,60 +23,34 @@ class BrowseGifCategoryType {
         /**
          * Search
          */
-        const val GIF_ITEM_SEARCH = "Search"
+        const val GIF_ITEM_SEARCH = "Search-ItemType"
         /**
          * Favorites
          */
-        const val GIF_ITEM_FAVORITE = "Favorites"
+        const val GIF_ITEM_FAVORITE = "Favorites-ItemType"
         /**
          * Category
          */
-        const val GIF_ITEM_CATEGORIES = "Category"
+        const val GIF_ITEM_CATEGORIES = "Category-ItemType"
         /**
          * Add New Category
          */
-        const val GIF_ITEM_CATEGORIES_ADD = "Add New Category"
+        const val GIF_ITEM_CATEGORIES_ADD_NEW = "AddNewCategory-ItemType"
         /**
          * Social Media
          */
-        const val GIF_ITEM_SOCIAL_MEDIA = "Social Media"
-
-        const val GIF_ITEM_SEARCH_TYPE = 0
-        const val GIF_ITEM_FAVORITE_TYPE = 1
-        const val GIF_ITEM_CATEGORIES_TYPE = 2
-        const val GIF_ITEM_CATEGORIES_ADD_TYPE = 3
-        const val GIF_ITEM_SOCIAL_MEDIA_TYPE = 4
-    }
-}
-
-fun browseGifCategoryType(positionTitle: String) : Int {
-
-    return when (positionTitle) {
-        BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
-            BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE
-        }
-        BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
-            BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE
-        }
-        BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
-            BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
-        }
-        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD -> {
-            BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE
-        }
-        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
-            BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE
-        }
-        else -> {
-            BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE
-        }
+        const val GIF_ITEM_SOCIAL_MEDIA = "SocialMedia-ItemType"
+        /**
+         * Null Item
+         */
+        const val GIF_ITEM_NULL = "NULL-ItemType"
     }
 }
 
 fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, viewType: String) : RecyclerView.ViewHolder {
 
-    return when (browseGifCategoryType(viewType)) {
-        BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
+    return when ((viewType)) {
+        BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
 
             BrowseSearchListViewHolder(
                 LayoutInflater.from(context)
@@ -87,7 +61,7 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
             )
 
         }
-        BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
+        BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
 
             BrowseFavoriteListViewHolder(
                 LayoutInflater.from(context)
@@ -98,7 +72,7 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
             )
 
         }
-        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
+        BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
 
             BrowseCategoryListViewHolder(
                 LayoutInflater.from(context)
@@ -109,7 +83,7 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
             )
 
         }
-        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
+        BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW -> {
 
             BrowseAddListViewHolder(
                 LayoutInflater.from(context)
@@ -120,7 +94,7 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
             )
 
         }
-        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE -> {
+        BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
 
             BrowseSocialMediaListViewHolder(
                 LayoutInflater.from(context)
@@ -130,12 +104,23 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
                     )
             )
         }
-        else -> {
+        BrowseGifCategoryType.GIF_ITEM_NULL -> {
 
-            BrowseCategoryListViewHolder(
+            BrowseEmptyViewHolder(
                 LayoutInflater.from(context)
                     .inflate(
-                        R.layout.browse_gif_category_item_view,
+                        R.layout.browse_gif_empty_item,
+                        parentViewGroup, false
+                    )
+            )
+
+        }
+        else -> {
+
+            BrowseEmptyViewHolder(
+                LayoutInflater.from(context)
+                    .inflate(
+                        R.layout.browse_gif_empty_item,
                         parentViewGroup, false
                     )
             )

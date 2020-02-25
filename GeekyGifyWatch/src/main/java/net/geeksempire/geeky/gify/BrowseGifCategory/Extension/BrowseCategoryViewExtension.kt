@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 6:56 PM
- * Last modified 2/18/20 6:51 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.ResultReceiver
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -61,23 +62,23 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemPress {
 
-        override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
+        override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: String) {
 
             when (viewType) {
-                BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
 
                     fragmentPlaceHolder.visibility = View.VISIBLE
                     GiphyExplore()
                         .invokeGiphyExplore(this@createViewModelObserver)
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW -> {
 
                     fragmentPlaceHolder.visibility = View.VISIBLE
 
@@ -98,7 +99,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                         .commit()
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
 
                     when (rightLeft) {
                         RecyclerViewRightLeftItem.RIGHT_ITEM -> {
@@ -112,25 +113,25 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         }
 
-        override fun itemPressed(rightLeft: Boolean, viewType: Int) {
+        override fun itemPressed(rightLeft: Boolean, viewType: String) {
             when (viewType) {
-                BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
 
                     fragmentPlaceHolder.visibility = View.VISIBLE
                     GiphyExplore()
                         .invokeGiphyExplore(this@createViewModelObserver)
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
 
                     when (rightLeft) {
                         RecyclerViewRightLeftItem.RIGHT_ITEM -> {
@@ -167,16 +168,16 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         }
 
-        override fun itemLongPressed(rightLeft: Boolean, categoryName: String, viewType: Int) {
+        override fun itemLongPressed(rightLeft: Boolean, categoryName: String, viewType: String) {
 
             when (viewType) {
-                BrowseGifCategoryType.GIF_ITEM_SEARCH_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_FAVORITE_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
 
                     CoroutineScope(Dispatchers.IO).launch {
                         val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(
@@ -208,7 +209,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     }
 
                 }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_TYPE -> {
+                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW -> {
 
                 }
             }
@@ -216,10 +217,12 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
         override suspend fun deleteCategory(rightLeft: Boolean, itemPosition: Int, categoryName: String) {
 
+            var viewType: String = BrowseGifCategoryType.GIF_ITEM_CATEGORIES
             var categoryItemDataLeft: CategoryItemDataLeft? = null
             var categoryItemDataRight: CategoryItemDataRight? = null
 
             categoryAdapter?.categoryItemsData?.get(itemPosition)?.let { pairCategory ->
+                viewType = pairCategory.viewType
                 categoryItemDataLeft = pairCategory.categoryLeft
                 categoryItemDataRight = pairCategory.categoryRight
             }
@@ -252,21 +255,23 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             delay(200)
             categoryAdapter?.categoryItemsData
                 ?.set(itemPosition,
-                    CategoryItemData(categoryItemDataLeft, categoryItemDataRight))
+                    CategoryItemData(viewType, categoryItemDataLeft, categoryItemDataRight))
 
             withContext(Dispatchers.Main) {
                 categoryAdapter?.
-                        notifyItemChanged(itemPosition, CategoryItemData(categoryItemDataLeft, categoryItemDataRight))
+                        notifyItemChanged(itemPosition, CategoryItemData(viewType, categoryItemDataLeft, categoryItemDataRight))
             }
         }
     }
 
     browseGifCategoryView.categoriesListData.observe(this@createViewModelObserver,
         Observer {
+            Log.d("BrowseGifCategoryView", "${it.size}")
             if (categoryAdapter == null) {
 
                 categoryAdapter = BrowseCategoryAdapter(applicationContext, recyclerViewItemLongPress)
-                categoryAdapter!!.categoryItemsData = it
+                categoryAdapter!!.categoryItemsData.clear()
+                categoryAdapter!!.categoryItemsData.addAll(it)
 
                 categoryList.adapter = categoryAdapter
                 categoryAdapter?.notifyDataSetChanged()
@@ -277,8 +282,10 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                         .smoothScrollToPosition(if(it[0].categoryLeft?.categoryTitle == "Search"){ 2 } else { 0 })
                 }, 99)
             } else {
-                categoryAdapter?.let { categoryAdapter ->
-                    categoryAdapter.categoryItemsData = it
+
+                categoryAdapter!!.let { categoryAdapter ->
+                    categoryAdapter.categoryItemsData.clear()
+                    categoryAdapter.categoryItemsData.addAll(it)
 
                     categoryAdapter.notifyItemRangeChanged(0, categoryAdapter.itemCount)
 
@@ -291,13 +298,14 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         })
 
-    BrowseCategoryViewModel.firstFavoriteAdded.observe(this@createViewModelObserver,
+    BrowseCategoryViewModel.favoriteFirstLastModified.observe(this@createViewModelObserver,
         Observer {
-
-            triggerGifCategoryDataLoading(
-                applicationContext,
-                browseGifCategoryView
-            )
+            if (it) {
+                triggerGifCategoryDataLoading(
+                    applicationContext,
+                    browseGifCategoryView
+                )
+            }
         })
 
     triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
@@ -306,9 +314,11 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 }
 
 private fun triggerGifCategoryDataLoading(context: Context, browseGifCategoryView: BrowseCategoryViewModel) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-    BrowseGitCategoryData(context).categoryListNames().await().let {
+
+    BrowseGitCategoryData(context).categoryListNames().await().let { listDataCategory ->
+
         browseGifCategoryView.setupCategoryBrowserData(
-            it,
+            listDataCategory,
             GetResources(context).getNeonColors()
         )
     }

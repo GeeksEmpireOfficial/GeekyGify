@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 4:10 PM
- * Last modified 2/19/20 4:08 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,16 +21,15 @@ import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemDataLeft
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemDataRight
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryListItemType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.Utils.Calculations.numberEven
 
 class BrowseCategoryViewModel : ViewModel() {
 
     companion object {
-        val firstFavoriteAdded: MutableLiveData<Boolean> by lazy {
-            MutableLiveData<Boolean>().also {
-                it.postValue(false)
-            }
+        val favoriteFirstLastModified: MutableLiveData<Boolean> by lazy {
+            MutableLiveData<Boolean>()
         }
     }
 
@@ -38,62 +37,68 @@ class BrowseCategoryViewModel : ViewModel() {
         MutableLiveData<ArrayList<CategoryItemData>>()
     }
 
-    fun setupCategoryBrowserData(rawData: ArrayList<String?>, colorsList: ArrayList<String>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+    fun setupCategoryBrowserData(rawData: ArrayList<CategoryListItemType>, colorsList: ArrayList<String>) = CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
         val categoriesListDataFinal = ArrayList<CategoryItemData>()
 
+        val itemType = ArrayList<String>()
         val categoriesNamesLeft = ArrayList<CategoryItemDataLeft?>()
         val categoriesNamesRight = ArrayList<CategoryItemDataRight?>()
 
-        rawData.forEachIndexed { index, aString ->
-            Log.d("CategoryRawData", "${aString}")
+        rawData.forEachIndexed { index, categoryListItemType ->
+            Log.d("CategoryRawData", "${categoryListItemType}")
 
-            if (aString == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
+            if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
 
-                categoriesNamesLeft.add(CategoryItemDataLeft(aString, 0))
+                categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, 0))
+                itemType.add(categoryListItemType.itemType)
 
-            } else if (aString == BrowseGifCategoryType.GIF_ITEM_FAVORITE) {
+            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_FAVORITE) {
 
-                categoriesNamesLeft.add(CategoryItemDataLeft(aString, 0))
+                categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, 0))
+                itemType.add(categoryListItemType.itemType)
 
-            } else if (aString == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD) {
-
-                val colorData = colorsList.random()
-                val aBackgroundColor = Color.parseColor(colorData)
-                categoriesNamesLeft.add(CategoryItemDataLeft(aString, aBackgroundColor))
-
-            } else if (aString == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA) {
+            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW) {
 
                 val colorData = colorsList.random()
                 val aBackgroundColor = Color.parseColor(colorData)
-                categoriesNamesLeft.add(CategoryItemDataLeft(aString, aBackgroundColor))
+                categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
+                itemType.add(categoryListItemType.itemType)
 
-            } else if (aString.isNullOrBlank()) {
+            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA) {
+
+                val colorData = colorsList.random()
+                val aBackgroundColor = Color.parseColor(colorData)
+                categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
+                itemType.add(categoryListItemType.itemType)
+
+            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES) {
+                if (numberEven(index)) {
+
+                    val colorData = colorsList.random()
+                    val aBackgroundColor = Color.parseColor(colorData)
+                    categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
+                    itemType.add(categoryListItemType.itemType)
+
+                } else {
+
+                    val colorData = colorsList.random()
+                    val aBackgroundColor = Color.parseColor(colorData)
+                    categoriesNamesRight.add(CategoryItemDataRight(categoryListItemType.itemTitle, aBackgroundColor))
+
+                }
+            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_NULL) {
 
                 categoriesNamesRight.add(null)
-
-            } else if (numberEven(index)) {
-
-                val colorData = colorsList.random()
-                val aBackgroundColor = Color.parseColor(colorData)
-                categoriesNamesLeft.add(CategoryItemDataLeft(aString, aBackgroundColor))
-
-                colorsList.remove(colorData)
-
-            } else {
-
-                val colorData = colorsList.random()
-                val aBackgroundColor = Color.parseColor(colorData)
-                categoriesNamesRight.add(CategoryItemDataRight(aString, aBackgroundColor))
-
-                colorsList.remove(colorData)
 
             }
         }
 
         for (it in categoriesNamesLeft.indices) {
+
             categoriesListDataFinal.add(
                 CategoryItemData(
+                    itemType[it],
                     try { categoriesNamesLeft[it] } catch (e: IndexOutOfBoundsException) { null } ,
                     try { categoriesNamesRight[it] } catch (e: IndexOutOfBoundsException) { null }
                 )
@@ -101,5 +106,9 @@ class BrowseCategoryViewModel : ViewModel() {
         }
 
         categoriesListData.postValue(categoriesListDataFinal)
+
+        itemType.clear()
+        categoriesNamesLeft.clear()
+        categoriesNamesRight.clear()
     }
 }

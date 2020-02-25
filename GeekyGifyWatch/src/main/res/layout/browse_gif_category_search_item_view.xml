@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/18/20 6:11 PM
-  ~ Last modified 2/18/20 6:08 PM
+  ~ Created by Elias Fazel on 2/24/20 8:43 PM
+  ~ Last modified 2/24/20 4:32 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -28,6 +28,8 @@
         android:paddingBottom="7dp"
         android:background="@drawable/ripple_background"
         android:visibility="gone"
+
+        android:contentDescription="@string/searchGif"
 
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 4:10 PM
- * Last modified 2/19/20 3:42 PM
+ * Created by Elias Fazel on 2/24/20 8:43 PM
+ * Last modified 2/24/20 8:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataInterface
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataModel
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDatabase
+import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryListItemType
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
 import net.geeksempire.geeky.gify.GifFavorite.Util.FavoriteCheckpoint
 import net.geeksempire.geeky.gify.R
@@ -27,42 +28,56 @@ class BrowseGitCategoryData(var context: Context) {
 
     private val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(context).initialGifCategoryDatabase()
 
-    fun categoryListNames() : Deferred<ArrayList<String?>> = CoroutineScope(Dispatchers.IO).async {
-        var gifCategoryList = ArrayList<String?>()
+    fun categoryListNames() : Deferred<ArrayList<CategoryListItemType>> = CoroutineScope(Dispatchers.IO).async {
+        var gifCategoryList = ArrayList<CategoryListItemType>()
 
-        gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_SEARCH)
-        gifCategoryList.add(null)
+        gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SEARCH, context.getString(R.string.searchGif)))
+        gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
 
         if (context.getDatabasePath(DatabaseInformation.GIF_CATEGORY_DATABASE_NAME).exists()) {
             Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Get Database Category List")
 
             if (FavoriteCheckpoint(context).favoriteDatabaseExists()) {
-                gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_FAVORITE)
-                gifCategoryList.add(null)
+                gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_FAVORITE, context.getString(R.string.favoriteGif)))
+                gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
             }
 
-            gifCategoryList.addAll(getGifCategoryDatabase().await() as ArrayList<String>)
+            getGifCategoryDatabase().await().forEachIndexed { index, aString ->
+
+                gifCategoryList.add(CategoryListItemType(
+                    BrowseGifCategoryType.GIF_ITEM_CATEGORIES,
+                    aString
+                ))
+            }
 
         } else {
             Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Get Default Category List")
 
-            gifCategoryList.addAll((context.resources.getStringArray(R.array.gifCategoryList).toList() as ArrayList<String?>))
+            context.resources.getStringArray(R.array.gifCategoryList).forEachIndexed { index, aString ->
+                gifCategoryList.add(CategoryListItemType(
+                    BrowseGifCategoryType.GIF_ITEM_CATEGORIES,
+                    aString))
+            }
 
             initializeGifCategoryDatabase(gifCategoryList)
         }
 
         if (numberEven(gifCategoryList.size)) {
-            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
-            gifCategoryList.add(null)
 
-            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
-            gifCategoryList.add(null)
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
+
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA, BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
+
         } else {
-            gifCategoryList.add(null)
-            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
 
-            gifCategoryList.add(null)
-            gifCategoryList.add(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW))
+
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA, BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA))
+
         }
 
 
@@ -74,7 +89,7 @@ class BrowseGitCategoryData(var context: Context) {
         gifCategoryDataInterface.initDataAccessObject().getAllGifCategoryNames()
     }
 
-    private suspend fun initializeGifCategoryDatabase(initialGifCategoryNames: ArrayList<String?>) {
+    private suspend fun initializeGifCategoryDatabase(initialGifCategoryNames: ArrayList<CategoryListItemType>) {
 
         val arrayOfGifCategoryDataModels = ArrayList<GifCategoryDataModel>()
 
@@ -85,7 +100,10 @@ class BrowseGitCategoryData(var context: Context) {
             }
             .filter { it ->
 
-                (it != null) && (it != BrowseGifCategoryType.GIF_ITEM_FAVORITE) && (it != BrowseGifCategoryType.GIF_ITEM_SEARCH) && (it != BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD)
+                (it != null)
+                        && (it.itemType != BrowseGifCategoryType.GIF_ITEM_FAVORITE)
+                        && (it.itemType != BrowseGifCategoryType.GIF_ITEM_SEARCH)
+                        && (it.itemType != BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW)
             }
             .map {
 
@@ -98,7 +116,7 @@ class BrowseGitCategoryData(var context: Context) {
             .withIndex().collect {
                 Log.d(this@BrowseGitCategoryData.javaClass.simpleName, "Database Filtered: ${it.value}")
 
-                it.value?.let {  categoryName ->
+                it.value.itemTitle?.let {  categoryName ->
                     arrayOfGifCategoryDataModels.add(
                         GifCategoryDataModel(
                             categoryName,

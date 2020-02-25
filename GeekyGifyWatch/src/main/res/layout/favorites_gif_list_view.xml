@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/16/20 1:01 PM
-  ~ Last modified 2/16/20 12:46 PM
+  ~ Created by Elias Fazel on 2/24/20 8:43 PM
+  ~ Last modified 2/24/20 4:33 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -58,6 +58,8 @@
         android:text="@string/favoriteGif"
         android:fontFamily="@font/pixelate_outline"
         android:background="@drawable/category_left_background"
+
+        android:contentDescription="@string/favoriteGif"
 
         apps:autoSizeTextType="uniform"
         apps:autoSizeMaxTextSize="14sp"

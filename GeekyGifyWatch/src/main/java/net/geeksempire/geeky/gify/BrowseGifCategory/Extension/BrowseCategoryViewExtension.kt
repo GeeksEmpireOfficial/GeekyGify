@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:39 PM
+ * Created by Elias Fazel on 2/24/20 9:49 PM
+ * Last modified 2/24/20 9:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -180,9 +180,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
 
                     CoroutineScope(Dispatchers.IO).launch {
-                        val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(
-                            applicationContext
-                        ).initialGifCategoryDatabase()
+
+                        val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
 
                         when (rightLeft) {
                             RecyclerViewRightLeftItem.RIGHT_ITEM -> {
@@ -217,49 +216,68 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
         override suspend fun deleteCategory(rightLeft: Boolean, itemPosition: Int, categoryName: String) {
 
-            var viewType: String = BrowseGifCategoryType.GIF_ITEM_CATEGORIES
-            var categoryItemDataLeft: CategoryItemDataLeft? = null
-            var categoryItemDataRight: CategoryItemDataRight? = null
+            categoryAdapter?.let { categoryAdapterIt ->
+                var viewType: String = BrowseGifCategoryType.GIF_ITEM_CATEGORIES
+                var categoryItemDataLeft: CategoryItemDataLeft? = null
+                var categoryItemDataRight: CategoryItemDataRight? = null
 
-            categoryAdapter?.categoryItemsData?.get(itemPosition)?.let { pairCategory ->
-                viewType = pairCategory.viewType
-                categoryItemDataLeft = pairCategory.categoryLeft
-                categoryItemDataRight = pairCategory.categoryRight
-            }
+                categoryAdapterIt.categoryItemsData?.get(itemPosition)?.let { pairCategory ->
+                    viewType = pairCategory.viewType
+                    categoryItemDataLeft = pairCategory.categoryLeft
+                    categoryItemDataRight = pairCategory.categoryRight
+                }
 
-            when (rightLeft) {
-                RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+                when (rightLeft) {
+                    RecyclerViewRightLeftItem.RIGHT_ITEM -> {
 
-                    CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+                        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
-                        GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
-                            .initDataAccessObject()
-                            .deleteByCategoryName(categoryName)
+                            GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+                                .initDataAccessObject()
+                                .deleteByCategoryName(categoryName)
 
-                        categoryItemDataRight = null
+                            categoryItemDataRight = null
+                        }
+                    }
+                    RecyclerViewRightLeftItem.LEFT_ITEM -> {
+
+                        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+
+                            GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
+                                .initDataAccessObject()
+                                .deleteByCategoryName(categoryName)
+
+                            categoryItemDataLeft = null
+                        }
                     }
                 }
-                RecyclerViewRightLeftItem.LEFT_ITEM -> {
 
-                    CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+                categoryAdapterIt.deleteCounter++
 
-                        GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
-                            .initDataAccessObject()
-                            .deleteByCategoryName(categoryName)
+                delay(200)
 
-                        categoryItemDataLeft = null
+                if (categoryAdapterIt.deleteCounter >= 5) {
+                    categoryAdapterIt.deleteCounter = 0
+
+                    triggerGifCategoryDataLoading(
+                        applicationContext,
+                        browseGifCategoryView
+                    )
+
+                } else {
+
+                    categoryAdapterIt.categoryItemsData
+                        .set(itemPosition,
+                            CategoryItemData(
+                                viewType,
+                                categoryItemDataLeft,
+                                categoryItemDataRight))
+
+                    withContext(Dispatchers.Main) {
+                        categoryAdapterIt.
+                            notifyItemChanged(itemPosition, CategoryItemData(viewType, categoryItemDataLeft, categoryItemDataRight))
                     }
                 }
-            }
-
-            delay(200)
-            categoryAdapter?.categoryItemsData
-                ?.set(itemPosition,
-                    CategoryItemData(viewType, categoryItemDataLeft, categoryItemDataRight))
-
-            withContext(Dispatchers.Main) {
-                categoryAdapter?.
-                        notifyItemChanged(itemPosition, CategoryItemData(viewType, categoryItemDataLeft, categoryItemDataRight))
             }
         }
     }
@@ -279,7 +297,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 Handler().postDelayed({
 
                     categoryList
-                        .smoothScrollToPosition(if(it[0].categoryLeft?.categoryTitle == "Search"){ 2 } else { 0 })
+                        .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
                 }, 99)
             } else {
 
@@ -287,12 +305,12 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     categoryAdapter.categoryItemsData.clear()
                     categoryAdapter.categoryItemsData.addAll(it)
 
-                    categoryAdapter.notifyItemRangeChanged(0, categoryAdapter.itemCount)
+                    categoryAdapter.notifyDataSetChanged()
 
                     Handler().postDelayed({
 
                         categoryList
-                            .smoothScrollToPosition(if(it[0].categoryLeft?.categoryTitle == "Search"){ 2 } else { 0 })
+                            .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
                     }, 99)
                 }
             }

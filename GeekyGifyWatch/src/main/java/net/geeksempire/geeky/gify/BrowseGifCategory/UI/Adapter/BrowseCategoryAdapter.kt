@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:27 PM
+ * Created by Elias Fazel on 2/24/20 9:49 PM
+ * Last modified 2/24/20 9:41 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,6 +37,8 @@ class BrowseCategoryAdapter(var context: Context,
                             var  recyclerViewGifCategoryItemPress: RecyclerViewGifCategoryItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val categoryItemsData: ArrayList<CategoryItemData> = ArrayList<CategoryItemData>()
+
+    var deleteCounter: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/26/20 9:17 PM
- * Last modified 2/26/20 9:14 PM
+ * Created by Elias Fazel on 2/26/20 9:34 PM
+ * Last modified 2/26/20 9:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -144,7 +144,7 @@ class BrowseCategoryAdapter(var context: Context,
             viewHolder.searchIcon.setOnClickListener {
 
                 categoryItemsData[position].categoryLeft?.categoryTitle?.let { itemTitle ->
-                    recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                    recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LeftItem,
                         itemTitle,
                         BrowseGifCategoryType.GIF_ITEM_SEARCH)
                 }
@@ -163,7 +163,7 @@ class BrowseCategoryAdapter(var context: Context,
             viewHolder.addIcon.setOnClickListener {
 
                 categoryItemsData[position].categoryLeft?.categoryTitle?.let { itemTitle ->
-                    recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                    recyclerViewGifCategoryItemPress.itemPressed(RecyclerViewRightLeftItem.LeftItem,
                         itemTitle,
                         BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW)
                 }
@@ -177,7 +177,7 @@ class BrowseCategoryAdapter(var context: Context,
             viewHolder.rateReview.setOnClickListener {
 
                 recyclerViewGifCategoryItemPress
-                    .itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                    .itemPressed(RecyclerViewRightLeftItem.LeftItem,
                         null,
                         BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
             }
@@ -185,7 +185,7 @@ class BrowseCategoryAdapter(var context: Context,
             viewHolder.facebookIcon.setOnClickListener {
 
                 recyclerViewGifCategoryItemPress
-                    .itemPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                    .itemPressed(RecyclerViewRightLeftItem.RightItem,
                         null,
                         BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
             }
@@ -227,7 +227,7 @@ class BrowseCategoryAdapter(var context: Context,
                         CoroutineScope(Dispatchers.IO).launch {
 
                             recyclerViewGifCategoryItemPress.deleteCategory(
-                                RecyclerViewRightLeftItem.LEFT_ITEM,
+                                RecyclerViewRightLeftItem.LeftItem,
                                 position,
                                 categoryName
                             )
@@ -281,7 +281,7 @@ class BrowseCategoryAdapter(var context: Context,
                         CoroutineScope(Dispatchers.IO).launch {
 
                             recyclerViewGifCategoryItemPress.deleteCategory(
-                                RecyclerViewRightLeftItem.RIGHT_ITEM,
+                                RecyclerViewRightLeftItem.RightItem,
                                 position,
                                 categoryName
                             )
@@ -304,7 +304,7 @@ class BrowseCategoryAdapter(var context: Context,
 
             viewHolder.categoryIconRight.setOnLongClickListener { view ->
                 categoryItemsData[position].categoryRight?.categoryTitle?.let {
-                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.RightItem,
                         it,
                         BrowseGifCategoryType.GIF_ITEM_CATEGORIES
                     )
@@ -315,7 +315,7 @@ class BrowseCategoryAdapter(var context: Context,
 
             viewHolder.categoryIconLeft.setOnLongClickListener { view ->
                 categoryItemsData[position].categoryLeft?.categoryTitle?.let {
-                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                    recyclerViewGifCategoryItemPress.itemLongPressed(RecyclerViewRightLeftItem.LeftItem,
                         it,
                         BrowseGifCategoryType.GIF_ITEM_CATEGORIES
                     )

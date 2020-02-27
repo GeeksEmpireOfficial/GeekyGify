@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/26/20 9:17 PM
- * Last modified 2/26/20 9:05 PM
+ * Created by Elias Fazel on 2/26/20 9:34 PM
+ * Last modified 2/26/20 9:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,7 +62,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemPress {
 
-        override fun itemPressed(rightLeft: Boolean, categoryName: String?, viewType: String) {
+        override fun itemPressed(rightLeft: RecyclerViewRightLeftItem, categoryName: String?, viewType: String) {
 
             when (viewType) {
                 BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
@@ -102,7 +102,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
 
                     when (rightLeft) {
-                        RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+                        RecyclerViewRightLeftItem.RightItem -> {
 
                             val resultReceiver = object : ResultReceiver(Handler()) {
                                 override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
@@ -125,7 +125,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                                 remoteIntent,
                                 resultReceiver)
                         }
-                        RecyclerViewRightLeftItem.LEFT_ITEM -> {
+                        RecyclerViewRightLeftItem.LeftItem -> {
 
                             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.playStoreLink) + packageName)).apply {
                                 startActivity(this)
@@ -136,7 +136,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         }
 
-        override fun itemLongPressed(rightLeft: Boolean, categoryName: String?, viewType: String) {
+        override fun itemLongPressed(rightLeft: RecyclerViewRightLeftItem, categoryName: String?, viewType: String) {
 
             when (viewType) {
                 BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
@@ -152,7 +152,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                         val gifCategoryDataInterface: GifCategoryDataInterface = GifCategoryDatabase(applicationContext).initialGifCategoryDatabase()
 
                         when (rightLeft) {
-                            RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+                            RecyclerViewRightLeftItem.RightItem -> {
                                 categoryName?.let {
                                     gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
                                         GifCategoryDataModel(
@@ -162,7 +162,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                                     )
                                 }
                             }
-                            RecyclerViewRightLeftItem.LEFT_ITEM -> {
+                            RecyclerViewRightLeftItem.LeftItem -> {
                                 categoryName?.let {
                                     gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
                                         GifCategoryDataModel(
@@ -186,7 +186,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         }
 
-        override suspend fun deleteCategory(rightLeft: Boolean, itemPosition: Int, categoryName: String) {
+        override suspend fun deleteCategory(rightLeft: RecyclerViewRightLeftItem, itemPosition: Int, categoryName: String) {
 
             categoryAdapter?.let { categoryAdapterIt ->
                 var viewType: String = BrowseGifCategoryType.GIF_ITEM_CATEGORIES
@@ -200,7 +200,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 }
 
                 when (rightLeft) {
-                    RecyclerViewRightLeftItem.RIGHT_ITEM -> {
+                    RecyclerViewRightLeftItem.RightItem -> {
 
                         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
@@ -211,7 +211,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                             categoryItemDataRight = null
                         }
                     }
-                    RecyclerViewRightLeftItem.LEFT_ITEM -> {
+                    RecyclerViewRightLeftItem.LeftItem -> {
 
                         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 

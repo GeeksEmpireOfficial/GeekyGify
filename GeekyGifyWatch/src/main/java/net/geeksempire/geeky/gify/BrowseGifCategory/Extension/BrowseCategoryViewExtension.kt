@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 9:49 PM
- * Last modified 2/24/20 9:49 PM
+ * Created by Elias Fazel on 2/26/20 9:17 PM
+ * Last modified 2/26/20 9:05 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -62,7 +62,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
     val recyclerViewItemLongPress = object : RecyclerViewGifCategoryItemPress {
 
-        override fun itemPressed(rightLeft: Boolean, categoryName: String, viewType: String) {
+        override fun itemPressed(rightLeft: Boolean, categoryName: String?, viewType: String) {
 
             when (viewType) {
                 BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
@@ -104,38 +104,6 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     when (rightLeft) {
                         RecyclerViewRightLeftItem.RIGHT_ITEM -> {
 
-                        }
-                        RecyclerViewRightLeftItem.LEFT_ITEM -> {
-
-                        }
-                    }
-                }
-            }
-        }
-
-        override fun itemPressed(rightLeft: Boolean, viewType: String) {
-            when (viewType) {
-                BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
-
-                    fragmentPlaceHolder.visibility = View.VISIBLE
-                    GiphyExplore()
-                        .invokeGiphyExplore(this@createViewModelObserver)
-
-                }
-                BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
-
-                }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES -> {
-
-                }
-                BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW -> {
-
-                }
-                BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA -> {
-
-                    when (rightLeft) {
-                        RecyclerViewRightLeftItem.RIGHT_ITEM -> {
-
                             val resultReceiver = object : ResultReceiver(Handler()) {
                                 override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
                                     if (resultCode == RemoteIntent.RESULT_OK) {
@@ -168,7 +136,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             }
         }
 
-        override fun itemLongPressed(rightLeft: Boolean, categoryName: String, viewType: String) {
+        override fun itemLongPressed(rightLeft: Boolean, categoryName: String?, viewType: String) {
 
             when (viewType) {
                 BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
@@ -185,20 +153,24 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                         when (rightLeft) {
                             RecyclerViewRightLeftItem.RIGHT_ITEM -> {
-                                gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
-                                    GifCategoryDataModel(
-                                        categoryName,
-                                        System.currentTimeMillis()
+                                categoryName?.let {
+                                    gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
+                                        GifCategoryDataModel(
+                                            it,
+                                            System.currentTimeMillis()
+                                        )
                                     )
-                                )
+                                }
                             }
                             RecyclerViewRightLeftItem.LEFT_ITEM -> {
-                                gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
-                                    GifCategoryDataModel(
-                                        categoryName,
-                                        System.currentTimeMillis()
+                                categoryName?.let {
+                                    gifCategoryDataInterface.initDataAccessObject().updateGifCategoryData(
+                                        GifCategoryDataModel(
+                                            it,
+                                            System.currentTimeMillis()
+                                        )
                                     )
-                                )
+                                }
                             }
                         }
 

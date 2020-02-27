@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 9:49 PM
- * Last modified 2/24/20 9:41 PM
+ * Created by Elias Fazel on 2/26/20 9:17 PM
+ * Last modified 2/26/20 9:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -178,6 +178,7 @@ class BrowseCategoryAdapter(var context: Context,
 
                 recyclerViewGifCategoryItemPress
                     .itemPressed(RecyclerViewRightLeftItem.LEFT_ITEM,
+                        null,
                         BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
             }
 
@@ -185,6 +186,7 @@ class BrowseCategoryAdapter(var context: Context,
 
                 recyclerViewGifCategoryItemPress
                     .itemPressed(RecyclerViewRightLeftItem.RIGHT_ITEM,
+                        null,
                         BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
             }
         }

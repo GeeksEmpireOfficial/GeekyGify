@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 2:24 PM
- * Last modified 2/20/20 1:47 PM
+ * Created by Elias Fazel on 2/29/20 10:02 AM
+ * Last modified 2/29/20 9:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,7 +36,7 @@ class PopupAppShortcuts(val context: Context) {
             .setLongLabel(shortcutLabel)
             .setIcon(appIcon)
             .setIntent(intent)
-            .setRank(System.currentTimeMillis().toInt())
+            .setRank(1)
             .build()
 
         shortcutManager.addDynamicShortcuts(arrayOf(shortcutInfo).toMutableList())

@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/21/20 1:53 PM
- * Last modified 2/21/20 1:43 PM
+ * Created by Elias Fazel on 3/2/20 7:28 AM
+ * Last modified 3/2/20 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.DataController.Extension
+package net.geeksempire.geeky.gify.SharedDataController.Extension
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -22,8 +22,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.null_data_controller.*
-import net.geeksempire.geeky.gify.DataController.NullDataController
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.Utils.Converter.ConvertFile
 import net.geeksempire.geeky.gify.Utils.UI.PopupAppShortcuts
 

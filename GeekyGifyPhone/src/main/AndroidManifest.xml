@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/21/20 1:25 PM
-  ~ Last modified 2/21/20 1:21 PM
+  ~ Created by Elias Fazel on 3/2/20 7:28 AM
+  ~ Last modified 3/2/20 7:27 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -58,7 +58,7 @@
             android:icon="@mipmap/ic_launcher"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
-            android:name=".DataController.ShareDataController"
+            android:name=".SharedDataController.DataController"
             android:theme="@style/ShareWaitingTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

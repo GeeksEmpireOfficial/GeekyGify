@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/20/20 2:24 PM
- * Last modified 2/20/20 12:58 PM
+ * Created by Elias Fazel on 3/2/20 7:28 AM
+ * Last modified 3/2/20 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.DataController
+package net.geeksempire.geeky.gify.SharedDataController
 
 import android.content.Intent
 import android.net.Uri
@@ -26,9 +26,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.offline_indicator.view.*
 import kotlinx.android.synthetic.main.received_data_controller.*
 import kotlinx.coroutines.*
-import net.geeksempire.geeky.gify.DataController.Extension.setupLoadingAnimation
-import net.geeksempire.geeky.gify.DataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.SharedDataController.Extension.setupLoadingAnimation
+import net.geeksempire.geeky.gify.SharedDataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.Utils.Networking.DownloadGif
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView

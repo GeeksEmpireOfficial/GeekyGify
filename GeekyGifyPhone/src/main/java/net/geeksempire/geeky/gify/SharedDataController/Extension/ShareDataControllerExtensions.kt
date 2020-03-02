@@ -1,20 +1,20 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/18/20 5:56 PM
- * Last modified 2/18/20 5:56 PM
+ * Created by Elias Fazel on 3/2/20 7:28 AM
+ * Last modified 3/2/20 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.DataController.Extension
+package net.geeksempire.geeky.gify.SharedDataController.Extension
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.received_data_controller.*
-import net.geeksempire.geeky.gify.DataController.ReceivedDataController
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.SharedDataController.ReceivedDataController
 
 fun ReceivedDataController.setupLoadingAnimation() {
 

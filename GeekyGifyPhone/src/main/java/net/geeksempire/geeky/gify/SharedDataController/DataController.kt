@@ -1,14 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 2/20/20 2:24 PM
- * Last modified 2/20/20 2:20 PM
+ * Created by Elias Fazel on 3/2/20 7:28 AM
+ * Last modified 3/2/20 7:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.DataController
+package net.geeksempire.geeky.gify.SharedDataController
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
@@ -29,8 +29,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import kotlinx.android.synthetic.main.received_data_controller.*
 import net.geeksempire.geeky.gify.BuildConfig
-import net.geeksempire.geeky.gify.DataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.SharedDataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.Utils.Converter.ConvertFile
 import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
@@ -40,7 +40,7 @@ import net.geeksempire.geeky.gify.Utils.UI.PopupAppShortcuts
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 
-class ShareDataController : AppCompatActivity() {
+class DataController : AppCompatActivity() {
 
     val receivedDataController: Fragment = ReceivedDataController()
     val nullDataController: Fragment = NullDataController()
@@ -59,13 +59,13 @@ class ShareDataController : AppCompatActivity() {
         val snackbarView = SnackbarView()
 
         networkConnectionListener = NetworkConnectionListener(
-            this@ShareDataController,
+            this@DataController,
             mainView,
             systemCheckpoint)
 
         if (intent.data == null) {
 
-            snackbarView.snackBarViewFail(this@ShareDataController,
+            snackbarView.snackBarViewFail(this@DataController,
                 mainView,
                 getString(R.string.errorOccurred))
 
@@ -127,7 +127,7 @@ class ShareDataController : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
-        this@ShareDataController.finish()
+        this@DataController.finish()
         networkConnectionListener.unRegisterDefaultNetworkCallback()
     }
 

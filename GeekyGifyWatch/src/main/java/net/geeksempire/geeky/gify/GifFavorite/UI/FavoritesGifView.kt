@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 12:46 PM
+ * Created by Elias Fazel on 3/2/20 6:17 AM
+ * Last modified 3/2/20 6:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,11 +10,14 @@
 
 package net.geeksempire.geeky.gify.GifFavorite.UI
 
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.favorites_gif_list_view.*
 import net.geeksempire.geeky.gify.GeekyGifyWatchApplication
 import net.geeksempire.geeky.gify.GifFavorite.Extension.favoritesGifViewObserverExtension
@@ -67,6 +70,13 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
         }
 
         favoritesGifViewModel = favoritesGifViewObserverExtension()
+
+        val animatable = getDrawable(R.drawable.animated_search_icon) as Animatable
+        animatable.start()
+
+        Glide.with(applicationContext)
+            .load(animatable as Drawable)
+            .into(exploreGifs)
     }
 
     override fun onDestroy() {

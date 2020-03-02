@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 4:50 AM
- * Last modified 3/2/20 3:25 AM
+ * Created by Elias Fazel on 3/2/20 6:17 AM
+ * Last modified 3/2/20 6:11 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,6 +10,8 @@
 
 package net.geeksempire.geeky.gify.BrowseGif.UI
 
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,6 +19,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createClickListeners
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createViewModelObserver
@@ -63,6 +66,13 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
         categoryTitle.setOnClickListener {
 
         }
+
+        val animatable = getDrawable(R.drawable.animated_search_icon) as Animatable
+        animatable.start()
+
+        Glide.with(applicationContext)
+            .load(animatable as Drawable)
+            .into(exploreGifs)
     }
 
     override fun onResume() {

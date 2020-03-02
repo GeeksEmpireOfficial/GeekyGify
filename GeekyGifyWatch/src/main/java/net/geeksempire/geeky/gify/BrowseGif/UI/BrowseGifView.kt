@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 3:13 PM
- * Last modified 2/19/20 2:53 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 3:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -51,19 +51,17 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
         ambientController = AmbientModeSupport.attach(this)
         ambientController.setAmbientOffloadEnabled(true)
 
-        val categoryName = intent.getStringExtra("CategoryName")
+        val queryType: String = intent.getStringExtra("QueryType")!!
+        val categoryName: String = intent.getStringExtra("CategoryName")!!
 
-        categoryName?.let {
+        categoryTitle.text = categoryName
 
-            categoryTitle.text = it
+        val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(queryType, categoryName)
 
-            val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(it)
+        createClickListeners(queryType, categoryName, browseGifViewModel)
 
-            createClickListeners(it, browseGifViewModel)
+        categoryTitle.setOnClickListener {
 
-            categoryTitle.setOnClickListener {
-
-            }
         }
     }
 

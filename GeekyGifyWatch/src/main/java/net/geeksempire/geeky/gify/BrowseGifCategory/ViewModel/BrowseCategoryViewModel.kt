@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:43 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 2:00 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,6 +48,9 @@ class BrowseCategoryViewModel : ViewModel() {
         rawData.forEachIndexed { index, categoryListItemType ->
             Log.d("CategoryRawData", "${categoryListItemType}")
 
+            val colorData = colorsList.random()
+            val aBackgroundColor = Color.parseColor(colorData)
+
             if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_SEARCH) {
 
                 categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, 0))
@@ -60,30 +63,28 @@ class BrowseCategoryViewModel : ViewModel() {
 
             } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW) {
 
-                val colorData = colorsList.random()
-                val aBackgroundColor = Color.parseColor(colorData)
                 categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
                 itemType.add(categoryListItemType.itemType)
 
             } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA) {
 
-                val colorData = colorsList.random()
-                val aBackgroundColor = Color.parseColor(colorData)
                 categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
                 itemType.add(categoryListItemType.itemType)
 
-            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES) {
+            } else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_TRENDING) {
+
+                categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
+                itemType.add(categoryListItemType.itemType)
+
+            }
+            else if (categoryListItemType.itemType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES) {
                 if (numberEven(index)) {
 
-                    val colorData = colorsList.random()
-                    val aBackgroundColor = Color.parseColor(colorData)
                     categoriesNamesLeft.add(CategoryItemDataLeft(categoryListItemType.itemTitle, aBackgroundColor))
                     itemType.add(categoryListItemType.itemType)
 
                 } else {
 
-                    val colorData = colorsList.random()
-                    val aBackgroundColor = Color.parseColor(colorData)
                     categoriesNamesRight.add(CategoryItemDataRight(categoryListItemType.itemTitle, aBackgroundColor))
 
                 }

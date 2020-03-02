@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 12:35 PM
- * Last modified 2/20/20 12:32 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 3:36 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,14 +12,14 @@ package net.geeksempire.geeky.gify.BrowseGif.Extension
 
 import android.view.View
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
-import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
+import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequestResponse
 
-fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel: BrowseGifViewModel) {
+fun BrowseGifView.createClickListeners(queryType: String, categoryName: String, browseGifViewModel: BrowseGifViewModel) {
 
     exploreGifs.setOnClickListener {
 
@@ -37,9 +37,9 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
 
         BrowseGifViewModel.gifRequestOffset = BrowseGifViewModel.gifRequestOffset.plus(BrowseGifViewModel.gifRequestLimit)
 
-        GiphySearchParameter(categoryName).also {
+        GiphySearchParameter(queryType, categoryName).also {
 
-            EnqueueSearch()
+            EnqueueEndPointQuery()
                 .giphyJsonObjectRequest(applicationContext,
                     it,
                     JsonRequestResponse().jsonRequestResponseHandler(applicationContext, browseGifViewModel))
@@ -56,9 +56,9 @@ fun BrowseGifView.createClickListeners(categoryName: String, browseGifViewModel:
             previousGifPage.visibility = View.GONE
         }
 
-        GiphySearchParameter(categoryName).also {
+        GiphySearchParameter(queryType, categoryName).also {
 
-            EnqueueSearch()
+            EnqueueEndPointQuery()
                 .giphyJsonObjectRequest(applicationContext,
                     it,
                     JsonRequestResponse().jsonRequestResponseHandler(applicationContext, browseGifViewModel))

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 12:35 PM
- * Last modified 2/20/20 12:32 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 3:37 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import kotlinx.android.synthetic.main.offline_indicator.view.*
-import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueSearch
+import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.BrowseGifAdapter
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
@@ -35,7 +35,7 @@ import net.geeksempire.geeky.gify.GiphyExplore.GiphySearchParameter
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequestResponse
 
-fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifViewModel {
+fun BrowseGifView.createViewModelObserver (queryType: String, categoryName: String) : BrowseGifViewModel {
 
     gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
 
@@ -80,7 +80,12 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
                 gifList.adapter = browseGifAdapter
                 browseGifAdapter.notifyDataSetChanged()
 
-                nextGifPage.visibility = View.VISIBLE
+
+                nextGifPage.visibility = if (queryType == BrowseGifViewModel.QUERY_TYPE.QUERY_SEARCH) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
             }
 
             Log.d(this@createViewModelObserver.javaClass.simpleName, "GifsListData Observe")
@@ -110,9 +115,9 @@ fun BrowseGifView.createViewModelObserver (categoryName: String) : BrowseGifView
             }
         })
 
-    GiphySearchParameter(categoryName).also {
+    GiphySearchParameter(queryType, categoryName).also {
 
-        EnqueueSearch()
+        EnqueueEndPointQuery()
             .giphyJsonObjectRequest(applicationContext,
                 it,
                 JsonRequestResponse().jsonRequestResponseHandler(applicationContext, browseGifViewModel))

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/14/20 4:26 PM
- * Last modified 2/14/20 3:04 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 3:12 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,11 +26,17 @@ import org.json.JSONObject
 class BrowseGifViewModel : ViewModel() {
 
     companion object {
+        var gifQueryType: String = BrowseGifViewModel.QUERY_TYPE.QUERY_SEARCH
         const val gifRequestLimit: Int = 12
         var gifRequestOffset: Int = 0
         var gifRequestRating: String = "G"
         var gifRequestLanguage: String = "en"
 
+    }
+
+    object QUERY_TYPE {
+        const val QUERY_SEARCH = "Search"
+        const val QUERY_TREND = "Trend"
     }
 
     val gifsListData: MutableLiveData<ArrayList<BrowseGifItemData>> by lazy {

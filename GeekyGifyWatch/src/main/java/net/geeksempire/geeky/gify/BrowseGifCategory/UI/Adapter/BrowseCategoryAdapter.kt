@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 12:21 AM
- * Last modified 3/2/20 12:20 AM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 4:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.BrowseGif.UI.BrowseGifView
+import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.CategoryItemData
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Data.RecyclerViewRightLeftItem
 import net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter.Utils.BrowseGifCategoryType
@@ -179,11 +180,17 @@ class BrowseCategoryAdapter(var context: Context,
             viewHolder.trendingBackground.visibility = View.VISIBLE
             viewHolder.trendingTitle.visibility = View.VISIBLE
 
-
             viewHolder.trendingTitle.text = context.getString(R.string.trending)
 
             viewHolder.trendingTitle.setOnClickListener {
 
+                Intent(context, BrowseGifView::class.java).apply {
+                    this.putExtra("QueryType", BrowseGifViewModel.QUERY_TYPE.QUERY_TREND)
+                    this.putExtra("CategoryName", context.getString(R.string.trending))
+                    this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(this,
+                        ActivityOptions.makeCustomAnimation(context, R.anim.slide_from_right, 0).toBundle())
+                }
             }
 
         } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA
@@ -230,6 +237,7 @@ class BrowseCategoryAdapter(var context: Context,
                     Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
 
                     Intent(context, BrowseGifView::class.java).apply {
+                        this.putExtra("QueryType", BrowseGifViewModel.QUERY_TYPE.QUERY_SEARCH)
                         this.putExtra("CategoryName", categoryItemsData[position].categoryLeft?.categoryTitle.toString())
                         this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         context.startActivity(this,
@@ -284,6 +292,7 @@ class BrowseCategoryAdapter(var context: Context,
                     Log.d("BrowseCategoryAdapter", categoryItemsData[position].categoryRight?.categoryTitle.toString())
 
                     Intent(context, BrowseGifView::class.java).apply {
+                        this.putExtra("QueryType", BrowseGifViewModel.QUERY_TYPE.QUERY_SEARCH)
                         this.putExtra("CategoryName", categoryItemsData[position].categoryRight?.categoryTitle.toString())
                         this.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         context.startActivity(this,

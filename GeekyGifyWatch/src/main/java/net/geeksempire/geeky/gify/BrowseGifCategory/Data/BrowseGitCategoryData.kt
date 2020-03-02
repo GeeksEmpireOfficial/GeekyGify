@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 12:21 AM
- * Last modified 3/1/20 11:50 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 2:07 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,10 +64,10 @@ class BrowseGitCategoryData(var context: Context) {
 
         if (numberEven(gifCategoryList.size)) {
 
-            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_TRENDING, context.getString(R.string.trending)))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
 
-            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_TRENDING, BrowseGifCategoryType.GIF_ITEM_TRENDING))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, context.getString(R.string.addNewCategory)))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
 
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA, BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA))
@@ -76,16 +76,16 @@ class BrowseGitCategoryData(var context: Context) {
         } else {
 
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
-            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_TRENDING, context.getString(R.string.trending)))
 
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
-            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_TRENDING, BrowseGifCategoryType.GIF_ITEM_TRENDING))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, context.getString(R.string.addNewCategory)))
+
 
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA, BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA))
 
         }
-
 
         gifCategoryList
     }

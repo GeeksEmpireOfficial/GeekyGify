@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 12:21 AM
- * Last modified 3/1/20 11:49 PM
+ * Created by Elias Fazel on 3/2/20 4:50 AM
+ * Last modified 3/2/20 1:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -82,6 +82,17 @@ fun BrowseCategoryAdapter.browseGifCategoryTypeView(parentViewGroup: ViewGroup, 
                 LayoutInflater.from(context)
                     .inflate(
                         R.layout.browse_gif_category_item_view,
+                        parentViewGroup, false
+                    )
+            )
+
+        }
+        BrowseGifCategoryType.GIF_ITEM_TRENDING -> {
+
+            BrowseTrendingListViewHolder(
+                LayoutInflater.from(context)
+                    .inflate(
+                        R.layout.browse_gif_category_trending_item_view,
                         parentViewGroup, false
                     )
             )

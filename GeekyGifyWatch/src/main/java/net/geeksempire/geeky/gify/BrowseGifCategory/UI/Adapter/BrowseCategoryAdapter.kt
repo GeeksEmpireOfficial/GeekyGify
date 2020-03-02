@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 4:50 AM
- * Last modified 3/2/20 4:49 AM
+ * Created by Elias Fazel on 3/2/20 6:08 AM
+ * Last modified 3/2/20 6:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,6 +13,8 @@ package net.geeksempire.geeky.gify.BrowseGifCategory.UI.Adapter
 import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.View
@@ -140,8 +142,13 @@ class BrowseCategoryAdapter(var context: Context,
             val viewHolder = initialViewHolder as BrowseSearchListViewHolder
 
             viewHolder.searchIcon.visibility = View.VISIBLE
+
+
+            val animatable = context.getDrawable(R.drawable.animated_search_icon) as Animatable
+            animatable.start()
+
             Glide.with(context)
-                .load(R.drawable.gph_ic_search_pink)
+                .load(animatable as Drawable)
                 .into(viewHolder.searchIcon)
 
             viewHolder.searchIcon.setOnClickListener {

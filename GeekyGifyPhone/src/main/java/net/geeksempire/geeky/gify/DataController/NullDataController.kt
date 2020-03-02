@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/21/20 6:46 PM
- * Last modified 2/21/20 6:46 PM
+ * Created by Elias Fazel on 3/2/20 7:23 AM
+ * Last modified 3/2/20 7:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,8 @@ package net.geeksempire.geeky.gify.DataController
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -69,6 +71,13 @@ class NullDataController : Fragment() {
                 startActivity(this)
             }
         }
+
+        val animatable = context!!.getDrawable(R.drawable.animated_geeky_gify_text) as Animatable
+        animatable.start()
+
+        Glide.with(context!!)
+            .load(animatable as Drawable)
+            .into(appNameView)
 
         setupClickNullDataControllerAdsApp()
 

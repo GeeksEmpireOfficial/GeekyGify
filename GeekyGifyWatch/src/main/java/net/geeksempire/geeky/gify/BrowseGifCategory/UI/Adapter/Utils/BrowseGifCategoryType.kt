@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:43 PM
+ * Created by Elias Fazel on 3/2/20 12:21 AM
+ * Last modified 3/1/20 11:49 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,6 +32,10 @@ class BrowseGifCategoryType {
          * Category
          */
         const val GIF_ITEM_CATEGORIES = "Category-ItemType"
+        /**
+         * Trending
+         */
+        const val GIF_ITEM_TRENDING = "Trending-ItemType"
         /**
          * Add New Category
          */

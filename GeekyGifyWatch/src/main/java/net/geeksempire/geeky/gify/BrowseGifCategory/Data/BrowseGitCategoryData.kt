@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:10 PM
+ * Created by Elias Fazel on 3/2/20 12:21 AM
+ * Last modified 3/1/20 11:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -67,6 +67,9 @@ class BrowseGitCategoryData(var context: Context) {
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
 
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_TRENDING, BrowseGifCategoryType.GIF_ITEM_TRENDING))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
+
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA, BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
 
@@ -74,6 +77,9 @@ class BrowseGitCategoryData(var context: Context) {
 
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW, BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW))
+
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
+            gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_TRENDING, BrowseGifCategoryType.GIF_ITEM_TRENDING))
 
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_NULL, null))
             gifCategoryList.add(CategoryListItemType(BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA, BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA))

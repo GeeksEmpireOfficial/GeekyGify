@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/26/20 9:34 PM
- * Last modified 2/26/20 9:28 PM
+ * Created by Elias Fazel on 3/2/20 12:21 AM
+ * Last modified 3/2/20 12:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -67,8 +67,10 @@ class BrowseCategoryAdapter(var context: Context,
         } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW
             && viewHolderPayload is BrowseAddListViewHolder) {
 
-        }
-        else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA
+        } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_TRENDING
+            && viewHolderPayload is BrowseTrendingListViewHolder) {
+
+        } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA
             && viewHolderPayload is BrowseSocialMediaListViewHolder) {
 
         } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES
@@ -169,6 +171,21 @@ class BrowseCategoryAdapter(var context: Context,
                 }
             }
 
+        } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_TRENDING
+            && initialViewHolder is BrowseTrendingListViewHolder) {
+
+            val viewHolder = initialViewHolder as BrowseTrendingListViewHolder
+
+            viewHolder.trendingBackground.visibility = View.VISIBLE
+            viewHolder.trendingTitle.visibility = View.VISIBLE
+
+
+            viewHolder.trendingTitle.text = context.getString(R.string.trending)
+
+            viewHolder.trendingTitle.setOnClickListener {
+
+            }
+
         } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA
             && initialViewHolder is BrowseSocialMediaListViewHolder) {
 
@@ -189,8 +206,7 @@ class BrowseCategoryAdapter(var context: Context,
                         null,
                         BrowseGifCategoryType.GIF_ITEM_SOCIAL_MEDIA)
             }
-        }
-        else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES
+        } else if (categoryItemsData[position].viewType == BrowseGifCategoryType.GIF_ITEM_CATEGORIES
             && initialViewHolder is BrowseCategoryListViewHolder) {
 
             val viewHolder = initialViewHolder as BrowseCategoryListViewHolder

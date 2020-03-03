@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/16/20 10:45 AM
-  ~ Last modified 2/16/20 10:08 AM
+  ~ Created by Elias Fazel on 3/3/20 1:16 AM
+  ~ Last modified 3/3/20 1:11 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:imeOptions="actionDone"
         android:inputType="text"
-        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
         android:cursorVisible="false"
         android:textColor="@android:color/transparent"
         android:background="@android:color/transparent"/>

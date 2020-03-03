@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 6:28 AM
- * Last modified 3/3/20 6:28 AM
+ * Created by Elias Fazel on 3/3/20 6:52 AM
+ * Last modified 3/3/20 6:46 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Calculations.calculateThirtyPercent
+import net.geeksempire.geeky.gify.Utils.Favorite.FavoriteCheckpoint
 import net.geeksempire.geeky.gify.Utils.SharingProcess.ControlGifShare
 
 fun GifViewer.setupGifViewClickListener() {
@@ -111,18 +112,22 @@ fun GifViewer.setupGifViewClickListener() {
         false
     }
 
+    val favoriteCheckpoint: FavoriteCheckpoint = FavoriteCheckpoint(context!!)
+    if (favoriteCheckpoint.gifFavorited(gifLinkToDownload)) {
+        makeFavorite.isLiked = true
+    }
     makeFavorite.setOnLikeListener(object : OnLikeListener {
         override fun liked(likeButton: LikeButton?) {
             CoroutineScope(Dispatchers.IO).launch {
 
-
+                favoriteCheckpoint.favoriteIt(gifLinkToDownload)
             }
         }
 
         override fun unLiked(likeButton: LikeButton?) {
             CoroutineScope(Dispatchers.IO).launch {
 
-
+                favoriteCheckpoint.unFavoriteIt(gifLinkToDownload)
             }
         }
     })

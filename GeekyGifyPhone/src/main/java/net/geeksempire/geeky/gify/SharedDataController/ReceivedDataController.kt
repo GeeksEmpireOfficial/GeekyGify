@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/2/20 7:28 AM
- * Last modified 3/2/20 7:28 AM
+ * Created by Elias Fazel on 3/3/20 4:54 AM
+ * Last modified 3/3/20 3:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,6 +31,7 @@ import net.geeksempire.geeky.gify.SharedDataController.Extension.setupLoadingAni
 import net.geeksempire.geeky.gify.SharedDataController.Parameter.DataParameter
 import net.geeksempire.geeky.gify.Utils.Networking.DownloadGif
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 import java.io.File
 
@@ -92,7 +93,7 @@ class ReceivedDataController : Fragment() {
                         withContext(Dispatchers.Main) {
                             SnackbarView().snackBarViewFail((activity as AppCompatActivity),
                                 mainView,
-                                getString(R.string.downloadErrorOccurred))
+                                getString(R.string.downloadErrorOccurred), object: SnackbarInteraction{})
                         }
                     }
                 }
@@ -148,7 +149,7 @@ class ReceivedDataController : Fragment() {
 
                     SnackbarView().snackBarViewFail((activity as AppCompatActivity),
                         mainView,
-                        getString(R.string.downloadErrorOccurred))
+                        getString(R.string.downloadErrorOccurred), object: SnackbarInteraction{})
 
                 }
             }

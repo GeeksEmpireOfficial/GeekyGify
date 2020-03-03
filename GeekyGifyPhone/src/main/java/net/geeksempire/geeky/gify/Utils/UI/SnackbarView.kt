@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 6:19 PM
- * Last modified 2/19/20 6:12 PM
+ * Created by Elias Fazel on 3/3/20 4:54 AM
+ * Last modified 3/3/20 3:58 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -10,16 +10,15 @@
 
 package net.geeksempire.geeky.gify.Utils.UI
 
-import android.os.Handler
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 class SnackbarView {
 
-    fun snackBarViewFail(appCompatActivity: AppCompatActivity, viewGroup: ViewGroup, errorMessage: String) {
+    fun snackBarViewFail(context: Context, viewGroup: ViewGroup, errorMessage: String, snackbarInteraction: SnackbarInteraction) {
         val snackbarError = Snackbar.make(viewGroup, errorMessage, Snackbar.LENGTH_LONG)
         snackbarError.show()
         snackbarError.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
@@ -29,20 +28,17 @@ class SnackbarView {
 
             override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                 super.onDismissed(transientBottomBar, event)
+                snackbarInteraction.onSnackbarRemoved()
             }
         })
     }
 
-    fun snackBarViewSuccess(appCompatActivity: AppCompatActivity, viewGroup: ViewGroup, successMessage: String) {
+    fun snackBarViewSuccess(context: Context, viewGroup: ViewGroup, successMessage: String, snackbarInteraction: SnackbarInteraction) {
         val snackbarSuccess = Snackbar.make(viewGroup, successMessage, Snackbar.LENGTH_INDEFINITE)
         snackbarSuccess.show()
-        snackbarSuccess.setAction(appCompatActivity.getString(android.R.string.ok), object : View.OnClickListener{
+        snackbarSuccess.setAction(context.getString(android.R.string.ok), object : View.OnClickListener{
             override fun onClick(view: View?) {
-
-                Handler().postDelayed({
-                    appCompatActivity.finish()
-                }, 500)
-
+                snackbarInteraction.onActionClick()
             }
         })
         snackbarSuccess.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
@@ -52,7 +48,13 @@ class SnackbarView {
 
             override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                 super.onDismissed(transientBottomBar, event)
+                snackbarInteraction.onSnackbarRemoved()
             }
         })
     }
+}
+
+interface SnackbarInteraction {
+    fun onActionClick() {}
+    fun onSnackbarRemoved() {}
 }

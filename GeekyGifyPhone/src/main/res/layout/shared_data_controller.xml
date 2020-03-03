@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/18/20 5:56 PM
-  ~ Last modified 2/18/20 5:55 PM
+  ~ Created by Elias Fazel on 3/3/20 4:54 AM
+  ~ Last modified 3/3/20 4:33 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -55,5 +55,11 @@
         android:id="@+id/fragmentPlaceHolder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <FrameLayout
+        android:id="@+id/fragmentPlaceHolderGifViewer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 7:28 AM
- * Last modified 3/2/20 7:28 AM
+ * Created by Elias Fazel on 3/3/20 4:54 AM
+ * Last modified 3/3/20 4:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,26 +11,21 @@
 package net.geeksempire.geeky.gify.SharedDataController
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.Animatable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.null_data_controller.*
+import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.Extension.setupClickNullDataControllerAdsApp
-import net.geeksempire.geeky.gify.Utils.UI.GlowAnimation
-import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
+import net.geeksempire.geeky.gify.SharedDataController.Extension.setupClickNullDataControllerUI
 
-class NullDataController : Fragment() {
+open class NullDataController : Fragment() {
+
+    val gifViewer: Fragment = GifViewer(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +39,6 @@ class NullDataController : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val glowAnimation = GlowAnimation(context!!)
-
-        SnackbarView()
-            .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.nullData))
-
-        Handler().postDelayed({
-            Glide.with(context!!)
-                .asGif()
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .load("https://media0.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif")
-                .into(waitingView)
-        }, 357)
 
         facebookIcon.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookPageLink))).apply {
@@ -72,51 +54,7 @@ class NullDataController : Fragment() {
             }
         }
 
-        val animatable = context!!.getDrawable(R.drawable.animated_geeky_gify_text) as Animatable
-        animatable.start()
-
-        Glide.with(context!!)
-            .load(animatable as Drawable)
-            .into(appNameView)
-
         setupClickNullDataControllerAdsApp()
-
-        with(facebookIcon) {
-            glowAnimation.valueAnimatorLoopTint(
-                this,
-                startValueColor = context!!.getColor(R.color.light), endValueColor = Color.TRANSPARENT,
-                startDuration = 1777, endDuration = 777
-            )
-        }
-
-        with(rateReviewIcon) {
-            glowAnimation.valueAnimatorLoopTint(
-                this,
-                startValueColor = context!!.getColor(R.color.light), endValueColor = Color.TRANSPARENT,
-                startDuration = 1777, endDuration = 777
-            )
-        }
-
-        with(floatItName) {
-            glowAnimation.shadowValueAnimatorLoop(
-                view = this,
-                startValueShadow = 0, endValueShadow = 29,
-                startDuration = 1333, endDuration = 777,
-                shadowColor = context!!.getColor(R.color.lighter),
-                shadowX = 0f,
-                shadowY = 0f
-            )
-        }
-
-        with(superShortcutsName) {
-            glowAnimation.shadowValueAnimatorLoop(
-                view = this,
-                startValueShadow = 0, endValueShadow = 29,
-                startDuration = 1333, endDuration = 777,
-                shadowColor = context!!.getColor(R.color.lighter),
-                shadowX = 0f,
-                shadowY = 0f
-            )
-        }
+        setupClickNullDataControllerUI()
     }
 }

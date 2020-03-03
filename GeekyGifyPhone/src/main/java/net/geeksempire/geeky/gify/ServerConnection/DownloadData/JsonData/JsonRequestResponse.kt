@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 2:00 AM
- * Last modified 3/3/20 1:40 AM
+ * Created by Elias Fazel on 3/3/20 4:54 AM
+ * Last modified 3/3/20 4:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,7 +26,7 @@ class JsonRequestResponse {
                     GetResources(context).getNeonColors())
             }
 
-            override fun jsonRequestResponseFailureHandler(jsonError: String) {
+            override fun jsonRequestResponseFailureHandler(jsonError: String?) {
 
                 browseGifViewModel.gifsListError.postValue(jsonError)
             }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 4:23 AM
+ * Created by Elias Fazel on 3/3/20 5:11 AM
+ * Last modified 3/3/20 4:59 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -211,10 +211,10 @@ fun NullDataController.setupClickNullDataControllerUI() {
             object : SnackbarInteraction {
                 override fun onActionClick() {
                     waitingView.alpha = 0.5f
-
-                    TrendingGif(this@setupClickNullDataControllerUI).initial()
                 }
             })
+
+    TrendingGif(this@setupClickNullDataControllerUI).initial()
 
     val animatable = context!!.getDrawable(R.drawable.animated_geeky_gify_text) as Animatable
     animatable.start()

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 4:54 AM
+ * Created by Elias Fazel on 3/3/20 5:11 AM
+ * Last modified 3/3/20 4:57 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -56,8 +56,8 @@ fun GifViewer.setupGifViewClickListener() {
             shareGif.startAnimation(animationSlideOut)
             shareGif.visibility = View.GONE
 
-            makeFavorite.startAnimation(animationSlideOut)
-            makeFavorite.visibility = View.GONE
+//            makeFavorite.startAnimation(animationSlideOut)
+//            makeFavorite.visibility = View.GONE
 
             /*User Profile*/
             userAvatarView.startAnimation(animationSlideOut)
@@ -80,8 +80,8 @@ fun GifViewer.setupGifViewClickListener() {
             shareGif.startAnimation(animationSlideIn)
             shareGif.visibility = View.VISIBLE
 
-            makeFavorite.startAnimation(animationSlideIn)
-            makeFavorite.visibility = View.VISIBLE
+//            makeFavorite.startAnimation(animationSlideIn)
+//            makeFavorite.visibility = View.VISIBLE
 
             /*User Profile*/
             userAvatarView.startAnimation(animationSlideIn)

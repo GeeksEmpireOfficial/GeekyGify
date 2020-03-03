@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:11 AM
- * Last modified 3/3/20 4:59 AM
+ * Created by Elias Fazel on 3/3/20 5:48 AM
+ * Last modified 3/3/20 5:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
@@ -192,25 +191,13 @@ fun NullDataController.setupClickNullDataControllerUI() {
         .asGif()
         .diskCacheStrategy(DiskCacheStrategy.DATA)
         .load("https://media0.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif")
-        .addListener(object : RequestListener<GifDrawable> {
-            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<GifDrawable>?, isFirstResource: Boolean): Boolean {
-
-                return true
-            }
-
-            override fun onResourceReady(resource: GifDrawable?, model: Any?, target: Target<GifDrawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-
-                return true
-            }
-
-        })
         .into(waitingView)
 
     SnackbarView()
         .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.nullData),
             object : SnackbarInteraction {
                 override fun onActionClick() {
-                    waitingView.alpha = 0.5f
+                    waitingView.setImageDrawable(null)
                 }
             })
 

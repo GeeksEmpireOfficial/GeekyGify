@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:11 AM
- * Last modified 3/3/20 5:06 AM
+ * Created by Elias Fazel on 3/3/20 5:48 AM
+ * Last modified 3/3/20 5:38 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -31,4 +31,13 @@ fun displayY(context: Context): Int {
 
 fun columnCount(itemWidth: Int, context: Context): Int {
     return (displayX(context) / DpToPixel(itemWidth.toFloat(), context)).toInt()
+}
+
+fun rowCount(parentHeight: Int, itemHeight: Int): Int {
+    val rowResult = parentHeight / itemHeight
+    return if (rowResult == 0) {
+        1
+    } else {
+        rowResult
+    }
 }

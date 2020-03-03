@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:11 AM
- * Last modified 3/3/20 5:04 AM
+ * Created by Elias Fazel on 3/3/20 5:48 AM
+ * Last modified 3/3/20 5:48 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,9 +17,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.null_data_controller.*
 import kotlinx.android.synthetic.main.shared_data_controller.*
 import kotlinx.android.synthetic.main.trending_gif.*
 import kotlinx.android.synthetic.main.trending_gif.mainView
+import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
@@ -29,7 +31,8 @@ import net.geeksempire.geeky.gify.ServerConnection.DownloadData.GiphySearchParam
 import net.geeksempire.geeky.gify.ServerConnection.ViewModel.BrowseGifViewModel
 import net.geeksempire.geeky.gify.ServerConnection.ViewModel.GifUserProfile
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
-import net.geeksempire.geeky.gify.Utils.Calculations.columnCount
+import net.geeksempire.geeky.gify.Utils.Calculations.DpToPixel
+import net.geeksempire.geeky.gify.Utils.Calculations.rowCount
 import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequestResponseInterface
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
@@ -37,8 +40,14 @@ import org.json.JSONObject
 
 class TrendingGif (var nullDataController: NullDataController) {
 
-    fun initial() {
-        nullDataController.trendingList.layoutManager = GridLayoutManager(nullDataController.context!!, columnCount(87, nullDataController.context!!), RecyclerView.VERTICAL, false)
+    val context = nullDataController.context!!
+
+    fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+        delay(1000)
+
+        nullDataController.trendingList.layoutManager = GridLayoutManager(context,
+            rowCount(nullDataController.trendingGifInclude.height, DpToPixel(87f, context).toInt()),
+            RecyclerView.HORIZONTAL, false)
 
         val browseGifViewModel =
             ViewModelProvider(nullDataController).get(BrowseGifViewModel::class.java)
@@ -47,7 +56,7 @@ class TrendingGif (var nullDataController: NullDataController) {
             categoryName = null,
             queryType = EndPointAddress.QUERY_TYPE.QUERY_TREND
         ).also {
-            EnqueueEndPointQuery().giphyJsonObjectRequest(nullDataController.context!!, it,
+            EnqueueEndPointQuery().giphyJsonObjectRequest(context, it,
                 object : JsonRequestResponseInterface {
                     override fun jsonRequestResponseSuccessHandler(
                         rawDataJsonObject: JSONObject,
@@ -103,9 +112,9 @@ class TrendingGif (var nullDataController: NullDataController) {
 
         browseGifViewModel.gifsListError.observe(nullDataController,
             Observer {
-                SnackbarView().snackBarViewFail(nullDataController.context!!,
+                SnackbarView().snackBarViewFail(context,
                     nullDataController.mainView,
-                    nullDataController.context!!.getString(R.string.downloadErrorOccurred), object : SnackbarInteraction {})
+                    context.getString(R.string.downloadErrorOccurred), object : SnackbarInteraction {})
             })
     }
 }

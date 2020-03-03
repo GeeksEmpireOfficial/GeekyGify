@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/3/20 4:54 AM
-  ~ Last modified 3/3/20 4:54 AM
+  ~ Created by Elias Fazel on 3/3/20 5:48 AM
+  ~ Last modified 3/3/20 5:27 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -17,12 +17,87 @@
     android:padding="19dp"
     android:background="@android:color/transparent">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/trendingIconStart"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingEnd="13dp"
+        android:paddingStart="13dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_normal"
+
+        apps:lottie_rawRes="@raw/trending"
+        apps:lottie_loop="true"
+        apps:lottie_autoPlay="true"
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/trendingIconEnd"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingEnd="13dp"
+        android:paddingStart="13dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_normal"
+
+        apps:lottie_rawRes="@raw/trending"
+        apps:lottie_loop="true"
+        apps:lottie_autoPlay="true"
+
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/trendingTitle"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/trending"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_normal"
+
+        apps:autoSizeTextType="uniform"
+        apps:autoSizeMaxTextSize="23sp"
+        apps:autoSizeMinTextSize="12sp"
+        apps:autoSizeStepGranularity="1sp"
+
+        apps:layout_constraintStart_toEndOf="@id/trendingIconStart"
+        apps:layout_constraintEnd_toStartOf="@id/trendingIconEnd"
+        apps:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/trendingList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/trendingTitle"
         apps:layout_constraintStart_toStartOf="parent"
         apps:layout_constraintEnd_toEndOf="parent"/>
 

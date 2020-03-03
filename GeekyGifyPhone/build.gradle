@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 3:46 AM
+ * Created by Elias Fazel on 3/3/20 6:28 AM
+ * Last modified 3/3/20 5:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -88,6 +88,8 @@ static def getDateDay() {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(path: ':LikeButtonLibrary')
 
 
     implementation 'com.google.firebase:firebase-analytics:17.2.3'

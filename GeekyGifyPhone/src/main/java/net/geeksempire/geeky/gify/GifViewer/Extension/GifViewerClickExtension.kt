@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:11 AM
- * Last modified 3/3/20 4:57 AM
+ * Created by Elias Fazel on 3/3/20 6:28 AM
+ * Last modified 3/3/20 6:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,10 +17,16 @@ import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.gif_view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Calculations.calculateThirtyPercent
+import net.geeksempire.geeky.gify.Utils.SharingProcess.ControlGifShare
 
 fun GifViewer.setupGifViewClickListener() {
 
@@ -56,8 +62,8 @@ fun GifViewer.setupGifViewClickListener() {
             shareGif.startAnimation(animationSlideOut)
             shareGif.visibility = View.GONE
 
-//            makeFavorite.startAnimation(animationSlideOut)
-//            makeFavorite.visibility = View.GONE
+            makeFavorite.startAnimation(animationSlideOut)
+            makeFavorite.visibility = View.GONE
 
             /*User Profile*/
             userAvatarView.startAnimation(animationSlideOut)
@@ -80,8 +86,8 @@ fun GifViewer.setupGifViewClickListener() {
             shareGif.startAnimation(animationSlideIn)
             shareGif.visibility = View.VISIBLE
 
-//            makeFavorite.startAnimation(animationSlideIn)
-//            makeFavorite.visibility = View.VISIBLE
+            makeFavorite.startAnimation(animationSlideIn)
+            makeFavorite.visibility = View.VISIBLE
 
             /*User Profile*/
             userAvatarView.startAnimation(animationSlideIn)
@@ -105,49 +111,28 @@ fun GifViewer.setupGifViewClickListener() {
         false
     }
 
-//    FavoriteCheckpoint(context!!)
-//        .checkIfFavorite(makeFavorite, gifLinkToDownload)
-//    makeFavorite.setOnLikeListener(object : OnLikeListener {
-//        override fun liked(likeButton: LikeButton?) {
-//            CoroutineScope(Dispatchers.IO).launch {
-//
-//                FavoriteIt(context!!)
-//                    .addFavoriteGifDatabase(
-//                        gifLinkToDownload, gifPreviewLink,
-//                        gifUserName, gifUserAvatarUrl, gifUserIsVerified).await()
-//
-//                delay(555)
-//                if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 1) {
-//                    Log.d("FavoriteDatabaseModified", "First Item Added")
-//
-//                    BrowseCategoryViewModel.favoriteFirstLastModified.postValue(true)
-//                }
-//            }
-//        }
-//
-//        override fun unLiked(likeButton: LikeButton?) {
-//            CoroutineScope(Dispatchers.IO).launch {
-//
-//                UnfavoriteIt(context!!)
-//                    .removeFavoriteGifDatabase(
-//                        gifLinkToDownload).await()
-//
-//                delay(555)
-//                if (FavoriteCheckpoint(context!!).favoriteDatabaseCount() == 0) {
-//                    Log.d("FavoriteDatabaseModified", "Last Item Removed")
-//
-//                    BrowseCategoryViewModel.favoriteFirstLastModified.postValue(true)
-//                }
-//            }
-//        }
-//    })
-//
-//    shareGif.setOnClickListener {
-//
-//        ControlGifShare(activity!!)
-//            .initializeGifShare(gifLinkToDownload,
-//                context?.getString(R.string.app_name)
-//            )
-//
-//    }
+    makeFavorite.setOnLikeListener(object : OnLikeListener {
+        override fun liked(likeButton: LikeButton?) {
+            CoroutineScope(Dispatchers.IO).launch {
+
+
+            }
+        }
+
+        override fun unLiked(likeButton: LikeButton?) {
+            CoroutineScope(Dispatchers.IO).launch {
+
+
+            }
+        }
+    })
+
+    shareGif.setOnClickListener {
+
+        ControlGifShare(activity!!)
+            .initializeGifShare(gifLinkToDownload,
+                context?.getString(R.string.app_name)
+            )
+
+    }
 }

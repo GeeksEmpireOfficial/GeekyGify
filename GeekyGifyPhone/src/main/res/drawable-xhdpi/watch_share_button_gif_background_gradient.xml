@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/3/20 5:11 AM
-  ~ Last modified 3/3/20 4:54 AM
+  ~ Created by Elias Fazel on 3/3/20 6:28 AM
+  ~ Last modified 3/3/20 6:22 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -18,13 +18,10 @@
         <shape
             android:shape="rectangle">
 
-            <corners
-                android:topLeftRadius="113dp"
-                android:bottomLeftRadius="113dp"/>
             <gradient
-                android:startColor="@color/default_color_game_transparent"
+                android:startColor="@color/default_color_game_light"
                 android:centerColor="@color/dark_transparent"
-                android:endColor="@color/default_color_game_transparent"
+                android:endColor="@color/default_color_game_light"
                 android:angle="90"/>
         </shape>
     </item>
@@ -33,9 +30,6 @@
         <shape
             android:shape="rectangle">
 
-            <corners
-                android:topLeftRadius="113dp"
-                android:bottomLeftRadius="113dp"/>
             <solid
                 android:color="@color/default_color_light"/>
         </shape>

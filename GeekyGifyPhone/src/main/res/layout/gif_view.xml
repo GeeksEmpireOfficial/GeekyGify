@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/3/20 5:48 AM
-  ~ Last modified 3/3/20 5:45 AM
+  ~ Created by Elias Fazel on 3/3/20 6:28 AM
+  ~ Last modified 3/3/20 6:24 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -14,7 +14,7 @@
     android:id="@+id/mainViewItem"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@drawable/gif_view_background_gradient">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/progressBarGifView"
@@ -90,9 +90,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/shareGif"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_marginEnd="3dp"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="7dp"
         android:src="@drawable/icon_share"
         android:visibility="gone"
 
@@ -132,35 +132,35 @@
             apps:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <com.like.LikeButton xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--        android:id="@+id/makeFavorite"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="3dp"-->
-<!--        android:visibility="gone"-->
+    <com.like.LikeButton xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/makeFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:visibility="gone"
 
-<!--        app:icon_type="heart"-->
-<!--        app:icon_size="51dp"-->
-<!--        app:like_drawable="@drawable/icon_favorite_on"-->
-<!--        app:unlike_drawable="@drawable/icon_favorite"-->
-<!--        app:circle_start_color="@color/purple"-->
-<!--        app:circle_end_color="@color/yellow"-->
-<!--        app:dots_primary_color="@color/pink"-->
-<!--        app:dots_secondary_color="@color/default_color_light"-->
+        app:icon_type="heart"
+        app:icon_size="57dp"
+        app:like_drawable="@drawable/icon_favorite_on"
+        app:unlike_drawable="@drawable/icon_favorite"
+        app:circle_start_color="@color/purple"
+        app:circle_end_color="@color/yellow"
+        app:dots_primary_color="@color/pink"
+        app:dots_secondary_color="@color/default_color_light"
 
-<!--        app:anim_scale_factor="1"-->
-<!--        app:is_enabled="true"-->
-<!--        app:liked="false"-->
+        app:anim_scale_factor="1"
+        app:is_enabled="true"
+        app:liked="false"
 
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/closeFragment"
-        android:layout_width="33dp"
-        android:layout_height="33dp"
-        android:layout_margin="3dp"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_margin="7dp"
         android:scaleType="fitCenter"
         android:src="@drawable/close_button"
 

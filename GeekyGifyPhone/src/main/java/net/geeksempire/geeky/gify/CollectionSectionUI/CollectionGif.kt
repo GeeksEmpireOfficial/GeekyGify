@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 10:10 AM
- * Last modified 3/4/20 10:03 AM
+ * Created by Elias Fazel on 3/4/20 10:48 AM
+ * Last modified 3/4/20 10:47 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,7 @@ import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.ServerConnection.DownloadData.UserData.RetrieveUserInformation
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.Utils.Calculations.DpToPixel
 import net.geeksempire.geeky.gify.Utils.Calculations.rowCount
@@ -32,7 +33,6 @@ import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 import net.geeksempire.geeky.gify.ViewModel.BrowseGifViewModel
-import net.geeksempire.geeky.gify.ViewModel.GifUserProfile
 import java.io.File
 
 class CollectionGif(var nullDataController: NullDataController) {
@@ -69,45 +69,43 @@ class CollectionGif(var nullDataController: NullDataController) {
         val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress =
             object : RecyclerViewGifBrowseItemPress {
 
-                override fun itemPressed(
-                    gifUserProfile: GifUserProfile?,
-                    gifOriginalUri: String, linkToGif: String, gifPreviewUri: String
-                ) {
+                override fun itemPressedCollection(gifDrawable: File, gifId: String) {
+                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
-                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility =
-                        View.VISIBLE
+                    with(RetrieveUserInformation()) {
+                        this.getData(gifId)
 
-                    nullDataController.gifViewer.arguments = Bundle().apply {
-                        putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
-                        putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, gifPreviewUri)
-                        putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, gifOriginalUri)
+                        nullDataController.gifViewer.arguments = Bundle().apply {
+                            putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
+                            putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, this@with.jsonObjectImagePreviewLink)
+                            putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL,  this@with.jsonObjectImageOriginalLink)
 
-                        gifUserProfile?.let { gifUserProfile ->
-                            putString(
-                                GiphyJsonDataStructure.DATA_USER_NAME,
-                                gifUserProfile.userName
-                            )
-                            putString(
-                                GiphyJsonDataStructure.DATA_USER_AVATAR_URL,
-                                gifUserProfile.userAvatarUrl
-                            )
-                            putBoolean(
-                                GiphyJsonDataStructure.DATA_USER_IS_VERIFIED,
-                                gifUserProfile.isUserVerified
-                            )
+                            this@with.gifUserProfile.let { gifUserProfile ->
+                                putString(
+                                    GiphyJsonDataStructure.DATA_USER_NAME,
+                                    this@with.gifUserProfile.userName
+                                )
+                                putString(
+                                    GiphyJsonDataStructure.DATA_USER_AVATAR_URL,
+                                    this@with.gifUserProfile.userAvatarUrl
+                                )
+                                putBoolean(
+                                    GiphyJsonDataStructure.DATA_USER_IS_VERIFIED,
+                                    this@with.gifUserProfile.isUserVerified
+                                )
+                            }
                         }
+
+                        (nullDataController.activity as AppCompatActivity).supportFragmentManager
+                            .beginTransaction()
+                            .setCustomAnimations(R.anim.slide_from_right, 0)
+                            .replace(
+                                R.id.fragmentPlaceHolderGifViewer,
+                                nullDataController.gifViewer,
+                                "GIF VIEWER"
+                            )
+                            .commit()
                     }
-
-                    (nullDataController.activity as AppCompatActivity).supportFragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.slide_from_right, 0)
-                        .replace(
-                            R.id.fragmentPlaceHolderGifViewer,
-                            nullDataController.gifViewer,
-                            "GIF VIEWER"
-                        )
-                        .commit()
-
                 }
             }
 

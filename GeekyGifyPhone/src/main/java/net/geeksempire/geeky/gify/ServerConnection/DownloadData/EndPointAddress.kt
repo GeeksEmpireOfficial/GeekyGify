@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 4:03 AM
+ * Created by Elias Fazel on 3/4/20 10:48 AM
+ * Last modified 3/4/20 10:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -52,5 +52,10 @@ class EndPointAddress {
                 "api_key=${EndPointAddress.GIPHY_ENDPOINT_API_KEY}" +
                 "&limit=${giphySearchParameter.requestLimit}" +
                 "&rating=${giphySearchParameter.searchRating}"
+    }
+
+    fun generateGiphyUserData(gifId: String) : String {
+
+        return "https://api.giphy.com/v1/gifs/${gifId}?api_key=${EndPointAddress.GIPHY_ENDPOINT_API_KEY}"
     }
 }

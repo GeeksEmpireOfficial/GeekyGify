@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 9:55 AM
- * Last modified 3/4/20 9:55 AM
+ * Created by Elias Fazel on 3/4/20 10:48 AM
+ * Last modified 3/4/20 10:19 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -77,7 +77,7 @@ class TrendingGif(var nullDataController: NullDataController) {
         val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress =
             object : RecyclerViewGifBrowseItemPress {
 
-                override fun itemPressed(
+                override fun itemPressedTrending(
                     gifUserProfile: GifUserProfile?,
                     gifOriginalUri: String, linkToGif: String, gifPreviewUri: String
                 ) {

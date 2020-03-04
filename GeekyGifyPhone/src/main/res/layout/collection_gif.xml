@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/4/20 9:55 AM
-  ~ Last modified 3/4/20 9:51 AM
+  ~ Created by Elias Fazel on 3/4/20 10:10 AM
+  ~ Last modified 3/4/20 10:10 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -104,7 +104,7 @@
             android:id="@+id/collectionList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="87dp"
+            android:paddingBottom="105dp"
             android:isScrollContainer="false"
             android:nestedScrollingEnabled="false"/>
     </androidx.core.widget.NestedScrollView>

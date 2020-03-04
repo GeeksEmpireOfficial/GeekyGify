@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 9:55 AM
- * Last modified 3/4/20 9:40 AM
+ * Created by Elias Fazel on 3/4/20 10:10 AM
+ * Last modified 3/4/20 10:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,7 +46,7 @@ class CollectionGif(var nullDataController: NullDataController) {
             context,
             rowCount(
                 nullDataController.collectionGifInclude.height,
-                DpToPixel(87f, context).toInt()
+                DpToPixel(105f, context).toInt()
             ),
             RecyclerView.HORIZONTAL, false
         )

@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/3/20 4:54 AM
-  ~ Last modified 3/3/20 4:54 AM
+  ~ Created by Elias Fazel on 3/4/20 9:55 AM
+  ~ Last modified 3/4/20 9:51 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -17,13 +17,95 @@
     android:padding="19dp"
     android:background="@android:color/transparent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/collectionList"
-        android:layout_width="match_parent"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/collectionIconStart"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingEnd="1dp"
+        android:paddingStart="1dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_normal"
+
+        apps:lottie_rawRes="@raw/favorite"
+        apps:lottie_loop="true"
+        apps:lottie_autoPlay="true"
+
+        apps:layout_constraintStart_toStartOf="parent"
+        apps:layout_constraintTop_toTopOf="parent" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/collectionIconEnd"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingEnd="1dp"
+        android:paddingStart="1dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_normal"
+
+        apps:lottie_rawRes="@raw/favorite"
+        apps:lottie_loop="true"
+        apps:lottie_autoPlay="true"
+
+        apps:layout_constraintEnd_toEndOf="parent"
+        apps:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/collectionTitle"
+        android:layout_width="0dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:gravity="center"
+        android:paddingStart="3dp"
+        android:paddingEnd="3dp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="3"
+        android:scrollHorizontally="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/collection"
+        android:textColor="@color/light"
+        android:fontFamily="@font/pixelate_normal"
+
+        apps:autoSizeTextType="uniform"
+        apps:autoSizeMaxTextSize="23sp"
+        apps:autoSizeMinTextSize="12sp"
+        apps:autoSizeStepGranularity="1sp"
+
+        apps:layout_constraintStart_toEndOf="@id/collectionIconStart"
+        apps:layout_constraintEnd_toStartOf="@id/collectionIconEnd"
+        apps:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        apps:layout_constraintTop_toTopOf="parent"
+        apps:layout_constraintTop_toBottomOf="@id/collectionTitle"
         apps:layout_constraintStart_toStartOf="parent"
-        apps:layout_constraintEnd_toEndOf="parent"/>
+        apps:layout_constraintEnd_toEndOf="parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/collectionList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="87dp"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false"/>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

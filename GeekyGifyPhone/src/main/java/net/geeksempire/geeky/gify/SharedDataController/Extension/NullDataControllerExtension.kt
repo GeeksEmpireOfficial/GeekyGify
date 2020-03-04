@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:48 AM
- * Last modified 3/3/20 5:48 AM
+ * Created by Elias Fazel on 3/4/20 9:55 AM
+ * Last modified 3/4/20 9:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.null_data_controller.*
+import net.geeksempire.geeky.gify.CollectionSectionUI.CollectionGif
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.TrendingSectionUI.TrendingGif
@@ -185,7 +186,7 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
     }
 }
 
-fun NullDataController.setupClickNullDataControllerUI() {
+fun NullDataController.setupNullDataControllerUI() {
 
     Glide.with(context!!)
         .asGif()
@@ -194,14 +195,17 @@ fun NullDataController.setupClickNullDataControllerUI() {
         .into(waitingView)
 
     SnackbarView()
-        .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.nullData),
+        .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.explore), getString(R.string.nullData),
             object : SnackbarInteraction {
                 override fun onActionClick() {
                     waitingView.setImageDrawable(null)
+
                 }
             })
 
-    TrendingGif(this@setupClickNullDataControllerUI).initial()
+    TrendingGif(this@setupNullDataControllerUI).initial()
+
+    CollectionGif(this@setupNullDataControllerUI).initial()
 
     val animatable = context!!.getDrawable(R.drawable.animated_geeky_gify_text) as Animatable
     animatable.start()

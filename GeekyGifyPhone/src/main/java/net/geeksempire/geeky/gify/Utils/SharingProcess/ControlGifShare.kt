@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 6:58 AM
- * Last modified 3/4/20 6:13 AM
+ * Created by Elias Fazel on 3/4/20 9:55 AM
+ * Last modified 3/4/20 9:45 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -110,7 +110,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                 Log.d(this@ControlGifShare.javaClass.simpleName, "Data Sent Successfully")
 
                 SnackbarView()
-                    .snackBarViewSuccess(fragmentActivity, fragmentActivity.mainViewItem,  fragmentActivity.getString(R.string.dataSendToWatchDone),
+                    .snackBarViewSuccess(fragmentActivity, fragmentActivity.mainViewItem,  fragmentActivity.getString(android.R.string.ok), fragmentActivity.getString(R.string.dataSendToWatchDone),
                         object : SnackbarInteraction {
                             override fun onActionClick() {
 

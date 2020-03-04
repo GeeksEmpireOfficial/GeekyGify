@@ -8,7 +8,7 @@
  * https://opensource.org/licenses/MIT
  */
 
-package net.geeksempire.geeky.gify.TrendingSectionUI
+package net.geeksempire.geeky.gify.CollectionSectionUI
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -19,43 +19,43 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.UI.RecyclerView.BrowseGifListViewHolder
-import net.geeksempire.geeky.gify.ViewModel.BrowseTrendingGifItemData
+import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
 
-class TrendingGifAdapter(var trendingGif: TrendingGif,
-                         var recyclerViewGifBrowseItemPress: RecyclerViewGifBrowseItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CollectionGifAdapter(var collectionGif: CollectionGif,
+                           private var recyclerViewGifBrowseItemPress: RecyclerViewGifBrowseItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val trendingGifAdapterData = ArrayList<BrowseTrendingGifItemData>()
+    val collectionGifAdapterData = ArrayList<BrowseCollectionGifItemData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return BrowseGifListViewHolder(LayoutInflater.from(trendingGif.nullDataController.context).inflate(R.layout.browse_gif_item_view, parent, false))
+        return BrowseGifListViewHolder(LayoutInflater.from(collectionGif.nullDataController.context).inflate(R.layout.browse_gif_item_view, parent, false))
     }
 
     override fun getItemCount(): Int {
 
-        return trendingGifAdapterData.size
+        return collectionGifAdapterData.size
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
 
         when (viewHolder) {
             is BrowseGifListViewHolder -> {
-                viewHolder.mainView.setBackgroundColor(Color.parseColor(trendingGifAdapterData[position].backgroundColor))
+                viewHolder.mainView.setBackgroundColor(Color.parseColor(collectionGifAdapterData[position].backgroundColor))
 
-                Glide.with(trendingGif.nullDataController.context!!)
+                Glide.with(collectionGif.nullDataController.context!!)
                     .asGif()
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
-                    .load(trendingGifAdapterData[position].gifPreviewUrl)
+                    .load(collectionGifAdapterData[position].gifDrawable)
                     .into(viewHolder.gifPreview)
 
                 viewHolder.gifPreview.setOnClickListener {
 
-                    recyclerViewGifBrowseItemPress.itemPressed(
-                        trendingGifAdapterData[position].gifUserProfile,
-                        trendingGifAdapterData[position].gifOriginalUri,
-                        trendingGifAdapterData[position].linkToGif,
-                        trendingGifAdapterData[position].gifPreviewUrl
-                    )
+//                    recyclerViewGifBrowseItemPress.itemPressed(
+//                        collectionGifAdapterData[position].gifUserProfile,
+//                        collectionGifAdapterData[position].gifOriginalUri,
+//                        collectionGifAdapterData[position].linkToGif,
+//                        collectionGifAdapterData[position].gifPreviewUrl
+//                    )
 
                 }
 

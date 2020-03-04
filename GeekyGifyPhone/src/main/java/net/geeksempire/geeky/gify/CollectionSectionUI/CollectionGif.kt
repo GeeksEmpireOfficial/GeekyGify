@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 10:48 AM
- * Last modified 3/4/20 10:47 AM
+ * Created by Elias Fazel on 3/4/20 11:11 AM
+ * Last modified 3/4/20 11:10 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -73,38 +73,40 @@ class CollectionGif(var nullDataController: NullDataController) {
                     nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                     with(RetrieveUserInformation()) {
-                        this.getData(gifId)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            this@with.getData(gifId).await()
 
-                        nullDataController.gifViewer.arguments = Bundle().apply {
-                            putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
-                            putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, this@with.jsonObjectImagePreviewLink)
-                            putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL,  this@with.jsonObjectImageOriginalLink)
+                            nullDataController.gifViewer.arguments = Bundle().apply {
+                                putString(GiphyJsonDataStructure.DATA_URL, this@with.jsonObjectImageOriginalLink)
+                                putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, this@with.jsonObjectImagePreviewLink)
+                                putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL,  this@with.jsonObjectImageOriginalLink)
 
-                            this@with.gifUserProfile.let { gifUserProfile ->
-                                putString(
-                                    GiphyJsonDataStructure.DATA_USER_NAME,
-                                    this@with.gifUserProfile.userName
-                                )
-                                putString(
-                                    GiphyJsonDataStructure.DATA_USER_AVATAR_URL,
-                                    this@with.gifUserProfile.userAvatarUrl
-                                )
-                                putBoolean(
-                                    GiphyJsonDataStructure.DATA_USER_IS_VERIFIED,
-                                    this@with.gifUserProfile.isUserVerified
-                                )
+                                this@with.gifUserProfile?.let { gifUserProfile ->
+                                    putString(
+                                        GiphyJsonDataStructure.DATA_USER_NAME,
+                                        gifUserProfile.userName
+                                    )
+                                    putString(
+                                        GiphyJsonDataStructure.DATA_USER_AVATAR_URL,
+                                        gifUserProfile.userAvatarUrl
+                                    )
+                                    putBoolean(
+                                        GiphyJsonDataStructure.DATA_USER_IS_VERIFIED,
+                                        gifUserProfile.isUserVerified
+                                    )
+                                }
                             }
-                        }
 
-                        (nullDataController.activity as AppCompatActivity).supportFragmentManager
-                            .beginTransaction()
-                            .setCustomAnimations(R.anim.slide_from_right, 0)
-                            .replace(
-                                R.id.fragmentPlaceHolderGifViewer,
-                                nullDataController.gifViewer,
-                                "GIF VIEWER"
-                            )
-                            .commit()
+                            (nullDataController.activity as AppCompatActivity).supportFragmentManager
+                                .beginTransaction()
+                                .setCustomAnimations(R.anim.slide_from_right, 0)
+                                .replace(
+                                    R.id.fragmentPlaceHolderGifViewer,
+                                    nullDataController.gifViewer,
+                                    "GIF VIEWER"
+                                )
+                                .commit()
+                        }
                     }
                 }
             }

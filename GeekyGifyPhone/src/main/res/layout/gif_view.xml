@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/3/20 6:28 AM
-  ~ Last modified 3/3/20 6:24 AM
+  ~ Created by Elias Fazel on 3/4/20 6:58 AM
+  ~ Last modified 3/4/20 6:50 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -37,12 +37,12 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/userVerifiedBadgeView"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         android:layout_marginBottom="3dp"
         android:padding="1dp"
         android:scaleType="fitCenter"
-        android:visibility="invisible"
+        android:visibility="gone"
 
         apps:layout_constraintBottom_toBottomOf="parent"
         apps:layout_constraintLeft_toLeftOf="parent"
@@ -50,9 +50,9 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/userAvatarView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="50dp"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="57dp"
         android:layout_marginBottom="3dp"
         android:padding="1dp"
         android:scaleType="fitCenter"
@@ -64,7 +64,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/userNameView"
         android:layout_width="0dp"
-        android:layout_height="25dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="3dp"
         android:paddingStart="5dp"
@@ -80,8 +80,8 @@
         android:visibility="gone"
 
         apps:autoSizeTextType="uniform"
-        apps:autoSizeMaxTextSize="14sp"
-        apps:autoSizeMinTextSize="10sp"
+        apps:autoSizeMaxTextSize="29sp"
+        apps:autoSizeMinTextSize="19sp"
         apps:autoSizeStepGranularity="1sp"
 
         apps:layout_constraintBottom_toTopOf="@id/userVerifiedBadgeView"

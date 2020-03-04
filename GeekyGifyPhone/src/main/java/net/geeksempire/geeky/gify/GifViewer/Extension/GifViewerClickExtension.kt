@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 6:52 AM
- * Last modified 3/3/20 6:46 AM
+ * Created by Elias Fazel on 3/4/20 6:58 AM
+ * Last modified 3/4/20 5:31 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -135,8 +135,12 @@ fun GifViewer.setupGifViewClickListener() {
     shareGif.setOnClickListener {
 
         ControlGifShare(activity!!)
-            .initializeGifShare(gifLinkToDownload,
-                context?.getString(R.string.app_name)
+            .initializeGifShare(
+                gifLinkToDownload, context?.getString(R.string.app_name),
+                gifPreviewLink,
+                gifUserName,
+                gifUserAvatarUrl,
+                gifUserIsVerified
             )
 
     }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 4:54 AM
+ * Created by Elias Fazel on 3/4/20 6:58 AM
+ * Last modified 3/4/20 6:32 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.gif_view.view.*
 import kotlinx.android.synthetic.main.shared_data_controller.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupGifViewClickListener
+import net.geeksempire.geeky.gify.GifViewer.Extension.setupUserProfileInformation
 import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.R
 
@@ -92,6 +93,12 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
                 }
             })
             .into(gifView)
+
+        gifUserName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_NAME)
+        gifUserAvatarUrl = arguments?.getString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL)
+        gifUserIsVerified = arguments?.getBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED)
+
+        setupUserProfileInformation()
     }
 
     override fun onDestroyView() {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:48 AM
- * Last modified 3/3/20 5:48 AM
+ * Created by Elias Fazel on 3/4/20 6:58 AM
+ * Last modified 3/4/20 6:30 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,16 +38,18 @@ import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 import org.json.JSONObject
 
-class TrendingGif (var nullDataController: NullDataController) {
+class TrendingGif(var nullDataController: NullDataController) {
 
     val context = nullDataController.context!!
 
     fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
-        delay(1000)
+        delay(1357)
 
-        nullDataController.trendingList.layoutManager = GridLayoutManager(context,
+        nullDataController.trendingList.layoutManager = GridLayoutManager(
+            context,
             rowCount(nullDataController.trendingGifInclude.height, DpToPixel(87f, context).toInt()),
-            RecyclerView.HORIZONTAL, false)
+            RecyclerView.HORIZONTAL, false
+        )
 
         val browseGifViewModel =
             ViewModelProvider(nullDataController).get(BrowseGifViewModel::class.java)
@@ -60,7 +62,8 @@ class TrendingGif (var nullDataController: NullDataController) {
                 object : JsonRequestResponseInterface {
                     override fun jsonRequestResponseSuccessHandler(
                         rawDataJsonObject: JSONObject,
-                        colorsList: ArrayList<String>) {
+                        colorsList: ArrayList<String>
+                    ) {
 
                         browseGifViewModel.setupGifsBrowserData(rawDataJsonObject, colorsList)
                     }
@@ -71,32 +74,50 @@ class TrendingGif (var nullDataController: NullDataController) {
                 })
         }
 
-        val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress = object : RecyclerViewGifBrowseItemPress {
-            override fun itemPressed(gifUserProfile: GifUserProfile?,
-                                     gifOriginalUri: String, linkToGif: String, gifPreviewUri: String) {
+        val recyclerViewGifBrowseItemPressHandler: RecyclerViewGifBrowseItemPress =
+            object : RecyclerViewGifBrowseItemPress {
 
-                nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
+                override fun itemPressed(
+                    gifUserProfile: GifUserProfile?,
+                    gifOriginalUri: String, linkToGif: String, gifPreviewUri: String
+                ) {
 
-                nullDataController.gifViewer.arguments = Bundle().apply {
-                    putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
-                    putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, gifPreviewUri)
-                    putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, gifOriginalUri)
+                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility =
+                        View.VISIBLE
 
-                    gifUserProfile?.let { gifUserProfile ->
-                        putString(GiphyJsonDataStructure.DATA_USER_NAME, gifUserProfile.userName)
-                        putString(GiphyJsonDataStructure.DATA_USER_AVATAR_URL, gifUserProfile.userAvatarUrl)
-                        putBoolean(GiphyJsonDataStructure.DATA_USER_IS_VERIFIED, gifUserProfile.isUserVerified)
+                    nullDataController.gifViewer.arguments = Bundle().apply {
+                        putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
+                        putString(GiphyJsonDataStructure.DATA_IMAGES_PREVIEW_GIF, gifPreviewUri)
+                        putString(GiphyJsonDataStructure.DATA_IMAGES_ORIGINAL, gifOriginalUri)
+
+                        gifUserProfile?.let { gifUserProfile ->
+                            putString(
+                                GiphyJsonDataStructure.DATA_USER_NAME,
+                                gifUserProfile.userName
+                            )
+                            putString(
+                                GiphyJsonDataStructure.DATA_USER_AVATAR_URL,
+                                gifUserProfile.userAvatarUrl
+                            )
+                            putBoolean(
+                                GiphyJsonDataStructure.DATA_USER_IS_VERIFIED,
+                                gifUserProfile.isUserVerified
+                            )
+                        }
                     }
+
+                    (nullDataController.activity as AppCompatActivity).supportFragmentManager
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_from_right, 0)
+                        .replace(
+                            R.id.fragmentPlaceHolderGifViewer,
+                            nullDataController.gifViewer,
+                            "GIF VIEWER"
+                        )
+                        .commit()
+
                 }
-
-                (nullDataController.activity as AppCompatActivity).supportFragmentManager
-                    .beginTransaction()
-                    .setCustomAnimations(R.anim.slide_from_right, 0)
-                    .replace(R.id.fragmentPlaceHolderGifViewer, nullDataController.gifViewer, "GIF VIEWER")
-                    .commit()
-
             }
-        }
 
         val trendingGifAdapter: TrendingGifAdapter = TrendingGifAdapter(this@TrendingGif, recyclerViewGifBrowseItemPressHandler)
 
@@ -114,7 +135,8 @@ class TrendingGif (var nullDataController: NullDataController) {
             Observer {
                 SnackbarView().snackBarViewFail(context,
                     nullDataController.mainView,
-                    context.getString(R.string.downloadErrorOccurred), object : SnackbarInteraction {})
+                    context.getString(R.string.downloadErrorOccurred),
+                    object : SnackbarInteraction {})
             })
     }
 }

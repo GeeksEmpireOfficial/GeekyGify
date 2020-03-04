@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 4:54 AM
+ * Created by Elias Fazel on 3/4/20 6:58 AM
+ * Last modified 3/4/20 6:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -39,7 +39,7 @@ class EnqueueEndPointQuery {
             if (giphySearchParameter.queryType == EndPointAddress.QUERY_TYPE.QUERY_SEARCH) {
                 EndPointAddress().generateGiphySearchLink(giphySearchParameter)
             } else if (giphySearchParameter.queryType == EndPointAddress.QUERY_TYPE.QUERY_TREND) {
-                giphySearchParameter.requestLimit = 20
+                giphySearchParameter.requestLimit = 31
 
                 EndPointAddress().generateGiphyTrendingLink(giphySearchParameter)
             } else {

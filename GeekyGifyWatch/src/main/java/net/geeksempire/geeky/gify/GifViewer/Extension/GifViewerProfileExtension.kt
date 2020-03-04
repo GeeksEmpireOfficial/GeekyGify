@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 3:13 PM
- * Last modified 2/19/20 3:11 PM
+ * Created by Elias Fazel on 3/4/20 6:58 AM
+ * Last modified 3/4/20 6:51 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,8 +26,15 @@ fun GifViewer.setupUserProfileInformation() {
 
         Glide.with(context!!)
             .asGif()
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(gifUserAvatarUrl)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .apply(RequestOptions.circleCropTransform())
+            .into(userAvatarView)
+
+        Glide.with(context!!)
+            .asDrawable()
+            .load(gifUserAvatarUrl)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
             .apply(RequestOptions.circleCropTransform())
             .into(userAvatarView)
 

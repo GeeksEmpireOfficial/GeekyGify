@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 6:58 AM
- * Last modified 3/4/20 5:31 AM
+ * Created by Elias Fazel on 3/4/20 11:25 AM
+ * Last modified 3/4/20 11:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,16 +30,6 @@ import net.geeksempire.geeky.gify.Utils.Favorite.FavoriteCheckpoint
 import net.geeksempire.geeky.gify.Utils.SharingProcess.ControlGifShare
 
 fun GifViewer.setupGifViewClickListener() {
-
-    closeFragment.setOnClickListener {
-        activity?.let {
-            it.supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(0, R.anim.slide_to_right)
-                .remove(this@setupGifViewClickListener)
-                .commit()
-        }
-    }
 
     gifView.setOnClickListener {
 

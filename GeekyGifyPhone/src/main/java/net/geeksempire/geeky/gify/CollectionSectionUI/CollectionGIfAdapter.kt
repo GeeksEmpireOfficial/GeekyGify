@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 10:10 AM
- * Last modified 3/4/20 10:07 AM
+ * Created by Elias Fazel on 3/4/20 10:18 AM
+ * Last modified 3/4/20 10:18 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.TrendingSectionUI.BrowseTrendingGifListViewHolder
 import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
 
 class CollectionGifAdapter(var collectionGif: CollectionGif,
@@ -39,7 +38,7 @@ class CollectionGifAdapter(var collectionGif: CollectionGif,
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
 
         when (viewHolder) {
-            is BrowseTrendingGifListViewHolder -> {
+            is BrowseCollectionGifListViewHolder -> {
                 viewHolder.mainView.setBackgroundColor(Color.parseColor(collectionGifAdapterData[position].backgroundColor))
 
                 Glide.with(collectionGif.nullDataController.context!!)
@@ -50,12 +49,6 @@ class CollectionGifAdapter(var collectionGif: CollectionGif,
 
                 viewHolder.gifPreview.setOnClickListener {
 
-//                    recyclerViewGifBrowseItemPress.itemPressed(
-//                        collectionGifAdapterData[position].gifUserProfile,
-//                        collectionGifAdapterData[position].gifOriginalUri,
-//                        collectionGifAdapterData[position].linkToGif,
-//                        collectionGifAdapterData[position].gifPreviewUrl
-//                    )
 
                 }
 

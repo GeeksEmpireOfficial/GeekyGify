@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 11:11 AM
- * Last modified 3/4/20 11:10 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 7:52 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,14 +40,11 @@ class CollectionGif(var nullDataController: NullDataController) {
     val context = nullDataController.context!!
 
     fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
-        delay(1357)
+        delay(1579)
 
         nullDataController.collectionList.layoutManager = GridLayoutManager(
             context,
-            rowCount(
-                nullDataController.collectionGifInclude.height,
-                DpToPixel(105f, context).toInt()
-            ),
+            rowCount(nullDataController.collectionGifInclude.height, DpToPixel(119f, context).toInt()),
             RecyclerView.HORIZONTAL, false
         )
 
@@ -60,7 +57,7 @@ class CollectionGif(var nullDataController: NullDataController) {
             geekyGifyCollectionFolder.listFiles()?.let {
 
                 browseGifViewModel.setupCollectionGifsBrowseData(
-                    it.toList() as ArrayList<File>,
+                    it.toList(),
                     GetResources(context).getNeonColors()
                 )
             }
@@ -121,7 +118,7 @@ class CollectionGif(var nullDataController: NullDataController) {
                 collectionGifAdapter.collectionGifAdapterData.addAll(it)
 
                 nullDataController.collectionList.adapter = collectionGifAdapter
-
+                (nullDataController.collectionList.adapter as CollectionGifAdapter).notifyDataSetChanged()
             })
 
         browseGifViewModel.gifsListError.observe(nullDataController,

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/3/20 5:48 AM
- * Last modified 3/3/20 5:38 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 7:21 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,11 +22,11 @@ fun calculateThirtyPercent(currentNumber: Int) : Int {
 }
 
 fun displayX(context: Context): Int {
-    return context.getResources().getDisplayMetrics().widthPixels
+    return context.resources.displayMetrics.widthPixels
 }
 
 fun displayY(context: Context): Int {
-    return context.getResources().getDisplayMetrics().heightPixels
+    return context.resources.displayMetrics.heightPixels
 }
 
 fun columnCount(itemWidth: Int, context: Context): Int {
@@ -34,7 +34,8 @@ fun columnCount(itemWidth: Int, context: Context): Int {
 }
 
 fun rowCount(parentHeight: Int, itemHeight: Int): Int {
-    val rowResult = parentHeight / itemHeight
+    val rowResult = (parentHeight / itemHeight)
+
     return if (rowResult == 0) {
         1
     } else {

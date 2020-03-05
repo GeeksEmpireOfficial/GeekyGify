@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 9:55 AM
- * Last modified 3/4/20 9:50 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 7:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,11 +21,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.null_data_controller.*
 import net.geeksempire.geeky.gify.CollectionSectionUI.CollectionGif
+import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.TrendingSectionUI.TrendingGif
@@ -192,20 +194,33 @@ fun NullDataController.setupNullDataControllerUI() {
         .asGif()
         .diskCacheStrategy(DiskCacheStrategy.DATA)
         .load("https://media0.giphy.com/media/ZCemAxolHlLetaTqLh/giphy.gif")
+        .listener(object : RequestListener<GifDrawable> {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<GifDrawable>?, isFirstResource: Boolean): Boolean {
+
+                return false
+            }
+
+            override fun onResourceReady(resource: GifDrawable?, model: Any?, target: Target<GifDrawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+                CollectionGif(this@setupNullDataControllerUI).initial()
+
+                TrendingGif(this@setupNullDataControllerUI).initial()
+
+                return false
+            }
+
+        })
         .into(waitingView)
 
     SnackbarView()
         .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.explore), getString(R.string.nullData),
             object : SnackbarInteraction {
                 override fun onActionClick() {
-                    waitingView.setImageDrawable(null)
 
+                    GiphyExplore()
+                        .invokeGiphyExplore(this@setupNullDataControllerUI)
                 }
             })
-
-    TrendingGif(this@setupNullDataControllerUI).initial()
-
-    CollectionGif(this@setupNullDataControllerUI).initial()
 
     val animatable = context!!.getDrawable(R.drawable.animated_geeky_gify_text) as Animatable
     animatable.start()

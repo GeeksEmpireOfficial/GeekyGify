@@ -1,8 +1,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/4/20 9:55 AM
-  ~ Last modified 3/4/20 9:45 AM
+  ~ Created by Elias Fazel on 3/5/20 8:01 AM
+  ~ Last modified 3/5/20 7:28 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -23,7 +23,7 @@
     <string name="dataSendToWatchDone"> ➡ ⌚ ✔ </string>
     <string name="dataSendToWatchError"> ➡ ⌚ ⚠ </string>
 
-    <string name="nullData">You Should Share From Smartwatch ⌚ </string>
+    <string name="nullData">You Should Share GIF From Smartwatch ⌚ Or …</string>
 
     <string name="updateAvailable">New Update Available | Click Here to Install…!</string>
     <string name="rateReview">Please Rate &amp; Write Review</string>

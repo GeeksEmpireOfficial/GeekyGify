@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 6:58 AM
- * Last modified 3/4/20 6:06 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 6:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -14,8 +14,8 @@ import android.content.Context
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPointAddress
-import net.geeksempire.geeky.gify.ServerConnection.DownloadData.GiphySearchParameter
+import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.EndPointAddress
+import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.GiphySearchParameter
 import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequestResponseInterface
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import org.json.JSONObject
@@ -37,13 +37,16 @@ class EnqueueEndPointQuery {
 
         val retrievedData: String = URL(
             if (giphySearchParameter.queryType == EndPointAddress.QUERY_TYPE.QUERY_SEARCH) {
-                EndPointAddress().generateGiphySearchLink(giphySearchParameter)
+                EndPointAddress()
+                    .generateGiphySearchLink(giphySearchParameter)
             } else if (giphySearchParameter.queryType == EndPointAddress.QUERY_TYPE.QUERY_TREND) {
                 giphySearchParameter.requestLimit = 31
 
-                EndPointAddress().generateGiphyTrendingLink(giphySearchParameter)
+                EndPointAddress()
+                    .generateGiphyTrendingLink(giphySearchParameter)
             } else {
-                EndPointAddress().generateGiphySearchLink(giphySearchParameter)
+                EndPointAddress()
+                    .generateGiphySearchLink(giphySearchParameter)
             }
         ).readText(Charset.defaultCharset())
 

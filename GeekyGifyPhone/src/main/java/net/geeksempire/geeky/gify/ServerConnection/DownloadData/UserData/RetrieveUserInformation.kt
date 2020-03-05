@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 11:11 AM
- * Last modified 3/4/20 11:11 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 6:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
-import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPointAddress
+import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.EndPointAddress
 import net.geeksempire.geeky.gify.ViewModel.GifUserProfile
 import org.json.JSONObject
 import java.net.URL
@@ -35,7 +35,9 @@ class RetrieveUserInformation {
 
     fun getData(gifId: String) = CoroutineScope(SupervisorJob() + Dispatchers.IO).async {
 
-        val rawData = URL(EndPointAddress().generateGiphyUserData(gifId)).readText(Charset.defaultCharset())
+        val rawData = URL(
+            EndPointAddress()
+                .generateGiphyUserData(gifId)).readText(Charset.defaultCharset())
 
         val jsonObject : JSONObject = JSONObject(rawData)
 

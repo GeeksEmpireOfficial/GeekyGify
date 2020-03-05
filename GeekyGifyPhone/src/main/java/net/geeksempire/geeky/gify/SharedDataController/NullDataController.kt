@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 11:25 AM
- * Last modified 3/4/20 11:22 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 7:22 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,9 +36,8 @@ open class NullDataController : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.null_data_controller, container, false)
 
-        return view
+        return inflater.inflate(R.layout.null_data_controller, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,8 +54,6 @@ open class NullDataController : Fragment() {
                         TrendingGif(this@NullDataController).initial()
                     }
                 }
-
-
             }
         })
 

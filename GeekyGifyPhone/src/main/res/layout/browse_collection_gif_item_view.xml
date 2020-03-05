@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/4/20 10:10 AM
-  ~ Last modified 3/4/20 10:03 AM
+  ~ Created by Elias Fazel on 3/5/20 8:01 AM
+  ~ Last modified 3/5/20 7:18 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -17,8 +17,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gifItemView"
-        android:layout_width="113dp"
-        android:layout_height="113dp"
+        android:layout_width="119dp"
+        android:layout_height="119dp"
         android:scaleType="fitCenter"
         apps:layout_constraintTop_toTopOf="parent"
         apps:layout_constraintBottom_toBottomOf="parent"

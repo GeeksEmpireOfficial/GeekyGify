@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 10:48 AM
- * Last modified 3/4/20 10:19 AM
+ * Created by Elias Fazel on 3/5/20 8:01 AM
+ * Last modified 3/5/20 8:01 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.null_data_controller.*
+import kotlinx.android.synthetic.main.null_data_controller.waitingView
 import kotlinx.android.synthetic.main.shared_data_controller.*
 import kotlinx.android.synthetic.main.trending_gif.*
 import kotlinx.android.synthetic.main.trending_gif.mainView
@@ -26,8 +27,8 @@ import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
-import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPointAddress
-import net.geeksempire.geeky.gify.ServerConnection.DownloadData.GiphySearchParameter
+import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.EndPointAddress
+import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.GiphySearchParameter
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.Utils.Calculations.DpToPixel
 import net.geeksempire.geeky.gify.Utils.Calculations.rowCount
@@ -82,8 +83,7 @@ class TrendingGif(var nullDataController: NullDataController) {
                     gifOriginalUri: String, linkToGif: String, gifPreviewUri: String
                 ) {
 
-                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility =
-                        View.VISIBLE
+                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                     nullDataController.gifViewer.arguments = Bundle().apply {
                         putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
@@ -123,11 +123,13 @@ class TrendingGif(var nullDataController: NullDataController) {
 
         browseGifViewModel.gifsListDataTrending.observe(nullDataController,
             Observer {
+                nullDataController.waitingView.setImageDrawable(null)
 
                 trendingGifAdapter.trendingGifAdapterData.clear()
                 trendingGifAdapter.trendingGifAdapterData.addAll(it)
 
                 nullDataController.trendingList.adapter = trendingGifAdapter
+                (nullDataController.trendingList.adapter as TrendingGifAdapter).notifyDataSetChanged()
 
             })
 

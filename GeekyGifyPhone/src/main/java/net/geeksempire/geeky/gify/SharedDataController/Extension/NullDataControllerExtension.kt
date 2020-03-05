@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:01 AM
- * Last modified 3/5/20 7:55 AM
+ * Created by Elias Fazel on 3/5/20 8:49 AM
+ * Last modified 3/5/20 8:49 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,11 +26,9 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.null_data_controller.*
-import net.geeksempire.geeky.gify.CollectionSectionUI.CollectionGif
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
-import net.geeksempire.geeky.gify.TrendingSectionUI.TrendingGif
 import net.geeksempire.geeky.gify.Utils.Converter.ConvertFile
 import net.geeksempire.geeky.gify.Utils.UI.GlowAnimation
 import net.geeksempire.geeky.gify.Utils.UI.PopupAppShortcuts
@@ -202,9 +200,9 @@ fun NullDataController.setupNullDataControllerUI() {
 
             override fun onResourceReady(resource: GifDrawable?, model: Any?, target: Target<GifDrawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 
-                CollectionGif(this@setupNullDataControllerUI).initial()
+                collectionGif.initial()
 
-                TrendingGif(this@setupNullDataControllerUI).initial()
+                trendingGif.initial()
 
                 return false
             }

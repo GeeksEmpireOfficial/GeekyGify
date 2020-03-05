@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 10:48 AM
- * Last modified 3/4/20 10:21 AM
+ * Created by Elias Fazel on 3/5/20 8:49 AM
+ * Last modified 3/5/20 8:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,17 +13,32 @@ package net.geeksempire.geeky.gify.CollectionSectionUI
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
+import net.geeksempire.geeky.gify.CollectionSectionUI.Utils.CollectionDiffUtil
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
+
 
 class CollectionGifAdapter(var collectionGif: CollectionGif,
                            private var recyclerViewGifBrowseItemPress: RecyclerViewGifBrowseItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val collectionGifAdapterData = ArrayList<BrowseCollectionGifItemData>()
+
+    fun updateCollectionData(newCollectionGifItemData: ArrayList<BrowseCollectionGifItemData>) {
+
+        val diffCallback = CollectionDiffUtil(collectionGifAdapterData, newCollectionGifItemData)
+
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        this.collectionGifAdapterData.clear()
+        this.collectionGifAdapterData.addAll(newCollectionGifItemData)
+
+        diffResult.dispatchUpdatesTo(this@CollectionGifAdapter)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -33,6 +48,22 @@ class CollectionGifAdapter(var collectionGif: CollectionGif,
     override fun getItemCount(): Int {
 
         return collectionGifAdapterData.size
+    }
+
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int, payloads: MutableList<Any>) {
+        super.onBindViewHolder(viewHolder, position, payloads)
+
+        when (viewHolder) {
+            is BrowseCollectionGifListViewHolder -> {
+                viewHolder.mainView.setBackgroundColor(Color.parseColor(collectionGifAdapterData[position].backgroundColor))
+
+                Glide.with(collectionGif.nullDataController.context!!)
+                    .asGif()
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .load(collectionGifAdapterData[position].gifDrawable)
+                    .into(viewHolder.gifPreview)
+            }
+        }
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {

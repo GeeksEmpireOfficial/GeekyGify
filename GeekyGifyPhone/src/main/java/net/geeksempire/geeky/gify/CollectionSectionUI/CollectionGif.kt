@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:01 AM
- * Last modified 3/5/20 7:52 AM
+ * Created by Elias Fazel on 3/5/20 8:49 AM
+ * Last modified 3/5/20 8:34 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,12 +32,15 @@ import net.geeksempire.geeky.gify.Utils.Calculations.rowCount
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
+import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
 import net.geeksempire.geeky.gify.ViewModel.BrowseGifViewModel
 import java.io.File
 
 class CollectionGif(var nullDataController: NullDataController) {
 
     val context = nullDataController.context!!
+
+    lateinit var collectionGifAdapter: CollectionGifAdapter
 
     fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
         delay(1579)
@@ -108,8 +111,7 @@ class CollectionGif(var nullDataController: NullDataController) {
                 }
             }
 
-        val collectionGifAdapter: CollectionGifAdapter =
-            CollectionGifAdapter(this@CollectionGif, recyclerViewGifBrowseItemPressHandler)
+        collectionGifAdapter = CollectionGifAdapter(this@CollectionGif, recyclerViewGifBrowseItemPressHandler)
 
         browseGifViewModel.gifsListDataCollection.observe(nullDataController,
             Observer {
@@ -128,5 +130,12 @@ class CollectionGif(var nullDataController: NullDataController) {
                     context.getString(R.string.downloadErrorOccurred),
                     object : SnackbarInteraction {})
             })
+    }
+
+    fun updateData(newCollectionGifAdapterData: ArrayList<BrowseCollectionGifItemData>) {
+
+        collectionGifAdapter.updateCollectionData(
+            newCollectionGifAdapterData
+        )
     }
 }

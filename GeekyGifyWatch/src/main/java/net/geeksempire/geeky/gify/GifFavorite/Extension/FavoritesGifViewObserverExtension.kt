@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 12:46 PM
+ * Created by Elias Fazel on 3/5/20 9:00 AM
+ * Last modified 3/5/20 8:55 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -69,6 +69,7 @@ fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel
         Observer {
             if (it.isNotEmpty()) {
                 if (favoritesGifAdapter == null) {
+
                     gifList.visibility = View.VISIBLE
                     progressBarGifs.hide()
 
@@ -77,9 +78,11 @@ fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel
 
                     gifList.adapter = favoritesGifAdapter
                     favoritesGifAdapter?.notifyDataSetChanged()
+
                 } else {
-                    favoritesGifAdapter?.favoriteGifItemData = it as ArrayList<FavoriteDataModel>
-                    favoritesGifAdapter?.notifyDataSetChanged()
+
+                    favoritesGifAdapter?.updateCollectionData(it as ArrayList<FavoriteDataModel>)
+
                 }
             } else {
                 this@favoritesGifViewObserverExtension.finish()

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 11:25 AM
- * Last modified 3/4/20 11:21 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,9 +23,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
+import kotlinx.android.synthetic.main.data_controller.*
 import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.android.synthetic.main.gif_view.view.*
-import kotlinx.android.synthetic.main.shared_data_controller.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupGifViewClickListener
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupUserProfileInformation

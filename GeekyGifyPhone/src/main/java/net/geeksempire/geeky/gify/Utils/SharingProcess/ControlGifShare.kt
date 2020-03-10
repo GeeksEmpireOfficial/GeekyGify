@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 9:55 AM
- * Last modified 3/4/20 9:45 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:27 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,6 +18,7 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import kotlinx.android.synthetic.main.data_controller.*
 import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.android.synthetic.main.gif_view.view.*
 import net.geeksempire.geeky.gify.R
@@ -110,7 +111,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                 Log.d(this@ControlGifShare.javaClass.simpleName, "Data Sent Successfully")
 
                 SnackbarView()
-                    .snackBarViewSuccess(fragmentActivity, fragmentActivity.mainViewItem,  fragmentActivity.getString(android.R.string.ok), fragmentActivity.getString(R.string.dataSendToWatchDone),
+                    .snackBarViewSuccess(fragmentActivity, fragmentActivity.mainViewDataController,  fragmentActivity.getString(android.R.string.ok), fragmentActivity.getString(R.string.dataSendToWatchDone),
                         object : SnackbarInteraction {
                             override fun onActionClick() {
 
@@ -121,7 +122,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                 Log.d(this@ControlGifShare.javaClass.simpleName, "$exception")
 
                 SnackbarView()
-                    .snackBarViewFail(fragmentActivity, fragmentActivity.mainViewItem,  fragmentActivity.getString(R.string.dataSendToWatchError),
+                    .snackBarViewFail(fragmentActivity, fragmentActivity.mainViewDataController,  fragmentActivity.getString(R.string.dataSendToWatchError),
                         object : SnackbarInteraction {
                             override fun onSnackbarRemoved() {
 

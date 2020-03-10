@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:01 AM
- * Last modified 3/5/20 8:01 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:14 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,7 +22,7 @@ import com.giphy.sdk.ui.GiphyCoreUI
 import com.giphy.sdk.ui.themes.DarkTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
-import kotlinx.android.synthetic.main.shared_data_controller.*
+import kotlinx.android.synthetic.main.data_controller.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController

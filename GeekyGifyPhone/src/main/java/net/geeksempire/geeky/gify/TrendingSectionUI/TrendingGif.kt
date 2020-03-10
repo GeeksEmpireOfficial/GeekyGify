@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:01 AM
- * Last modified 3/5/20 8:01 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:40 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,11 +17,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.data_controller.*
 import kotlinx.android.synthetic.main.null_data_controller.*
 import kotlinx.android.synthetic.main.null_data_controller.waitingView
-import kotlinx.android.synthetic.main.shared_data_controller.*
 import kotlinx.android.synthetic.main.trending_gif.*
-import kotlinx.android.synthetic.main.trending_gif.mainView
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
@@ -136,7 +135,7 @@ class TrendingGif(var nullDataController: NullDataController) {
         browseGifViewModel.gifsListError.observe(nullDataController,
             Observer {
                 SnackbarView().snackBarViewFail(context,
-                    nullDataController.mainView,
+                    nullDataController.mainViewNullDataController,
                     context.getString(R.string.downloadErrorOccurred),
                     object : SnackbarInteraction {})
             })

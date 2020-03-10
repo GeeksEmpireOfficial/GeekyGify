@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:49 AM
- * Last modified 3/5/20 8:49 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -211,7 +211,7 @@ fun NullDataController.setupNullDataControllerUI() {
         .into(waitingView)
 
     SnackbarView()
-        .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainView, getString(R.string.explore), getString(R.string.nullData),
+        .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainViewNullDataController, getString(R.string.explore), getString(R.string.nullData),
             object : SnackbarInteraction {
                 override fun onActionClick() {
 

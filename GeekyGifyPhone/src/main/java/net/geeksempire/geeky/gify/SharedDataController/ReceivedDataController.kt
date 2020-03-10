@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 3:59 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 1:50 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -24,7 +24,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.offline_indicator.view.*
-import kotlinx.android.synthetic.main.received_data_controller.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.Extension.setupLoadingAnimation
@@ -33,11 +32,14 @@ import net.geeksempire.geeky.gify.Utils.Networking.DownloadGif
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.SystemCheckpoint
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
+import net.geeksempire.geeky.gify.databinding.ReceivedDataControllerBinding
 import java.io.File
 
 class ReceivedDataController : Fragment() {
 
-    lateinit var gifFile: File
+    private lateinit var receivedDataControllerBinding: ReceivedDataControllerBinding
+
+    var gifFile: File? = null
 
     lateinit var linkToDownloadGif: String
     lateinit var additionalText: String
@@ -49,10 +51,10 @@ class ReceivedDataController : Fragment() {
         StrictMode.setVmPolicy(vmBuilder.build())
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.received_data_controller, container, false)
+    override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        receivedDataControllerBinding = ReceivedDataControllerBinding.inflate(layoutInflater, container, false)
 
-        return view
+        return receivedDataControllerBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,9 +73,9 @@ class ReceivedDataController : Fragment() {
                 CoroutineScope(Dispatchers.Default).launch {
                     gifFile = DownloadGif(context!!).downloadGifFile(linkToDownloadGif).await()
 
-                    if (gifFile.exists()) {
+                    if (gifFile!!.exists()) {
                         withContext(SupervisorJob() + Dispatchers.Main) {
-                            shareButton.visibility = View.VISIBLE
+                            receivedDataControllerBinding.shareButton.visibility = View.VISIBLE
                         }
 
                         Intent(Intent.ACTION_SEND).apply {
@@ -92,7 +94,7 @@ class ReceivedDataController : Fragment() {
 
                         withContext(Dispatchers.Main) {
                             SnackbarView().snackBarViewFail((activity as AppCompatActivity),
-                                mainView,
+                                receivedDataControllerBinding.mainViewReceivedDataController,
                                 getString(R.string.downloadErrorOccurred), object: SnackbarInteraction{})
                         }
                     }
@@ -103,9 +105,9 @@ class ReceivedDataController : Fragment() {
                 activity!!.window.navigationBarColor = context!!.getColor(R.color.cyberGreen)
 
                 val offlineIndicator = LayoutInflater.from(context!!).inflate(
-                    R.layout.offline_indicator, mainView, false)
+                    R.layout.offline_indicator, receivedDataControllerBinding.mainViewReceivedDataController, false)
 
-                mainView.addView(offlineIndicator)
+                receivedDataControllerBinding.mainViewReceivedDataController.addView(offlineIndicator)
 
                 Glide.with(context!!)
                     .asGif()
@@ -125,7 +127,7 @@ class ReceivedDataController : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        shareButton.setOnClickListener {
+        receivedDataControllerBinding.shareButton.setOnClickListener {
 
             gifFile?.let {
 
@@ -148,7 +150,7 @@ class ReceivedDataController : Fragment() {
                 } else {
 
                     SnackbarView().snackBarViewFail((activity as AppCompatActivity),
-                        mainView,
+                        receivedDataControllerBinding.mainViewReceivedDataController,
                         getString(R.string.downloadErrorOccurred), object: SnackbarInteraction{})
 
                 }

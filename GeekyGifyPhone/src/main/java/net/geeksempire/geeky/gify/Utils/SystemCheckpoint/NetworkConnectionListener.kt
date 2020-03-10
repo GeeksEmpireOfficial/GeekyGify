@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 12:51 PM
- * Last modified 2/13/20 12:39 PM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:17 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,8 +27,8 @@ import kotlinx.android.synthetic.main.offline_indicator.view.*
 import net.geeksempire.geeky.gify.R
 
 class NetworkConnectionListener (private var appCompatActivity: AppCompatActivity,
-                                                     var mainView: ConstraintLayout,
-                                                     var systemCheckpoint: SystemCheckpoint) :  ConnectivityManager.NetworkCallback() {
+                                 var rootView: ConstraintLayout,
+                                 var systemCheckpoint: SystemCheckpoint) :  ConnectivityManager.NetworkCallback() {
 
     val connectivityManager = appCompatActivity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     var offlineIndicator: View
@@ -36,7 +36,7 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
     init {
         connectivityManager.registerDefaultNetworkCallback(this@NetworkConnectionListener)
 
-        offlineIndicator = LayoutInflater.from(appCompatActivity).inflate(R.layout.offline_indicator, mainView, false)
+        offlineIndicator = LayoutInflater.from(appCompatActivity).inflate(R.layout.offline_indicator, rootView, false)
     }
 
     override fun onAvailable(network: Network) {
@@ -48,7 +48,7 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
                 if (systemCheckpoint.networkConnection()) {
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Available")
 
-                    mainView.removeView(offlineIndicator)
+                    rootView.removeView(offlineIndicator)
 
                     appCompatActivity.window.statusBarColor = appCompatActivity.getColor(R.color.default_color_game_light)
                     appCompatActivity.window.navigationBarColor = appCompatActivity.getColor(R.color.default_color_game_light)
@@ -66,7 +66,7 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
                 if (!systemCheckpoint.networkConnection()) {
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Lost")
 
-                    mainView.addView(offlineIndicator)
+                    rootView.addView(offlineIndicator)
 
                     appCompatActivity.window.statusBarColor = appCompatActivity.getColor(R.color.cyberGreen)
                     appCompatActivity.window.navigationBarColor = appCompatActivity.getColor(R.color.cyberGreen)
@@ -87,7 +87,7 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
         }
     }
 
-    fun unRegisterDefaultNetworkCallback() {
+    fun unregisterDefaultNetworkCallback() {
         connectivityManager.unregisterNetworkCallback(this@NetworkConnectionListener)
     }
 }

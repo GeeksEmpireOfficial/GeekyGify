@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/3/20 4:54 AM
- * Last modified 3/3/20 3:59 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:19 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -27,7 +27,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import kotlinx.android.synthetic.main.received_data_controller.*
 import net.geeksempire.geeky.gify.BuildConfig
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.Parameter.DataParameter
@@ -39,18 +38,21 @@ import net.geeksempire.geeky.gify.Utils.UI.CreateNotification
 import net.geeksempire.geeky.gify.Utils.UI.PopupAppShortcuts
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
-
+import net.geeksempire.geeky.gify.databinding.DataControllerBinding
 
 class DataController : AppCompatActivity() {
 
-    val receivedDataController: Fragment = ReceivedDataController()
-    val nullDataController: Fragment = NullDataController()
+    private lateinit var dataControllerBinding: DataControllerBinding
+
+    private val receivedDataController: Fragment = ReceivedDataController()
+    private val nullDataController: Fragment = NullDataController()
 
     private lateinit var networkConnectionListener: NetworkConnectionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.shared_data_controller)
+        dataControllerBinding = DataControllerBinding.inflate(layoutInflater)
+        setContentView(dataControllerBinding.root)
 
         val vmBuilder = VmPolicy.Builder()
         StrictMode.setVmPolicy(vmBuilder.build())
@@ -61,13 +63,13 @@ class DataController : AppCompatActivity() {
 
         networkConnectionListener = NetworkConnectionListener(
             this@DataController,
-            mainView,
+            dataControllerBinding.mainViewDataController,
             systemCheckpoint)
 
         if (intent.data == null) {
 
             snackbarView.snackBarViewFail(this@DataController,
-                mainView,
+                dataControllerBinding.mainViewDataController,
                 getString(R.string.errorOccurred), object: SnackbarInteraction {})
 
             supportFragmentManager
@@ -129,7 +131,7 @@ class DataController : AppCompatActivity() {
         super.onDestroy()
 
         this@DataController.finish()
-        networkConnectionListener.unRegisterDefaultNetworkCallback()
+        networkConnectionListener.unregisterDefaultNetworkCallback()
     }
 
     private fun createPopupShortcutAd(firebaseRemoteConfig: FirebaseRemoteConfig) {

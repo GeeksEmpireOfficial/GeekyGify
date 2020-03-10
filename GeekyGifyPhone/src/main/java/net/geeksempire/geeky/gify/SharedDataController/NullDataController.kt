@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:49 AM
- * Last modified 3/5/20 8:49 AM
+ * Created by Elias Fazel on 3/10/20 2:40 PM
+ * Last modified 3/10/20 2:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.null_data_controller.*
 import net.geeksempire.geeky.gify.CollectionSectionUI.CollectionGif
 import net.geeksempire.geeky.gify.CollectionSectionUI.Utils.CollectionFile
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
@@ -30,9 +29,13 @@ import net.geeksempire.geeky.gify.SharedDataController.Extension.setupNullDataCo
 import net.geeksempire.geeky.gify.TrendingSectionUI.TrendingGif
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
+import net.geeksempire.geeky.gify.databinding.NullDataControllerBinding
 import java.io.File
 
 open class NullDataController : Fragment() {
+
+    private var nullDataControllerBinding: NullDataControllerBinding? = null
+    private val nullBinding get() = nullDataControllerBinding!!
 
     lateinit var collectionGif: CollectionGif
     lateinit var trendingGif: TrendingGif
@@ -43,9 +46,10 @@ open class NullDataController : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        nullDataControllerBinding = NullDataControllerBinding.inflate(layoutInflater, container, false)
 
-        return inflater.inflate(R.layout.null_data_controller, container, false)
+        return nullBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,15 +97,14 @@ open class NullDataController : Fragment() {
             }
         })
 
-
-        facebookIcon.setOnClickListener {
+        nullDataControllerBinding?.facebookIcon?.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookPageLink))).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(this)
             }
         }
 
-        rateReviewIcon.setOnClickListener {
+        nullDataControllerBinding?.rateReviewIcon?.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.playStoreLink) + context!!.packageName)).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(this)
@@ -110,5 +113,11 @@ open class NullDataController : Fragment() {
 
         setupClickNullDataControllerAdsApp()
         setupNullDataControllerUI()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        nullDataControllerBinding = null
     }
 }

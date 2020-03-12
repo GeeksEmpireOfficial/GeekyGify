@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 4:15 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:22 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -21,7 +21,6 @@ import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.CollectionSectionUI.Utils.CollectionDiffUtil
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
-
 
 class CollectionGifAdapter(var collectionGif: CollectionGif,
                            private var recyclerViewGifBrowseItemPress: RecyclerViewGifBrowseItemPress) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

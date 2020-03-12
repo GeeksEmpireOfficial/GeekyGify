@@ -1,15 +1,14 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:01 AM
- * Last modified 3/5/20 6:53 AM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
  */
 
 package net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint
-
 
 data class GiphySearchParameter(var queryType: String = EndPointAddress.gifQueryType,
                                 var categoryName: String?,

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:14 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:25 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,9 +22,9 @@ import com.giphy.sdk.ui.GiphyCoreUI
 import com.giphy.sdk.ui.themes.DarkTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
-import kotlinx.android.synthetic.main.data_controller.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.SharedDataController.DataController
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 
 class GiphyExplore {
@@ -53,7 +53,7 @@ class GiphyExplore {
         giphyDialog.gifSelectionListener = object: GiphyDialogFragment.GifSelectionListener {
 
             override fun onGifSelected(media: Media) {
-                (nullDataController.activity as AppCompatActivity).fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
+                (nullDataController.activity as DataController).dataControllerBinding.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                 nullDataController.gifViewer.arguments = Bundle().apply {
                     putString(GiphyJsonDataStructure.DATA_URL, media.url)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 10:48 AM
- * Last modified 3/4/20 10:19 AM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:31 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -41,7 +41,7 @@ class TrendingGifAdapter(var trendingGif: TrendingGif,
             is BrowseTrendingGifListViewHolder -> {
                 viewHolder.mainView.setBackgroundColor(Color.parseColor(trendingGifAdapterData[position].backgroundColor))
 
-                Glide.with(trendingGif.nullDataController.context!!)
+                Glide.with(trendingGif.nullDataController.requireContext())
                     .asGif()
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .load(trendingGifAdapterData[position].gifPreviewUrl)

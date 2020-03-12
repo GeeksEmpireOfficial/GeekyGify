@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:27 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:52 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,17 +15,14 @@ import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
-import kotlinx.android.synthetic.main.data_controller.*
-import kotlinx.android.synthetic.main.gif_view.*
-import kotlinx.android.synthetic.main.gif_view.view.*
+import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
-class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterface {
+class ControlGifShare (private var gifViewer: GifViewer) : SharingInterface {
 
     object DATA_TYPE_WATCH {
         const val SHARED_GIF_PATH = "/shared_gif_link"
@@ -44,11 +41,11 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                            gifUserAvatar: String?,
                            gifUserVerified: Boolean?) {
 
-        val shareView = fragmentActivity.fullShareView
-        shareView.startAnimation(AnimationUtils.loadAnimation(fragmentActivity, R.anim.slide_from_right))
+        val shareView = gifViewer.gifViewBinding.fullShareView
+        shareView.startAnimation(AnimationUtils.loadAnimation(gifViewer.requireContext(), R.anim.slide_from_right))
         shareView.visibility = View.VISIBLE
 
-        shareView.shareToPhone.setOnClickListener {
+        gifViewer.gifViewBinding.shareToPhone.setOnClickListener {
 
             startShareToPhoneProcess(
                 gifLinkToShare,
@@ -56,7 +53,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
             )
         }
 
-        shareView.shareToWatch.setOnClickListener {
+        gifViewer.gifViewBinding.shareToWatch.setOnClickListener {
 
             startShareToWatchProcess(
                 gifLinkToShare,
@@ -86,7 +83,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                         "&" +
                         "${Intent.EXTRA_TEXT}=${additionalText}"))
 
-        fragmentActivity.startActivity(remoteIntent)
+        gifViewer.startActivity(remoteIntent)
     }
 
     private fun startShareToWatchProcess(gifLinkToShare: String,
@@ -105,13 +102,13 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
         val putDataRequest = putDataMapRequest.asPutDataRequest()
         putDataRequest.setUrgent()
 
-        val dataItemTask = Wearable.getDataClient(fragmentActivity).putDataItem(putDataRequest)
+        val dataItemTask = Wearable.getDataClient(gifViewer.requireActivity()).putDataItem(putDataRequest)
         dataItemTask
             .addOnSuccessListener { dataItem ->
                 Log.d(this@ControlGifShare.javaClass.simpleName, "Data Sent Successfully")
 
                 SnackbarView()
-                    .snackBarViewSuccess(fragmentActivity, fragmentActivity.mainViewDataController,  fragmentActivity.getString(android.R.string.ok), fragmentActivity.getString(R.string.dataSendToWatchDone),
+                    .snackBarViewSuccess(gifViewer.requireContext(), gifViewer.gifViewBinding.mainViewGifViewer,  gifViewer.getString(android.R.string.ok), gifViewer.getString(R.string.dataSendToWatchDone),
                         object : SnackbarInteraction {
                             override fun onActionClick() {
 
@@ -122,7 +119,7 @@ class ControlGifShare (var fragmentActivity: FragmentActivity) : SharingInterfac
                 Log.d(this@ControlGifShare.javaClass.simpleName, "$exception")
 
                 SnackbarView()
-                    .snackBarViewFail(fragmentActivity, fragmentActivity.mainViewDataController,  fragmentActivity.getString(R.string.dataSendToWatchError),
+                    .snackBarViewFail(gifViewer.requireContext(), gifViewer.gifViewBinding.mainViewGifViewer,  gifViewer.getString(R.string.dataSendToWatchError),
                         object : SnackbarInteraction {
                             override fun onSnackbarRemoved() {
 

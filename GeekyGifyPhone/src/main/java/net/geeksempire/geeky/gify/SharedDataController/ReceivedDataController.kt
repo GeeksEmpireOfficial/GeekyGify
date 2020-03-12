@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 2:13 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:29 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -37,7 +37,7 @@ import java.io.File
 
 class ReceivedDataController : Fragment() {
 
-    private lateinit var receivedDataControllerBinding: ReceivedDataControllerBinding
+    lateinit var receivedDataControllerBinding: ReceivedDataControllerBinding
 
     var gifFile: File? = null
 

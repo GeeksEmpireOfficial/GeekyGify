@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 4:10 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:31 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.null_data_controller.*
-import kotlinx.android.synthetic.main.trending_gif.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
@@ -45,9 +43,9 @@ class TrendingGif(var nullDataController: NullDataController) {
     fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
         delay(1357)
 
-        nullDataController.trendingList.layoutManager = GridLayoutManager(
+        nullDataController.nullDataControllerBinding.trendingGifInclude.trendingList.layoutManager = GridLayoutManager(
             context,
-            rowCount(nullDataController.trendingGifInclude.height, DpToPixel(87f, context).toInt()),
+            rowCount(nullDataController.nullDataControllerBinding.trendingGifInclude.root.height, DpToPixel(87f, context).toInt()),
             RecyclerView.HORIZONTAL, false
         )
 
@@ -127,8 +125,8 @@ class TrendingGif(var nullDataController: NullDataController) {
                 trendingGifAdapter.trendingGifAdapterData.clear()
                 trendingGifAdapter.trendingGifAdapterData.addAll(it)
 
-                nullDataController.trendingList.adapter = trendingGifAdapter
-                (nullDataController.trendingList.adapter as TrendingGifAdapter).notifyDataSetChanged()
+                nullDataController.nullDataControllerBinding.trendingGifInclude.trendingList.adapter = trendingGifAdapter
+                (nullDataController.nullDataControllerBinding.trendingGifInclude.trendingList.adapter as TrendingGifAdapter).notifyDataSetChanged()
 
             })
 

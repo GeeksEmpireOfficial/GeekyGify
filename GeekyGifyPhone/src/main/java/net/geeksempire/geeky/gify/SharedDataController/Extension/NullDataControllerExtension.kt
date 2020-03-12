@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 4:28 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -30,7 +30,6 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
-import kotlinx.android.synthetic.main.null_data_controller.*
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
@@ -124,7 +123,7 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
                     )
 
                     activity?.runOnUiThread {
-                        floatItIcon.setImageDrawable(resource)
+                        nullDataControllerBinding.floatItIcon.setImageDrawable(resource)
                     }
                 }
 
@@ -156,7 +155,7 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
                     )
 
                     activity?.runOnUiThread {
-                        superShortcutsIcon.setImageDrawable(resource)
+                        nullDataControllerBinding.superShortcutsIcon.setImageDrawable(resource)
                     }
                 }
 
@@ -165,26 +164,26 @@ fun NullDataController.setupClickNullDataControllerAdsApp() {
         })
         .submit()
 
-    floatItIcon.setOnClickListener {
+    nullDataControllerBinding.floatItIcon.setOnClickListener {
         Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.floatItLink))).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
         }
     }
-    floatItName.setOnClickListener {
+    nullDataControllerBinding.floatItName.setOnClickListener {
         Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.floatItLink))).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
         }
     }
 
-    superShortcutsIcon.setOnClickListener {
+    nullDataControllerBinding.superShortcutsIcon.setOnClickListener {
         Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.superShortcutsLink))).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
         }
     }
-    superShortcutsName.setOnClickListener {
+    nullDataControllerBinding.superShortcutsName.setOnClickListener {
         Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.superShortcutsLink))).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(this)
@@ -214,10 +213,10 @@ fun NullDataController.setupNullDataControllerUI() {
             }
 
         })
-        .into(waitingView)
+        .into(nullDataControllerBinding.waitingView)
 
     SnackbarView()
-        .snackBarViewSuccess((activity as AppCompatActivity?)!!, mainViewNullDataController, getString(R.string.explore), getString(R.string.nullData),
+        .snackBarViewSuccess((activity as AppCompatActivity?)!!, nullDataControllerBinding.mainViewNullDataController, getString(R.string.explore), getString(R.string.nullData),
             object : SnackbarInteraction {
                 override fun onActionClick() {
 
@@ -231,11 +230,11 @@ fun NullDataController.setupNullDataControllerUI() {
 
     Glide.with(context!!)
         .load(animatable as Drawable)
-        .into(appNameView)
+        .into(nullDataControllerBinding.appNameView)
 
     val glowAnimation = GlowAnimation(context!!)
 
-    with(facebookIcon) {
+    with(nullDataControllerBinding.facebookIcon) {
         glowAnimation.valueAnimatorLoopTint(
             this,
             startValueColor = context!!.getColor(R.color.light), endValueColor = Color.TRANSPARENT,
@@ -243,7 +242,7 @@ fun NullDataController.setupNullDataControllerUI() {
         )
     }
 
-    with(rateReviewIcon) {
+    with(nullDataControllerBinding.rateReviewIcon) {
         glowAnimation.valueAnimatorLoopTint(
             this,
             startValueColor = context!!.getColor(R.color.light), endValueColor = Color.TRANSPARENT,
@@ -251,7 +250,7 @@ fun NullDataController.setupNullDataControllerUI() {
         )
     }
 
-    with(floatItName) {
+    with(nullDataControllerBinding.floatItName) {
         glowAnimation.shadowValueAnimatorLoop(
             view = this,
             startValueShadow = 0, endValueShadow = 29,
@@ -262,7 +261,7 @@ fun NullDataController.setupNullDataControllerUI() {
         )
     }
 
-    with(superShortcutsName) {
+    with(nullDataControllerBinding.superShortcutsName) {
         glowAnimation.shadowValueAnimatorLoop(
             view = this,
             startValueShadow = 0, endValueShadow = 29,
@@ -277,16 +276,16 @@ fun NullDataController.setupNullDataControllerUI() {
 fun NullDataController.changeWaitingView() {
 
     TransitionManager.beginDelayedTransition(
-        mainViewNullDataController, TransitionSet()
+        nullDataControllerBinding.mainViewNullDataController, TransitionSet()
             .addTransition(ChangeBounds())
             .addTransition(ChangeImageTransform())
     )
 
-    val viewLayoutParameter = waitingView.layoutParams
+    val viewLayoutParameter = nullDataControllerBinding.waitingView.layoutParams
 
     viewLayoutParameter.width = 10
     viewLayoutParameter.height = 10
 
-    waitingView.layoutParams = viewLayoutParameter
-    waitingView.visibility = View.GONE
+    nullDataControllerBinding.waitingView.layoutParams = viewLayoutParameter
+    nullDataControllerBinding.waitingView.visibility = View.GONE
 }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 5:00 PM
- * Last modified 3/11/20 4:53 PM
+ * Created by Elias Fazel on 3/11/20 5:52 PM
+ * Last modified 3/11/20 5:20 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,8 +17,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.collection_gif.*
-import kotlinx.android.synthetic.main.null_data_controller.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
@@ -44,9 +42,9 @@ class CollectionGif(var nullDataController: NullDataController) {
     fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
         delay(1579)
 
-        nullDataController.collectionList.layoutManager = GridLayoutManager(
+        nullDataController.nullDataControllerBinding.collectionGifInclude.collectionList.layoutManager = GridLayoutManager(
             context,
-            rowCount(nullDataController.collectionGifInclude.height, DpToPixel(119f, context).toInt()),
+            rowCount(nullDataController.nullDataControllerBinding.collectionGifInclude.root.height, DpToPixel(119f, context).toInt()),
             RecyclerView.HORIZONTAL, false
         )
 
@@ -118,8 +116,8 @@ class CollectionGif(var nullDataController: NullDataController) {
                 collectionGifAdapter.collectionGifAdapterData.clear()
                 collectionGifAdapter.collectionGifAdapterData.addAll(it)
 
-                nullDataController.collectionList.adapter = collectionGifAdapter
-                (nullDataController.collectionList.adapter as CollectionGifAdapter).notifyDataSetChanged()
+                nullDataController.nullDataControllerBinding.collectionGifInclude.collectionList.adapter = collectionGifAdapter
+                (nullDataController.nullDataControllerBinding.collectionGifInclude.collectionList.adapter as CollectionGifAdapter).notifyDataSetChanged()
             })
 
         browseGifViewModel.gifsListError.observe(nullDataController,

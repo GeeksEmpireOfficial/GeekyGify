@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:35 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 4:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -34,8 +34,7 @@ import java.io.File
 
 open class NullDataController : Fragment() {
 
-    private var nullDataControllerBinding: NullDataControllerBinding? = null
-    private val nullBinding get() = nullDataControllerBinding!!
+    lateinit var nullDataControllerBinding: NullDataControllerBinding
 
     lateinit var collectionGif: CollectionGif
     lateinit var trendingGif: TrendingGif
@@ -49,7 +48,7 @@ open class NullDataController : Fragment() {
     override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         nullDataControllerBinding = NullDataControllerBinding.inflate(layoutInflater, container, false)
 
-        return nullBinding.root
+        return nullDataControllerBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +58,7 @@ open class NullDataController : Fragment() {
         trendingGif = TrendingGif(this@NullDataController)
 
         gifViewer = GifViewer(object : GifViewerFragmentStateListener {
+
             override fun onFragmentDetach(reloadDataType: ReloadData) {
 
                 when (reloadDataType) {
@@ -72,11 +72,11 @@ open class NullDataController : Fragment() {
                                 val browseGifItemData = ArrayList<BrowseCollectionGifItemData>()
                                 val colorsList = GetResources(context!!).getNeonColors()
 
-                                it.forEach {
-                                    Log.d(this@NullDataController.javaClass.simpleName, it.name)
+                                it.forEach { file ->
+                                    Log.d(this@NullDataController.javaClass.simpleName, file.name)
 
-                                    val gifDrawable: File = it
-                                    val gifId: String = CollectionFile().extractGifId(it.name)
+                                    val gifDrawable: File = file
+                                    val gifId: String = CollectionFile().extractGifId(file.name)
                                     val aBackgroundColor = colorsList.random()
 
                                     browseGifItemData.add(BrowseCollectionGifItemData(
@@ -97,15 +97,15 @@ open class NullDataController : Fragment() {
             }
         })
 
-        nullDataControllerBinding?.facebookIcon?.setOnClickListener {
+        nullDataControllerBinding.facebookIcon.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookPageLink))).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(this)
             }
         }
 
-        nullDataControllerBinding?.rateReviewIcon?.setOnClickListener {
-            Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.playStoreLink) + context!!.packageName)).apply {
+        nullDataControllerBinding.rateReviewIcon.setOnClickListener {
+            Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.playStoreLink) + requireContext().packageName)).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(this)
             }
@@ -117,7 +117,5 @@ open class NullDataController : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        nullDataControllerBinding = null
     }
 }

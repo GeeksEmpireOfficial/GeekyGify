@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 2/21/20 6:46 PM
-  ~ Last modified 2/21/20 4:54 PM
+  ~ Created by Elias Fazel on 3/11/20 4:31 PM
+  ~ Last modified 3/11/20 2:19 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -20,7 +20,7 @@
                 android:type="radial"
                 android:centerX="0.50"
                 android:centerY="0.50"
-                android:gradientRadius="110%"
+                android:gradientRadius="100%"
                 android:startColor="@color/light_transparent"
                 android:centerColor="@android:color/transparent"
                 android:endColor="@android:color/transparent" />

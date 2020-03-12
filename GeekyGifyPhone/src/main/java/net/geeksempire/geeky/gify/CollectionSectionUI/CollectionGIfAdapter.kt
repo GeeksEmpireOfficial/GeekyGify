@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 8:49 AM
- * Last modified 3/5/20 8:27 AM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 4:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,7 +57,7 @@ class CollectionGifAdapter(var collectionGif: CollectionGif,
             is BrowseCollectionGifListViewHolder -> {
                 viewHolder.mainView.setBackgroundColor(Color.parseColor(collectionGifAdapterData[position].backgroundColor))
 
-                Glide.with(collectionGif.nullDataController.context!!)
+                Glide.with(collectionGif.nullDataController.requireContext())
                     .asGif()
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .load(collectionGifAdapterData[position].gifDrawable)
@@ -72,7 +72,7 @@ class CollectionGifAdapter(var collectionGif: CollectionGif,
             is BrowseCollectionGifListViewHolder -> {
                 viewHolder.mainView.setBackgroundColor(Color.parseColor(collectionGifAdapterData[position].backgroundColor))
 
-                Glide.with(collectionGif.nullDataController.context!!)
+                Glide.with(collectionGif.nullDataController.requireContext())
                     .asGif()
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .load(collectionGifAdapterData[position].gifDrawable)

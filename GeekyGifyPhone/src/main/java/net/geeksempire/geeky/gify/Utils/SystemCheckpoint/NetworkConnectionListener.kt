@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:17 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 2:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -50,8 +50,8 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
 
                     rootView.removeView(offlineIndicator)
 
-                    appCompatActivity.window.statusBarColor = appCompatActivity.getColor(R.color.default_color_game_light)
-                    appCompatActivity.window.navigationBarColor = appCompatActivity.getColor(R.color.default_color_game_light)
+                    appCompatActivity.window.statusBarColor = appCompatActivity.getColor(R.color.default_color_game_dark)
+                    appCompatActivity.window.navigationBarColor = appCompatActivity.getColor(R.color.default_color_game_dark)
                 }
             }, 555)
         }

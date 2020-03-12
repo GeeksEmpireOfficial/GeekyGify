@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:19 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 3:51 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -42,7 +42,7 @@ import net.geeksempire.geeky.gify.databinding.DataControllerBinding
 
 class DataController : AppCompatActivity() {
 
-    private lateinit var dataControllerBinding: DataControllerBinding
+    lateinit var dataControllerBinding: DataControllerBinding
 
     private val receivedDataController: Fragment = ReceivedDataController()
     private val nullDataController: Fragment = NullDataController()

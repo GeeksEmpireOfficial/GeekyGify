@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:40 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 4:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,13 +18,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.collection_gif.*
-import kotlinx.android.synthetic.main.data_controller.*
 import kotlinx.android.synthetic.main.null_data_controller.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.ServerConnection.DownloadData.UserData.RetrieveUserInformation
+import net.geeksempire.geeky.gify.SharedDataController.DataController
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.Utils.Calculations.DpToPixel
 import net.geeksempire.geeky.gify.Utils.Calculations.rowCount
@@ -37,7 +37,7 @@ import java.io.File
 
 class CollectionGif(var nullDataController: NullDataController) {
 
-    val context = nullDataController.context!!
+    val context = nullDataController.requireContext()
 
     lateinit var collectionGifAdapter: CollectionGifAdapter
 
@@ -69,7 +69,7 @@ class CollectionGif(var nullDataController: NullDataController) {
             object : RecyclerViewGifBrowseItemPress {
 
                 override fun itemPressedCollection(gifDrawable: File, gifId: String) {
-                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
+                    (nullDataController.requireActivity() as DataController).dataControllerBinding.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                     with(RetrieveUserInformation()) {
                         CoroutineScope(Dispatchers.IO).launch {
@@ -125,7 +125,7 @@ class CollectionGif(var nullDataController: NullDataController) {
         browseGifViewModel.gifsListError.observe(nullDataController,
             Observer {
                 SnackbarView().snackBarViewFail(context,
-                    nullDataController.mainViewNullDataController,
+                    nullDataController.nullDataControllerBinding.mainViewNullDataController,
                     context.getString(R.string.downloadErrorOccurred),
                     object : SnackbarInteraction {})
             })

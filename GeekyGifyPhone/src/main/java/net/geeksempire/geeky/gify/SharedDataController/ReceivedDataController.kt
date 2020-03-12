@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire. 
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 1:50 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 2:13 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -60,7 +60,7 @@ class ReceivedDataController : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val systemCheckpoint = SystemCheckpoint(context!!)
+        val systemCheckpoint = SystemCheckpoint(requireContext())
 
         arguments?.let {
 
@@ -71,7 +71,7 @@ class ReceivedDataController : Fragment() {
                 setupLoadingAnimation()
 
                 CoroutineScope(Dispatchers.Default).launch {
-                    gifFile = DownloadGif(context!!).downloadGifFile(linkToDownloadGif).await()
+                    gifFile = DownloadGif(requireContext()).downloadGifFile(linkToDownloadGif).await()
 
                     if (gifFile!!.exists()) {
                         withContext(SupervisorJob() + Dispatchers.Main) {
@@ -101,15 +101,15 @@ class ReceivedDataController : Fragment() {
                 }
 
             } else {
-                activity!!.window.statusBarColor = context!!.getColor(R.color.cyberGreen)
-                activity!!.window.navigationBarColor = context!!.getColor(R.color.cyberGreen)
+                requireActivity().window.statusBarColor = requireContext().getColor(R.color.cyberGreen)
+                requireActivity().window.navigationBarColor = requireContext().getColor(R.color.cyberGreen)
 
-                val offlineIndicator = LayoutInflater.from(context!!).inflate(
+                val offlineIndicator = LayoutInflater.from(requireContext()).inflate(
                     R.layout.offline_indicator, receivedDataControllerBinding.mainViewReceivedDataController, false)
 
                 receivedDataControllerBinding.mainViewReceivedDataController.addView(offlineIndicator)
 
-                Glide.with(context!!)
+                Glide.with(requireContext())
                     .asGif()
                     .diskCacheStrategy(DiskCacheStrategy.DATA)
                     .load(R.drawable.no_internet_connection)
@@ -118,7 +118,7 @@ class ReceivedDataController : Fragment() {
                 offlineIndicator.offlineWait.setOnClickListener {
                     startActivity(Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 
-                    activity!!.finish()
+                    requireActivity().finish()
                 }
             }
         }

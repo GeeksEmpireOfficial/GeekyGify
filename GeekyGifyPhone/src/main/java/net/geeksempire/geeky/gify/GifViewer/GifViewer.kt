@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:40 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 2:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -61,7 +61,7 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.gif_view, container, false)
 
-        Glide.with(context!!)
+        Glide.with(requireContext())
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(R.drawable.gradient_loading)
@@ -73,7 +73,7 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(context!!)
+        Glide.with(requireContext())
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(gifLinkToDownload)
@@ -98,13 +98,11 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
         closeFragment.setOnClickListener {
             gifViewerFragmentStateListener?.onFragmentDetach(ReloadData.DataType_Collection)
 
-            activity?.let {
-                it.supportFragmentManager
-                    .beginTransaction()
-                    .setCustomAnimations(0, R.anim.slide_to_right)
-                    .remove(this@GifViewer)
-                    .commit()
-            }
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(0, R.anim.slide_to_right)
+                .remove(this@GifViewer)
+                .commit()
         }
 
         gifUserName = arguments?.getString(GiphyJsonDataStructure.DATA_USER_NAME)
@@ -119,6 +117,6 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
 
         gifViewerFragmentStateListener?.onFragmentDetach(ReloadData.DataType_Collection)
 
-        activity!!.fragmentPlaceHolderGifViewer!!.visibility = View.GONE
+        requireActivity().fragmentPlaceHolderGifViewer!!.visibility = View.GONE
     }
 }

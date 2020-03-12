@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/19/20 3:13 PM
- * Last modified 2/19/20 3:06 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 2:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -64,7 +64,7 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.gif_view, container, false)
 
-        Glide.with(context!!)
+        Glide.with(requireContext())
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(R.drawable.gradient_loading)
@@ -76,7 +76,7 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Glide.with(context!!)
+        Glide.with(requireContext())
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(gifLinkToDownload)
@@ -98,7 +98,17 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
             })
             .into(gifView)
 
-        val displayDetection = DisplayDetection(activity!!)
+        closeFragment.setOnClickListener {
+            activity?.let {
+                it.supportFragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(0, R.anim.slide_to_right)
+                    .remove(this@GifViewer)
+                    .commit()
+            }
+        }
+
+        val displayDetection = DisplayDetection(requireActivity())
         displayDetection.initializeShapeDetection(object : ShapeDetection {
 
             override fun shapeType(typeOfShape: Int) {
@@ -137,6 +147,6 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
 
         gifViewerFragmentStateListener?.onFragmentDetach()
 
-        activity!!.fragmentPlaceHolder!!.visibility = View.GONE
+        requireActivity().fragmentPlaceHolder!!.visibility = View.GONE
     }
 }

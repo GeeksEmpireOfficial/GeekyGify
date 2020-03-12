@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:35 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 4:28 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,7 +16,12 @@ import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.net.Uri
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -34,6 +39,7 @@ import net.geeksempire.geeky.gify.Utils.UI.GlowAnimation
 import net.geeksempire.geeky.gify.Utils.UI.PopupAppShortcuts
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
 import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
+
 
 fun NullDataController.setupClickNullDataControllerAdsApp() {
 
@@ -266,4 +272,21 @@ fun NullDataController.setupNullDataControllerUI() {
             shadowY = 0f
         )
     }
+}
+
+fun NullDataController.changeWaitingView() {
+
+    TransitionManager.beginDelayedTransition(
+        mainViewNullDataController, TransitionSet()
+            .addTransition(ChangeBounds())
+            .addTransition(ChangeImageTransform())
+    )
+
+    val viewLayoutParameter = waitingView.layoutParams
+
+    viewLayoutParameter.width = 10
+    viewLayoutParameter.height = 10
+
+    waitingView.layoutParams = viewLayoutParameter
+    waitingView.visibility = View.GONE
 }

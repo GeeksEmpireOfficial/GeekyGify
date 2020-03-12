@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/20/20 2:24 PM
- * Last modified 2/20/20 12:47 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 2:43 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,12 +40,14 @@ class DownloadGif (var context: Context) {
         } else {
             val downloadGifByte = URL(linkToGif).readBytes()
 
-            val fileOutputStream = FileOutputStream(gifFile)
+            withContext(Dispatchers.IO) {
+                val fileOutputStream = FileOutputStream(gifFile)
 
-            fileOutputStream.write(downloadGifByte)
+                fileOutputStream.write(downloadGifByte)
 
-            fileOutputStream.flush()
-            fileOutputStream.close()
+                fileOutputStream.flush()
+                fileOutputStream.close()
+            }
         }
 
         gifFile

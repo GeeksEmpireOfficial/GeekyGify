@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:40 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 4:10 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,9 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.data_controller.*
 import kotlinx.android.synthetic.main.null_data_controller.*
-import kotlinx.android.synthetic.main.null_data_controller.waitingView
 import kotlinx.android.synthetic.main.trending_gif.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
@@ -28,6 +26,8 @@ import net.geeksempire.geeky.gify.BrowseGif.Utils.RecyclerViewGifBrowseItemPress
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.EndPointAddress
 import net.geeksempire.geeky.gify.ServerConnection.DownloadData.EndPoint.GiphySearchParameter
+import net.geeksempire.geeky.gify.SharedDataController.DataController
+import net.geeksempire.geeky.gify.SharedDataController.Extension.changeWaitingView
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.Utils.Calculations.DpToPixel
 import net.geeksempire.geeky.gify.Utils.Calculations.rowCount
@@ -40,7 +40,7 @@ import org.json.JSONObject
 
 class TrendingGif(var nullDataController: NullDataController) {
 
-    val context = nullDataController.context!!
+    val context = nullDataController.requireContext()
 
     fun initial() = CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
         delay(1357)
@@ -82,7 +82,7 @@ class TrendingGif(var nullDataController: NullDataController) {
                     gifOriginalUri: String, linkToGif: String, gifPreviewUri: String
                 ) {
 
-                    nullDataController.activity!!.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
+                    (nullDataController.requireActivity() as DataController).dataControllerBinding.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                     nullDataController.gifViewer.arguments = Bundle().apply {
                         putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
@@ -122,7 +122,7 @@ class TrendingGif(var nullDataController: NullDataController) {
 
         browseGifViewModel.gifsListDataTrending.observe(nullDataController,
             Observer {
-                nullDataController.waitingView.setImageDrawable(null)
+                nullDataController.changeWaitingView()
 
                 trendingGifAdapter.trendingGifAdapterData.clear()
                 trendingGifAdapter.trendingGifAdapterData.addAll(it)
@@ -135,7 +135,7 @@ class TrendingGif(var nullDataController: NullDataController) {
         browseGifViewModel.gifsListError.observe(nullDataController,
             Observer {
                 SnackbarView().snackBarViewFail(context,
-                    nullDataController.mainViewNullDataController,
+                    nullDataController.nullDataControllerBinding.mainViewNullDataController,
                     context.getString(R.string.downloadErrorOccurred),
                     object : SnackbarInteraction {})
             })

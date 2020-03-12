@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:01 PM
+ * Created by Elias Fazel on 3/11/20 4:31 PM
+ * Last modified 3/11/20 2:39 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,16 +35,6 @@ import net.geeksempire.geeky.gify.Utils.Calculations.calculateThirtyPercent
 import net.geeksempire.geeky.gify.Utils.SharingProcess.ControlGifShare
 
 fun GifViewer.setupGifViewClickListener() {
-
-    closeFragment.setOnClickListener {
-        activity?.let {
-            it.supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(0, R.anim.slide_to_right)
-                .remove(this@setupGifViewClickListener)
-                .commit()
-        }
-    }
 
     gifView.setOnClickListener {
 

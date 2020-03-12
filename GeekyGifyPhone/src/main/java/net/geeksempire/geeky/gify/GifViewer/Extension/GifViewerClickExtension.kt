@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 2:25 PM
+ * Created by Elias Fazel on 3/11/20 5:14 PM
+ * Last modified 3/11/20 5:06 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -19,7 +19,6 @@ import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.like.LikeButton
 import com.like.OnLikeListener
-import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,40 +30,40 @@ import net.geeksempire.geeky.gify.Utils.SharingProcess.ControlGifShare
 
 fun GifViewer.setupGifViewClickListener() {
 
-    gifView.setOnClickListener {
+    gifViewBinding.gifView.setOnClickListener {
 
     }
 
     var viewExpanded: Boolean = false
-    gifView.setOnLongClickListener {
+    gifViewBinding.gifView.setOnLongClickListener {
 
         TransitionManager.beginDelayedTransition(
-            mainViewGifViewer, TransitionSet()
+            gifViewBinding.mainViewGifViewer, TransitionSet()
                 .addTransition(ChangeBounds())
                 .addTransition(ChangeImageTransform())
         )
 
-        val gifViewLayoutParameter: ViewGroup.LayoutParams = gifView.layoutParams
+        val gifViewLayoutParameter: ViewGroup.LayoutParams = gifViewBinding.gifView.layoutParams
 
         if (viewExpanded)  {
 
             val animationSlideOut = AnimationUtils.loadAnimation(context, R.anim.slide_to_right)
 
-            shareGif.startAnimation(animationSlideOut)
-            shareGif.visibility = View.GONE
+            gifViewBinding.shareGif.startAnimation(animationSlideOut)
+            gifViewBinding.shareGif.visibility = View.GONE
 
-            makeFavorite.startAnimation(animationSlideOut)
-            makeFavorite.visibility = View.GONE
+            gifViewBinding.makeFavorite.startAnimation(animationSlideOut)
+            gifViewBinding.makeFavorite.visibility = View.GONE
 
             /*User Profile*/
-            userAvatarView.startAnimation(animationSlideOut)
-            userAvatarView.visibility = View.GONE
+            gifViewBinding.userAvatarView.startAnimation(animationSlideOut)
+            gifViewBinding.userAvatarView.visibility = View.GONE
 
-            userNameView.startAnimation(animationSlideOut)
-            userNameView.visibility = View.GONE
+            gifViewBinding.userNameView.startAnimation(animationSlideOut)
+            gifViewBinding.userNameView.visibility = View.GONE
 
-            userVerifiedBadgeView.startAnimation(animationSlideOut)
-            userVerifiedBadgeView.visibility = View.GONE
+            gifViewBinding.userVerifiedBadgeView.startAnimation(animationSlideOut)
+            gifViewBinding.userVerifiedBadgeView.visibility = View.GONE
             /*User Profile*/
 
             gifViewLayoutParameter.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -74,28 +73,28 @@ fun GifViewer.setupGifViewClickListener() {
 
             val animationSlideIn = AnimationUtils.loadAnimation(context, R.anim.slide_from_right)
 
-            shareGif.startAnimation(animationSlideIn)
-            shareGif.visibility = View.VISIBLE
+            gifViewBinding.shareGif.startAnimation(animationSlideIn)
+            gifViewBinding.shareGif.visibility = View.VISIBLE
 
-            makeFavorite.startAnimation(animationSlideIn)
-            makeFavorite.visibility = View.VISIBLE
+            gifViewBinding.makeFavorite.startAnimation(animationSlideIn)
+            gifViewBinding.makeFavorite.visibility = View.VISIBLE
 
             /*User Profile*/
-            userAvatarView.startAnimation(animationSlideIn)
-            userAvatarView.visibility = View.VISIBLE
+            gifViewBinding.userAvatarView.startAnimation(animationSlideIn)
+            gifViewBinding.userAvatarView.visibility = View.VISIBLE
 
-            userNameView.startAnimation(animationSlideIn)
-            userNameView.visibility = View.VISIBLE
+            gifViewBinding.userNameView.startAnimation(animationSlideIn)
+            gifViewBinding.userNameView.visibility = View.VISIBLE
 
-            userVerifiedBadgeView.startAnimation(animationSlideIn)
-            userVerifiedBadgeView.visibility = View.VISIBLE
+            gifViewBinding.userVerifiedBadgeView.startAnimation(animationSlideIn)
+            gifViewBinding.userVerifiedBadgeView.visibility = View.VISIBLE
             /*User Profile*/
 
-            gifViewLayoutParameter.width = calculateThirtyPercent(gifView.width)
-            gifViewLayoutParameter.height = calculateThirtyPercent(gifView.height)
+            gifViewLayoutParameter.width = calculateThirtyPercent(gifViewBinding.gifView.width)
+            gifViewLayoutParameter.height = calculateThirtyPercent(gifViewBinding.gifView.height)
 
         }
-        gifView.layoutParams = gifViewLayoutParameter
+        gifViewBinding.gifView.layoutParams = gifViewLayoutParameter
 
         viewExpanded = !viewExpanded
 
@@ -104,9 +103,9 @@ fun GifViewer.setupGifViewClickListener() {
 
     val favoriteCheckpoint: FavoriteCheckpoint = FavoriteCheckpoint(context!!)
     if (favoriteCheckpoint.gifFavorited(gifLinkToDownload)) {
-        makeFavorite.isLiked = true
+        gifViewBinding.makeFavorite.isLiked = true
     }
-    makeFavorite.setOnLikeListener(object : OnLikeListener {
+    gifViewBinding.makeFavorite.setOnLikeListener(object : OnLikeListener {
         override fun liked(likeButton: LikeButton?) {
             CoroutineScope(Dispatchers.IO).launch {
 
@@ -122,7 +121,7 @@ fun GifViewer.setupGifViewClickListener() {
         }
     })
 
-    shareGif.setOnClickListener {
+    gifViewBinding.shareGif.setOnClickListener {
 
         ControlGifShare(activity!!)
             .initializeGifShare(

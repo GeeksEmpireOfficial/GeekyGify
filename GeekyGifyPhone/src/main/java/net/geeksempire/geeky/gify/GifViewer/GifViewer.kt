@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 2:39 PM
+ * Created by Elias Fazel on 3/11/20 5:14 PM
+ * Last modified 3/11/20 5:07 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -23,17 +23,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
-import kotlinx.android.synthetic.main.data_controller.*
-import kotlinx.android.synthetic.main.gif_view.*
-import kotlinx.android.synthetic.main.gif_view.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupGifViewClickListener
 import net.geeksempire.geeky.gify.GifViewer.Extension.setupUserProfileInformation
 import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.GifViewer.Utils.ReloadData
 import net.geeksempire.geeky.gify.R
+import net.geeksempire.geeky.gify.SharedDataController.DataController
+import net.geeksempire.geeky.gify.databinding.GifViewBinding
 
 class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentStateListener?) : Fragment() {
+
+    lateinit var gifViewBinding: GifViewBinding
 
     lateinit var linkToGif: String
     lateinit var gifPreviewLink: String
@@ -58,16 +59,16 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
         StrictMode.setVmPolicy(vmBuilder.build())
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.gif_view, container, false)
+    override fun onCreateView(layoutInflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        gifViewBinding = GifViewBinding.inflate(layoutInflater, container, false)
 
         Glide.with(requireContext())
             .asGif()
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .load(R.drawable.gradient_loading)
-            .into(view.progressBarGifView)
+            .into(gifViewBinding.progressBarGifView)
 
-        return view
+        return gifViewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,7 +86,7 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
 
                 override fun onResourceReady(drawable: GifDrawable?, any: Any?, target: com.bumptech.glide.request.target.Target<GifDrawable>?, dataSource: DataSource?, boolean: Boolean): Boolean {
                     Handler().postDelayed({
-                        progressBarGifView.visibility = View.GONE
+                        gifViewBinding.progressBarGifView.visibility = View.GONE
 
                         setupGifViewClickListener()
                     }, 500)
@@ -93,9 +94,9 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
                     return false
                 }
             })
-            .into(gifView)
+            .into(gifViewBinding.gifView)
 
-        closeFragment.setOnClickListener {
+        gifViewBinding.closeFragment.setOnClickListener {
             gifViewerFragmentStateListener?.onFragmentDetach(ReloadData.DataType_Collection)
 
             requireActivity().supportFragmentManager
@@ -117,6 +118,6 @@ class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentSta
 
         gifViewerFragmentStateListener?.onFragmentDetach(ReloadData.DataType_Collection)
 
-        requireActivity().fragmentPlaceHolderGifViewer!!.visibility = View.GONE
+        (requireActivity() as DataController).dataControllerBinding.fragmentPlaceHolderGifViewer.visibility = View.GONE
     }
 }

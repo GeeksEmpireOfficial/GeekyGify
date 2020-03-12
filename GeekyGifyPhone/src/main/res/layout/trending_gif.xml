@@ -2,8 +2,8 @@
 <!--
   ~ Copyright © 2020 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/11/20 4:31 PM
-  ~ Last modified 3/11/20 4:04 PM
+  ~ Created by Elias Fazel on 3/11/20 5:00 PM
+  ~ Last modified 3/11/20 4:48 PM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -11,15 +11,11 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:apps="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rootTrendingGif"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="19dp"
     android:paddingEnd="19sp"
-    android:background="@android:color/transparent"
-
-    tools:viewBindingIgnore="true">
+    android:background="@android:color/transparent">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/trendingIconStart"

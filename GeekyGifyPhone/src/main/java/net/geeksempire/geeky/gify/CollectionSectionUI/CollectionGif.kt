@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 4:10 PM
+ * Created by Elias Fazel on 3/11/20 5:00 PM
+ * Last modified 3/11/20 4:53 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -133,8 +133,12 @@ class CollectionGif(var nullDataController: NullDataController) {
 
     fun updateData(newCollectionGifAdapterData: ArrayList<BrowseCollectionGifItemData>) {
 
-        collectionGifAdapter.updateCollectionData(
-            newCollectionGifAdapterData
-        )
+        if (collectionGifAdapter.collectionGifAdapterData.size > 0) {
+            collectionGifAdapter.updateCollectionData(
+                newCollectionGifAdapterData
+            )
+        } else {
+            initial()
+        }
     }
 }

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/26/20 9:34 PM
- * Last modified 2/26/20 9:28 PM
+ * Created by Elias Fazel on 4/28/20 4:28 AM
+ * Last modified 4/28/20 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,7 +18,6 @@ import android.os.Handler
 import android.os.ResultReceiver
 import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.wear.widget.WearableLinearLayoutManager
@@ -82,11 +81,12 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                     fragmentPlaceHolder.visibility = View.VISIBLE
 
-                    val addNewCategory: Fragment = AddNewCategory(object : GifCategoryFragmentStateListener {
+                    val addNewCategory: AddNewCategory = AddNewCategory()
+                    addNewCategory.gifCategoryFragmentStateListener = object : GifCategoryFragmentStateListener {
                         override fun onFragmentDetach() {
                             triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
                         }
-                    })
+                    }
 
                     addNewCategory.arguments = Bundle().apply {
 

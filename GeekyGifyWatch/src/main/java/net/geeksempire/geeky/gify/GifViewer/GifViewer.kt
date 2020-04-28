@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 2:39 PM
+ * Created by Elias Fazel on 4/28/20 4:28 AM
+ * Last modified 4/28/20 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,7 +36,9 @@ import net.geeksempire.geeky.gify.Utils.UI.DisplayDetection
 import net.geeksempire.geeky.gify.Utils.UI.ShapeDetection
 
 
-class GifViewer(private val gifViewerFragmentStateListener: GifViewerFragmentStateListener?) : Fragment() {
+class GifViewer : Fragment() {
+
+    var gifViewerFragmentStateListener: GifViewerFragmentStateListener? = null
 
     lateinit var linkToGif: String
     lateinit var gifPreviewLink: String

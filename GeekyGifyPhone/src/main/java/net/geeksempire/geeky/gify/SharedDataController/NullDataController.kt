@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 4:13 PM
+ * Created by Elias Fazel on 4/28/20 4:28 AM
+ * Last modified 4/28/20 4:25 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -32,14 +32,14 @@ import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
 import net.geeksempire.geeky.gify.databinding.NullDataControllerBinding
 import java.io.File
 
-open class NullDataController : Fragment() {
+class NullDataController : Fragment() {
 
     lateinit var nullDataControllerBinding: NullDataControllerBinding
 
     lateinit var collectionGif: CollectionGif
     lateinit var trendingGif: TrendingGif
 
-    var gifViewer: Fragment = GifViewer(object : GifViewerFragmentStateListener {})
+    val gifViewer: GifViewer = GifViewer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,7 @@ open class NullDataController : Fragment() {
         collectionGif = CollectionGif(this@NullDataController)
         trendingGif = TrendingGif(this@NullDataController)
 
-        gifViewer = GifViewer(object : GifViewerFragmentStateListener {
+        gifViewer.gifViewerFragmentStateListener = object : GifViewerFragmentStateListener {
 
             override fun onFragmentDetach(reloadDataType: ReloadData) {
 
@@ -95,7 +95,7 @@ open class NullDataController : Fragment() {
                     }
                 }
             }
-        })
+        }
 
         nullDataControllerBinding.facebookIcon.setOnClickListener {
             Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.facebookPageLink))).apply {

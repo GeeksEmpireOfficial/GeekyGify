@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 6:17 AM
- * Last modified 3/2/20 6:15 AM
+ * Created by Elias Fazel on 4/28/20 4:28 AM
+ * Last modified 4/28/20 4:28 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.favorites_gif_list_view.*
@@ -35,7 +34,7 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
 
     private lateinit var favoritesGifViewModel: FavoritesGifViewModel
 
-    var gifViewer: Fragment = GifViewer(null)
+    var gifViewer: GifViewer = GifViewer()
 
     @Inject
     lateinit var networkConnectionListener: NetworkConnectionListener
@@ -53,11 +52,14 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
         ambientController = AmbientModeSupport.attach(this)
         ambientController.setAmbientOffloadEnabled(true)
 
-        gifViewer = GifViewer(object : GifViewerFragmentStateListener {
+        gifViewer = GifViewer()
+        gifViewer.gifViewerFragmentStateListener = object : GifViewerFragmentStateListener {
+
             override fun onFragmentDetach() {
+
                 favoritesGifViewModel.setupGifsFavoritesData()
             }
-        })
+        }
 
         exploreGifs.setOnClickListener {
 

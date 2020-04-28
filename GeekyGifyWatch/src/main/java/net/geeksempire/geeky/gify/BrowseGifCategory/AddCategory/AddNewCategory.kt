@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/16/20 1:01 PM
- * Last modified 2/16/20 12:40 PM
+ * Created by Elias Fazel on 4/28/20 4:28 AM
+ * Last modified 4/28/20 4:26 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -28,7 +28,9 @@ import net.geeksempire.geeky.gify.BrowseGifCategory.Utils.GifCategoryFragmentSta
 import net.geeksempire.geeky.gify.R
 
 
-class AddNewCategory (private val gifCategoryFragmentStateListener: GifCategoryFragmentStateListener?) : Fragment() {
+class AddNewCategory : Fragment() {
+
+    var gifCategoryFragmentStateListener: GifCategoryFragmentStateListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 5:52 PM
- * Last modified 3/11/20 5:25 PM
+ * Created by Elias Fazel on 5/16/20 1:24 PM
+ * Last modified 5/16/20 12:55 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -18,8 +18,8 @@ import com.giphy.sdk.core.models.enums.RatingType
 import com.giphy.sdk.core.models.enums.RenditionType
 import com.giphy.sdk.ui.GPHContentType
 import com.giphy.sdk.ui.GPHSettings
-import com.giphy.sdk.ui.GiphyCoreUI
-import com.giphy.sdk.ui.themes.DarkTheme
+import com.giphy.sdk.ui.Giphy
+import com.giphy.sdk.ui.themes.GPHTheme
 import com.giphy.sdk.ui.themes.GridType
 import com.giphy.sdk.ui.views.GiphyDialogFragment
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
@@ -34,9 +34,9 @@ class GiphyExplore {
     }
 
     fun invokeGiphyExplore(nullDataController: NullDataController) {
-        GiphyCoreUI.configure((nullDataController.activity as AppCompatActivity), GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = true)
+        Giphy.configure((nullDataController.activity as AppCompatActivity), GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = false)
 
-        val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = DarkTheme, dimBackground = true)
+        val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = GPHTheme.Dark, useBlurredBackground = true)
         giphySettings.mediaTypeConfig = arrayOf(
             GPHContentType.gif,
             GPHContentType.sticker,
@@ -52,7 +52,7 @@ class GiphyExplore {
 
         giphyDialog.gifSelectionListener = object: GiphyDialogFragment.GifSelectionListener {
 
-            override fun onGifSelected(media: Media) {
+            override fun onGifSelected(media: Media, searchTerm: String?) {
                 (nullDataController.activity as DataController).dataControllerBinding.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                 nullDataController.gifViewer.arguments = Bundle().apply {
@@ -73,6 +73,10 @@ class GiphyExplore {
                     .setCustomAnimations(R.anim.slide_from_right, 0)
                     .replace(R.id.fragmentPlaceHolderGifViewer, nullDataController.gifViewer, "GIF VIEWER")
                     .commit()
+            }
+
+            override fun didSearchTerm(term: String) {
+
             }
 
             override fun onDismissed() {

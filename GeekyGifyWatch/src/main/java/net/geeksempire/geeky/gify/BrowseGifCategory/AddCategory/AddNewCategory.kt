@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 4/28/20 4:28 AM
- * Last modified 4/28/20 4:26 AM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 11:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.add_new_category_view.*
-import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDataModel
 import net.geeksempire.geeky.gify.BrowseGifCategory.RoomDatabase.GifCategoryDatabase
@@ -53,7 +52,7 @@ class AddNewCategory : Fragment() {
 
         typeNewCategoryName.requestFocus()
 
-        val inputMethodManager = getSystemService(context!!, InputMethodManager::class.java) as InputMethodManager
+        val inputMethodManager = getSystemService(requireContext(), InputMethodManager::class.java) as InputMethodManager
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 
         typeNewCategoryName.setOnEditorActionListener { view, actionId, event ->
@@ -66,7 +65,7 @@ class AddNewCategory : Fragment() {
                     if (!view.text.isBlank()) {
                         CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
 
-                            GifCategoryDatabase(context!!)
+                            GifCategoryDatabase(requireContext())
                                 .initialGifCategoryDatabase()
                                 .initDataAccessObject()
                                 .insertNewGifCategoryData(
@@ -110,6 +109,6 @@ class AddNewCategory : Fragment() {
         super.onDestroyView()
 
 
-        activity!!.fragmentPlaceHolder!!.visibility = View.GONE
+        fragmentPlaceHolder!!.visibility = View.GONE
     }
 }

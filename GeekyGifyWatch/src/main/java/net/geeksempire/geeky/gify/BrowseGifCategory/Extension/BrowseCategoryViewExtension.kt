@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 4/28/20 4:28 AM
- * Last modified 4/28/20 4:28 AM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 11:17 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,7 +22,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.wear.widget.WearableLinearLayoutManager
 import com.google.android.wearable.intent.RemoteIntent
-import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import kotlinx.coroutines.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.AddCategory.AddNewCategory
 import net.geeksempire.geeky.gify.BrowseGifCategory.Data.BrowseGitCategoryData

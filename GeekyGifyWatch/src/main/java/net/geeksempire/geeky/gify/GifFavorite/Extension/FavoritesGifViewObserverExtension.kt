@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/5/20 9:00 AM
- * Last modified 3/5/20 8:55 AM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 11:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.favorites_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.BrowseGif.UI.Adapter.Data.GifUserProfile
 import net.geeksempire.geeky.gify.GifFavorite.RoomDatabase.FavoriteDataModel
@@ -30,7 +29,7 @@ import net.geeksempire.geeky.gify.R
 
 fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel {
 
-    gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
+    favoritesGifListViewBinding.gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
 
     val favoritesGifViewModelFactory = FavoritesGifViewModelFactory(applicationContext)
     val favoritesGifViewModel = ViewModelProvider(this@favoritesGifViewObserverExtension, favoritesGifViewModelFactory).get(FavoritesGifViewModel::class.java)
@@ -40,7 +39,7 @@ fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel
         override fun itemPressed(gifUserProfile: GifUserProfile?,
                                  gifOriginalUri: String, linkToGif: String, gifPreviewUri: String) {
 
-            fragmentPlaceHolder.visibility = View.VISIBLE
+            favoritesGifListViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
 
             gifViewer.arguments = Bundle().apply {
                 putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
@@ -70,13 +69,13 @@ fun FavoritesGifView.favoritesGifViewObserverExtension() : FavoritesGifViewModel
             if (it.isNotEmpty()) {
                 if (favoritesGifAdapter == null) {
 
-                    gifList.visibility = View.VISIBLE
-                    progressBarGifs.hide()
+                    favoritesGifListViewBinding.gifList.visibility = View.VISIBLE
+                    favoritesGifListViewBinding.progressBarGifs.hide()
 
                     favoritesGifAdapter = FavoritesGifAdapter(this@favoritesGifViewObserverExtension, recyclerViewGifFavoriteItemPress)
                     favoritesGifAdapter?.favoriteGifItemData = it as ArrayList<FavoriteDataModel>
 
-                    gifList.adapter = favoritesGifAdapter
+                    favoritesGifListViewBinding.gifList.adapter = favoritesGifAdapter
                     favoritesGifAdapter?.notifyDataSetChanged()
 
                 } else {

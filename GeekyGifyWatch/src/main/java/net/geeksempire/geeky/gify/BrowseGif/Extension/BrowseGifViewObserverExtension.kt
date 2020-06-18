@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/2/20 4:50 AM
- * Last modified 3/2/20 3:37 AM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 10:50 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import kotlinx.android.synthetic.main.offline_indicator.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.EnqueueEndPointQuery
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
@@ -37,7 +36,7 @@ import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.JsonRequest
 
 fun BrowseGifView.createViewModelObserver (queryType: String, categoryName: String) : BrowseGifViewModel {
 
-    gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
+    browseGifListViewBinding.gifList.layoutManager = GridLayoutManager(applicationContext, 2, RecyclerView.VERTICAL, false)
 
     val browseGifViewModel = ViewModelProvider(this@createViewModelObserver).get(BrowseGifViewModel::class.java)
 
@@ -46,7 +45,7 @@ fun BrowseGifView.createViewModelObserver (queryType: String, categoryName: Stri
         override fun itemPressed(gifUserProfile: GifUserProfile?,
                                  gifOriginalUri: String, linkToGif: String, gifPreviewUri: String) {
 
-            fragmentPlaceHolder.visibility = View.VISIBLE
+            browseGifListViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
 
             gifViewer.arguments = Bundle().apply {
                 putString(GiphyJsonDataStructure.DATA_URL, linkToGif)
@@ -72,16 +71,16 @@ fun BrowseGifView.createViewModelObserver (queryType: String, categoryName: Stri
     browseGifViewModel.gifsListData.observe(this@createViewModelObserver,
         Observer {
             if (it.size > 0) {
-                gifList.visibility = View.VISIBLE
-                progressBarGifs.hide()
+                browseGifListViewBinding.gifList.visibility = View.VISIBLE
+                browseGifListViewBinding.progressBarGifs.hide()
 
                 val browseGifAdapter = BrowseGifAdapter(this@createViewModelObserver, it, recyclerViewGifBrowseItemPressHandler)
 
-                gifList.adapter = browseGifAdapter
+                browseGifListViewBinding.gifList.adapter = browseGifAdapter
                 browseGifAdapter.notifyDataSetChanged()
 
 
-                nextGifPage.visibility = if (queryType == BrowseGifViewModel.QUERY_TYPE.QUERY_SEARCH) {
+                browseGifListViewBinding.nextGifPage.visibility = if (queryType == BrowseGifViewModel.QUERY_TYPE.QUERY_SEARCH) {
                     View.VISIBLE
                 } else {
                     View.GONE
@@ -95,9 +94,9 @@ fun BrowseGifView.createViewModelObserver (queryType: String, categoryName: Stri
         Observer { errorMessage ->
 
             if (errorMessage.isNotEmpty()) {
-                val offlineIndicator = LayoutInflater.from(this@createViewModelObserver).inflate(R.layout.offline_indicator, mainView, false)
+                val offlineIndicator = LayoutInflater.from(this@createViewModelObserver).inflate(R.layout.offline_indicator, browseGifListViewBinding.mainView, false)
 
-                mainView.addView(offlineIndicator)
+                browseGifListViewBinding.mainView.addView(offlineIndicator)
 
                 Glide.with(applicationContext)
                     .asGif()

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 5/16/20 1:24 PM
- * Last modified 5/16/20 1:18 PM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 10:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -24,7 +25,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
-import kotlinx.android.synthetic.main.browse_gif_list_view.*
+
 import kotlinx.android.synthetic.main.gif_view.*
 import kotlinx.android.synthetic.main.gif_view.view.*
 import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
@@ -47,6 +48,8 @@ class GifViewer : Fragment() {
     var gifUserName: String? = null
     var gifUserAvatarUrl: String? = null
     var gifUserIsVerified: Boolean? = null
+
+    var fragmentPlaceHolder: FrameLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -149,6 +152,6 @@ class GifViewer : Fragment() {
 
         gifViewerFragmentStateListener?.onFragmentDetach()
 
-        requireActivity().fragmentPlaceHolder!!.visibility = View.GONE
+        fragmentPlaceHolder?.visibility = View.GONE
     }
 }

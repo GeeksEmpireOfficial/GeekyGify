@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 4/28/20 4:36 AM
- * Last modified 4/28/20 4:36 AM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 10:56 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.browse_gif_list_view.*
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createClickListeners
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createViewModelObserver
 import net.geeksempire.geeky.gify.BrowseGif.ViewModel.BrowseGifViewModel
@@ -30,25 +29,31 @@ import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import net.geeksempire.geeky.gify.Utils.UI.DisplayDetection
 import net.geeksempire.geeky.gify.Utils.UI.ShapeDetection
+import net.geeksempire.geeky.gify.databinding.BrowseGifListViewBinding
 import javax.inject.Inject
 
 class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
 
     private lateinit var ambientController: AmbientModeSupport.AmbientController
 
-    val gifViewer: Fragment = GifViewer()
+    val gifViewer: Fragment = GifViewer().apply {
+        this.fragmentPlaceHolder = browseGifListViewBinding.fragmentPlaceHolder
+    }
+
+    lateinit var browseGifListViewBinding: BrowseGifListViewBinding
 
     @Inject
     lateinit var networkConnectionListener: NetworkConnectionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.browse_gif_list_view)
+        browseGifListViewBinding = BrowseGifListViewBinding.inflate(layoutInflater)
+        setContentView(browseGifListViewBinding.root)
 
         (application as GeekyGifyWatchApplication)
             .dependencyGraph
             .subDependencyGraph()
-            .create(this@BrowseGifView, mainView)
+            .create(this@BrowseGifView, browseGifListViewBinding.mainView)
             .inject(this@BrowseGifView)
 
         ambientController = AmbientModeSupport.attach(this)
@@ -57,13 +62,13 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
         val queryType: String = intent.getStringExtra("QueryType")!!
         val categoryName: String = intent.getStringExtra("CategoryName")!!
 
-        categoryTitle.text = categoryName
+        browseGifListViewBinding.categoryTitle.text = categoryName
 
         val browseGifViewModel: BrowseGifViewModel = createViewModelObserver(queryType, categoryName)
 
         createClickListeners(queryType, categoryName, browseGifViewModel)
 
-        categoryTitle.setOnClickListener {
+        browseGifListViewBinding.categoryTitle.setOnClickListener {
 
         }
 
@@ -72,7 +77,7 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
 
         Glide.with(applicationContext)
             .load(animatable as Drawable)
-            .into(exploreGifs)
+            .into(browseGifListViewBinding.exploreGifs)
     }
 
     override fun onResume() {
@@ -91,14 +96,14 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
                     DisplayDetection.DisplayType.ROUND_CHIN -> {
                         Log.d(DisplayDetection::class.java.simpleName, "CHIN")
 
-                        exploreGifs.visibility = View.GONE
+                        browseGifListViewBinding.exploreGifs.visibility = View.GONE
                     }
                     DisplayDetection.DisplayType.RECTANGLE -> {
                         Log.d(DisplayDetection::class.java.simpleName, "RECTANGLE")
 
-                        val categoryTitleLayoutParameter: ViewGroup.LayoutParams = categoryTitle.layoutParams
+                        val categoryTitleLayoutParameter: ViewGroup.LayoutParams = browseGifListViewBinding.categoryTitle.layoutParams
                         categoryTitleLayoutParameter.width = ViewGroup.LayoutParams.MATCH_PARENT
-                        categoryTitle.layoutParams = categoryTitleLayoutParameter
+                        browseGifListViewBinding.categoryTitle.layoutParams = categoryTitleLayoutParameter
                     }
                 }
             }

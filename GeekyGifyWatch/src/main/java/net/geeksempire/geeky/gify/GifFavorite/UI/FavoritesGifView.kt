@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 4/28/20 4:28 AM
- * Last modified 4/28/20 4:28 AM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 11:13 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.ambient.AmbientModeSupport
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.favorites_gif_list_view.*
 import net.geeksempire.geeky.gify.GeekyGifyWatchApplication
 import net.geeksempire.geeky.gify.GifFavorite.Extension.favoritesGifViewObserverExtension
 import net.geeksempire.geeky.gify.GifFavorite.ViewModel.FavoritesGifViewModel
@@ -26,6 +25,7 @@ import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
+import net.geeksempire.geeky.gify.databinding.FavoritesGifListViewBinding
 import javax.inject.Inject
 
 class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider {
@@ -34,19 +34,24 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
 
     private lateinit var favoritesGifViewModel: FavoritesGifViewModel
 
-    var gifViewer: GifViewer = GifViewer()
+    var gifViewer: GifViewer = GifViewer().apply {
+        this.fragmentPlaceHolder = favoritesGifListViewBinding.fragmentPlaceHolder
+    }
+
+    lateinit var favoritesGifListViewBinding: FavoritesGifListViewBinding
 
     @Inject
     lateinit var networkConnectionListener: NetworkConnectionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.favorites_gif_list_view)
+        favoritesGifListViewBinding = FavoritesGifListViewBinding.inflate(layoutInflater)
+        setContentView(favoritesGifListViewBinding.root)
 
         (application as GeekyGifyWatchApplication)
             .dependencyGraph
             .subDependencyGraph()
-            .create(this@FavoritesGifView, mainView)
+            .create(this@FavoritesGifView, favoritesGifListViewBinding.mainView)
             .inject(this@FavoritesGifView)
 
         ambientController = AmbientModeSupport.attach(this)
@@ -61,11 +66,11 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
             }
         }
 
-        exploreGifs.setOnClickListener {
+        favoritesGifListViewBinding.exploreGifs.setOnClickListener {
 
-            if (!gifViewer.isVisible || !fragmentPlaceHolder.isShown) {
+            if (!gifViewer.isVisible || !favoritesGifListViewBinding.fragmentPlaceHolder.isShown) {
 
-                fragmentPlaceHolder.visibility = View.VISIBLE
+                favoritesGifListViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
                 GiphyExplore()
                     .invokeGiphyExplore(this@FavoritesGifView)
             }
@@ -78,7 +83,7 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
 
         Glide.with(applicationContext)
             .load(animatable as Drawable)
-            .into(exploreGifs)
+            .into(favoritesGifListViewBinding.exploreGifs)
     }
 
     override fun onDestroy() {

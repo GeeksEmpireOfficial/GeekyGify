@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/24/20 8:43 PM
- * Last modified 2/24/20 8:40 PM
+ * Created by Elias Fazel on 6/18/20 11:18 AM
+ * Last modified 6/18/20 11:16 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.wear.ambient.AmbientModeSupport
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import kotlinx.android.synthetic.main.browse_gif_category_view.*
 import net.geeksempire.geeky.gify.BrowseGifCategory.Extension.createViewModelObserver
 import net.geeksempire.geeky.gify.BrowseGifCategory.ViewModel.BrowseCategoryViewModel
 import net.geeksempire.geeky.gify.BuildConfig
@@ -24,6 +23,7 @@ import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.Networking.ServerConnections.RemoteConfigFunctions
 import net.geeksempire.geeky.gify.Utils.SystemCheckpoint.NetworkConnectionListener
 import net.geeksempire.geeky.gify.Utils.UI.CreateNotification
+import net.geeksempire.geeky.gify.databinding.BrowseGifCategoryViewBinding
 import javax.inject.Inject
 
 class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackProvider  {
@@ -32,17 +32,20 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
 
     private lateinit var browseGifCategoryView: BrowseCategoryViewModel
 
+    lateinit var browseGifCategoryViewBinding: BrowseGifCategoryViewBinding
+
     @Inject
     lateinit var networkConnectionListener: NetworkConnectionListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        browseGifCategoryViewBinding = BrowseGifCategoryViewBinding.inflate(layoutInflater)
         setContentView(R.layout.browse_gif_category_view)
 
         (application as GeekyGifyWatchApplication)
             .dependencyGraph
             .subDependencyGraph()
-            .create(this@BrowseCategoryView, mainView)
+            .create(this@BrowseCategoryView, browseGifCategoryViewBinding.mainView)
             .inject(this@BrowseCategoryView)
 
         ambientController = AmbientModeSupport.attach(this)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 5/16/20 1:24 PM
- * Last modified 5/16/20 12:55 PM
+ * Created by Elias Fazel on 6/19/20 3:26 PM
+ * Last modified 6/19/20 3:15 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -26,6 +26,8 @@ import net.geeksempire.geeky.gify.BrowseGif.Data.GiphyJsonDataStructure
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.DataController
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 class GiphyExplore {
 
@@ -80,6 +82,16 @@ class GiphyExplore {
             }
 
             override fun onDismissed() {
+
+                SnackbarView()
+                    .snackBarViewSuccess((nullDataController.requireContext()), nullDataController.nullDataControllerBinding.mainViewNullDataController, nullDataController.getString(R.string.explore), nullDataController.getString(R.string.nullData),
+                        object : SnackbarInteraction {
+                            override fun onActionClick() {
+
+                                giphyDialog.showNow((nullDataController.activity as AppCompatActivity).supportFragmentManager, "GIF_DIALOGUE")
+
+                            }
+                        })
 
             }
         }

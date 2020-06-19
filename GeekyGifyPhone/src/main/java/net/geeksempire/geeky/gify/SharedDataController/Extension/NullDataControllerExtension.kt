@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 3:00 PM
- * Last modified 6/19/20 3:00 PM
+ * Created by Elias Fazel on 6/19/20 3:26 PM
+ * Last modified 6/19/20 3:16 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
 import androidx.transition.TransitionManager
@@ -29,11 +30,14 @@ import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.NullDataController
 import net.geeksempire.geeky.gify.Utils.Converter.ConvertFile
 import net.geeksempire.geeky.gify.Utils.UI.GlowAnimation
 import net.geeksempire.geeky.gify.Utils.UI.PopupAppShortcuts
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
+import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 
 
 fun NullDataController.setupClickNullDataControllerAdsApp() {
@@ -211,6 +215,16 @@ fun NullDataController.setupNullDataControllerUI() {
         })
         .into(nullDataControllerBinding.waitingView)
 
+    SnackbarView()
+        .snackBarViewSuccess((activity as AppCompatActivity?)!!, nullDataControllerBinding.mainViewNullDataController, getString(R.string.explore), getString(R.string.nullData),
+            object : SnackbarInteraction {
+                override fun onActionClick() {
+
+                    GiphyExplore()
+                        .invokeGiphyExplore(this@setupNullDataControllerUI)
+                }
+            })
+
     val animatable = context!!.getDrawable(R.drawable.animated_geeky_gify_text) as Animatable
     animatable.start()
 
@@ -257,6 +271,7 @@ fun NullDataController.setupNullDataControllerUI() {
             shadowY = 0f
         )
     }
+
 }
 
 fun NullDataController.changeWaitingView() {

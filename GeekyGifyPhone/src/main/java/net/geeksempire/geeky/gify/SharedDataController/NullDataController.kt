@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 3:00 PM
- * Last modified 6/19/20 2:58 PM
+ * Created by Elias Fazel on 6/19/20 3:26 PM
+ * Last modified 6/19/20 3:26 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,21 +17,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import net.geeksempire.geeky.gify.CollectionSectionUI.CollectionGif
 import net.geeksempire.geeky.gify.CollectionSectionUI.Utils.CollectionFile
 import net.geeksempire.geeky.gify.GifViewer.GifViewer
 import net.geeksempire.geeky.gify.GifViewer.Utils.GifViewerFragmentStateListener
 import net.geeksempire.geeky.gify.GifViewer.Utils.ReloadData
-import net.geeksempire.geeky.gify.GiphyExplore.GiphyExplore
 import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.SharedDataController.Extension.setupClickNullDataControllerAdsApp
 import net.geeksempire.geeky.gify.SharedDataController.Extension.setupNullDataControllerUI
 import net.geeksempire.geeky.gify.TrendingSectionUI.TrendingGif
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
-import net.geeksempire.geeky.gify.Utils.UI.SnackbarInteraction
-import net.geeksempire.geeky.gify.Utils.UI.SnackbarView
 import net.geeksempire.geeky.gify.ViewModel.BrowseCollectionGifItemData
 import net.geeksempire.geeky.gify.databinding.NullDataControllerBinding
 import java.io.File
@@ -68,29 +64,32 @@ class NullDataController : Fragment() {
                 when (reloadDataType) {
                     ReloadData.DataType_Collection -> {
 
-                        val geekyGifyCollectionFolder = File(context!!.externalMediaDirs[0].path + File.separator + "SharedGifCollection")
-                        if (geekyGifyCollectionFolder.exists()) {
+                        context?.let {
 
-                            geekyGifyCollectionFolder.listFiles()?.let {
+                            val geekyGifyCollectionFolder = File(it.externalMediaDirs[0].path + File.separator + "SharedGifCollection")
+                            if (geekyGifyCollectionFolder.exists()) {
 
-                                val browseGifItemData = ArrayList<BrowseCollectionGifItemData>()
-                                val colorsList = GetResources(context!!).getNeonColors()
+                                geekyGifyCollectionFolder.listFiles()?.let {
 
-                                it.forEach { file ->
-                                    Log.d(this@NullDataController.javaClass.simpleName, file.name)
+                                    val browseGifItemData = ArrayList<BrowseCollectionGifItemData>()
+                                    val colorsList = GetResources(context!!).getNeonColors()
 
-                                    val gifDrawable: File = file
-                                    val gifId: String = CollectionFile().extractGifId(file.name)
-                                    val aBackgroundColor = colorsList.random()
+                                    it.forEach { file ->
+                                        Log.d(this@NullDataController.javaClass.simpleName, file.name)
 
-                                    browseGifItemData.add(BrowseCollectionGifItemData(
-                                        gifDrawable,
-                                        gifId,
-                                        aBackgroundColor)
-                                    )
+                                        val gifDrawable: File = file
+                                        val gifId: String = CollectionFile().extractGifId(file.name)
+                                        val aBackgroundColor = colorsList.random()
+
+                                        browseGifItemData.add(BrowseCollectionGifItemData(
+                                            gifDrawable,
+                                            gifId,
+                                            aBackgroundColor)
+                                        )
+                                    }
+
+                                    collectionGif.updateData(browseGifItemData)
                                 }
-
-                                collectionGif.updateData(browseGifItemData)
                             }
                         }
                     }
@@ -121,16 +120,6 @@ class NullDataController : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        SnackbarView()
-            .snackBarViewSuccess((activity as AppCompatActivity?)!!, nullDataControllerBinding.mainViewNullDataController, getString(R.string.explore), getString(R.string.nullData),
-                object : SnackbarInteraction {
-                    override fun onActionClick() {
-
-                        GiphyExplore()
-                            .invokeGiphyExplore(this@NullDataController)
-                    }
-                })
     }
 
     override fun onDestroyView() {

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 8:30 AM
- * Last modified 6/19/20 8:24 AM
+ * Created by Elias Fazel on 6/19/20 2:38 PM
+ * Last modified 6/19/20 2:36 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -44,7 +44,6 @@ import net.geeksempire.geeky.gify.R
 import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 
 fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
-
 
     browseGifCategoryViewBinding.categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
     browseGifCategoryViewBinding.categoryList.isEdgeItemsCenteringEnabled = true
@@ -273,6 +272,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     browseGifCategoryViewBinding.categoryList
                         .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
                 }, 99)
+
             } else {
 
                 categoryAdapter!!.let { categoryAdapter ->
@@ -287,6 +287,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                             .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
                     }, 99)
                 }
+
             }
         })
 

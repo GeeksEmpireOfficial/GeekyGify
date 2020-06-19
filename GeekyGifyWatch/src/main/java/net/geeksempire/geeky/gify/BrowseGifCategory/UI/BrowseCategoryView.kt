@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/18/20 11:18 AM
- * Last modified 6/18/20 11:16 AM
+ * Created by Elias Fazel on 6/19/20 2:38 PM
+ * Last modified 6/19/20 2:35 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -40,7 +40,7 @@ class BrowseCategoryView : AppCompatActivity(), AmbientModeSupport.AmbientCallba
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         browseGifCategoryViewBinding = BrowseGifCategoryViewBinding.inflate(layoutInflater)
-        setContentView(R.layout.browse_gif_category_view)
+        setContentView(browseGifCategoryViewBinding.root)
 
         (application as GeekyGifyWatchApplication)
             .dependencyGraph

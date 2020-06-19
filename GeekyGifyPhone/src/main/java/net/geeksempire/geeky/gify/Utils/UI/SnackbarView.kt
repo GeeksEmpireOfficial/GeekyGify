@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/4/20 9:55 AM
- * Last modified 3/4/20 9:44 AM
+ * Created by Elias Fazel on 6/19/20 3:00 PM
+ * Last modified 6/19/20 2:58 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -36,6 +36,7 @@ class SnackbarView {
     fun snackBarViewSuccess(context: Context, viewGroup: ViewGroup,
                             actionText: String,
                             successMessage: String, snackbarInteraction: SnackbarInteraction) {
+
         val snackbarSuccess = Snackbar.make(viewGroup, successMessage, Snackbar.LENGTH_INDEFINITE)
         snackbarSuccess.show()
         snackbarSuccess.setAction(actionText, object : View.OnClickListener{

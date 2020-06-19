@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/18/20 11:18 AM
- * Last modified 6/18/20 11:17 AM
+ * Created by Elias Fazel on 6/19/20 8:30 AM
+ * Last modified 6/19/20 8:15 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
@@ -30,6 +31,8 @@ import net.geeksempire.geeky.gify.R
 class AddNewCategory : Fragment() {
 
     var gifCategoryFragmentStateListener: GifCategoryFragmentStateListener? = null
+
+    var fragmentPlaceHolder: FrameLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,6 +112,6 @@ class AddNewCategory : Fragment() {
         super.onDestroyView()
 
 
-        fragmentPlaceHolder!!.visibility = View.GONE
+        fragmentPlaceHolder?.visibility = View.GONE
     }
 }

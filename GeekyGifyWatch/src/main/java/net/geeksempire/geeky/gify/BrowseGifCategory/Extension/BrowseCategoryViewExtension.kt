@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 8:08 AM
- * Last modified 6/19/20 8:06 AM
+ * Created by Elias Fazel on 6/19/20 8:30 AM
+ * Last modified 6/19/20 8:24 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -80,7 +80,9 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                     browseGifCategoryViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
 
-                    val addNewCategory: AddNewCategory = AddNewCategory()
+                    val addNewCategory: AddNewCategory = AddNewCategory().apply {
+                        this.fragmentPlaceHolder = browseGifCategoryViewBinding.fragmentPlaceHolder
+                    }
                     addNewCategory.gifCategoryFragmentStateListener = object : GifCategoryFragmentStateListener {
                         override fun onFragmentDetach() {
                             triggerGifCategoryDataLoading(applicationContext, browseGifCategoryView)
@@ -256,6 +258,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
     browseGifCategoryView.categoriesListData.observe(this@createViewModelObserver,
         Observer {
             Log.d("BrowseGifCategoryView", "${it.size}")
+
             if (categoryAdapter == null) {
 
                 categoryAdapter = BrowseCategoryAdapter(applicationContext, recyclerViewItemLongPress)

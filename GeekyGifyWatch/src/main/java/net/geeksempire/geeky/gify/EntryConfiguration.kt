@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/10/20 2:40 PM
- * Last modified 3/10/20 12:57 PM
+ * Created by Elias Fazel on 6/19/20 8:30 AM
+ * Last modified 6/19/20 8:20 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -49,11 +49,13 @@ class EntryConfiguration : AppCompatActivity(), AmbientModeSupport.AmbientCallba
         ambientController.setAmbientOffloadEnabled(true)
 
         if (systemCheckpoint.networkConnection()) {
+
             startActivity(Intent(applicationContext, BrowseCategoryView::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }, ActivityOptions.makeCustomAnimation(applicationContext, android.R.anim.fade_in, android.R.anim.fade_out).toBundle())
 
             this@EntryConfiguration.finish()
+
         } else {
             val offlineIndicator = LayoutInflater.from(this@EntryConfiguration).inflate(R.layout.offline_indicator, entryConfigurationBinding.mainView, false)
             entryConfigurationBinding.mainView.addView(offlineIndicator)

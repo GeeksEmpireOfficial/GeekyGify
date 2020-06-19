@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 8:08 AM
- * Last modified 6/19/20 8:03 AM
+ * Created by Elias Fazel on 6/19/20 2:46 PM
+ * Last modified 6/19/20 2:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -13,7 +13,6 @@ package net.geeksempire.geeky.gify.GiphyExplore
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.giphy.sdk.core.models.Media
 import com.giphy.sdk.core.models.enums.RatingType
 import com.giphy.sdk.core.models.enums.RenditionType
@@ -54,7 +53,7 @@ class GiphyExplore {
 
             override fun onGifSelected(media: Media, searchTerm: String?) {
 
-                val gifViewer: Fragment = GifViewer().apply {
+                val gifViewer: GifViewer = GifViewer().apply {
                     this.fragmentPlaceHolder = fragmentPlaceHolder
                 }
                 gifViewer.arguments = Bundle().apply {

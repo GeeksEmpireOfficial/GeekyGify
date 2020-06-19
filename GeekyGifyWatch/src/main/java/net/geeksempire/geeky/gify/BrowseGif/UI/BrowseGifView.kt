@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/18/20 11:18 AM
- * Last modified 6/18/20 10:56 AM
+ * Created by Elias Fazel on 6/19/20 2:46 PM
+ * Last modified 6/19/20 2:46 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -17,7 +17,6 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.wear.ambient.AmbientModeSupport
 import com.bumptech.glide.Glide
 import net.geeksempire.geeky.gify.BrowseGif.Extension.createClickListeners
@@ -36,8 +35,10 @@ class BrowseGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallbackPro
 
     private lateinit var ambientController: AmbientModeSupport.AmbientController
 
-    val gifViewer: Fragment = GifViewer().apply {
-        this.fragmentPlaceHolder = browseGifListViewBinding.fragmentPlaceHolder
+    val gifViewer: GifViewer by lazy {
+        GifViewer().apply {
+            this.fragmentPlaceHolder = browseGifListViewBinding.fragmentPlaceHolder
+        }
     }
 
     lateinit var browseGifListViewBinding: BrowseGifListViewBinding

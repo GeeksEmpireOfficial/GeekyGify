@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/18/20 11:18 AM
- * Last modified 6/18/20 11:17 AM
+ * Created by Elias Fazel on 6/19/20 8:08 AM
+ * Last modified 6/19/20 8:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -46,9 +46,9 @@ import net.geeksempire.geeky.gify.Utils.RetrieveResources.GetResources
 fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
 
-    categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
-    categoryList.isEdgeItemsCenteringEnabled = true
-    categoryList.apply {
+    browseGifCategoryViewBinding.categoryList.layoutManager = WearableLinearLayoutManager(applicationContext, BrowseCategoryWearLayoutManager())
+    browseGifCategoryViewBinding.categoryList.isEdgeItemsCenteringEnabled = true
+    browseGifCategoryViewBinding.categoryList.apply {
         this.isCircularScrollingGestureEnabled = true
         this.bezelFraction = 0.10f
         this.scrollDegreesPerScreen = 90f
@@ -65,9 +65,9 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
             when (viewType) {
                 BrowseGifCategoryType.GIF_ITEM_SEARCH -> {
 
-                    fragmentPlaceHolder.visibility = View.VISIBLE
+                    browseGifCategoryViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
                     GiphyExplore()
-                        .invokeGiphyExplore(this@createViewModelObserver)
+                        .invokeGiphyExplore(this@createViewModelObserver, browseGifCategoryViewBinding.fragmentPlaceHolder)
 
                 }
                 BrowseGifCategoryType.GIF_ITEM_FAVORITE -> {
@@ -78,7 +78,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 }
                 BrowseGifCategoryType.GIF_ITEM_CATEGORIES_ADD_NEW -> {
 
-                    fragmentPlaceHolder.visibility = View.VISIBLE
+                    browseGifCategoryViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
 
                     val addNewCategory: AddNewCategory = AddNewCategory()
                     addNewCategory.gifCategoryFragmentStateListener = object : GifCategoryFragmentStateListener {
@@ -262,12 +262,12 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 categoryAdapter!!.categoryItemsData.clear()
                 categoryAdapter!!.categoryItemsData.addAll(it)
 
-                categoryList.adapter = categoryAdapter
+                browseGifCategoryViewBinding.categoryList.adapter = categoryAdapter
                 categoryAdapter?.notifyDataSetChanged()
 
                 Handler().postDelayed({
 
-                    categoryList
+                    browseGifCategoryViewBinding.categoryList
                         .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
                 }, 99)
             } else {
@@ -280,7 +280,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                     Handler().postDelayed({
 
-                        categoryList
+                        browseGifCategoryViewBinding.categoryList
                             .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
                     }, 99)
                 }

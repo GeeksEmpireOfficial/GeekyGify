@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/18/20 11:18 AM
- * Last modified 6/18/20 10:57 AM
+ * Created by Elias Fazel on 6/19/20 8:08 AM
+ * Last modified 6/19/20 8:03 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -11,6 +11,7 @@
 package net.geeksempire.geeky.gify.GiphyExplore
 
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.giphy.sdk.core.models.Media
@@ -32,7 +33,7 @@ class GiphyExplore {
         private const val GIPHY_SDK_API_KEY = "vaQ2LAuOJoWDVdtTYqdPHPI38PUzdnG1"
     }
 
-    fun invokeGiphyExplore(appCompatActivity: AppCompatActivity) {
+    fun invokeGiphyExplore(appCompatActivity: AppCompatActivity, fragmentPlaceHolder: FrameLayout) {
         Giphy.configure(appCompatActivity, GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = false)
 
         val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = GPHTheme.Dark, useBlurredBackground = true)
@@ -54,7 +55,7 @@ class GiphyExplore {
             override fun onGifSelected(media: Media, searchTerm: String?) {
 
                 val gifViewer: Fragment = GifViewer().apply {
-                    this.fragmentPlaceHolder = browseGifListViewBinding.fragmentPlaceHolder
+                    this.fragmentPlaceHolder = fragmentPlaceHolder
                 }
                 gifViewer.arguments = Bundle().apply {
                     putString(GiphyJsonDataStructure.DATA_URL, media.url)

@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/18/20 11:18 AM
- * Last modified 6/18/20 11:13 AM
+ * Created by Elias Fazel on 6/19/20 8:08 AM
+ * Last modified 6/19/20 8:06 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -57,7 +57,6 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
         ambientController = AmbientModeSupport.attach(this)
         ambientController.setAmbientOffloadEnabled(true)
 
-        gifViewer = GifViewer()
         gifViewer.gifViewerFragmentStateListener = object : GifViewerFragmentStateListener {
 
             override fun onFragmentDetach() {
@@ -72,7 +71,7 @@ class FavoritesGifView : AppCompatActivity(), AmbientModeSupport.AmbientCallback
 
                 favoritesGifListViewBinding.fragmentPlaceHolder.visibility = View.VISIBLE
                 GiphyExplore()
-                    .invokeGiphyExplore(this@FavoritesGifView)
+                    .invokeGiphyExplore(this@FavoritesGifView, favoritesGifListViewBinding.fragmentPlaceHolder)
             }
         }
 

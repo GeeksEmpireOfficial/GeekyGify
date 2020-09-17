@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 2/13/20 8:48 PM
- * Last modified 2/13/20 8:08 PM
+ * Created by Elias Fazel on 9/17/20 7:23 AM
+ * Last modified 7/4/20 3:21 PM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.browse_gif_category_item_view.view.*
 class BrowseCategoryListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val mainView: ConstraintLayout = view.mainViewItem
+
     val categoryIconLeft: TextView = view.categoryIconLeft
     val deleteLeftCategory: ImageView = view.deleteLeftCategory
 

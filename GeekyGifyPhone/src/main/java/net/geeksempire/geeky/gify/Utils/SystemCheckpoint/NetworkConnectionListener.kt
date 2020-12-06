@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 3/11/20 4:31 PM
- * Last modified 3/11/20 2:16 PM
+ * Created by Elias Fazel on 12/6/20 7:56 AM
+ * Last modified 12/6/20 7:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -44,7 +45,7 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
 
         appCompatActivity.runOnUiThread {
 
-            Handler().postDelayed({
+            Handler((Looper.getMainLooper()).postDelayed({
                 if (systemCheckpoint.networkConnection()) {
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Available")
 
@@ -62,7 +63,7 @@ class NetworkConnectionListener (private var appCompatActivity: AppCompatActivit
 
         appCompatActivity.runOnUiThread {
 
-            Handler().postDelayed({
+            Handler((Looper.getMainLooper()).postDelayed({
                 if (!systemCheckpoint.networkConnection()) {
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Lost")
 

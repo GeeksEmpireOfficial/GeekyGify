@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 5/16/20 1:24 PM
- * Last modified 5/16/20 12:53 PM
+ * Created by Elias Fazel on 12/6/20 7:56 AM
+ * Last modified 12/6/20 7:54 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -12,6 +12,7 @@ package net.geeksempire.geeky.gify.GifViewer
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.StrictMode
 import android.view.LayoutInflater
 import android.view.View
@@ -87,7 +88,7 @@ class GifViewer : Fragment() {
                 }
 
                 override fun onResourceReady(drawable: GifDrawable?, any: Any?, target: com.bumptech.glide.request.target.Target<GifDrawable>?, dataSource: DataSource?, boolean: Boolean): Boolean {
-                    Handler().postDelayed({
+                    Handler((Looper.getMainLooper()).postDelayed({
                         gifViewBinding.progressBarGifView.visibility = View.INVISIBLE
 
                         setupGifViewClickListener()

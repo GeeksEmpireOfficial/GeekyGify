@@ -1,8 +1,8 @@
 /*
  * Copyright © 2020 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 2:38 PM
- * Last modified 6/19/20 2:36 PM
+ * Created by Elias Fazel on 12/6/20 7:56 AM
+ * Last modified 12/6/20 7:53 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -15,6 +15,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.ResultReceiver
 import android.util.Log
 import android.view.View
@@ -104,7 +105,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     when (rightLeft) {
                         RecyclerViewRightLeftItem.RightItem -> {
 
-                            val resultReceiver = object : ResultReceiver(Handler()) {
+                            val resultReceiver = object : ResultReceiver(Handler((Looper.getMainLooper())) {
                                 override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
                                     if (resultCode == RemoteIntent.RESULT_OK) {
 
@@ -267,7 +268,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 browseGifCategoryViewBinding.categoryList.adapter = categoryAdapter
                 categoryAdapter?.notifyDataSetChanged()
 
-                Handler().postDelayed({
+                Handler((Looper.getMainLooper()).postDelayed({
 
                     browseGifCategoryViewBinding.categoryList
                         .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
@@ -281,7 +282,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                     categoryAdapter.notifyDataSetChanged()
 
-                    Handler().postDelayed({
+                    Handler((Looper.getMainLooper()).postDelayed({
 
                         browseGifCategoryViewBinding.categoryList
                             .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })

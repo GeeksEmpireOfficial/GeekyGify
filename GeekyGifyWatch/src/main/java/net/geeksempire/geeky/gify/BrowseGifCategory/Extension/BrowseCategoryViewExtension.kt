@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
- * Created by Elias Fazel on 12/6/20 7:56 AM
- * Last modified 12/6/20 7:53 AM
+ * Created by Elias Fazel on 11/13/21, 10:28 AM
+ * Last modified 11/13/21, 10:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -105,7 +105,8 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                     when (rightLeft) {
                         RecyclerViewRightLeftItem.RightItem -> {
 
-                            val resultReceiver = object : ResultReceiver(Handler((Looper.getMainLooper())) {
+                            val resultReceiver = object : ResultReceiver(Handler((Looper.getMainLooper()))) {
+
                                 override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
                                     if (resultCode == RemoteIntent.RESULT_OK) {
 
@@ -268,7 +269,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
                 browseGifCategoryViewBinding.categoryList.adapter = categoryAdapter
                 categoryAdapter?.notifyDataSetChanged()
 
-                Handler((Looper.getMainLooper()).postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
 
                     browseGifCategoryViewBinding.categoryList
                         .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })
@@ -282,7 +283,7 @@ fun BrowseCategoryView.createViewModelObserver() : BrowseCategoryViewModel {
 
                     categoryAdapter.notifyDataSetChanged()
 
-                    Handler((Looper.getMainLooper()).postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
 
                         browseGifCategoryViewBinding.categoryList
                             .smoothScrollToPosition(if(it.size > 4){ 2 } else { 0 })

@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
- * Created by Elias Fazel on 12/6/20 7:56 AM
- * Last modified 12/6/20 7:53 AM
+ * Created by Elias Fazel on 11/13/21, 10:28 AM
+ * Last modified 11/13/21, 10:27 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -48,7 +48,7 @@ class NetworkConnectionListener @Inject constructor (private var appCompatActivi
 
         appCompatActivity.runOnUiThread {
 
-            Handler((Looper.getMainLooper()).postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 if (systemCheckpoint.networkConnection()) {
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Available")
 
@@ -63,7 +63,7 @@ class NetworkConnectionListener @Inject constructor (private var appCompatActivi
 
         appCompatActivity.runOnUiThread {
 
-            Handler((Looper.getMainLooper()).postDelayed({
+            Handler(Looper.getMainLooper()).postDelayed({
                 if (!systemCheckpoint.networkConnection()) {
                     Log.d(this@NetworkConnectionListener.javaClass.simpleName, "Network Lost")
 

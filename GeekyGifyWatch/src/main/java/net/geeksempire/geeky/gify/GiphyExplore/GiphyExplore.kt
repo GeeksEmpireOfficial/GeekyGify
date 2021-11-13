@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 2:46 PM
- * Last modified 6/19/20 2:46 PM
+ * Created by Elias Fazel on 11/13/21, 10:34 AM
+ * Last modified 11/13/21, 10:33 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -35,7 +35,7 @@ class GiphyExplore {
     fun invokeGiphyExplore(appCompatActivity: AppCompatActivity, fragmentPlaceHolder: FrameLayout) {
         Giphy.configure(appCompatActivity, GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = false)
 
-        val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = GPHTheme.Dark, useBlurredBackground = true)
+        val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = GPHTheme.Dark)
         giphySettings.mediaTypeConfig = arrayOf(
             GPHContentType.gif,
             GPHContentType.sticker,
@@ -51,7 +51,7 @@ class GiphyExplore {
 
         giphyDialog.gifSelectionListener = object: GiphyDialogFragment.GifSelectionListener {
 
-            override fun onGifSelected(media: Media, searchTerm: String?) {
+            override fun onGifSelected(media: Media, searchTerm: String?, selectedContentType: GPHContentType) {
 
                 val gifViewer: GifViewer = GifViewer().apply {
                     this.fragmentPlaceHolder = fragmentPlaceHolder
@@ -80,7 +80,7 @@ class GiphyExplore {
 
             }
 
-            override fun onDismissed() {
+            override fun onDismissed(selectedContentType: GPHContentType) {
 
             }
         }

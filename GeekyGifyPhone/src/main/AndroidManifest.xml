@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright © 2020 By Geeks Empire.
+  ~ Copyright © 2021 By Geeks Empire.
   ~
-  ~ Created by Elias Fazel on 3/3/20 6:52 AM
-  ~ Last modified 3/3/20 6:50 AM
+  ~ Created by Elias Fazel on 11/13/21, 10:24 AM
+  ~ Last modified 11/13/21, 10:24 AM
   ~
   ~ Licensed Under MIT License.
   ~ https://opensource.org/licenses/MIT
@@ -44,7 +44,8 @@
             android:label="@string/app_name"
             android:name=".EntryConfiguration"
             android:excludeFromRecents="false"
-            android:theme="@style/GeeksEmpire.Material">
+            android:theme="@style/GeeksEmpire.Material"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,7 +60,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:label="@string/app_name"
             android:name=".SharedDataController.DataController"
-            android:theme="@style/ShareWaitingTheme">
+            android:theme="@style/ShareWaitingTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

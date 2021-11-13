@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
- * Created by Elias Fazel on 12/6/20 7:56 AM
- * Last modified 12/6/20 7:54 AM
+ * Created by Elias Fazel on 11/13/21, 11:01 AM
+ * Last modified 11/13/21, 10:39 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -88,7 +88,7 @@ class GifViewer : Fragment() {
                 }
 
                 override fun onResourceReady(drawable: GifDrawable?, any: Any?, target: com.bumptech.glide.request.target.Target<GifDrawable>?, dataSource: DataSource?, boolean: Boolean): Boolean {
-                    Handler((Looper.getMainLooper()).postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
                         gifViewBinding.progressBarGifView.visibility = View.INVISIBLE
 
                         setupGifViewClickListener()

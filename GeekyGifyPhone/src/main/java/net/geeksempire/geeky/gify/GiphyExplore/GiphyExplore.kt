@@ -1,8 +1,8 @@
 /*
- * Copyright © 2020 By Geeks Empire.
+ * Copyright © 2021 By Geeks Empire.
  *
- * Created by Elias Fazel on 6/19/20 3:26 PM
- * Last modified 6/19/20 3:15 PM
+ * Created by Elias Fazel on 11/13/21, 11:01 AM
+ * Last modified 11/13/21, 10:42 AM
  *
  * Licensed Under MIT License.
  * https://opensource.org/licenses/MIT
@@ -38,7 +38,7 @@ class GiphyExplore {
     fun invokeGiphyExplore(nullDataController: NullDataController) {
         Giphy.configure((nullDataController.activity as AppCompatActivity), GiphyExplore.GIPHY_SDK_API_KEY, verificationMode = false)
 
-        val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = GPHTheme.Dark, useBlurredBackground = true)
+        val giphySettings = GPHSettings(gridType = GridType.waterfall, theme = GPHTheme.Dark)
         giphySettings.mediaTypeConfig = arrayOf(
             GPHContentType.gif,
             GPHContentType.sticker,
@@ -54,7 +54,7 @@ class GiphyExplore {
 
         giphyDialog.gifSelectionListener = object: GiphyDialogFragment.GifSelectionListener {
 
-            override fun onGifSelected(media: Media, searchTerm: String?) {
+            override fun onGifSelected(media: Media, searchTerm: String?, selectedContentType: GPHContentType) {
                 (nullDataController.activity as DataController).dataControllerBinding.fragmentPlaceHolderGifViewer.visibility = View.VISIBLE
 
                 nullDataController.gifViewer.arguments = Bundle().apply {
@@ -81,7 +81,7 @@ class GiphyExplore {
 
             }
 
-            override fun onDismissed() {
+            override fun onDismissed(selectedContentType: GPHContentType) {
 
                 SnackbarView()
                     .snackBarViewSuccess((nullDataController.requireContext()), nullDataController.nullDataControllerBinding.mainViewNullDataController, nullDataController.getString(R.string.explore), nullDataController.getString(R.string.nullData),
